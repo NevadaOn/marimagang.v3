@@ -141,7 +141,6 @@
 
     <div class="section-divider"></div>
 
-    <!-- Alur Magang -->
     <section id="alur" class="py-5">
         <div class="container">
             <div class="text-center mb-5">
