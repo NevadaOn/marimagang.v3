@@ -1,7 +1,6 @@
 (function() {
     'use strict';
     
-    // Inject CSS
     const css = `
         .starry-container {
             position: fixed;
@@ -132,7 +131,6 @@
         }
     `;
     
-    // Inject CSS into document
     const styleElement = document.createElement('style');
     styleElement.textContent = css;
     document.head.appendChild(styleElement);
@@ -146,7 +144,6 @@
         }
         
         init() {
-            // Create container
             this.container = document.createElement('div');
             this.container.className = 'starry-container';
             document.body.appendChild(this.container);
@@ -155,7 +152,6 @@
 
             this.startMeteorShower();
             
-            // Handle window resize
             window.addEventListener('resize', () => this.handleResize());
         }
         
@@ -169,21 +165,17 @@
             const star = document.createElement('div');
             star.className = 'star';
             
-            // Random size (1-3px)
             const size = Math.floor(Math.random() * 3) + 1;
             star.classList.add(`size-${size}`);
-            
-            // Random position
+
             const x = Math.random() * window.innerWidth;
             const y = Math.random() * window.innerHeight;
             star.style.left = x + 'px';
             star.style.top = y + 'px';
             
-            // Random twinkle duration (2-6 seconds)
             const duration = (Math.random() * 4 + 2).toFixed(1);
             star.style.setProperty('--duration', duration + 's');
             
-            // Random animation delay
             star.style.animationDelay = (Math.random() * 5).toFixed(1) + 's';
             
             this.container.appendChild(star);
@@ -218,7 +210,6 @@
             this.container.appendChild(meteor);
             this.meteors.push(meteor);
             
-            // Remove meteor after animation
             setTimeout(() => {
                 if (meteor.parentNode) {
                     meteor.parentNode.removeChild(meteor);
@@ -321,7 +312,6 @@
             meteor.style.setProperty('--end-x', (endX - startX) + 'px');
             meteor.style.setProperty('--end-y', (endY - startY) + 'px');
             
-            // Fade pattern configurations
             this.configureFadePattern(meteor, config);
         }
         
