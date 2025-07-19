@@ -223,7 +223,7 @@
         
         getMeteorType() {
             const rand = Math.random();
-            if (rand < 0.3) return 'bright';      // 30% terang
+            if (rand < 0.3) return 'bright';     
             if (rand < 0.6) return 'dim';        // 30% redup
             if (rand < 0.8) return 'glowing';    // 20% berpendar
             return 'normal';                      // 20% normal
