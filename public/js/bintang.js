@@ -285,13 +285,11 @@
         }
         
         configureMeteorAnimation(meteor, config, startX, startY, endX, endY, angle) {
-            // Basic properties
             meteor.style.setProperty('--meteor-size', config.size);
             meteor.style.setProperty('--core-opacity', config.coreOpacity);
             meteor.style.setProperty('--duration', config.duration + 's');
             meteor.style.setProperty('--easing', config.easing);
             
-            // Tail properties
             meteor.style.setProperty('--tail-length', config.tailLength);
             meteor.style.setProperty('--tail-width', config.tailWidth);
             meteor.style.setProperty('--inner-tail-length', (parseInt(config.tailLength) * 0.5) + 'px');
@@ -299,14 +297,12 @@
             meteor.style.setProperty('--tail-rotation', angle + 'deg');
             meteor.style.setProperty('--tail-glow', config.tailGlow);
             
-            // Tail opacity variations
             meteor.style.setProperty('--tail-start-opacity', (config.coreOpacity * 0.2).toFixed(2));
             meteor.style.setProperty('--tail-mid-opacity', (config.coreOpacity * 0.5).toFixed(2));
             meteor.style.setProperty('--tail-end-opacity', (config.coreOpacity * 0.8).toFixed(2));
             meteor.style.setProperty('--tail-glow-opacity', (config.coreOpacity * 0.4).toFixed(2));
             meteor.style.setProperty('--inner-tail-opacity', (config.coreOpacity * 0.6).toFixed(2));
             
-            // Animation path
             meteor.style.setProperty('--start-x', '0px');
             meteor.style.setProperty('--start-y', '0px');
             meteor.style.setProperty('--end-x', (endX - startX) + 'px');
