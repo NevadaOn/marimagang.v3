@@ -247,7 +247,6 @@
         </div>
     </footer>
 
-    <!-- Scroll to Top Button -->
     <button class="scroll-to-top" id="scrollToTop">
         <i class="fas fa-arrow-up"></i>
     </button>
@@ -255,7 +254,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        // Initialize AOS
         AOS.init({
             duration: 1000,
             once: true
@@ -270,7 +268,6 @@
             }, 1000);
         });
 
-        // Theme Toggle
         function toggleTheme() {
             const body = document.body;
             const themeIcon = document.getElementById('themeIcon');
