@@ -324,7 +324,6 @@
             });
         });
 
-        // Scroll to top button
         const scrollToTopBtn = document.getElementById('scrollToTop');
         
         window.addEventListener('scroll', function() {
