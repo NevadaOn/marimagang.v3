@@ -622,13 +622,13 @@
                             <label class="form-label">Unggah Surat (PDF)</label>
                             <input type="file" name="surat_pdf" accept="application/pdf" class="form-control">
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label class="form-label">Komentar Admin</label>
                             <textarea name="komentar_admin" rows="4" class="form-control">{{ old('komentar_admin', $pengajuan->komentar_admin) }}</textarea>
-                        </div>
+                        </div> --}}
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save me-1"></i>
-                            Simpan Surat & Komentar
+                            Simpan Surat
                         </button>
                     </form>
 
@@ -773,6 +773,25 @@
         <button type="submit" class="btn btn-primary mt-2">Simpan Bidang</button>
     </form>
 @endif
+
+<form action="{{ route('admin.pengajuan.kirimCatatan', $pengajuan->id) }}" method="POST">
+    @csrf
+
+    <div class="mb-3">
+        <label for="tujuan" class="form-label">Tujuan Komentar</label>
+        <select name="tujuan" id="tujuan" class="form-select" required>
+            <option value="user">User</option>
+            <option value="admin_bidang">Admin Bidang</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="komentar_admin" class="form-label">Isi Komentar</label>
+        <textarea name="komentar_admin" class="form-control" rows="4" required>{{ old('komentar_admin') }}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kirim</button>
+</form>
 
 <!-- Preview Modal -->
 <div id="previewModal" class="modal">

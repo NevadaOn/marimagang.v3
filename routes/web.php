@@ -134,7 +134,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/{id}/download/{document}', 'downloadDocument')->name('admin.pengajuan.download');
         Route::post('/admin/pengajuan/{id}/upload-surat', [AdminPengajuanController::class, 'uploadSurat'])->name('admin.pengajuan.uploadSurat');
         Route::post('/admin/pengajuan/{id}/generate-surat', [AdminPengajuanController::class, 'generateSurat'])->name('admin.pengajuan.generateSurat');
-
+        Route::post('/{id}/catatan', 'kirimCatatan')->name('admin.pengajuan.kirimCatatan');
     });
     
     Route::middleware('superadmin')->group(function () {
