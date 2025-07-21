@@ -80,7 +80,7 @@ class AdminPengajuanController extends Controller
         $pengajuan = Pengajuan::findOrFail($id);
         $admin = auth()->guard('admin')->user();
 
-        if (!in_array($admin->role, ['superadmin', 'admin_dinas'])) {
+        if (!in_array($admin->role, ['superadmin', 'admin_bidang'])) {
             return back()->with('error', 'Anda tidak memiliki izin untuk memperbarui tanggal.');
         }
 
