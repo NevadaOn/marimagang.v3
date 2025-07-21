@@ -121,7 +121,7 @@ class AdminPengajuanController extends Controller
     public function uploadSurat(Request $request, $id)
     {
         $request->validate([
-            'surat_pdf' => 'required|mimes:pdf|max:2048', // max 2MB
+            'surat_pdf' => 'nullable|mimes:pdf|max:2048',
             'komentar_admin' => 'nullable|string',
         ]);
 
