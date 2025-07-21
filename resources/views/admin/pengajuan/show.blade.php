@@ -456,7 +456,7 @@
                     </div>
                     @if($pengajuan->komentar_admin)
                     <div class="mt-4 p-3" style="background-color: #f8f9fa; border-radius: 0.25rem;">
-                        <h6 class="fw-bold mb-2">Komentar Admin</h6>
+                        <h6 class="fw-bold mb-2">catatan Admin Dinas untuk Admin Bidang</h6>
                         <p class="mb-0">{{ $pengajuan->komentar_admin }}</p>
                     </div>
                     @endif
