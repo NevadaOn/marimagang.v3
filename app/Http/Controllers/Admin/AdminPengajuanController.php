@@ -70,6 +70,26 @@ class AdminPengajuanController extends Controller
         return back()->with('error', 'Anda tidak memiliki izin untuk mengubah status ini.');
     }
 
+    public function updateTanggal(Request $request, $id)
+    {
+        $request->validate([
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
+        ]);
+
+        $pengajuan = Pengajuan::findOrFail($id);
+        $admin = auth()->guard('admin')->user();
+
+        if (!in_array($admin->role, ['superadmin', 'admin_dinas'])) {
+            return back()->with('error', 'Anda tidak memiliki izin untuk memperbarui tanggal.');
+        }
+
+        $pengajuan->tanggal_mulai = $request->tanggal_mulai;
+        $pengajuan->tanggal_selesai = $request->tanggal_selesai;
+        $pengajuan->save();
+
+        return back()->with('success', 'Tanggal magang berhasil diperbarui.');
+    }
 
 
     public function approve($id)
