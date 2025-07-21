@@ -26,7 +26,9 @@ class AdminPengajuanController extends Controller
             'databidang'
         ])->findOrFail($id);
 
-        return view('admin.pengajuan.show', compact('pengajuan'));
+        $listBidang = \App\Models\Databidang::all();
+
+        return view('admin.pengajuan.show', compact('pengajuan', 'listBidang'));
     }
 
     public function updateStatus(Request $request, $id)
@@ -89,6 +91,25 @@ class AdminPengajuanController extends Controller
         $pengajuan->save();
 
         return back()->with('success', 'Tanggal magang berhasil diperbarui.');
+    }
+
+    public function updateBidang(Request $request, $id)
+    {
+        $request->validate([
+            'databidang_id' => 'required|exists:databidang,id',
+        ]);
+
+        $pengajuan = Pengajuan::findOrFail($id);
+        $admin = auth()->guard('admin')->user();
+
+        if (!in_array($admin->role, ['superadmin', 'admin_dinas'])) {
+            return back()->with('error', 'Anda tidak memiliki izin untuk mengubah bidang.');
+        }
+
+        $pengajuan->databidang_id = $request->databidang_id;
+        $pengajuan->save();
+
+        return back()->with('success', 'Bidang pengajuan berhasil diperbarui.');
     }
 
 

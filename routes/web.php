@@ -128,6 +128,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/{id}', 'show')->name('admin.pengajuan.show');
         Route::put('/{id}/status', 'updateStatus')->name('admin.pengajuan.updateStatus');
         Route::put('/{id}/update-tanggal', 'updateTanggal')->name('admin.pengajuan.updateTanggal');
+        Route::patch('/admin/pengajuan/{id}/update-bidang', [AdminPengajuanController::class, 'updateBidang'])->name('admin.pengajuan.updateBidang');
         Route::post('/{id}/approve', 'approve')->name('admin.pengajuan.approve');
         Route::post('/{id}/reject', 'reject')->name('admin.pengajuan.reject');
         Route::get('/{id}/download/{document}', 'downloadDocument')->name('admin.pengajuan.download');
