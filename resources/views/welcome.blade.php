@@ -53,14 +53,44 @@
           <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span
               class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
         </div>
-        <div class="header-right text-end">
-          <div class="switch-button">
-            <div class="form-check form-switch">
-              <input class="form-check-input" id="flexSwitchCheckChecked" type="checkbox" role="switch" checked="">
-            </div>
-          </div><a class="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow"
-            href="page-login.html">Masuk</a>
+        <div class="header-right text-end d-flex align-items-center gap-3">
+    <div class="header-right d-flex align-items-center gap-3 flex-nowrap">
+    <div class="switch-button">
+        <div class="form-check form-switch">
+            <input class="form-check-input" id="flexSwitchCheckChecked" type="checkbox" role="switch" checked>
         </div>
+    </div>
+
+    @if (Route::has('login'))
+        <div class="d-flex align-items-center gap-2 flex-nowrap">
+            @auth
+                <a
+                    href="{{ url('/dashboard') }}"
+                    class="btn btn-sm btn-linear hover-up hover-shadow text-nowrap"
+                >
+                    Dashboard
+                </a>
+            @else
+                <a
+                    href="{{ route('login') }}"
+                    class="btn btn-sm btn-linear hover-up hover-shadow text-nowrap"
+                >
+                    Log in
+                </a>
+
+                @if (Route::has('register'))
+                    <a
+                        href="{{ route('register') }}"
+                        class="btn btn-sm btn-warning hover-up hover-shadow text-nowrap"
+                    >
+                        Register
+                    </a>
+                @endif
+            @endauth
+        </div>
+    @endif
+</div>
+
       </div>
     </div>
   </header>

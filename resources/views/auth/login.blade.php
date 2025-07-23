@@ -1,83 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KOMINFO - Sign In</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
-</head>
-<body>
-      <script src="{{ asset('js/bintang.js') }}"></script>
-    <div class="sign-up-container">
-        <div class="welcome-section">
-            <div class="logo">
-                <div class="logo-icon">
-                    <img src="{{ asset('img/kominfo-seeklogo1.png') }}" alt="">
-                </div>
-            </div>
-            
-            <h1 class="welcome-title">Selamat datang</h1>
-            <p class="welcome-subtitle">Masuk ke akun Anda</p>
-            
-            <div class="illustration">
-                <img src="{{ asset('img/7_pns_success1.png') }}" alt="Kominfo" >
-            </div>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="msapplication-TileColor" content="#0E0E0E">
+    <meta name="template-color" content="#0E0E0E">
+    <meta name="description" content="Index page">
+    <meta name="keywords" content="index, page">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/template/favicon.svg') }}">
+    <link href="{{ asset('assets/css/style.css?v=2.0') }}" rel="stylesheet">
+
+    <title>Login - Personal Blog  HTML Template</title>
+  </head>
+  <body>
+    <div id="preloader-active">
+      <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+          <div class="text-center"><img class="mb-10" src="{{ asset('assets/imgs/template/favicon.svg') }}" alt="GenZ">
+            <div class="preloader-dots"></div>
+          </div>
         </div>
-
-        <div class="form-section">
-            <h2 class="form-title">Sign In</h2>
-            
-            @if ($errors->any())
-                <div>
-                    <strong>Error:</strong> {{ $errors->first() }}
-                </div>
-            @endif
-
-            <form method="POST" action="{{ url('/login') }}">
-                @csrf
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Your Password</label>
-                    <div class="password-field">
-                        <input type="password" id="password" name="password" required >
-                        <button type="button" class="password-toggle" onclick="togglePassword()">
-                            <i class="fas fa-eye" id="eyeIcon"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <button type="submit" class="sign-up-btn">Sign In</button>
-            </form>
-            
-            <div class="sign-in-link">
-                Belum punya Akun? <a href="{{ route('register') }}">Register Sekarang</a>
-            </div>
-            <div class="sign-in-link">
-                 <a href="{{ route('password.request') }}">Lupa Password?</a>
-            </div>
-        </div>
+      </div>
     </div>
-
-    <script>
-        function togglePassword() {
-            const passwordField = document.getElementById('password');
-            const eyeIcon = document.getElementById('eyeIcon');
+    <header class="header sticky-bar">
+      <div class="container">
+        <div class="row align-items-start">
+          <div class="col-xl-1"></div>
+          <div class="col-xl-10 col-lg-12">
             
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                eyeIcon.classList.remove('fa-eye');
-                eyeIcon.classList.add('fa-eye-slash');
-            } else {
-                passwordField.type = 'password';
-                eyeIcon.classList.remove('fa-eye-slash');
-                eyeIcon.classList.add('fa-eye');
-            }
-        }
-    </script>
-</body>
+          </div>
+        </div>
+      </div>
+    </header>
+    @if ($errors->any())
+    <div>
+        <strong>Error:</strong> {{ $errors->first() }}
+    </div>
+@endif
+    <main class="main">
+      <div class="cover-home3">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-10 col-lg-12 m-auto">
+              <div class="text-center mt-50 pb-50">
+                <h2 class="color-linear d-inline-block">Welcome back !</h2>
+              </div>
+              <div class="box-form-login pb-50">
+                <div class="form-login bg-gray-850 border-gray-800 text-start">
+                  <form method="POST" action="{{ url('/login') }}">
+                    @csrf
+
+                    <div class="form-group">
+                        <input class="form-control bg-gray-850 border-gray-800" 
+                            type="email" 
+                            name="email" 
+                            id="email" 
+                            placeholder="User name" 
+                            required>
+                    </div>
+
+                    <div class="form-group position-relative">
+                        <input class="form-control bg-gray-850 border-gray-800 password" 
+                            type="password" 
+                            name="password" 
+                            id="password" 
+                            placeholder="Password" 
+                            required>
+                        <span class="viewpass"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <a class="color-white link" href="{{ route('password.request') }}">Forgot password?</a>
+                    </div>
+
+                    <div class="form-group">
+                        <input class="btn btn-linear color-gray-850 hover-up" type="submit" value="Log me in">
+                    </div>
+
+                    <div class="form-group mb-0">
+                        <span>Don’t have an account?</span>
+                        <a class="color-linear" href="{{ route('register') }}">Sign Up</a>
+                    </div>
+                </form>
+
+                </div>
+                <div class="box-line"><span class="bg-gray-900">Or, sign in with your email</span></div>
+                <div class="box-login-gmail bg-gray-850 border-gray-800 hover-up"><a class="btn btn-login-gmail color-gray-500" href="#">Sign in with Google</a></div>
+                <div class="box-line"><span class="bg-gray-900"><a class="color-linear" href="index.html">Back</span> </a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+   
+    <script src="{{ asset('assets/js/vendors/modernizr-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/jquery-migrate-3.3.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/waypoints.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/wow.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/text-type.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/jquery.progressScroll.min.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js?v=2.0') }}"></script>
+
+  </body>
 </html>
