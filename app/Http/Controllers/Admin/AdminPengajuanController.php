@@ -13,9 +13,12 @@ class AdminPengajuanController extends Controller
 {
     public function index()
     {
-        $pengajuan = Pengajuan::with(['user', 'anggota', 'databidang'])->latest()->get();
-        return view('admin.pengajuan.superadmin', compact('pengajuan'));
+        $pengajuan = Pengajuan::with(['user', 'anggota', 'databidang'])
+            ->latest()
+            ->paginate(10);
+        return view('admin.pengajuan.index', compact('pengajuan'));
     }
+    
     public function bidang()
     {
         $pengajuan = Pengajuan::with(['user','anggota', 'databidang'])
@@ -267,6 +270,48 @@ public function kirimCatatan(Request $request, $id)
         return back()->with('success', 'Surat berhasil dibuat dan disimpan.');
     }
 
+    public function generateSuratKesediaan(Request $request, $id)
+    {
+        // Validasi input form
+        $request->validate([
+            'nomor_surat' => 'required|string|max:255',
+            'penanggung_jawab' => 'required|string|max:255',
+        ]);
+
+        // Ambil data pengajuan + relasi anggota & bidang
+        $pengajuan = Pengajuan::with(['anggota', 'databidang'])->findOrFail($id);
+        $admin = auth('admin')->user();
+
+        // Hanya izinkan admin_bidang yang sesuai ATAU superadmin
+        if (!(
+            ($admin->role === 'admin_bidang' && $pengajuan->databidang->admin_id === $admin->id) ||
+            $admin->role === 'superadmin'
+        )) {
+            abort(403, 'Anda tidak memiliki akses membuat surat ini.');
+        }
+
+        // Generate PDF dari Blade template
+        $pdf = Pdf::loadView('surat.template-kesediaan-bidang', [
+            'pengajuan' => $pengajuan,
+            'anggota' => $pengajuan->anggota,
+            'nomor_surat' => $request->nomor_surat,
+            'penanggung_jawab' => $request->penanggung_jawab,
+            'tanggal' => now()->format('d F Y'),
+            'admin' => $admin,
+        ]);
+
+        // Simpan file PDF ke storage
+        $filename = 'form_kesediaan_' . $pengajuan->kode_pengajuan . '.pdf';
+        $path = 'surat_pengajuan/' . $filename;
+
+        Storage::disk('public')->put($path, $pdf->output());
+
+        // Simpan path ke database
+        $pengajuan->form_kesediaan_magang = $path;
+        $pengajuan->save();
+
+        return back()->with('success', 'Form kesediaan berhasil dibuat dan disimpan.');
+    }
 
 
 }

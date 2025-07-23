@@ -122,18 +122,24 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     
     Route::get('/user-details/{pengajuanId}', [AdminDashboardController::class, 'getUserDetails'])
         ->name('admin.user.details');
+
+    Route::post('/pengajuan/{id}/generate-kesediaan', [AdminPengajuanController::class, 'generateSuratKesediaan'])
+        ->name('admin.pengajuan.kesediaan.generate');
     
     Route::controller(AdminPengajuanController::class)->prefix('pengajuan')->group(function () {
         Route::get('/', 'index')->name('admin.pengajuan.index');
         Route::get('/pengajuan/bidang', 'bidang')->name('admin.pengajuan.bidang');
         Route::get('/{id}', 'show')->name('admin.pengajuan.show');
         Route::put('/{id}/status', 'updateStatus')->name('admin.pengajuan.updateStatus');
+        Route::post('/{id}/catatan', 'kirimCatatan')->name('admin.pengajuan.kirimCatatan');
+        Route::patch('/admin/pengajuan/{id}/update-bidang', [AdminPengajuanController::class, 'updateBidang'])->name('admin.pengajuan.updateBidang');
         Route::post('/{id}/approve', 'approve')->name('admin.pengajuan.approve');
         Route::post('/{id}/reject', 'reject')->name('admin.pengajuan.reject');
+        Route::put('/admin/pengajuan/{pengajuan}/update-tanggal', [AdminPengajuanController::class, 'updateTanggal'])->name('admin.pengajuan.updateTanggal');
         Route::get('/{id}/download/{document}', 'downloadDocument')->name('admin.pengajuan.download');
         Route::post('/admin/pengajuan/{id}/upload-surat', [AdminPengajuanController::class, 'uploadSurat'])->name('admin.pengajuan.uploadSurat');
         Route::post('/admin/pengajuan/{id}/generate-surat', [AdminPengajuanController::class, 'generateSurat'])->name('admin.pengajuan.generateSurat');
-
+        // Route::post('/pengajuan/{id}/generate-kesediaan', [AdminPengajuanController::class, 'generateSuratKesediaan'])->name('admin.pengajuan.kesediaan.generate');
     });
     
     Route::middleware('superadmin')->group(function () {

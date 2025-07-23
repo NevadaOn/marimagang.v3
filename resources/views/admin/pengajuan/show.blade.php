@@ -456,7 +456,7 @@
                     </div>
                     @if($pengajuan->komentar_admin)
                     <div class="mt-4 p-3" style="background-color: #f8f9fa; border-radius: 0.25rem;">
-                        <h6 class="fw-bold mb-2">Komentar Admin</h6>
+                        <h6 class="fw-bold mb-2">catatan Admin Dinas untuk Admin Bidang</h6>
                         <p class="mb-0">{{ $pengajuan->komentar_admin }}</p>
                     </div>
                     @endif
@@ -622,13 +622,13 @@
                             <label class="form-label">Unggah Surat (PDF)</label>
                             <input type="file" name="surat_pdf" accept="application/pdf" class="form-control">
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label class="form-label">Komentar Admin</label>
                             <textarea name="komentar_admin" rows="4" class="form-control">{{ old('komentar_admin', $pengajuan->komentar_admin) }}</textarea>
-                        </div>
+                        </div> --}}
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save me-1"></i>
-                            Simpan Surat & Komentar
+                            Simpan Surat
                         </button>
                     </form>
 
@@ -718,6 +718,109 @@
         </div>
     </div>
 </div>
+
+<!-- Tombol untuk membuka modal -->
+<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateTanggalModal">
+    Ubah Tanggal Magang
+</button>
+<!-- Modal -->
+<div class="modal fade" id="updateTanggalModal" tabindex="-1" aria-labelledby="updateTanggalModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="{{ route('admin.pengajuan.updateTanggal', $pengajuan->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateTanggalModalLabel">Ubah Tanggal Magang</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="tanggal_mulai" class="form-label">Tanggal Mulai</label>
+            <input type="date" name="tanggal_mulai" id="tanggal_mulai" class="form-control" value="{{ $pengajuan->tanggal_mulai }}">
+          </div>
+
+          <div class="mb-3">
+            <label for="tanggal_selesai" class="form-label">Tanggal Selesai</label>
+            <input type="date" name="tanggal_selesai" id="tanggal_selesai" class="form-control" value="{{ $pengajuan->tanggal_selesai }}">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+@if (in_array(auth()->guard('admin')->user()->role, ['superadmin', 'admin_dinas']))
+    <form action="{{ route('admin.pengajuan.updateBidang', $pengajuan->id) }}" method="POST" class="mb-3">
+        @csrf
+        @method('PATCH')
+
+        <label for="databidang_id" class="form-label">Pilih Bidang</label>
+        <select name="databidang_id" id="databidang_id" class="form-select" required>
+            @foreach ($listBidang as $bidang)
+                <option value="{{ $bidang->id }}" {{ $pengajuan->databidang_id == $bidang->id ? 'selected' : '' }}>
+                    {{ $bidang->nama }}
+                </option>
+            @endforeach
+        </select>
+
+        <button type="submit" class="btn btn-primary mt-2">Simpan Bidang</button>
+    </form>
+@endif
+
+<form action="{{ route('admin.pengajuan.kirimCatatan', $pengajuan->id) }}" method="POST">
+    @csrf
+
+    <div class="mb-3">
+        <label for="tujuan" class="form-label">Tujuan Komentar</label>
+        <select name="tujuan" id="tujuan" class="form-select" required>
+            <option value="user">User</option>
+            <option value="admin_bidang">Admin Bidang</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="komentar_admin" class="form-label">Isi Komentar</label>
+        <textarea name="komentar_admin" class="form-control" rows="4" required>{{ old('komentar_admin') }}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kirim</button>
+</form>
+
+@if(auth('admin')->check() && (
+    (auth('admin')->user()->role === 'admin_bidang' && auth('admin')->user()->id === $pengajuan->databidang->admin_id) ||
+    auth('admin')->user()->role === 'superadmin'
+))
+    <form action="{{ route('admin.pengajuan.kesediaan.generate', $pengajuan->id) }}" method="POST">
+    @csrf
+        @csrf
+        <h5 class="font-bold mb-3">Buat Form Kesediaan Magang</h5>
+
+        <div class="mb-2">
+            <label>Nomor Surat</label>
+            <input type="text" name="nomor_surat" class="form-control" required>
+        </div>
+
+        <div class="mb-2">
+            <label>Penanggung Jawab</label>
+            <input type="text" name="penanggung_jawab" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-2">Generate Form</button>
+    </form>
+
+    @if($pengajuan->form_kesediaan_magang)
+        <a href="{{ asset('storage/' . $pengajuan->form_kesediaan_magang) }}" class="btn btn-success mt-2" target="_blank">
+            Lihat Form Kesediaan Magang
+        </a>
+    @endif
+@endif
 
 <!-- Preview Modal -->
 <div id="previewModal" class="modal">
