@@ -155,7 +155,6 @@
         </div>
     </main>
 
-    {{-- Script vendor & main --}}
     <script src="{{ asset('assets/js/vendors/modernizr-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendors/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendors/jquery-migrate-3.3.0.min.js') }}"></script>
