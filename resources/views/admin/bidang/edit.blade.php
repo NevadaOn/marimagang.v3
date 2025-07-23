@@ -1,4 +1,4 @@
-@extends('layouts.superadmin')
+@extends('layouts.adminbidang')
 @section('content')
 <h1 class="text-xl font-bold mb-4">Edit Bidang</h1>
 

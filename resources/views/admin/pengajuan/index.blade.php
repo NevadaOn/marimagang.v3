@@ -1,66 +1,69 @@
-@extends('layouts.superadmin')
 
-@section('title', 'Kelola Pengajuan')
+{{-- components/pengajuan-tabel.blade.php --}}
+<div data-bs-theme="dark">
+    <div class="container py-5">
+    <h1 class="fw-bold mb-4 text-white title">Daftar Pengajuan</h1>
 
-@section('content')
-<div class="container mx-auto px-4 py-6">
-    <h1 class="text-2xl font-semibold mb-4">Daftar Pengajuan</h1>
 
-    @if(session('success'))
-        <div class="mb-4 p-3 bg-green-100 text-green-700 rounded">
-            {{ session('success') }}
+        @if (session('success'))
+            <div class="alert bg-glass border-success text-light mb-4" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <div class="bg-glass rounded-4 shadow-lg p-2">
+            <table class="table table-glass align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center py-3 px-3" style="width: 5%;">No</th>
+                        <th scope="col" class="py-3 px-3" style="width: 18%;">Nama Pengusul</th>
+                        <th scope="col" class="py-3 px-3" style="width: 15%;">NIM</th>
+                        <th scope="col" class="py-3 px-3" style="width: 20%;">Bidang</th>
+                        <th scope="col" class="text-center py-3 px-3 bg" style="width: 15%;">Mulai</th>
+                        <th scope="col" class="text-center py-3 px-3" style="width: 15%;">Selesai</th>
+                        <th scope="col" class="text-center py-3 px-3 bg" style="width: 15%;">Diajukan</th>
+                        <th scope="col" class="text-center py-3 px-3" style="width: 15%;">Status</th>
+                        <th scope="col" class="text-center py-3 px-3" style="width: 10%;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($pengajuan as $index => $item)
+                        <tr>
+                            <td class="text-center py-3 px-3 ">{{ $pengajuan->firstItem() + $index }}</td>
+                            <td class="py-3 px-3">{{ $item->user->nama }}</td>
+                            <td class="py-3 px-3 ">{{ $item->user->nim }}</td>
+                            <td class="py-3 px-3">{{ $item->databidang->nama ?? '-' }}</td>
+                            <td class="text-center py-3 px-3 bg">{{ optional($item->tanggal_mulai)->format('d M Y') }}</td>
+                            <td class="text-center py-3 px-3">{{ optional($item->tanggal_selesai)->format('d M Y') }}</td>
+                            <td class="text-center py-3 px-3 bg">{{ $item->created_at->format('d M Y') }}</td>
+                            <td class="text-center py-3 px-3 ">
+                                @if ($item->status == 'disetujui')
+                                    <span class="badge-glass status-disetujui">Disetujui</span>
+                                @elseif($item->status == 'ditolak')
+                                    <span class="badge-glass status-ditolak">Ditolak</span>
+                                @else
+                                    <span class="badge-glass status-menunggu">Menunggu</span>
+                                @endif
+                            </td>
+                            
+                            <td class="text-center py-3 px-3 ">
+                                <a href="{{ route('admin.pengajuan.show', $item->id) }}"
+                                    class="btn btn-glass-action text-decoration-none">Detail</a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="9" class="text-center py-5 text-body-secondary">Tidak ada data pengajuan.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
-    @endif
 
-    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
-        <table class="min-w-full table-auto border border-gray-200">
-            <thead class="bg-gray-100 text-gray-700 text-sm">
-                <tr>
-                    <th class="px-4 py-2 border">No</th>
-                    <th class="px-4 py-2 border">Nama Pengusul</th>
-                    <th class="px-4 py-2 border">NIM</th>
-                    <th class="px-4 py-2 border">Bidang</th>
-                    <th class="px-4 py-2 border">Tanggal Mulai</th>
-                    <th class="px-4 py-2 border">Tanggal Selesai</th>
-                    <th class="px-4 py-2 border">Status</th>
-                    <th class="px-4 py-2 border">Tanggal Pengajuan</th>
-                    <th class="px-4 py-2 border">Aksi</th>
-                </tr>
-            </thead>
-            <tbody class="text-sm text-gray-800">
-                @forelse($pengajuan as $index => $item)
-                <tr class="border-b hover:bg-gray-50">
-                    <td class="px-4 py-2 border text-center">{{ $index + 1 }}</td>
-                    <td class="px-4 py-2 border">{{ $item->user->nama }}</td>
-                    <td class="px-4 py-2 border">{{ $item->user->nim }}</td>
-                    <td class="px-4 py-2 border">{{ $item->databidang->nama ?? '-' }}</td>
-                    <td class="px-4 py-2 border text-center">
-                        {{ $item->tanggal_mulai ? \Carbon\Carbon::parse($item->tanggal_mulai)->format('d M Y') : '-' }}
-                    </td>
-                    <td class="px-4 py-2 border text-center">
-                        {{ $item->tanggal_selesai ? \Carbon\Carbon::parse($item->tanggal_selesai)->format('d M Y') : '-' }}
-                    </td>
-                    <td class="px-4 py-2 border text-center">
-                        @if($item->status == 'disetujui')
-                            <span class="px-2 py-1 text-xs bg-green-100 text-green-700 rounded">Disetujui</span>
-                        @elseif($item->status == 'ditolak')
-                            <span class="px-2 py-1 text-xs bg-red-100 text-red-700 rounded">Ditolak</span>
-                        @else
-                            <span class="px-2 py-1 text-xs bg-yellow-100 text-yellow-700 rounded">Menunggu</span>
-                        @endif
-                    </td>
-                    <td class="px-4 py-2 border text-center">{{ $item->created_at->format('d M Y') }}</td>
-                    <td class="px-4 py-2 border text-center">
-                        <a href="{{ route('admin.pengajuan.show', $item->id) }}" class="text-blue-600 hover:underline text-sm">Detail</a>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="9" class="text-center py-4 text-gray-500">Tidak ada data pengajuan.</td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
+        @if ($pengajuan->hasPages())
+        <div class="d-flex justify-content-center mt-4">
+            {{ $pengajuan->links() }}
+        </div>
+        @endif
     </div>
 </div>
-@endsection

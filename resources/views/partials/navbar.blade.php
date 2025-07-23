@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-light navbar-bg">
+<nav class="navbar navbar-expand navbar-light" style="background-color: rgba(41, 50, 65, 0.5)">
     <a class="sidebar-toggle js-sidebar-toggle">
         <i class="hamburger align-self-center"></i>
     </a>
@@ -144,7 +144,7 @@
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
                     {{-- Ganti dengan avatar user yang login --}}
-                    <span class="text-dark">
+                    <span class="text-muted">
                         {{ auth()->guard('admin')->user()->nama ?? 'Guest' }}
                     </span>
                 </a>

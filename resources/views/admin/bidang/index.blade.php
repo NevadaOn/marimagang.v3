@@ -1,4 +1,4 @@
-@extends('layouts.superadmin')
+@extends('layouts.adminbidang')
 
 @section('title', 'Kelola Bidang')
 
