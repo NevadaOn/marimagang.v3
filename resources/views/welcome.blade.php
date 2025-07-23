@@ -1,535 +1,586 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Magang - Temukan Pengalaman Terbaik</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-    <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="msapplication-TileColor" content="#0E0E0E">
+  <meta name="template-color" content="#0E0E0E">
+  <meta name="description" content="Index page">
+  <meta name="keywords" content="index, page">
+  <meta name="author" content="">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/template/favicon.svg') }}">
+  <link href="{{ asset('assets/css/style.css?v=2.0') }}" rel="stylesheet">
+  <title>Genz - Personal Blog HTML Template</title>
 </head>
-<body class="light-mode">
-  <script src="{{ asset('js/bintang.js') }}"></script>
-    <div class="loading-animation" id="loadingAnimation">
-        <div class="loading-spinner"></div>
-    </div>
 
-    <div class="animated-bg">
-        <div class="floating-shapes shape-1"></div>
-        <div class="floating-shapes shape-2"></div>
-        <div class="floating-shapes shape-3"></div>
-    </div>
-
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#" data-aos="fade-right">
-              <img src="{{ asset('img/logo-kominfo.png') }}" width="40px" alt=""> Mari Magang
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Beranda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#bidang">Bidang Magang</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#alur">Alur Magang</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#dokumentasi">Dokumentasi</a>
-                    </li>
-                </ul>
-                <div>
-                    @if (Route::has('login'))
-                      <nav class="flex items-center justify-end gap-4">
-                        @auth
-                          <a
-                            href="{{ url('/dashboard') }}"
-                            class="btn btn-primary"
-                          >
-                            Dashboard
-                          </a>
-                        @else
-                          <a
-                            href="{{ route('login') }}"
-                            class="btn btn-primary"
-                          >
-                            Log in
-                          </a>
-
-                          @if (Route::has('register'))
-                            <a
-                              href="{{ route('register') }}"
-                              class="btn btn-warning me-2">
-                              Register
-                            </a>
-                          @endif
-                        @endauth
-                      </nav>
-                    @endif
-                  </div>
-                <div class="theme-toggle" onclick="toggleTheme()">
-                    <i class="fas fa-sun" id="themeIcon"></i>
-                </div>
-            </div>
+<body>
+  <div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+      <div class="preloader-inner position-relative">
+        <div class="text-center"><img class="mb-10" src="{{ asset('assets/imgs/template/favicon.svg') }}" alt="GenZ">
+          <div class="preloader-dots"></div>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="hero-content" data-aos="fade-up">
-                        <h1>Mulai Perjalanan Magang Anda</h1>
-                        <p>Temukan pengalaman magang terbaik di berbagai bidang dan kembangkan skill profesional Anda bersama mitra terpercaya kami.</p>
-                        <div class="d-flex gap-3">
-                            <button class="btn btn-primary-custom">
-                                <i class="fas fa-rocket me-2"></i>Daftar Sekarang
-                            </button>
-                            <button class="btn btn-outline-light">
-                                Lihat Persyaratan
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <img src="{{ asset('img/hero.jpg') }}" alt="Ilustrasi kegiatan di Diskominfo" class="img-fluid rounded">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <section id="bidang" class="py-5">
+      </div>
+    </div>
+  </div>
+  <header class="header sticky-bar bg-gray-900">
     <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="display-4 fw-bold" data-aos="fade-up">Bidang Magang</h2>
-            <p class="lead" data-aos="fade-up" data-aos-delay="100">Pilih bidang yang sesuai dengan minat dan passion Anda</p>
+      <div class="main-header">
+        <div class="header-logo">
+        <a class="d-flex" href="{{ url('/') }}">
+            <img class="logo-night" alt="GenZ" src="{{ asset('assets/imgs/template/kominDark.svg') }}">
+            <img class="d-none logo-day" alt="GenZ" src="{{ asset('assets/imgs/template/komin.svg') }}">
+        </a>
         </div>
+        <div class="header-nav">
+          <nav class="nav-main-menu d-none d-xl-block">
+            <ul class="main-menu">
+              <li><a class="active" href="index.html">Home</a>
 
-        <div class="row">
-            @forelse ($bidangs as $index => $bidang)
-                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="{{ 100 + ($index * 100) }}">
-                    <a href="{{ route('bidang.show', $bidang->slug) }}" class="text-decoration-none">
-                        <div class="feature-card text-center h-100">
-                            <div class="feature-icon mb-3">
-                                @if ($bidang->thumbnail)
-                                    <img src="{{ asset('storage/' . $bidang->thumbnail) }}" alt="{{ $bidang->nama }}" class="img-fluid rounded" style="height: 120px; object-fit: cover;">
-                                @endif
-                            </div>
-                            <h4>{{ $bidang->nama }}</h4>
-                            <p>{{ Str::limit($bidang->deskripsi, 100) }}</p>
-                        </div>
-                    </a>
-                </div>
-            @empty
-                <div class="col-12 text-center">
-                    <p>Belum ada bidang yang tersedia.</p>
-                </div>
-            @endforelse
+              </li>
+              <li><a class="color-gray-500" href="#bidangKerja">Alur Magang</a>
+
+              </li>
+              <li><a class="color-gray-500" href="#dokumentasi">Dokumentasi</a>
+
+              </li>
+
+              <li><a class="color-gray-500" href="page-contact.html">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span
+              class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
         </div>
+        <div class="header-right text-end">
+          <div class="switch-button">
+            <div class="form-check form-switch">
+              <input class="form-check-input" id="flexSwitchCheckChecked" type="checkbox" role="switch" checked="">
+            </div>
+          </div><a class="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow"
+            href="page-login.html">Masuk</a>
+        </div>
+      </div>
     </div>
-</section>
+  </header>
 
-
-    <div class="section-divider"></div>
-
-    <section id="alur" class="py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="display-4 fw-bold" data-aos="fade-up">Alur Magang</h2>
-                <p class="lead" data-aos="fade-up" data-aos-delay="100">Ikuti langkah-langkah mudah untuk memulai magang Anda</p>
+  <main class="main">
+    <div class="cover-home1">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-1"></div>
+          <div class="col-xl-10 col-lg-12">
+            <div class="banner">
+              <div class="row align-items-end">
+                <div class="col-lg-6 pt-100"><span
+                    class="text-sm-bold color-gray-600 wow animate__animated animate__fadeInUp">Selamat Datang
+                    Semua!</span>
+                  <h1 class="color-gray-50 mt-20 mb-20 wow animate__animated animate__fadeInUp">Mari<a
+                      class="typewrite color-linear" href="#" data-period="3000"
+                      data-type="[ &quot;Magang&quot;, &quot;Berkarier&quot;, &quot;Berkembang&quot; ]"></a></h1>
+                  <div class="row">
+                    <div class="col-lg-9">
+                      <p class="text-base color-gray-600 wow animate__animated animate__fadeInUp">Mari kembangkan
+                        kemampuan anda bersama kami, dengan berbgai banyak lowongan pekerjaan dan juga berbagai macam
+                        magang.</p>
+                    </div>
+                  </div>
+                  <div class="box-subscriber mt-40 mb-50 wow animate__animated animate__fadeInUp">
+                    <div class="inner-subscriber bg-gray-800">
+                      <form class="d-flex" action="#">
+                        <input class="input-sybscriber" type="text" placeholder="Masukkan email anda">
+                        <button class="btn btn-linear btn-arrow-right">Gabung <i
+                            class="fi-rr-arrow-small-right"></i></button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                  <div class="banner-img position-relative wow animate__animated animate__fadeIn"><img
+                      src="{{asset('assets/imgs/page/homepage1/banner.svg')}}" alt="Genz">
+                    <div class="pattern-1"><img src="assets/imgs/template/pattern-1.svg" alt="Genz"></div>
+                    <div class="pattern-2"><img src="assets/imgs/template/pattern-2.svg" alt="Genz"></div>
+                    <div class="pattern-3"><img src="assets/imgs/template/pattern-3.svg" alt="Genz"></div>
+                    <div class="pattern-4"><img src="assets/imgs/template/pattern-4.svg" alt="Genz"></div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="timeline">
-                <div class="timeline-item left" data-aos="fade-right">
-                    <div class="timeline-content">
-                        <h4><i class="fas fa-user-plus me-2"></i>Pendaftaran</h4>
-                        <p>Daftarkan diri Anda dengan mengisi formulir online dan upload dokumen yang diperlukan</p>
+            <div class="mb-70" id="bidangKerja">
+              <div class="box-topics border-gray-800 bg-gray-850">
+                <div class="row">
+                  <div class="col-lg-2">
+                    <h5 class="mb-15 color-white wow animate__animated animate__fadeInUp" data-wow-delay="0s">Bidang
+                      Kerja</h5>
+                    <p class="color-gray-500 mb-20 wow animate__animated animate__fadeInUp" data-wow-delay=".3s">Bidang
+                      kerja ini adalah bidang kerja yang berada pada layanan kami.</p>
+                    <div class="box-buttons-slider position-relative wow animate__animated animate__zoomIn">
+                      <div class="swiper-button-prev swiper-button-prev-style-1"></div>
+                      <div class="swiper-button-next swiper-button-next-style-1"></div>
                     </div>
-                </div>
-                <div class="timeline-item right" data-aos="fade-left">
-                    <div class="timeline-content">
-                        <h4><i class="fas fa-search me-2"></i>Seleksi</h4>
-                        <p>Tim kami akan melakukan seleksi berkas dan interview untuk menentukan kesesuaian</p>
+                  </div>
+                  <div class="col-lg-10">
+                    <div class="box-swiper">
+                      <div class="swiper-container swiper-group-5">
+                        <div class="swiper-wrapper">
+                          <div class="swiper-slide">
+                            <div class="card-style-1"><a href="blog-archive.html">
+                                <div class="card-image"><img src="assets/imgs/page/homepage1/Aplikasi Informatika.svg"
+                                    alt="Genz">
+                                  <div class="card-info">
+                                    <div class="info-bottom">
+                                      <h6 class="color-white mb-5">Aplikasi Informatika</h6>
+                                      <p class="text-xs color-gray-500">3 Lowongan</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a></div>
+                          </div>
+                          <div class="swiper-slide">
+                            <div class="card-style-1"><a href="blog-archive.html">
+                                <div class="card-image"><img src="assets/imgs/page/homepage1/Infrastruktur Jaringan.svg"
+                                    alt="Genz">
+                                  <div class="card-info">
+                                    <div class="info-bottom">
+                                      <h6 class="color-white mb-5">Infrastruktur Jaringan</h6>
+                                      <p class="text-xs color-gray-500">6 Lowongan</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a></div>
+                          </div>
+                          <div class="swiper-slide">
+                            <div class="card-style-1"><a href="blog-archive.html">
+                                <div class="card-image"><img src="{{asset('assets/imgs/page/homepage1/Komunikasi dan Konten.svg')}}"
+                                    alt="Genz">
+                                  <div class="card-info">
+                                    <div class="info-bottom">
+                                      <h6 class="color-white mb-5">Komunikasi dan Konten</h6>
+                                      <p class="text-xs color-gray-500">7 Lowongan</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a></div>
+                          </div>
+                          <div class="swiper-slide">
+                            <div class="card-style-1"><a href="blog-archive.html">
+                                <div class="card-image"><img src="{{asset('assets/imgs/page/homepage1/Statistik dan Data.svg')}}"
+                                    alt="Genz">
+                                  <div class="card-info">
+                                    <div class="info-bottom">
+                                      <h6 class="color-white mb-5">Statistik dan Data</h6>
+                                      <p class="text-xs color-gray-500">12 Lowongan</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a></div>
+                          </div>
+                          <div class="swiper-slide">
+                            <div class="card-style-1"><a href="blog-archive.html">
+                                <div class="card-image"><img src="{{asset('assets/imgs/page/homepage1/Comingsoon.svg')}}" alt="Genz">
+                                  <div class="card-info">
+                                    <div class="info-bottom">
+                                      <h6 class="color-white mb-5">Comingsoon</h6>
+                                      <p class="text-xs color-gray-500">.....</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a></div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
-                <div class="timeline-item left" data-aos="fade-right">
-                    <div class="timeline-content">
-                        <h4><i class="fas fa-handshake me-2"></i>Penempatan</h4>
-                        <p>Peserta yang lolos akan ditempatkan sesuai dengan bidang dan minat yang dipilih</p>
-                    </div>
-                </div>
-                <div class="timeline-item right" data-aos="fade-left">
-                    <div class="timeline-content">
-                        <h4><i class="fas fa-tasks me-2"></i>Pelaksanaan</h4>
-                        <p>Mulai magang dengan bimbingan mentor dan project yang menantang</p>
-                    </div>
-                </div>
-                <div class="timeline-item left" data-aos="fade-right">
-                    <div class="timeline-content">
-                        <h4><i class="fas fa-certificate me-2"></i>Sertifikat</h4>
-                        <p>Dapatkan sertifikat resmi setelah menyelesaikan program magang</p>
-                    </div>
-                </div>
+              </div>
             </div>
+            <h2 class="color-linear d-inline-block mb-10 wow animate__animated animate__fadeInUp">Alur Magang</h2>
+            <p class="text-lg color-gray-500 wow animate__animated animate__fadeInUp">Tahapan Magang Diskominfo</p>
+            <div class="row mt-70 mb-50">
+              <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6">
+                <div class="card-style-2 hover-up hover-neon wow animate__animated animate__fadeIn" data-wow-delay="0s">
+                  <div class="card-image"> </div>
+                  <div class="card-info">Regristrasi Akun</a></div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6">
+                <div class="card-style-2 hover-up hover-neon wow animate__animated animate__fadeIn"
+                  data-wow-delay="0.1s">
+                  <div class="card-image"></div>
+                  <div class="card-info">Lengkapi Profil</a></div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6">
+                <div class="card-style-2 hover-up hover-neon wow animate__animated animate__fadeIn"
+                  data-wow-delay="0.2s">
+                  <div class="card-image"></a></div>
+                  <div class="card-info">Pengajuan Magang</a></div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6">
+                <div class="card-style-2 hover-up hover-neon wow animate__animated animate__fadeIn"
+                  data-wow-delay="0.3s">
+                  <div class="card-image"></div>
+                  <div class="card-info">Proses Seleksi</a></div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6">
+                <div class="card-style-2 hover-up hover-neon wow animate__animated animate__fadeIn"
+                  data-wow-delay="0.4s">
+                  <div class="card-image"></div>
+                  <div class="card-info">Pengumuman Hasil</a></div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6">
+                <div class="card-style-2 hover-up hover-neon wow animate__animated animate__fadeIn"
+                  data-wow-delay="0.5s">
+                  <div class="card-image"></div>
+                  <div class="card-info">Kegiatan Magang</a></div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6">
+                <div class="card-style-2 hover-up hover-neon wow animate__animated animate__fadeIn"
+                  data-wow-delay="0.1s">
+                  <div class="card-image"></div>
+                  <div class="card-info">Magang Selesai</a></div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-70" id="dokumentasi">
+              <div class="col-lg-8">
+                <h2 class="color-linear d-inline-block mb-10">Dokumentasi Kegiatan</h2>
+                <p class="text-lg color-gray-500">Mari magang bersama kami</p>
+                <div class="box-list-posts mt-70">
+                  <div class="card-list-posts wow animate__animated animate__fadeIn">
+                    <div class="card-image hover-up"><a href=".html"><img
+                          src="assets/imgs/page/homepage1/img-news-1.jpg" alt="Genz"></a></div>
+                    <div class="card-info"><a class="btn btn-tag bg-gray-800 hover-up"
+                        href="blog-archive.html">Dokumentasi 1</a><a href=".html">
+                        <h4 class="mt-15 mb-20 color-white">Helpful Tips for Working from Home as a Freelancer</h4>
+                      </a>
+                      <p class="color-gray-500">Gosh jaguar ostrich quail one excited dear hello and bound and the and
+                        bland moral misheard roadrunner flapped lynx far that and jeepers giggled far and far</p>
+                      <div class="row mt-20">
+                        <div class="col-7"><a class="color-gray-700 text-sm mr-15" href="blog-archive.html">#
+                            Travel</a><a class="color-gray-700 text-sm" href="blog-archive.html"># Lifestyle</a></div>
+                        <div class="col-5 text-end"><span class="color-gray-700 text-sm timeread">3 mins read</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-list-posts wow animate__animated animate__fadeIn">
+                    <div class="card-image hover-up"><a href=".html"><img
+                          src="assets/imgs/page/homepage1/img-news-2.jpg" alt="Genz"></a></div>
+                    <div class="card-info"><a class="btn btn-tag bg-gray-800 hover-up"
+                        href="blog-archive.html">Dokumentasi 2</a><a href=".html">
+                        <h4 class="mt-15 mb-20 color-white">Helpful Tips for Working from Home as a Freelancer</h4>
+                      </a>
+                      <p class="color-gray-500">Gosh jaguar ostrich quail one excited dear hello and bound and the and
+                        bland moral misheard roadrunner flapped lynx far that and jeepers giggled far and far</p>
+                      <div class="row mt-20">
+                        <div class="col-7"><a class="color-gray-700 text-sm mr-15" href="blog-archive.html">#
+                            Travel</a><a class="color-gray-700 text-sm" href="blog-archive.html"># Lifestyle</a></div>
+                        <div class="col-5 text-end"><span class="color-gray-700 text-sm timeread">3 mins read</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-list-posts wow animate__animated animate__fadeIn">
+                    <div class="card-image hover-up"><a href=".html"><img
+                          src="assets/imgs/page/homepage1/img-news-3.jpg" alt="Genz"></a></div>
+                    <div class="card-info"><a class="btn btn-tag bg-gray-800 hover-up"
+                        href="blog-archive.html">Dokumentasi 3</a><a href=".html">
+                        <h4 class="mt-15 mb-20 color-white">Helpful Tips for Working from Home as a Freelancer</h4>
+                      </a>
+                      <p class="color-gray-500">Gosh jaguar ostrich quail one excited dear hello and bound and the and
+                        bland moral misheard roadrunner flapped lynx far that and jeepers giggled far and far</p>
+                      <div class="row mt-20">
+                        <div class="col-7"><a class="color-gray-700 text-sm mr-15" href="blog-archive.html">#
+                            Travel</a><a class="color-gray-700 text-sm" href="blog-archive.html"># Lifestyle</a></div>
+                        <div class="col-5 text-end"><span class="color-gray-700 text-sm timeread">3 mins read</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-list-posts wow animate__animated animate__fadeIn">
+                    <div class="card-image hover-up"><a href=".html"><img
+                          src="assets/imgs/page/homepage1/img-news-4.jpg" alt="Genz"></a></div>
+                    <div class="card-info"><a class="btn btn-tag bg-gray-800 hover-up"
+                        href="blog-archive.html">Dokumentasi 4</a><a href=".html">
+                        <h4 class="mt-15 mb-20 color-white">Helpful Tips for Working from Home as a Freelancer</h4>
+                      </a>
+                      <p class="color-gray-500">Gosh jaguar ostrich quail one excited dear hello and bound and the and
+                        bland moral misheard roadrunner flapped lynx far that and jeepers giggled far and far</p>
+                      <div class="row mt-20">
+                        <div class="col-7"><a class="color-gray-700 text-sm mr-15" href="blog-archive.html">#
+                            Travel</a><a class="color-gray-700 text-sm" href="blog-archive.html"># Lifestyle</a></div>
+                        <div class="col-5 text-end"><span class="color-gray-700 text-sm timeread">3 mins read</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-list-posts wow animate__animated animate__fadeIn">
+                    <div class="card-image hover-up"><a href=".html"><img
+                          src="assets/imgs/page/homepage1/img-news-5.jpg" alt="Genz"></a></div>
+                    <div class="card-info"><a class="btn btn-tag bg-gray-800 hover-up"
+                        href="blog-archive.html">Dokumentasi 5</a><a href=".html">
+                        <h4 class="mt-15 mb-20 color-white">Helpful Tips for Working from Home as a Freelancer</h4>
+                      </a>
+                      <p class="color-gray-500">Gosh jaguar ostrich quail one excited dear hello and bound and the and
+                        bland moral misheard roadrunner flapped lynx far that and jeepers giggled far and far</p>
+                      <div class="row mt-20">
+                        <div class="col-7"><a class="color-gray-700 text-sm mr-15" href="blog-archive.html">#
+                            Travel</a><a class="color-gray-700 text-sm" href="blog-archive.html"># Lifestyle</a></div>
+                        <div class="col-5 text-end"><span class="color-gray-700 text-sm timeread">3 mins read</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <nav class="mb-50">
+                  <ul class="pagination">
+                    <li class="page-item wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a
+                        class="page-link page-prev" href="#"><i class="fi-rr-arrow-small-left"></i></a></li>
+                    <li class="page-item wow animate__animated animate__fadeIn" data-wow-delay=".1s"><a
+                        class="page-link" href="#">1</a></li>
+                    <li class="page-item wow animate__animated animate__fadeIn" data-wow-delay=".2s"><a
+                        class="page-link active" href="#">2</a></li>
+                    <li class="page-item wow animate__animated animate__fadeIn" data-wow-delay=".3s"><a
+                        class="page-link" href="#">3</a></li>
+                    <li class="page-item wow animate__animated animate__fadeIn" data-wow-delay=".4s"><a
+                        class="page-link" href="#">...</a></li>
+                    <li class="page-item wow animate__animated animate__fadeIn" data-wow-delay=".5s"><a
+                        class="page-link page-next" href="#"><i class="fi-rr-arrow-small-right"></i></a></li>
+                  </ul>
+                </nav>
+              </div>
+              <div class="col-lg-4">
+                <div class="sidebar">
+                  <div class="box-sidebar bg-gray-850 border-gray-800">
+                    <div class="head-sidebar wow animate__animated animate__fadeIn">
+                      <h5 class="line-bottom">Dokumentasi Lainnya</h5>
+                    </div>
+                    <div class="content-sidebar">
+                      <div class="list-posts">
+                        <div class="item-post wow animate__animated animate__fadeIn">
+                          <div class="image-post"><a href="single-sidebar.html"><img
+                                src="assets/imgs/page/homepage1/img-post.jpg" alt="Genz"></a></div>
+                          <div class="info-post border-gray-800"><a href="single-sidebar.html">
+                              <h6 class="color-white">Creating is a privilege but it’s also a gift</h6>
+                            </a><span class="color-gray-700">15 mins read</span>
+                            <ul class="d-inline-block">
+                              <li class="color-gray-700">15 April 2022</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="item-post wow animate__animated animate__fadeIn">
+                          <div class="image-post"><a href="single-sidebar.html"><img
+                                src="assets/imgs/page/homepage1/img-post2.jpg" alt="Genz"></a></div>
+                          <div class="info-post border-gray-800"><a href="single-sidebar.html">
+                              <h6 class="color-white">Being unique is better than being perfect</h6>
+                            </a><span class="color-gray-700">15 mins read</span>
+                            <ul class="d-inline-block">
+                              <li class="color-gray-700">15 April 2022</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="item-post wow animate__animated animate__fadeIn">
+                          <div class="image-post"><a href="single-sidebar.html"><img
+                                src="assets/imgs/page/homepage1/img-post3.jpg" alt="Genz"></a></div>
+                          <div class="info-post border-gray-800"><a href="single-sidebar.html">
+                              <h6 class="color-white">Every day, in every city and town across the country</h6>
+                            </a><span class="color-gray-700">15 mins read</span>
+                            <ul class="d-inline-block">
+                              <li class="color-gray-700">15 April 2022</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="item-post wow animate__animated animate__fadeIn">
+                          <div class="image-post"><a href="single-sidebar.html"><img
+                                src="assets/imgs/page/homepage1/img-post4.jpg" alt="Genz"></a></div>
+                          <div class="info-post border-gray-800"><a href=".html">
+                              <h6 class="color-white">Your voice, your mind, your story, your vision</h6>
+                            </a><span class="color-gray-700">15 mins read</span>
+                            <ul class="d-inline-block">
+                              <li class="color-gray-700">15 April 2022</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="item-post wow animate__animated animate__fadeIn">
+                          <div class="image-post"><a href=".html"><img
+                                src="assets/imgs/page/homepage1/img-post4.jpg" alt="Genz"></a></div>
+                          <div class="info-post border-gray-800"><a href=".html">
+                              <h6 class="color-white">Your voice, your mind, your story, your vision</h6>
+                            </a><span class="color-gray-700">15 mins read</span>
+                            <ul class="d-inline-block">
+                              <li class="color-gray-700">15 April 2022</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="box-sidebar bg-gray-850 border-gray-800">
+                    <div class="head-sidebar wow animate__animated animate__fadeIn">
+                      <h5 class="line-bottom">Alumni Magang</h5>
+                    </div>
+                    <div class="content-sidebar">
+                      <div class="list-comments">
+                        <div class="item-comment border-gray-800 wow animate__animated animate__fadeIn">
+                          <p class="color-gray-500 mb-20">“ Sangat meanrik, saya suka magang disini selain pengalaman
+                            saya juga banyak kenal teman-teman baru “</p>
+                          <div class="box-author-small"><img src="assets/imgs/page/homepage1/author6.png" alt="Genz">
+                            <div class="author-info"><span class="d-block color-gray-700 text-sm">Nur Kholis
+                                Majid</span><span class="color-gray-700 text-xs">15 April 2025</span></div>
+                          </div>
+                        </div>
+                        <div class="item-comment border-gray-800 wow animate__animated animate__fadeIn">
+                          <p class="color-gray-500 mb-20">“ Mantap, skarang saya sudah kerja di perusahaan besar atas
+                            pengalaman magang saya “</p>
+                          <div class="box-author-small"><img src="assets/imgs/page/homepage1/author7.png" alt="Genz">
+                            <div class="author-info"><span class="d-block color-gray-700 text-sm">Adi
+                                Santoso</span><span class="color-gray-700 text-xs">12 juni 2025</span></div>
+                          </div>
+                        </div>
+                        <div class="item-comment border-gray-800 wow animate__animated animate__fadeIn">
+                          <p class="color-gray-500 mb-20">“ Jan jossss tenannn hahahaha “</p>
+                          <div class="box-author-small"><img src="assets/imgs/page/homepage1/author8.png" alt="Genz">
+                            <div class="author-info"><span class="d-block color-gray-700 text-sm">Cak Rizki</span><span
+                                class="color-gray-700 text-xs">18 agustus 2024</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="box-sidebar bg-gray-850 border-gray-800">
+                    <div class="head-sidebar"><a href="index.html"><img
+                class="logo-night" src="assets/imgs/template/kominDark.svg" alt="Genz"><img class="d-none logo-day"
+                alt="GenZ" src="assets/imgs/template/komin.svg"></a>
+                      <h6 class="color-gray-700">Tim Pengembang</h6>
+                    </div>
+                    <div class="content-sidebar">
+                      <div class="row mt-30 mb-10">
+                        <div class="col-sm-4 col-4 mb-20 wow animate__animated animate__fadeIn"><a href="#"><img
+                              class="bdrd-8" src="assets/imgs/page/homepage1/gallery.png" alt="Genz"></a></div>
+                        <div class="col-sm-4 col-4 mb-20 wow animate__animated animate__fadeIn"><a href="#"><img
+                              class="bdrd-8" src="assets/imgs/page/homepage1/gallery2.png" alt="Genz"></a></div>
+                        <div class="col-sm-4 col-4 mb-20 wow animate__animated animate__fadeIn"><a href="#"><img
+                              class="bdrd-8" src="assets/imgs/page/homepage1/gallery3.png" alt="Genz"></a></div>
+                        <div class="col-sm-4 col-4 mb-20 wow animate__animated animate__fadeIn"><a href="#"><img
+                              class="bdrd-8" src="assets/imgs/page/homepage1/gallery4.png" alt="Genz"></a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <section id="dokumentasi" class="py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="display-4 fw-bold" data-aos="fade-up">Dokumentasi Magang</h2>
-                <p class="lead" data-aos="fade-up" data-aos-delay="100">Lihat aktivitas dan pencapaian peserta magang kami</p>
-            </div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-1 bg-gray-850 border-gray-800">
+        <div class="row">
+          <div class="col-lg-4 mb-30"><a class="wow animate__animated animate__fadeInUp" href="index.html"><img
+                class="logo-night" src="assets/imgs/template/kominDark.svg" alt="Genz"><img class="d-none logo-day"
+                alt="GenZ" src="assets/imgs/template/komin.svg"></a>
+            <p class="mb-20 mt-20 text-sm color-gray-500 wow animate__animated animate__fadeInUp">Kementerian Komunikasi
+              dan Informatika, yang merupakan kementerian dalam pemerintahan Indonesia yang bertanggung jawab atas
+              urusan di bidang komunikasi dan informatika. </p>
+            <h6 class="color-white mb-5 wow animate__animated animate__fadeInUp">Address</h6>
+            <p class="text-sm color-gray-500 wow animate__animated animate__fadeInUp">2J9M+26M, Jl. Agus Salim,
+              Kiduldalem, Kec. Klojen, <br>Kota Malang, Jawa Timur 65143</p>
+          </div>
+          <div class="col-lg-4 mb-30">
+            <h6 class="text-lg mb-30 color-white wow animate__animated animate__fadeInUp">All Link</h6>
             <div class="row">
-                <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="glass-card p-0 overflow-hidden">
-                        <img src="https://via.placeholder.com/400x250/145389/ffffff?text=Workshop" class="img-fluid" alt="Workshop">
-                        <div class="p-3">
-                            <h5>Workshop Teknologi</h5>
-                            <p>Peserta mengikuti workshop tentang teknologi terkini</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="glass-card p-0 overflow-hidden">
-                        <img src="https://via.placeholder.com/400x250/09d1f2/ffffff?text=Presentasi" class="img-fluid" alt="Presentasi">
-                        <div class="p-3">
-                            <h5>Presentasi Project</h5>
-                            <p>Peserta mempresentasikan hasil project mereka</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="glass-card p-0 overflow-hidden">
-                        <img src="https://via.placeholder.com/400x250/745f74/ffffff?text=Networking" class="img-fluid" alt="Networking">
-                        <div class="p-3">
-                            <h5>Networking Session</h5>
-                            <p>Sesi networking dengan profesional industri</p>
-                        </div>
-                    </div>
-                </div>
+              <div class="col-6">
+                <ul class="menu-footer">
+                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
+                      href="index.html">Home</a></li>
+                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500" href="#bidangKerja">Alur
+                      Magang</a></li>
+                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
+                      href="#dokumentasi">Dokumentasi</a></li>
+                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
+                      href="page-404.html">404</a></li>
+                      
+                </ul>
+              </div>
+              <div class="col-6">
+                <ul class="menu-footer">
+                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500" href="#">Contact</a>
+                  </li>
+                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
+                      href="page-login.html">Login</a></li>
+                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
+                      href="page-signup.html">Sign-Up</a></li>
+                </ul>
+              </div>
             </div>
+          </div>
+          <div class="col-lg-4 mb-30">
+            <h4 class="text-lg mb-30 color-white wow animate__animated animate__fadeInUp">Newsletter</h4>
+            <p class="text-base color-gray-500 wow animate__animated animate__fadeInUp">Daftar disini, Raih kesempatan magang yang berkualitas.</p>
+            <div class="form-newsletters mt-15 wow animate__animated animate__fadeInUp">
+              <form action="#">
+                <div class="form-group">
+                  <input class="input-name border-gray-500" type="text" placeholder="Your name">
+                </div>
+                <div class="form-group">
+                  <input class="input-email border-gray-500" type="email" placeholder="Emaill address">
+                </div>
+                <div class="form-group mt-20">
+                  <button class="btn btn-linear hover-up">
+                    Daftar
+                    <i class="fi-rr-arrow-small-right"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <footer class="py-4 mt-5" style="background: rgba(17, 13, 51, 0.9);">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Mari Magang</h5>
-                    <p>Membantu mahasiswa menemukan pengalaman magang terbaik di Diskominfo Kab.Malang</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <div class="social-links">
-                        <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-light me-3"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-light"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
+        <div class="footer-bottom border-gray-800">
+          <div class="row">
+            <div class="col-lg-5 text-center text-lg-start">
+              <p class="text-base color-white wow animate__animated animate__fadeIn">© Created by<a class="copyright"
+                  href="#" target="_blank"> PKL Unira Malang</a></p>
             </div>
-            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
-            <div class="text-center">
-                <p>&copy; 2025 Mari Magang Diskominfo - Kab.Malang.</p>
+            <div class="col-lg-7 text-center text-lg-end">
+              <div class="box-socials">
+                <div class="d-inline-block mr-30 wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a
+                    class="icon-socials icon-twitter color-gray-500" href="https://twitter.com">Twitter</a></div>
+                <div class="d-inline-block mr-30 wow animate__animated animate__fadeIn" data-wow-delay=".2s"><a
+                    class="icon-socials icon-linked color-gray-500" href="https://www.linkedin.com">LinkedIn</a></div>
+                <div class="d-inline-block wow animate__animated animate__fadeIn" data-wow-delay=".4s"><a
+                    class="icon-socials icon-insta color-gray-500" href="https://www.instagram.com">Instagram</a></div>
+              </div>
             </div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </footer>
+  <div class="progressCounter progressScroll hover-up hover-neon-2">
+    <div class="progressScroll-border">
+      <div class="progressScroll-circle"><span class="progressScroll-text"><i class="fi-rr-arrow-small-up"></i></span>
+      </div>
+    </div>
+  </div>
+    <script src="{{ asset('assets/js/vendors/modernizr-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/jquery-migrate-3.3.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/waypoints.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/wow.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/text-type.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/jquery.progressScroll.min.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js?v=2.0') }}"></script>
 
-    <button class="scroll-to-top" id="scrollToTop">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
-
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('loadingAnimation').style.opacity = '0';
-                setTimeout(function() {
-                    document.getElementById('loadingAnimation').style.display = 'none';
-                }, 500);
-            }, 1000);
-        });
-
-        function toggleTheme() {
-            const body = document.body;
-            const themeIcon = document.getElementById('themeIcon');
-            
-            if (body.classList.contains('light-mode')) {
-                body.classList.remove('light-mode');
-                body.classList.add('dark-mode');
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'light');
-            }
-        }
-
-        // Load saved theme
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            const body = document.body;
-            const themeIcon = document.getElementById('themeIcon');
-            
-            if (savedTheme === 'dark') {
-                body.classList.remove('light-mode');
-                body.classList.add('dark-mode');
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            }
-        });
-
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.classList.add('show');
-            } else {
-                scrollToTopBtn.classList.remove('show');
-            }
-        });
-
-        scrollToTopBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Form submission
-        const form = document.querySelector('form');
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Show loading animation
-                const submitBtn = this.querySelector('button[type="submit"]');
-                const originalText = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Mengirim...';
-                submitBtn.disabled = true;
-                
-                // Simulate form submission
-                setTimeout(function() {
-                    submitBtn.innerHTML = '<i class="fas fa-check me-2"></i>Terkirim!';
-                    submitBtn.style.background = '#28a745';
-                    
-                    setTimeout(function() {
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                        submitBtn.style.background = '';
-                    }, 2000);
-                }, 1500);
-            });
-        }
-
-        // Add hover effect to cards
-        document.querySelectorAll('.feature-card, .glass-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Parallax effect for floating shapes
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelectorAll('.floating-shapes');
-            
-            parallax.forEach((element, index) => {
-                const speed = 0.5 + (index * 0.1);
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
-
-        // Counter animation
-        function animateCounter(element, start, end, duration) {
-            let current = start;
-            const increment = end > start ? 1 : -1;
-            const stepTime = Math.abs(Math.floor(duration / (end - start)));
-            
-            const timer = setInterval(function() {
-                current += increment;
-                element.textContent = current + (element.textContent.includes('%') ? '%' : '+');
-                
-                if (current === end) {
-                    clearInterval(timer);
-                }
-            }, stepTime);
-        }
-
-        // Intersection Observer for counter animation
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counters = entry.target.querySelectorAll('.stat-number');
-                    counters.forEach(counter => {
-                        const target = parseInt(counter.textContent);
-                        animateCounter(counter, 0, target, 2000);
-                    });
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        // Observe stats section
-        document.addEventListener('DOMContentLoaded', function() {
-            const statsSection = document.querySelector('.stats-card').closest('.row');
-            if (statsSection) {
-                observer.observe(statsSection);
-            }
-        });
-
-        // Add typing effect to hero title
-        function typeWriter(element, text, speed = 100) {
-            let i = 0;
-            element.innerHTML = '';
-            
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                }
-            }
-            
-            type();
-        }
-
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                const heroTitle = document.querySelector('.hero h1');
-                if (heroTitle) {
-                    const originalText = heroTitle.textContent;
-                    typeWriter(heroTitle, originalText, 50);
-                }
-            }, 1500);
-        });
-
-        function createParticles() {
-            const particlesContainer = document.createElement('div');
-            particlesContainer.style.position = 'fixed';
-            particlesContainer.style.top = '0';
-            particlesContainer.style.left = '0';
-            particlesContainer.style.width = '100%';
-            particlesContainer.style.height = '100%';
-            particlesContainer.style.pointerEvents = 'none';
-            particlesContainer.style.zIndex = '1';
-            document.body.appendChild(particlesContainer);
-
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'absolute';
-                particle.style.width = '2px';
-                particle.style.height = '2px';
-                particle.style.background = '#09d1f2';
-                particle.style.borderRadius = '50%';
-                particle.style.opacity = '0.3';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animation = `float ${3 + Math.random() * 4}s ease-in-out infinite`;
-                particle.style.animationDelay = Math.random() * 2 + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Initialize particles
-        createParticles();
-
-        // Add glow effect to buttons on hover
-        document.querySelectorAll('.btn-primary-custom').forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
-                this.style.boxShadow = '0 0 30px rgba(9, 209, 242, 0.6)';
-            });
-            
-            btn.addEventListener('mouseleave', function() {
-                this.style.boxShadow = '0 10px 30px rgba(20, 83, 137, 0.4)';
-            });
-        });
-
-        // Add progress bar animation
-        function animateProgressBars() {
-            const progressBars = document.querySelectorAll('.progress-bar');
-            progressBars.forEach(bar => {
-                const width = bar.getAttribute('data-width');
-                bar.style.width = width;
-            });
-        }
-
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     const cursor = document.createElement('div');
-        //     cursor.style.position = 'fixed';
-        //     cursor.style.width = '20px';
-        //     cursor.style.height = '20px';
-        //     cursor.style.border = '2px solid #09d1f2';
-        //     cursor.style.borderRadius = '50%';
-        //     cursor.style.pointerEvents = 'none';
-        //     cursor.style.zIndex = '9999';
-        //     cursor.style.opacity = '0';
-        //     cursor.style.transition = 'opacity 0.3s ease';
-        //     document.body.appendChild(cursor);
-
-        //     document.addEventListener('mousemove', function(e) {
-        //         cursor.style.left = e.clientX - 10 + 'px';
-        //         cursor.style.top = e.clientY - 10 + 'px';
-        //         cursor.style.opacity = '1';
-        //     });
-
-        //     document.addEventListener('mouseleave', function() {
-        //         cursor.style.opacity = '0';
-        //     });
-        // });
-    </script>
 </body>
+
 </html>
