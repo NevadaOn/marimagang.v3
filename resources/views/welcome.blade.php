@@ -53,43 +53,30 @@
           <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span
               class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
         </div>
-        <div class="header-right text-end d-flex align-items-center gap-3">
-    <div class="header-right d-flex align-items-center gap-3 flex-nowrap">
-    <div class="switch-button">
-        <div class="form-check form-switch">
-            <input class="form-check-input" id="flexSwitchCheckChecked" type="checkbox" role="switch" checked>
+        <div class="header-right text-end">
+        <div class="switch-button">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" id="flexSwitchCheckChecked" type="checkbox" role="switch" checked="">
+                </div>
         </div>
-    </div>
 
     @if (Route::has('login'))
-        <div class="d-flex align-items-center gap-2 flex-nowrap">
             @auth
                 <a
                     href="{{ url('/dashboard') }}"
-                    class="btn btn-sm btn-linear hover-up hover-shadow text-nowrap"
+                    class="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow"
                 >
                     Dashboard
                 </a>
             @else
                 <a
                     href="{{ route('login') }}"
-                    class="btn btn-sm btn-linear hover-up hover-shadow text-nowrap"
+                    class="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow"
                 >
-                    Log in
+                    Masuk
                 </a>
-
-                @if (Route::has('register'))
-                    <a
-                        href="{{ route('register') }}"
-                        class="btn btn-sm btn-warning hover-up hover-shadow text-nowrap"
-                    >
-                        Register
-                    </a>
-                @endif
             @endauth
-        </div>
     @endif
-</div>
 
       </div>
     </div>
@@ -118,11 +105,13 @@
                   </div>
                   <div class="box-subscriber mt-40 mb-50 wow animate__animated animate__fadeInUp">
                     <div class="inner-subscriber bg-gray-800">
-                      <form class="d-flex" action="#">
-                        <input class="input-sybscriber" type="text" placeholder="Masukkan email anda">
-                        <button class="btn btn-linear btn-arrow-right">Gabung <i
-                            class="fi-rr-arrow-small-right"></i></button>
+                      <form class="d-flex" action="{{ route('register') }}" method="GET">
+                          <input class="input-sybscriber" type="text" name="email" placeholder="Masukkan email anda">
+                          <button class="btn btn-linear btn-arrow-right">
+                              Gabung <i class="fi-rr-arrow-small-right"></i>
+                          </button>
                       </form>
+
                     </div>
                   </div>
                 </div>

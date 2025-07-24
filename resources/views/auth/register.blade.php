@@ -84,9 +84,10 @@
                                             type="email"
                                             name="email"
                                             id="email"
-                                            value="{{ old('email') }}"
+                                            value="{{ old('email', request('email')) }}"
                                             placeholder="Email"
                                             required>
+
                                     </div>
 
                                     {{-- Telepon --}}
