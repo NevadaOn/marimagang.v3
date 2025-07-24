@@ -143,74 +143,82 @@
                     <div class="box-swiper">
                       <div class="swiper-container swiper-group-5">
                         <div class="swiper-wrapper">
-                          <div class="swiper-slide">
-                            <div class="card-style-1"><a href="blog-archive.html">
-                                <div class="card-image"><img src="assets/imgs/page/homepage1/Aplikasi Informatika.svg"
-                                    alt="Genz">
+                          @forelse ($bidangs as $index => $bidang)
+                            <div class="swiper-slide">
+                              <div class="card-style-1">
+                                <a href="{{ route('bidang.show', $bidang->slug) }}">
+                                  <div class="card-image card-image-fixed">
+                                    @if ($bidang->thumbnail)
+                                      <img src="{{ asset('storage/' . $bidang->thumbnail) }}" alt="{{ $bidang->nama }}" class="card-img-uniform">
+                                    @else
+                                      <img src="{{ asset('assets/imgs/page/homepage1/default.svg') }}" alt="{{ $bidang->nama }}" class="card-img-uniform">
+                                    @endif
+                                    <div class="card-info">
+                                      <div class="info-bottom">
+                                        <h6 class="color-white mb-5">{{ $bidang->nama }}</h6>
+                                        <p class="text-xs color-gray-500">
+                                          @if(isset($bidang->lowongan_count))
+                                            {{ $bidang->lowongan_count }} Lowongan
+                                          @else
+                                            {{ Str::limit($bidang->deskripsi, 50) }}
+                                          @endif
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          @empty
+                            <div class="swiper-slide">
+                              <div class="card-style-1">
+                                <div class="card-image">
+                                  <img src="{{ asset('assets/imgs/page/homepage1/Comingsoon.svg') }}" alt="Coming Soon">
                                   <div class="card-info">
                                     <div class="info-bottom">
-                                      <h6 class="color-white mb-5">Aplikasi Informatika</h6>
-                                      <p class="text-xs color-gray-500">3 Lowongan</p>
+                                      <h6 class="color-white mb-5">Belum Ada Bidang</h6>
+                                      <p class="text-xs color-gray-500">Sedang dalam pengembangan...</p>
                                     </div>
                                   </div>
                                 </div>
-                              </a></div>
-                          </div>
-                          <div class="swiper-slide">
-                            <div class="card-style-1"><a href="blog-archive.html">
-                                <div class="card-image"><img src="assets/imgs/page/homepage1/Infrastruktur Jaringan.svg"
-                                    alt="Genz">
-                                  <div class="card-info">
-                                    <div class="info-bottom">
-                                      <h6 class="color-white mb-5">Infrastruktur Jaringan</h6>
-                                      <p class="text-xs color-gray-500">6 Lowongan</p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </a></div>
-                          </div>
-                          <div class="swiper-slide">
-                            <div class="card-style-1"><a href="blog-archive.html">
-                                <div class="card-image"><img src="{{asset('assets/imgs/page/homepage1/Komunikasi dan Konten.svg')}}"
-                                    alt="Genz">
-                                  <div class="card-info">
-                                    <div class="info-bottom">
-                                      <h6 class="color-white mb-5">Komunikasi dan Konten</h6>
-                                      <p class="text-xs color-gray-500">7 Lowongan</p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </a></div>
-                          </div>
-                          <div class="swiper-slide">
-                            <div class="card-style-1"><a href="blog-archive.html">
-                                <div class="card-image"><img src="{{asset('assets/imgs/page/homepage1/Statistik dan Data.svg')}}"
-                                    alt="Genz">
-                                  <div class="card-info">
-                                    <div class="info-bottom">
-                                      <h6 class="color-white mb-5">Statistik dan Data</h6>
-                                      <p class="text-xs color-gray-500">12 Lowongan</p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </a></div>
-                          </div>
-                          <div class="swiper-slide">
-                            <div class="card-style-1"><a href="blog-archive.html">
-                                <div class="card-image"><img src="{{asset('assets/imgs/page/homepage1/Comingsoon.svg')}}" alt="Genz">
-                                  <div class="card-info">
-                                    <div class="info-bottom">
-                                      <h6 class="color-white mb-5">Comingsoon</h6>
-                                      <p class="text-xs color-gray-500">.....</p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </a></div>
-                          </div>
+                              </div>
+                            </div>
+                          @endforelse
                         </div>
+                        
                       </div>
                     </div>
                   </div>
+
+                  <style>
+                  .card-image-fixed {
+                    position: relative;
+                    width: 100%;
+                    height: 200px;
+                    overflow: hidden;
+                    border-radius: 8px;
+                  }
+
+                  .card-img-uniform {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover; 
+                    object-position: center; 
+                    transition: transform 0.3s ease;
+                  }
+
+                  .card-style-1:hover .card-img-uniform {
+                    transform: scale(1.05);
+                  }
+
+                  .card-img-uniform-contain {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    object-position: center;
+                    background-color: #f8f9fa; 
+                  }
+                  </style>
                 </div>
               </div>
             </div>
