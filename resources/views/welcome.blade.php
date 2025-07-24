@@ -12,7 +12,7 @@
   <meta name="author" content="">
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/template/favicon.svg') }}">
   <link href="{{ asset('assets/css/style.css?v=2.0') }}" rel="stylesheet">
-  <title>Genz - Personal Blog HTML Template</title>
+  <title>Mari Magang - DIskominfo Kab.Malang</title>
 </head>
 
 <body>
@@ -30,8 +30,8 @@
       <div class="main-header">
         <div class="header-logo">
         <a class="d-flex" href="{{ url('/') }}">
-            <img class="logo-night" alt="GenZ" src="{{ asset('assets/imgs/template/kominDark.svg') }}">
-            <img class="d-none logo-day" alt="GenZ" src="{{ asset('assets/imgs/template/komin.svg') }}">
+            <img class="logo-night" alt="Diskominfo" src="{{ asset('img/rb_3083.png') }}" width="90px">
+            <img class="d-none logo-day" alt="Diskominfo" src="{{ asset('img/rb_3083.png') }}" width="90px">
         </a>
         </div>
         <div class="header-nav">
