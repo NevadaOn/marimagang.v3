@@ -47,7 +47,7 @@
                             </td>
                             
                             <td class="text-center py-3 px-3 ">
-                                <a href="{{ route('admin.pengajuan.show', $item->id) }}"
+                                <a href="{{ route('admin.pengajuan.showbidang', $item->id) }}"
                                     class="btn btn-glass-action text-decoration-none">Detail</a>
                             </td>
                         </tr>

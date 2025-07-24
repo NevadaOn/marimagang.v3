@@ -21,16 +21,52 @@
     {{-- Anda bisa menambahkan CSS atau script tambahan khusus untuk head di sini --}}
     @stack('styles')
     <style>
-        .bg-nav{
-            background-color: rgb(23, 32, 46) !important;
+             .main {
+                background: 
+      radial-gradient(circle at top right, rgba(148, 169, 201, 0.2), transparent 50%),
+      radial-gradient(circle at bottom left, rgba(148, 169, 201, 0.15), transparent 50%),
+      #0F172A;
+    min-height: 100vh;
+    }
+
+    .main::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("{{ asset('imgs/shadow-1.svg') }}");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top right;
+        opacity: 0.2;
+        pointer-events: none;
+    }
+
+    .main > * {
+        position: relative;
+    }
+    
+        .navbar {
+            background-color: rgba(23, 32, 46, 0) !important;
+        }
+    
+        div.sidebar-content.js-simplebar.bg-nav {
+            background-color: #0F172A !important;
+        }
+    
+        a.sidebar-link {
+            background-color: transparent;
         }
     </style>
+    
 </head>
 <body>
     <div class="wrapper">
         @include('partials.sidebarbidang') 
 
-        <div class="main" style="background-image: linear-gradient(135deg, #000000, #374151);">
+        <div class="main" style="">
             @include('partials.navbar')
 
                     @yield('content')

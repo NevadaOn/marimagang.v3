@@ -1,13 +1,13 @@
-<nav class="navbar navbar-expand navbar-light" style="background-color: rgba(41, 50, 65, 0.5)">
-    <a class="sidebar-toggle js-sidebar-toggle">
-        <i class="hamburger align-self-center"></i>
+<nav class="navbar navbar-expand " style="background-color: rgba(41, 50, 65, 0.5)">
+    <a class="sidebar-toggle js-sidebar-toggle text-light">
+        <i class="hamburger align-self-center text-light" style="color: white !important;" ></i>
     </a>
 
-    <div class="navbar-collapse collapse">
-        <ul class="navbar-nav navbar-align">
-            <li class="nav-item dropdown">
-                <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
-                    <div class="position-relative">
+    <div class="navbar-collapse collapse ">
+        <ul class="navbar-nav navbar-align ">
+            <li  class="nav-item dropdown ">
+                <a class="nav-icon dropdown-toggle text-light" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
+                   <div class="position-relative">
                         <i class="align-middle" data-feather="bell"></i>
                         <span class="indicator">4</span>
                     </div>
@@ -17,7 +17,7 @@
                         4 New Notifications
                     </div>
                     <div class="list-group">
-                        <a href="#" class="list-group-item">
+                        <a href="#" class="list-group-item ">
                             <div class="row g-0 align-items-center">
                                 <div class="col-2">
                                     <i class="text-danger" data-feather="alert-circle"></i>
@@ -66,14 +66,14 @@
                         </a>
                     </div>
                     <div class="dropdown-menu-footer">
-                        <a href="#" class="text-muted">Show all notifications</a>
+                        <a href="#" class="text-muted ">Show all notifications</a>
                     </div>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
                     <div class="position-relative">
-                        <i class="align-middle" data-feather="message-square"></i>
+                        <i class="align-middle text-light" data-feather="message-square"></i>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="messagesDropdown">
@@ -142,9 +142,9 @@
                     <i class="align-middle" data-feather="settings"></i>
                 </a>
 
-                <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                <a class="nav-link dropdown-toggle d-none d-sm-inline-block text-light" href="#" data-bs-toggle="dropdown">
                     {{-- Ganti dengan avatar user yang login --}}
-                    <span class="text-muted">
+                    <span class="text-light ">
                         {{ auth()->guard('admin')->user()->nama ?? 'Guest' }}
                     </span>
                 </a>

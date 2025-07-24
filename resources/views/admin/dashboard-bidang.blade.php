@@ -6,12 +6,12 @@
             --primary-color: #1e3a8a; /* Biru Kominfo */
             --secondary-color: #000000; /* Hitam */
             --accent-color: #3b82f6;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-bg: rgba(0, 0, 0, 0.075);
+            --glass-border: rgba(0, 0, 0, 0.055);
             --text-primary: #1f2937;
             --text-secondary: #6b7280;
             --gradient-1: linear-gradient(135deg, #1e3a8a, #3b82f6);
-            --gradient-2: linear-gradient(135deg, #7A7A7AFF, #1F50A0FF);
+            --gradient-2: linear-gradient(135deg, rgb(242, 255, 56), rgb(141, 160, 31));
             --gradient-3: linear-gradient(135deg, #059669, #10b981);
             --gradient-4: linear-gradient(135deg, #dc2626, #ef4444);
             --gradient-5: linear-gradient(135deg, #7c3aed, #a855f7);
@@ -37,10 +37,10 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 25% 25%, rgba(30, 58, 138, 0.4) 0%, transparent 50%),
-                radial-gradient(circle at 75% 30%, rgba(59, 130, 246, 0.3) 0%, transparent 60%),
-                radial-gradient(circle at 80% 80%, rgba(30, 58, 138, 0.2) 0%, transparent 70%),
-                radial-gradient(circle at 20% 70%, rgba(147, 197, 253, 0.15) 0%, transparent 50%);
+                radial-gradient(circle at 25% 25%, rgba(30, 59, 138, 0.146) 0%, transparent 50%),
+                radial-gradient(circle at 75% 30%, rgba(59, 131, 246, 0.094) 0%, transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(30, 59, 138, 0.114) 0%, transparent 70%),
+                radial-gradient(circle at 20% 70%, rgba(147, 196, 253, 0.071) 0%, transparent 50%);
             pointer-events: none;
             z-index: -2;
             animation: floatingLights 20s ease-in-out infinite;
@@ -315,7 +315,7 @@
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 32px rgba(30, 58, 138, 0.4);
-            background: var(--gradient-2);
+            background: var(--gradient-1);
         }
 
         .btn-outline-primary {
@@ -360,7 +360,7 @@
         }
 
         .badge.bg-secondary {
-            background: var(--gradient-2) !important;
+            background: var(--gradient-1) !important;
             color: white;
         }
 
@@ -635,7 +635,7 @@
                                                     title="Lihat Detail">
                                                 <i class="fas fa-eye"></i> Detail
                                             </button>
-                                            <a href="{{ route('admin.pengajuan.show', $user->pengajuan_id) }}" 
+                                            <a href="{{ route('admin.pengajuan.showbidang', $user->pengajuan_id) }}" 
                                                class="btn btn-sm btn-primary"
                                                title="Edit">
                                                 <i class="fas fa-edit"></i> Edit

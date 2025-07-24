@@ -130,6 +130,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/', 'index')->name('admin.pengajuan.index');
         Route::get('/pengajuan/bidang', 'bidang')->name('admin.pengajuan.bidang');
         Route::get('/{id}', 'show')->name('admin.pengajuan.show');
+        Route::get('bidang/{id}', 'showbidang')->name('admin.pengajuan.showbidang');
         Route::put('/{id}/status', 'updateStatus')->name('admin.pengajuan.updateStatus');
         Route::post('/{id}/catatan', 'kirimCatatan')->name('admin.pengajuan.kirimCatatan');
         Route::patch('/admin/pengajuan/{id}/update-bidang', [AdminPengajuanController::class, 'updateBidang'])->name('admin.pengajuan.updateBidang');
