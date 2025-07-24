@@ -306,7 +306,6 @@ public function kirimCatatan(Request $request, $id)
 
         Storage::disk('public')->put($path, $pdf->output());
 
-        // Simpan path ke database
         $pengajuan->form_kesediaan_magang = $path;
         $pengajuan->save();
 
