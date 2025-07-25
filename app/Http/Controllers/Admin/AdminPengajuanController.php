@@ -134,41 +134,28 @@ class AdminPengajuanController extends Controller
         return back()->with('success', 'Bidang pengajuan berhasil diperbarui.');
     }
 
-public function kirimCatatan(Request $request, $id)
-{
-    $request->validate([
-        'tujuan' => 'required|in:user,admin_bidang',
-        'komentar_admin' => 'required|string',
-    ]);
+    public function kirimCatatan(Request $request, $id)
+    {
+        $request->validate([
+            'tujuan' => 'required|in:user,admin_bidang',
+            'komentar_admin' => 'required|string',
+        ]);
 
-    $pengajuan = Pengajuan::with('anggota.user')->findOrFail($id);
-    $admin = auth()->guard('admin')->user();
-    $message = $request->komentar_admin;
+        $pengajuan = Pengajuan::with('anggota.user')->findOrFail($id);
+        $admin = auth()->guard('admin')->user();
+        $message = $request->komentar_admin;
 
-    if ($request->tujuan === 'admin_bidang') {
-        $pengajuan->komentar_admin = $message;
-        $pengajuan->save();
+        if ($request->tujuan === 'admin_bidang') {
+            $pengajuan->komentar_admin = $message;
+            $pengajuan->save();
 
-        return back()->with('success', 'Komentar berhasil dikirim ke Admin Bidang.');
-    }
+            return back()->with('success', 'Komentar berhasil dikirim ke Admin Bidang.');
+        }
 
-    $title = 'Catatan dari Admin';
+        $title = 'Catatan dari Admin';
 
-    Notification::create([
-        'user_id' => $pengajuan->user_id,
-        'title' => $title,
-        'message' => $message,
-        'type' => 'catatan_pengajuan',
-        'data' => json_encode([
-            'pengajuan_id' => $pengajuan->id,
-            'dari_admin' => $admin->name ?? 'Admin'
-        ]),
-        'is_read' => 0,
-    ]);
-
-    foreach ($pengajuan->anggota as $anggota) {
         Notification::create([
-            'user_id' => $anggota->user_id,
+            'user_id' => $pengajuan->user_id,
             'title' => $title,
             'message' => $message,
             'type' => 'catatan_pengajuan',
@@ -178,12 +165,24 @@ public function kirimCatatan(Request $request, $id)
             ]),
             'is_read' => 0,
         ]);
+
+        foreach ($pengajuan->anggota as $anggota) {
+            Notification::create([
+                'user_id' => $anggota->user_id,
+                'title' => $title,
+                'message' => $message,
+                'type' => 'catatan_pengajuan',
+                'data' => json_encode([
+                    'pengajuan_id' => $pengajuan->id,
+                    'dari_admin' => $admin->name ?? 'Admin'
+                ]),
+                'is_read' => 0,
+            ]);
+        }
+
+        return back()->with('success', 'Komentar berhasil dikirim ke semua user.');
     }
 
-    return back()->with('success', 'Komentar berhasil dikirim ke semua user.');
-}
-
-    
     public function approve($id)
     {
         $pengajuan = Pengajuan::findOrFail($id);
