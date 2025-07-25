@@ -12,7 +12,7 @@
   <meta name="author" content="">
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/template/favicon.svg') }}">
   <link href="{{ asset('assets/css/style.css?v=2.0') }}" rel="stylesheet">
-  <title>Mari Magang - DIskominfo Kab.Malang</title>
+  <title>Mari Magang - Diskominfo Kab.Malang</title>
 </head>
 
 <body>
