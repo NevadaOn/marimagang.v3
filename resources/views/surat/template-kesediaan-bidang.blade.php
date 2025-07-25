@@ -101,14 +101,70 @@
             <strong>{{ $namaKegiatan ?? '[NAMA KEGIATAN]' }}</strong>
         </p>
         <p><strong>Kelengkapan Pengajuan</strong></p>
+        @php
+            $kotakPath = public_path('img/kotak.png');
+            $kotakBase64 = file_exists($kotakPath)
+                ? 'data:image/' . pathinfo($kotakPath, PATHINFO_EXTENSION) . ';base64,' . base64_encode(file_get_contents($kotakPath))
+                : '';
+        @endphp
+
         <table>
-            <tr><td>Proposal</td><td>:</td><td><img src="{{asset('img/kotak.png')}}" alt="" width="23px" style="padding-top: 4px"></td></tr>
-            <tr><td>CV</td><td>:</td><td><img src="{{asset('img/kotak.png')}}" alt="" width="23px" style="padding-top: 4px"></td></tr>
-            <tr><td>Surat Pengantar Kampus</td><td>:</td><td><img src="{{asset('img/kotak.png')}}" alt="" width="23px" style="padding-top: 4px"></</td></tr>
-            <tr><td>Surat Keterangan Diskominfo</td><td>:</td><td><img src="{{asset('img/kotak.png')}}" alt="" width="23px" style="padding-top: 4px"></</td></tr>
-            <tr><td>Surat Keterangan BANGKESPOL</td><td>:</td><td><img src="{{asset('img/kotak.png')}}" alt="" width="23px" style="padding-top: 4px"></</td></tr>
-            <tr><td>Laporan Kegiatan</td><td>:</td><td><img src="{{asset('img/kotak.png')}}" alt="" width="23px" style="padding-top: 4px"></</td></tr>
+            <tr>
+                <td>Proposal</td>
+                <td>:</td>
+                <td>
+                    @if($kotakBase64)
+                        <img src="{{ $kotakBase64 }}" alt="" width="23px" style="padding-top: 4px" />
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <td>CV</td>
+                <td>:</td>
+                <td>
+                    @if($kotakBase64)
+                        <img src="{{ $kotakBase64 }}" alt="" width="23px" style="padding-top: 4px" />
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <td>Surat Pengantar Kampus</td>
+                <td>:</td>
+                <td>
+                    @if($kotakBase64)
+                        <img src="{{ $kotakBase64 }}" alt="" width="23px" style="padding-top: 4px" />
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <td>Surat Keterangan Diskominfo</td>
+                <td>:</td>
+                <td>
+                    @if($kotakBase64)
+                        <img src="{{ $kotakBase64 }}" alt="" width="23px" style="padding-top: 4px" />
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <td>Surat Keterangan BANGKESPOL</td>
+                <td>:</td>
+                <td>
+                    @if($kotakBase64)
+                        <img src="{{ $kotakBase64 }}" alt="" width="23px" style="padding-top: 4px" />
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <td>Laporan Kegiatan</td>
+                <td>:</td>
+                <td>
+                    @if($kotakBase64)
+                        <img src="{{ $kotakBase64 }}" alt="" width="23px" style="padding-top: 4px" />
+                    @endif
+                </td>
+            </tr>
         </table>
+
         <p style="margin-top: 5px; text-indent: 2em;">Demikian surat ini dibuat untuk digunakan sebagaimana mestinya.</p>
 
         <div style="width: 100%; margin-top: 20px;">
