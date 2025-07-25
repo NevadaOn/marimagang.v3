@@ -285,17 +285,14 @@ public function kirimCatatan(Request $request, $id)
 
     public function generateSuratKesediaan(Request $request, $id)
     {
-        // Validasi input form
         $request->validate([
-            'nomor_surat' => 'required|string|max:255',
             'penanggung_jawab' => 'required|string|max:255',
+            'nama_project' => 'required|string|max:255', 
         ]);
 
-        // Ambil data pengajuan + relasi anggota & bidang
-        $pengajuan = Pengajuan::with(['anggota', 'databidang'])->findOrFail($id);
+        $pengajuan = Pengajuan::with(['databidang', 'user'])->findOrFail($id);
         $admin = auth('admin')->user();
 
-        // Hanya izinkan admin_bidang yang sesuai ATAU superadmin
         if (!(
             ($admin->role === 'admin_bidang' && $pengajuan->databidang->admin_id === $admin->id) ||
             $admin->role === 'superadmin'
@@ -303,17 +300,14 @@ public function kirimCatatan(Request $request, $id)
             abort(403, 'Anda tidak memiliki akses membuat surat ini.');
         }
 
-        // Generate PDF dari Blade template
         $pdf = Pdf::loadView('surat.template-kesediaan-bidang', [
             'pengajuan' => $pengajuan,
-            'anggota' => $pengajuan->anggota,
-            'nomor_surat' => $request->nomor_surat,
+            'project' => $request->nama_project,
             'penanggung_jawab' => $request->penanggung_jawab,
             'tanggal' => now()->format('d F Y'),
             'admin' => $admin,
         ]);
 
-        // Simpan file PDF ke storage
         $filename = 'form_kesediaan_' . $pengajuan->kode_pengajuan . '.pdf';
         $path = 'surat_pengajuan/' . $filename;
 
@@ -324,6 +318,4 @@ public function kirimCatatan(Request $request, $id)
 
         return back()->with('success', 'Form kesediaan berhasil dibuat dan disimpan.');
     }
-
-
 }

@@ -1255,22 +1255,20 @@
     auth('admin')->user()->role === 'superadmin'
 ))
     <form action="{{ route('admin.pengajuan.kesediaan.generate', $pengajuan->id) }}" method="POST">
-    @csrf
         @csrf
-        <div class="d-flex justify-content-center">
-        <label for="tujuan" class="form-label fw-bold fs-4">Buat Form Kesediaan Magang</label>
-        </div>
-        <div class="mb-2 ms-3 text-light">
-            <label>Nomor Surat</label>
-            <input type="text" name="nomor_surat" class="form-control w-75 ms-1 mt-2" required>
-        </div>
+        <h5 class="font-bold mb-3">Buat Form Kesediaan Magang</h5>
 
-        <div class="mb-2 ms-3 text-light">
+        <div class="mb-2">
             <label>Penanggung Jawab</label>
-            <input type="text" name="penanggung_jawab" class="form-control w-75 ms-1 mt-2" required>
+            <input type="text" name="penanggung_jawab" class="form-control" required>
         </div>
 
-        <button type="submit" class="btn btn-primary mt-2 ms-3 mb-5">Generate Form</button>
+        <div class="mb-2">
+            <label>Nama Project</label>
+            <textarea name="nama_project" class="form-control" rows="3" placeholder="Masukkan judul/deskripsi project" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-2">Generate Form</button>
     </form>
 
     @if($pengajuan->form_kesediaan_magang)
@@ -1279,6 +1277,7 @@
         </a>
     @endif
 @endif
+
 
 <!-- Preview Modal -->
 <div id="previewModal" class="modal">

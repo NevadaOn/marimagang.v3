@@ -98,7 +98,7 @@
 
 
         <p style="margin-top: 20px; text-align: justify; text-indent: 2em;">
-            <strong>{{ $namaKegiatan ?? '[NAMA KEGIATAN]' }}</strong>
+            <strong>"{{ $project }}"</strong>
         </p>
         <p><strong>Kelengkapan Pengajuan</strong></p>
         @php
