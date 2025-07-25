@@ -511,8 +511,9 @@
     <div class="container">
       <div class="footer-1 bg-gray-850 border-gray-800">
         <div class="row">
-          <div class="col-lg-4 mb-30"><a class="wow animate__animated animate__fadeInUp" href="index.html"><img class="d-none logo-day"
-                alt="GenZ" src="{{ asset('img/rb_3083.png') }}" width="80px"></a>
+          <div class="col-lg-4 mb-30"><a class="wow animate__animated animate__fadeInUp" href="index.html"><img
+                class="logo-night" src="{{ asset('img/rb_3083.png') }}" width="110px" alt="Genz"><img class="d-none logo-day"
+                alt="GenZ" src="{{ asset('img/rb_3083.png') }}" width="110px"></a>
             <p class="mb-20 mt-20 text-sm color-gray-500 wow animate__animated animate__fadeInUp">Kementerian Komunikasi
               dan Informatika, yang merupakan kementerian dalam pemerintahan Indonesia yang bertanggung jawab atas
               urusan di bidang komunikasi dan informatika. </p>

@@ -152,7 +152,6 @@ public function kirimCatatan(Request $request, $id)
         return back()->with('success', 'Komentar berhasil dikirim ke Admin Bidang.');
     }
 
-    // Kirim ke user dan anggota
     $title = 'Catatan dari Admin';
 
     Notification::create([
