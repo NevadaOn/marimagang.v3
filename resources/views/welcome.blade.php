@@ -10,7 +10,7 @@
   <meta name="description" content="Index page">
   <meta name="keywords" content="index, page">
   <meta name="author" content="">
-  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/template/favicon.svg') }}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/template/rb_3083.svg') }}">
   <link href="{{ asset('assets/css/style.css?v=2.0') }}" rel="stylesheet">
   <title>Mari Magang - Diskominfo Kab.Malang</title>
 </head>
@@ -511,9 +511,8 @@
     <div class="container">
       <div class="footer-1 bg-gray-850 border-gray-800">
         <div class="row">
-          <div class="col-lg-4 mb-30"><a class="wow animate__animated animate__fadeInUp" href="index.html"><img
-                class="logo-night" src="assets/imgs/template/kominDark.svg" alt="Genz"><img class="d-none logo-day"
-                alt="GenZ" src="assets/imgs/template/komin.svg"></a>
+          <div class="col-lg-4 mb-30"><a class="wow animate__animated animate__fadeInUp" href="index.html"><img class="d-none logo-day"
+                alt="GenZ" src="{{ asset('img/rb_3083.png') }}" width="80px"></a>
             <p class="mb-20 mt-20 text-sm color-gray-500 wow animate__animated animate__fadeInUp">Kementerian Komunikasi
               dan Informatika, yang merupakan kementerian dalam pemerintahan Indonesia yang bertanggung jawab atas
               urusan di bidang komunikasi dan informatika. </p>
