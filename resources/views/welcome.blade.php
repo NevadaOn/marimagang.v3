@@ -513,10 +513,10 @@
         @if($doc->images->first())
             <img src="{{ asset('storage/' . $doc->images->first()->image_path) }}" style="max-height: 200px">
         @endif
-        <a href="{{ route('dokumentasi.show', $doc->id) }}">Lihat Selengkapnya</a>
+        <a href="{{ route('landing.documentation.show', $doc->id) }}">Lihat Selengkapnya</a>
     </div>
 @endforeach
-<a href="{{ route('dokumentasi.index') }}">Lihat Semua Dokumentasi</a>
+<a href="{{ route('landing.documentation.index') }}">Lihat Semua Dokumentasi</a>
 
   <footer class="footer">
     <div class="container">
