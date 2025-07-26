@@ -125,65 +125,72 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    // Dashboard
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+    // Dokumentasi Kegiatan
     Route::resource('documentation', DocumentationController::class);
-    
-    Route::get('/user-details/{pengajuanId}', [AdminDashboardController::class, 'getUserDetails'])
-        ->name('admin.user.details');
 
-    Route::post('/pengajuan/{id}/generate-kesediaan', [AdminPengajuanController::class, 'generateSuratKesediaan'])
-        ->name('admin.pengajuan.kesediaan.generate');
-    
-    Route::controller(AdminPengajuanController::class)->prefix('pengajuan')->group(function () {
-        Route::get('/', 'index')->name('admin.pengajuan.index');
-        Route::get('/pengajuan/bidang', 'bidang')->name('admin.pengajuan.bidang');
-        Route::put('/{id}/status', 'updateStatus')->name('admin.pengajuan.updateStatus');
-        Route::get('/{id}', 'show')->name('admin.pengajuan.show');
-        Route::get('bidang/{id}', 'showbidang')->name('admin.pengajuan.showbidang');
-        Route::post('/{id}/catatan', 'kirimCatatan')->name('admin.pengajuan.kirimCatatan');
-        Route::patch('/admin/pengajuan/{id}/update-bidang', [AdminPengajuanController::class, 'updateBidang'])->name('admin.pengajuan.updateBidang');
-        Route::post('/{id}/approve', 'approve')->name('admin.pengajuan.approve');
-        Route::post('/{id}/reject', 'reject')->name('admin.pengajuan.reject');
-        Route::put('/admin/pengajuan/{pengajuan}/update-tanggal', [AdminPengajuanController::class, 'updateTanggal'])->name('admin.pengajuan.updateTanggal');
-        Route::get('/{id}/download/{document}', 'downloadDocument')->name('admin.pengajuan.download');
-        Route::post('/admin/pengajuan/{id}/upload-surat', [AdminPengajuanController::class, 'uploadSurat'])->name('admin.pengajuan.uploadSurat');
-        Route::post('/admin/pengajuan/{id}/generate-surat', [AdminPengajuanController::class, 'generateSurat'])->name('admin.pengajuan.generateSurat');
-        // Route::post('/pengajuan/{id}/generate-kesediaan', [AdminPengajuanController::class, 'generateSuratKesediaan'])->name('admin.pengajuan.kesediaan.generate');
+    // Pengajuan
+    Route::controller(AdminPengajuanController::class)->prefix('pengajuan')->name('pengajuan.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/bidang', 'bidang')->name('bidang');
+        Route::put('/{id}/status', 'updateStatus')->name('updateStatus');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('bidang/{id}', 'showbidang')->name('showbidang');
+        Route::post('/{id}/catatan', 'kirimCatatan')->name('kirimCatatan');
+        Route::patch('/{id}/update-bidang', 'updateBidang')->name('updateBidang');
+        Route::post('/{id}/approve', 'approve')->name('approve');
+        Route::post('/{id}/reject', 'reject')->name('reject');
+        Route::put('/{pengajuan}/update-tanggal', 'updateTanggal')->name('updateTanggal');
+        Route::get('/{id}/download/{document}', 'downloadDocument')->name('download');
+        Route::post('/{id}/upload-surat', 'uploadSurat')->name('uploadSurat');
+        Route::post('/{id}/generate-surat', 'generateSurat')->name('generateSurat');
+        Route::post('/{id}/generate-kesediaan', 'generateSuratKesediaan')->name('kesediaan.generate');
     });
-    
+
+    // Data Pengguna per Pengajuan
+    Route::get('/user-details/{pengajuanId}', [AdminDashboardController::class, 'getUserDetails'])
+        ->name('user.details');
+
+    // Hanya untuk Superadmin
     Route::middleware('superadmin')->group(function () {
-        Route::controller(AdminUserController::class)->prefix('users')->group(function () {
-            Route::get('/', 'index')->name('admin.users.index');
-            Route::get('/{id}', 'show')->name('admin.users.show');
-            Route::put('/{id}/status', 'updateStatus')->name('admin.users.updateStatus');
-            Route::delete('/{id}', 'destroy')->name('admin.users.destroy');
-        });
-        
-        Route::controller(AdminBidangController::class)->prefix('bidang')->group(function () {
-            Route::get('/', 'index')->name('admin.bidang.index');
-            Route::get('/create', 'create')->name('admin.bidang.create');
-            Route::post('/', 'store')->name('admin.bidang.store');
-            Route::get('/{id}', 'show')->name('admin.bidang.show');
-            Route::get('/{id}/edit', 'edit')->name('admin.bidang.edit');
-            Route::put('/{id}', 'update')->name('admin.bidang.update');
-            Route::delete('/{id}', 'destroy')->name('admin.bidang.destroy');
-        });
-        
-        Route::prefix('admin-management')->group(function () {
-            Route::get('/', [AdminController::class, 'index'])->name('admin.admin.index');
-            Route::get('/create', [AdminController::class, 'create'])->name('admin.admin.create');
-            Route::post('/', [AdminController::class, 'store'])->name('admin.admin.store');
-            Route::get('/{id}/edit', [AdminController::class, 'edit'])->name('admin.admin.edit');
-            Route::put('/{id}', [AdminController::class, 'update'])->name('admin.admin.update');
-            Route::delete('/{id}', [AdminController::class, 'destroy'])->name('admin.admin.destroy');
+        // Manajemen User
+        Route::controller(AdminUserController::class)->prefix('users')->name('users.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/{id}', 'show')->name('show');
+            Route::put('/{id}/status', 'updateStatus')->name('updateStatus');
+            Route::delete('/{id}', 'destroy')->name('destroy');
         });
 
-        Route::prefix('reports')->group(function () {
-            Route::get('/pengajuan', [ReportController::class, 'pengajuan'])->name('admin.reports.pengajuan');
-            Route::get('/users', [ReportController::class, 'users'])->name('admin.reports.users');
-            Route::get('/statistik', [ReportController::class, 'statistik'])->name('admin.reports.statistik');
-            Route::get('/export/pengajuan', [ReportController::class, 'exportPengajuan'])->name('admin.reports.export.pengajuan');
-            Route::get('/export/users', [ReportController::class, 'exportUsers'])->name('admin.reports.export.users');
+        // Manajemen Bidang
+        Route::controller(AdminBidangController::class)->prefix('bidang')->name('bidang.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/', 'store')->name('store');
+            Route::get('/{id}', 'show')->name('show');
+            Route::get('/{id}/edit', 'edit')->name('edit');
+            Route::put('/{id}', 'update')->name('update');
+            Route::delete('/{id}', 'destroy')->name('destroy');
+        });
+
+        // Manajemen Admin
+        Route::prefix('admin-management')->name('admin.')->group(function () {
+            Route::get('/', [AdminController::class, 'index'])->name('index');
+            Route::get('/create', [AdminController::class, 'create'])->name('create');
+            Route::post('/', [AdminController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [AdminController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [AdminController::class, 'update'])->name('update');
+            Route::delete('/{id}', [AdminController::class, 'destroy'])->name('destroy');
+        });
+
+        // Laporan
+        Route::prefix('reports')->name('reports.')->group(function () {
+            Route::get('/pengajuan', [ReportController::class, 'pengajuan'])->name('pengajuan');
+            Route::get('/users', [ReportController::class, 'users'])->name('users');
+            Route::get('/statistik', [ReportController::class, 'statistik'])->name('statistik');
+            Route::get('/export/pengajuan', [ReportController::class, 'exportPengajuan'])->name('export.pengajuan');
+            Route::get('/export/users', [ReportController::class, 'exportUsers'])->name('export.users');
         });
     });
 });
