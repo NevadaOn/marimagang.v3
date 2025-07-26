@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 18, 2025 at 06:02 PM
+-- Generation Time: Jul 26, 2025 at 05:54 AM
 -- Server version: 10.11.11-MariaDB
 -- PHP Version: 8.2.29
 
@@ -136,6 +136,50 @@ INSERT INTO `databidang` (`id`, `admin_id`, `nama`, `slug`, `thumbnail`, `photo`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `documentations`
+--
+
+CREATE TABLE `documentations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `judul_kegiatan` varchar(255) DEFAULT NULL,
+  `judul_project` varchar(255) DEFAULT NULL,
+  `deskripsi` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `documentations`
+--
+
+INSERT INTO `documentations` (`id`, `judul_kegiatan`, `judul_project`, `deskripsi`, `created_at`, `updated_at`) VALUES
+(2, 'hhhha', 'asd', 'ads', '2025-07-25 20:25:57', '2025-07-25 20:25:57');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `documentation_images`
+--
+
+CREATE TABLE `documentation_images` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `documentation_id` bigint(20) UNSIGNED NOT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `caption` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `documentation_images`
+--
+
+INSERT INTO `documentation_images` (`id`, `documentation_id`, `image_path`, `caption`, `created_at`, `updated_at`) VALUES
+(2, 2, 'dokumentasi/NWNnoBb8bWkmGG8JQsPlx49DD2SssN1aFCO1jSEv.png', NULL, '2025-07-25 20:25:57', '2025-07-25 20:25:57');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `logbooks`
 --
 
@@ -213,7 +257,27 @@ INSERT INTO `notifications` (`id`, `user_id`, `title`, `message`, `type`, `data`
 (41, 20, 'Pengajuan Magang Terkirim', 'Pengajuan magang Anda telah berhasil dikirim dan sedang menunggu persetujuan Admin 1.', 'internship_submitted', '{\"internship_id\":23}', 0, '2025-07-16 21:13:52', '2025-07-16 21:13:52'),
 (42, 17, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: poqweirdfg', 'skill_added', '{\"skill_name\":\"poqweirdfg\"}', 0, '2025-07-18 09:54:50', '2025-07-18 09:54:50'),
 (43, 17, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: aszdxfgvhb', 'skill_added', '{\"skill_name\":\"aszdxfgvhb\"}', 0, '2025-07-18 09:55:06', '2025-07-18 09:55:06'),
-(44, 17, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: asdfgh', 'skill_added', '{\"skill_name\":\"asdfgh\"}', 0, '2025-07-18 09:55:15', '2025-07-18 09:55:15');
+(44, 17, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: asdfgh', 'skill_added', '{\"skill_name\":\"asdfgh\"}', 0, '2025-07-18 09:55:15', '2025-07-18 09:55:15'),
+(45, 17, 'Catatan dari Admin', 'harus melengkapi beberapa data sebelum di acc', 'catatan_pengajuan', '\"{\\\"pengajuan_id\\\":22,\\\"dari_admin\\\":\\\"Admin\\\"}\"', 0, '2025-07-21 07:03:47', '2025-07-21 07:03:47'),
+(46, 20, 'Catatan dari Admin', 'k', 'catatan_pengajuan', '\"{\\\"pengajuan_id\\\":23,\\\"dari_admin\\\":\\\"Admin\\\"}\"', 0, '2025-07-23 09:02:49', '2025-07-23 09:02:49'),
+(47, 20, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":23,\"kode_pengajuan\":\"MGG-2025-Z3CKKX\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-Z3CKKX\"}', 0, '2025-07-25 17:45:20', '2025-07-25 17:45:20'),
+(48, 20, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":23,\"kode_pengajuan\":\"MGG-2025-Z3CKKX\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-Z3CKKX\"}', 0, '2025-07-25 17:47:21', '2025-07-25 17:47:21'),
+(49, 20, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":23,\"kode_pengajuan\":\"MGG-2025-Z3CKKX\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-Z3CKKX\"}', 0, '2025-07-25 17:48:00', '2025-07-25 17:48:00'),
+(50, 20, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":23,\"kode_pengajuan\":\"MGG-2025-Z3CKKX\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-Z3CKKX\"}', 0, '2025-07-25 17:48:10', '2025-07-25 17:48:10'),
+(51, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 17:48:34', '2025-07-25 17:48:34'),
+(52, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 17:51:17', '2025-07-25 17:51:17'),
+(53, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 17:54:55', '2025-07-25 17:54:55'),
+(54, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 17:56:21', '2025-07-25 17:56:21'),
+(55, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:10:13', '2025-07-25 18:10:13'),
+(56, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:12:32', '2025-07-25 18:12:32'),
+(57, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:12:51', '2025-07-25 18:12:51'),
+(58, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:16:19', '2025-07-25 18:16:19'),
+(59, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:17:27', '2025-07-25 18:17:27'),
+(60, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:19:49', '2025-07-25 18:19:49'),
+(61, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:20:31', '2025-07-25 18:20:31'),
+(62, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:21:28', '2025-07-25 18:21:28'),
+(63, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:23:55', '2025-07-25 18:23:55'),
+(64, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:25:09', '2025-07-25 18:25:09');
 
 -- --------------------------------------------------------
 
@@ -250,6 +314,7 @@ CREATE TABLE `pengajuan` (
   `tanggal_selesai` date NOT NULL,
   `status` enum('pending','diproses','diteruskan','diterima','ditolak','magang','selesai') NOT NULL DEFAULT 'pending',
   `surat_pdf` varchar(255) DEFAULT NULL,
+  `form_kesediaan_magang` varchar(255) DEFAULT NULL,
   `komentar_admin` text DEFAULT NULL,
   `nilai_akhir` decimal(4,2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -260,10 +325,10 @@ CREATE TABLE `pengajuan` (
 -- Dumping data for table `pengajuan`
 --
 
-INSERT INTO `pengajuan` (`id`, `user_id`, `databidang_id`, `kode_pengajuan`, `deskripsi`, `tanggal_mulai`, `tanggal_selesai`, `status`, `surat_pdf`, `komentar_admin`, `nilai_akhir`, `created_at`, `updated_at`) VALUES
-(21, 13, 2, 'MGG-2025-NERPJR', 'sdsc', '2025-07-26', '2025-10-25', 'diteruskan', 'surat_pengajuan/surat_MGG-2025-NERPJR.pdf', NULL, NULL, '2025-07-03 20:58:10', '2025-07-04 22:56:06'),
-(22, 17, 2, 'MGG-2025-QYGX0J', NULL, '2025-07-16', '2025-07-31', 'pending', 'surat_pengajuan/surat_MGG-2025-QYGX0J.pdf', NULL, NULL, '2025-07-15 07:01:46', '2025-07-16 20:17:47'),
-(23, 20, 2, 'MGG-2025-Z3CKKX', NULL, '2025-07-18', '2025-08-19', 'diterima', NULL, NULL, NULL, '2025-07-16 21:13:52', '2025-07-16 21:18:46');
+INSERT INTO `pengajuan` (`id`, `user_id`, `databidang_id`, `kode_pengajuan`, `deskripsi`, `tanggal_mulai`, `tanggal_selesai`, `status`, `surat_pdf`, `form_kesediaan_magang`, `komentar_admin`, `nilai_akhir`, `created_at`, `updated_at`) VALUES
+(21, 13, 2, 'MGG-2025-NERPJR', 'sdsc', '2025-07-26', '2025-10-25', 'diteruskan', 'surat_pengajuan/surat_MGG-2025-NERPJR.pdf', NULL, NULL, NULL, '2025-07-03 20:58:10', '2025-07-04 22:56:06'),
+(22, 17, 5, 'MGG-2025-QYGX0J', NULL, '2025-07-22', '2025-07-30', 'diterima', 'surat_pengajuan/surat_MGG-2025-QYGX0J.pdf', 'surat_pengajuan/form_kesediaan_MGG-2025-QYGX0J.pdf', 'asdfg', NULL, '2025-07-15 07:01:46', '2025-07-25 18:21:12'),
+(23, 20, 2, 'MGG-2025-Z3CKKX', NULL, '2025-07-18', '2025-08-19', 'diterima', 'surat_pengajuan/surat_MGG-2025-Z3CKKX.pdf', 'surat_pengajuan/form_kesediaan_MGG-2025-Z3CKKX.pdf', 'hkm', NULL, '2025-07-16 21:13:52', '2025-07-25 17:45:20');
 
 -- --------------------------------------------------------
 
@@ -329,7 +394,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('DXZky04pe99qrekqtcc7HpFcMC9J3bcQiQZKz3jY', 17, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiMnkzNjhmS1JHM0cxZ011THp3ZExCbkVCMjJ3Qkh2ajBpTUFDc3VBcSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxNzt9', 1752860139);
+('AiPDeQCQW22FVWFpfZwcrmJ4dQap9F2a6aLy13Ko', 1, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTWJvRjZ0S2V0UGJ2RGlpWUhWdkFuQlptbUZHNmZMUW1NRVhoOXRaUyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZG1pbi9wZW5nYWp1YW4iO31zOjUyOiJsb2dpbl9hZG1pbl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1753499814),
+('f23ufbG285iICKC5Y3IrpGSMySFBusB96VoRAvlH', NULL, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiTHNwNXVoVkZWSWZpNWQxdm9JZ3lqNVZEdEp0TjdXUzBPOUpjeVhZayI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kb2t1bWVudGFzaS8yIjt9czo1MjoibG9naW5fYWRtaW5fNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6NDc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wZW5nYWp1YW4vTUdHLTIwMjUtUVlHWDBKIjt9fQ==', 1753500738);
 
 -- --------------------------------------------------------
 
@@ -553,6 +619,19 @@ ALTER TABLE `databidang`
   ADD KEY `idx_status_kuota` (`status`,`kuota_terisi`);
 
 --
+-- Indexes for table `documentations`
+--
+ALTER TABLE `documentations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `documentation_images`
+--
+ALTER TABLE `documentation_images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `documentation_id` (`documentation_id`);
+
+--
 -- Indexes for table `logbooks`
 --
 ALTER TABLE `logbooks`
@@ -687,6 +766,18 @@ ALTER TABLE `databidang`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `documentations`
+--
+ALTER TABLE `documentations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `documentation_images`
+--
+ALTER TABLE `documentation_images`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `logbooks`
 --
 ALTER TABLE `logbooks`
@@ -702,7 +793,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `pengajuan`
@@ -762,6 +853,12 @@ ALTER TABLE `anggota`
 --
 ALTER TABLE `databidang`
   ADD CONSTRAINT `fk_databidang_admin` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `documentation_images`
+--
+ALTER TABLE `documentation_images`
+  ADD CONSTRAINT `documentation_images_ibfk_1` FOREIGN KEY (`documentation_id`) REFERENCES `documentations` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `logbooks`
