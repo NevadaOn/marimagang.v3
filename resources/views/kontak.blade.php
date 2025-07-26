@@ -37,7 +37,7 @@
         <div class="header-nav">
           <nav class="nav-main-menu d-none d-xl-block">
             <ul class="main-menu">
-              <li><a class="active" href="{{ route('index') }}">Home</a></li>
+              <li><a class="color-gray-500" href="{{ route('welcome') }}">Home</a></li>
 
               </li>
               <li><a class="color-gray-500" href="#bidangKerja">Alur Magang</a>
@@ -47,7 +47,7 @@
 
               </li>
 
-              <li><a class="color-gray-500" href="page-contact.html">Contact</a></li>
+              <li><a class="active" href="page-contact.html">Contact</a></li>
             </ul>
           </nav>
           <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span
@@ -77,100 +77,78 @@
   </header>
 
   <main class="main">
-    <div class="cover-home1">
+    <div class="cover-home3">
       <div class="container">
         <div class="row">
-          <div class="col-xl-1"></div>
-          <div class="col-xl-10 col-lg-12">
-              <div class="pt-30 border-bottom border-gray-800 pb-20">
-                <div class="box-breadcrumbs">
-                  <ul class="breadcrumb">
-                    <li><a class="home" href="index.html">Home</a></li>
-                    <li><a href="blog-archive.html">Portfolio</a></li>
-                    <li><span>Business Card Design</span></li>
-                  </ul>
-                </div>
+          <div class="col-xl-10 col-lg-12 m-auto">
+            <div class="text-center mt-70">
+              <h1 class="color-linear d-inline-block mb-30">Contact Us</h1>
+              <p class="text-xl color-gray-500">Diskominfo Kabupaten Malang<br class="d-none d-lg-block">Kominfo
+                (Kementerian Komunikasi dan Informatika) adalah lembaga pemerintah yang <br
+                  class="d-none d-lg-block">bertugas mengatur dan mengawasi bidang komunikasi, informatika, serta media
+                digital di Indonesia.<br
+                  class="d-none d-lg-block"> Kominfo juga mendorong transformasi digital dan perlindungan data masyarakat.</p>
+            </div>
+            <div class="text-center mt-30">
+              <div class="d-inline-block support text-start">087927364529<br>+6237564738475</div>
+              <div class="d-inline-block location text-start">contact@kominfo.com<br>pkl@unira_malang.com</div>
+              <div class="d-inline-block plane text-start">pklUnira<br>unira_malang</div>
+            </div>
+            <div class="box-map mt-70 mb-50">
+              <iframe class="google-map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.159833545226!2d112.6330414!3d-7.9824239000000015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6298e932f9373%3A0xa947325c3d98a709!2sDinas%20Komunikasi%20dan%20Informatika%20Kabupaten%20Malang!5e0!3m2!1sid!2sid!4v1753553607424!5m2!1sid!2sid"
+                style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="form-contact">
+              <div class="text-center">
+                <h3 class="color-linear d-inline-block mb-10">Hubungi Kami</h3>
+                <p class="text-xs color-gray-500">Isi semua kolom dibawah ini*</p>
               </div>
-              <div class="row mt-50 align-items-end">
-                <div class="col-lg-8 m-auto text-center">
-                  <h2 class="color-linear">Business Card Design</h2>
-                </div>
-              </div>
-              <div class="row mt-30 mb-50">
-                <div class="swiper-container swiper-group-2">
-                  <div class="swiper-wrapper wow animate__animated animate__fadeIn">
-                    <div class="swiper-slide">
-                      <div class="image-detail mb-30"><img class="bdrd16" src="{{ asset('assets/imgs/page/portfolio/portfolio-1.png') }}" alt="Genz"></div>
-                    </div>
-                    <div class="swiper-slide">
-                      <div class="image-detail mb-30"><img class="bdrd16" src="{{ asset('assets/imgs/page/portfolio/portfolio-1-2.png') }}" alt="Genz"></div>
-                    </div>
-                    <div class="swiper-slide">
-                      <div class="image-detail mb-30"><img class="bdrd16" src="{{ asset('assets/imgs/page/portfolio/portfolio-1-3.png') }}" alt="Genz"></div>
-                    </div>
-                    <div class="swiper-slide">
-                      <div class="image-detail mb-30"><img class="bdrd16" src="{{ asset('assets/imgs/page/portfolio/portfolio-1-1.png') }}" alt="Genz"></div>
-                    </div>
+              <div class="row mt-50">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input class="form-control bg-gray-850 border-gray-800 color-gray-500" type="text"
+                      placeholder="Your name *">
                   </div>
-                  <div class="swiper-pagination"></div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="content-detail border-gray-800">
-                    <h3 class="color-white mb-30 wow animate__animated animate__fadeIn">Project Details</h3>
-                    <p class="text-lg color-gray-500 wow animate__animated animate__fadeIn">Thirty there & time wear across days, make inside on these you. Can young a really, roses blog small of song their dreamy life pretty? Because really duo living to noteworthy bloom bell. Transform clean daydreaming cute twenty process rooms cool. White white dreamy dramatically place everything although. Place out apartment afternoon whimsical kinder, little romantic joy we flowers handmade. Thirty she a studio of she whimsical projects, afternoon effect going an floated maybe.</p>
-                    <p class="text-lg color-gray-500 wow animate__animated animate__fadeIn">Tortor placerat bibendum consequat sapien, facilisi facilisi pellentesque morbi. Id consectetur ut vitae a massa a. Lacus ut bibendum sollicitudin fusce sociis mi. Dictum volutpat praesent ornare accumsan elit venenatis. Congue sodales nunc quis ultricies odio porta. Egestas mauris placerat leo phasellus ut sit.</p>
-                    <div class="row mt-50 wow animate__animated animate__fadeIn">
-                      <div class="col-lg-6 gallery-left"><img class="img-bdrd-16 mb-30" src="{{ asset('assets/imgs/page/portfolio/portfolio-2.png') }}" alt="Genz"></div>
-                      <div class="col-lg-6 gallery-right"><img class="img-bdrd-16 mb-20" src="{{ asset('assets/imgs/page/portfolio/portfolio-3.png') }}" alt="Genz"><img class="img-bdrd-16" src="{{ asset('assets/imgs/page/portfolio/portfolio-4.png') }}" alt="Genz"></div>
-                    </div>
-                    <p class="text-center text-lg color-gray-500 wow animate__animated animate__fadeIn">The brand identity</p>
-                    <h3 class="color-white mt-50 mb-30 wow animate__animated animate__fadeIn">Hire me</h3>
-                    <p class="text-lg color-gray-500 wow animate__animated animate__fadeIn">Thirty there & time wear across days, make inside on these you. Can young a really, roses blog small of song their dreamy life pretty? Because really duo living to noteworthy bloom bell. Transform clean daydreaming cute twenty process rooms cool. White white dreamy dramatically place everything although. Place out apartment afternoon whimsical kinder, little romantic joy we flowers handmade. Thirty she a studio of she whimsical projects, afternoon effect going an floated maybe.</p>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input class="form-control bg-gray-850 border-gray-800 color-gray-500" type="text"
+                      placeholder="Email *">
                   </div>
-                  <div class="box-tags wow animate__animated animate__fadeIn"><a class="btn btn-tags bg-gray-850 border-gray-800 mr-10 hover-up" href="blog-archive.html">#Nature</a><a class="btn btn-tags bg-gray-850 border-gray-800 mr-10 hover-up" href="blog-archive.html">#Beauty</a><a class="btn btn-tags bg-gray-850 border-gray-800 mr-10 hover-up" href="blog-archive.html">#Travel Tips</a><a class="btn btn-tags bg-gray-850 border-gray-800 hover-up" href="blog-archive.html">#House</a></div>
                 </div>
-                <div class="col-lg-4">
-                  <div class="sidebar">
-                    <div class="box-sidebar bg-gray-850 border-gray-800">
-                      <div class="head-sidebar wow animate__animated animate__fadeIn">
-                        <h5 class="line-bottom">Project information</h5>
-                      </div>
-                      <div class="content-sidebar">
-                        <div class="list-comments">
-                          <div class="item-comment border-gray-800 wow animate__animated animate__fadeIn">
-                            <p class="color-gray-200 mb-10 text-uppercase">Category</p>
-                            <p class="color-gray-500">Graphic Design, Marketing Kitsz</p>
-                          </div>
-                          <div class="item-comment border-gray-800 wow animate__animated animate__fadeIn">
-                            <p class="color-gray-200 mb-10 text-uppercase">Client</p>
-                            <p class="color-gray-500">Orion Coporation</p>
-                          </div>
-                          <div class="item-comment border-gray-800 wow animate__animated animate__fadeIn">
-                            <p class="color-gray-200 mb-10 text-uppercase">Project date</p>
-                            <p class="color-gray-500">01 November, 2022</p>
-                          </div>
-                          <div class="item-comment border-gray-800 wow animate__animated animate__fadeIn">
-                            <p class="color-gray-200 mb-10 text-uppercase">Project URL</p>
-                            <p class="color-gray-500"><a class="text-white" href="#">www.orioncoporation.com</a></p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="d-inline-block pt-10 wow animate__animated animate__fadeIn">
-                      <div class="d-flex align-item-center">
-                        <h6 class="d-inline-block color-gray-500 mr-10">Share</h6><a class="icon-media icon-fb" href="#"></a><a class="icon-media icon-tw" href="#"></a><a class="icon-media icon-printest" href="#"></a>
-                      </div>
-                    </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input class="form-control bg-gray-850 border-gray-800 color-gray-500" type="text"
+                      placeholder="Phone number *">
                   </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input class="form-control bg-gray-850 border-gray-800 color-gray-500" type="text"
+                      placeholder="Subject *">
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <textarea class="form-control bg-gray-850 border-gray-800 color-gray-500" rows="5"
+                      placeholder="Message *"></textarea>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="text-center mb-50"><a class="btn btn-linear btn-load-more btn-radius-8 hover-up">
+                      Send Message
+                      <i class="fi-rr-arrow-small-right"></i></a></div>
                 </div>
               </div>
             </div>
+          </div>
         </div>
       </div>
     </div>
   </main>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-1 bg-gray-850 border-gray-800">

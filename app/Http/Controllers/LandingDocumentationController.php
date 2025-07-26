@@ -18,4 +18,10 @@ class LandingDocumentationController extends Controller
         $documentation = Documentation::with('images')->findOrFail($id);
         return view('landing.documentation.show', compact('documentation'));
     }
+
+    public function kontak()
+    {
+    return view('kontak');
+    }
+
 }

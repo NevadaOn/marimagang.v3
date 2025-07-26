@@ -190,3 +190,5 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);
 });
+
+Route::get('/kontak', [App\Http\Controllers\LandingDocumentationController::class, 'kontak'])->name('kontak');

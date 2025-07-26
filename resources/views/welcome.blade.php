@@ -37,7 +37,7 @@
         <div class="header-nav">
           <nav class="nav-main-menu d-none d-xl-block">
             <ul class="main-menu">
-              <li><a class="active" href="index.html">Home</a>
+               <li><a class="active" href="{{ route('welcome') }}">Home</a></li>
 
               </li>
               <li><a class="color-gray-500" href="#bidangKerja">Alur Magang</a>
@@ -47,7 +47,7 @@
 
               </li>
 
-              <li><a class="color-gray-500" href="page-contact.html">Contact</a></li>
+              <li><a class="color-gray-500" href="{{ route('kontak') }}">Kontak</a></li>
             </ul>
           </nav>
           <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span
