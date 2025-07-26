@@ -1,10 +1,13 @@
-@extends('layouts.superadmin')
+@extends('layouts.adminbidang')
 
 @section('title', 'Kelola Pengajuan')
 
 @section('content')
-<div class="container mx-auto px-4 py-6">
-    <h1 class="text-2xl font-semibold mb-4">Daftar Pengajuan</h1>
+<div class="container mx-auto px-4 py-6 ">
+    <div class="card">
+         <h1 class=" text-2xl font-semibold  mb-4">Daftar Pengajuan</h1>
+    </div>
+   
 
     @if(session('success'))
         <div class="mb-4 p-3 bg-green-100 text-green-700 rounded">
