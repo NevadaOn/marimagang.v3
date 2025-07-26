@@ -1135,40 +1135,96 @@
             </div>
             @endif
 
-            <!-- Aksi Pengajuan -->
             @if (!empty($statusOptions))
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-cogs me-2"></i>
-                        Aksi Pengajuan
-                    </h5>
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">
+            <i class="fas fa-cogs me-2"></i>
+            Aksi Pengajuan
+        </h5>
+    </div>
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between">
+            <div>
+                <p class="mb-0">Silakan pilih tindakan yang ingin dilakukan terhadap pengajuan ini</p>
+            </div>
+
+            {{-- Form Status --}}
+            <form id="formStatus" method="POST" action="{{ route('admin.pengajuan.updateStatus', $pengajuan->id) }}">
+                @csrf
+                @method('PUT')
+                <label for="statusSelect" class="form-label me-3 mb-0">Ubah Status:</label>
+                <select name="status" id="statusSelect" class="form-control me-2" style="width: auto;">
+                    @foreach ($statusOptions as $status)
+                        <option value="{{ $status }}" {{ $pengajuan->status === $status ? 'selected' : '' }}>
+                            {{ ucfirst($status) }}
+                        </option>
+                    @endforeach
+                </select>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-1"></i> Simpan
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{-- Modal Catatan jika diterima --}}
+<div class="modal fade" id="modalCatatanDiterima" tabindex="-1" aria-labelledby="modalCatatanDiterimaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form id="formDiterima" action="{{ route('admin.pengajuan.updateStatus', $pengajuan->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <input type="hidden" name="status" value="diterima">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCatatanDiterimaLabel">Konfirmasi Penerimaan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                 </div>
-                <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <p class="mb-0">Silakan pilih tindakan yang ingin dilakukan terhadap pengajuan ini</p>
-                        </div>
-                        <form action="{{ route('admin.pengajuan.updateStatus', $pengajuan->id) }}" method="POST" class="d-flex align-items-center">
-                            @csrf
-                            @method('PUT')
-                            <label for="status" class="form-label me-3 mb-0">Ubah Status:</label>
-                            <select name="status" id="status" class="form-control me-2" style="width: auto;">
-                                @foreach ($statusOptions as $status)
-                                    <option value="{{ $status }}" {{ $pengajuan->status === $status ? 'selected' : '' }}>
-                                        {{ ucfirst($status) }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin mengubah status?')" class="btn btn-primary">
-                                <i class="fas fa-save me-1"></i>
-                                Simpan
-                            </button>
-                        </form>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="catatan_admin" class="form-label">Catatan untuk User (Opsional)</label>
+                        <textarea name="catatan_admin" class="form-control" rows="4" placeholder="Tulis catatan..."></textarea>
                     </div>
+
+                    @if($pengajuan->surat_pdf)
+                        <div class="mb-2">
+                            <label class="form-label">Surat Terkait:</label><br>
+                            <a href="{{ asset('storage/' . $pengajuan->surat_pdf) }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-file-pdf me-1"></i> Lihat Surat
+                            </a>
+                        </div>
+                    @else
+                        <p class="text-warning">Tidak ada surat PDF yang terlampir pada pengajuan ini.</p>
+                    @endif
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success">Kirim Notifikasi & Email</button>
                 </div>
             </div>
-            @endif
+        </form>
+    </div>
+</div>
+
+{{-- Script --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const formStatus = document.getElementById('formStatus');
+        const statusSelect = document.getElementById('statusSelect');
+        const modalCatatan = new bootstrap.Modal(document.getElementById('modalCatatanDiterima'));
+
+        formStatus.addEventListener('submit', function (e) {
+            const selectedStatus = statusSelect.value;
+            if (selectedStatus === 'diterima') {
+                e.preventDefault(); // Cegah pengiriman form utama
+                modalCatatan.show(); // Tampilkan modal
+            }
+        });
+    });
+</script>
+@endif
+
         </div>
     </div>
 </div>

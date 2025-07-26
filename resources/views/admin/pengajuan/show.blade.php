@@ -681,7 +681,6 @@
             </div>
             @endif
 
-            <!-- Aksi Pengajuan -->
             @if (!empty($statusOptions))
             <div class="card">
                 <div class="card-header">
