@@ -98,9 +98,7 @@
                       data-type="[ &quot;Magang&quot;, &quot;Berkarier&quot;, &quot;Berkembang&quot; ]"></a></h1>
                   <div class="row">
                     <div class="col-lg-9">
-                      <p class="text-base color-gray-600 wow animate__animated animate__fadeInUp">Mari kembangkan
-                        kemampuan anda bersama kami, dengan berbgai banyak lowongan pekerjaan dan juga berbagai macam
-                        magang.</p>
+                      <p class="text-base color-gray-600 wow animate__animated animate__fadeInUp">Mari kembangkan potensimu bersama kami melalui berbagai kesempatan magang yang menarik dan relevan untuk mahasiswa seperti kamu.</p>
                     </div>
                   </div>
                   <div class="box-subscriber mt-40 mb-50 wow animate__animated animate__fadeInUp">
