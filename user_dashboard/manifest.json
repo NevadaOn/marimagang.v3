@@ -1,0 +1,246 @@
+{
+  "../node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2": {
+    "file": "dashboard/compiled/fonts/bootstrap-icons.woff2",
+    "src": "../node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
+  },
+  "app-dark.css": {
+    "file": "dashboard/compiled/css/app-dark.css",
+    "src": "app-dark.css"
+  },
+  "app.css": {
+    "file": "dashboard/compiled/css/app.css",
+    "src": "app.css"
+  },
+  "application-email.css": {
+    "file": "dashboard/compiled/css/application-email.css",
+    "src": "application-email.css"
+  },
+  "dashboard/static/fonts/Iconly---Bold.eot": {
+    "file": "dashboard/compiled/eot/Iconly---Bold.eot",
+    "src": "dashboard/static/fonts/Iconly---Bold.eot"
+  },
+  "dashboard/static/fonts/Iconly---Bold.svg": {
+    "file": "dashboard/compiled/svg/Iconly---Bold.svg",
+    "src": "dashboard/static/fonts/Iconly---Bold.svg"
+  },
+  "dashboard/static/fonts/Iconly---Bold.ttf": {
+    "file": "dashboard/compiled/fonts/Iconly---Bold.ttf",
+    "src": "dashboard/static/fonts/Iconly---Bold.ttf"
+  },
+  "dashboard/static/fonts/Iconly---Bold.woff": {
+    "file": "dashboard/compiled/fonts/Iconly---Bold.woff",
+    "src": "dashboard/static/fonts/Iconly---Bold.woff"
+  },
+  "dashboard/static/fonts/nunito-latin-300-normal.woff": {
+    "file": "dashboard/compiled/fonts/nunito-latin-300-normal.woff",
+    "src": "dashboard/static/fonts/nunito-latin-300-normal.woff"
+  },
+  "dashboard/static/fonts/nunito-latin-300-normal.woff2": {
+    "file": "dashboard/compiled/fonts/nunito-latin-300-normal.woff2",
+    "src": "dashboard/static/fonts/nunito-latin-300-normal.woff2"
+  },
+  "dashboard/static/fonts/nunito-latin-400-normal.woff": {
+    "file": "dashboard/compiled/fonts/nunito-latin-400-normal.woff",
+    "src": "dashboard/static/fonts/nunito-latin-400-normal.woff"
+  },
+  "dashboard/static/fonts/nunito-latin-400-normal.woff2": {
+    "file": "dashboard/compiled/fonts/nunito-latin-400-normal.woff2",
+    "src": "dashboard/static/fonts/nunito-latin-400-normal.woff2"
+  },
+  "dashboard/static/fonts/nunito-latin-600-normal.woff": {
+    "file": "dashboard/compiled/fonts/nunito-latin-600-normal.woff",
+    "src": "dashboard/static/fonts/nunito-latin-600-normal.woff"
+  },
+  "dashboard/static/fonts/nunito-latin-600-normal.woff2": {
+    "file": "dashboard/compiled/fonts/nunito-latin-600-normal.woff2",
+    "src": "dashboard/static/fonts/nunito-latin-600-normal.woff2"
+  },
+  "dashboard/static/fonts/nunito-latin-700-normal.woff": {
+    "file": "dashboard/compiled/fonts/nunito-latin-700-normal.woff",
+    "src": "dashboard/static/fonts/nunito-latin-700-normal.woff"
+  },
+  "dashboard/static/fonts/nunito-latin-700-normal.woff2": {
+    "file": "dashboard/compiled/fonts/nunito-latin-700-normal.woff2",
+    "src": "dashboard/static/fonts/nunito-latin-700-normal.woff2"
+  },
+  "dashboard/static/fonts/nunito-latin-800-normal.woff": {
+    "file": "dashboard/compiled/fonts/nunito-latin-800-normal.woff",
+    "src": "dashboard/static/fonts/nunito-latin-800-normal.woff"
+  },
+  "dashboard/static/fonts/nunito-latin-800-normal.woff2": {
+    "file": "dashboard/compiled/fonts/nunito-latin-800-normal.woff2",
+    "src": "dashboard/static/fonts/nunito-latin-800-normal.woff2"
+  },
+  "dashboard/static/images/bg/4853433.png": {
+    "file": "dashboard/compiled/png/4853433.png",
+    "src": "dashboard/static/images/bg/4853433.png"
+  },
+  "dashboard/static/images/faces/1.jpg": {
+    "file": "dashboard/compiled/jpg/1.jpg",
+    "src": "dashboard/static/images/faces/1.jpg"
+  },
+  "dashboard/static/images/faces/2.jpg": {
+    "file": "dashboard/compiled/jpg/2.jpg",
+    "src": "dashboard/static/images/faces/2.jpg"
+  },
+  "dashboard/static/images/faces/3.jpg": {
+    "file": "dashboard/compiled/jpg/3.jpg",
+    "src": "dashboard/static/images/faces/3.jpg"
+  },
+  "dashboard/static/images/faces/4.jpg": {
+    "file": "dashboard/compiled/jpg/4.jpg",
+    "src": "dashboard/static/images/faces/4.jpg"
+  },
+  "dashboard/static/images/faces/5.jpg": {
+    "file": "dashboard/compiled/jpg/5.jpg",
+    "src": "dashboard/static/images/faces/5.jpg"
+  },
+  "dashboard/static/images/faces/6.jpg": {
+    "file": "dashboard/compiled/jpg/6.jpg",
+    "src": "dashboard/static/images/faces/6.jpg"
+  },
+  "dashboard/static/images/faces/7.jpg": {
+    "file": "dashboard/compiled/jpg/7.jpg",
+    "src": "dashboard/static/images/faces/7.jpg"
+  },
+  "dashboard/static/images/faces/8.jpg": {
+    "file": "dashboard/compiled/jpg/8.jpg",
+    "src": "dashboard/static/images/faces/8.jpg"
+  },
+  "dashboard/static/images/logo/favicon.svg": {
+    "file": "dashboard/compiled/svg/favicon.svg",
+    "src": "dashboard/static/images/logo/favicon.svg"
+  },
+  "dashboard/static/images/logo/logo.svg": {
+    "file": "dashboard/compiled/svg/logo.svg",
+    "src": "dashboard/static/images/logo/logo.svg"
+  },
+  "dashboard/static/images/samples/1.png": {
+    "file": "dashboard/compiled/png/1.png",
+    "src": "dashboard/static/images/samples/1.png"
+  },
+  "dashboard/static/images/samples/2.png": {
+    "file": "dashboard/compiled/png/2.png",
+    "src": "dashboard/static/images/samples/2.png"
+  },
+  "dashboard/static/images/samples/3.png": {
+    "file": "dashboard/compiled/png/3.png",
+    "src": "dashboard/static/images/samples/3.png"
+  },
+  "dashboard/static/images/samples/4.png": {
+    "file": "dashboard/compiled/png/4.png",
+    "src": "dashboard/static/images/samples/4.png"
+  },
+  "dashboard/static/images/samples/architecture1.jpg": {
+    "file": "dashboard/compiled/jpg/architecture1.jpg",
+    "src": "dashboard/static/images/samples/architecture1.jpg"
+  },
+  "dashboard/static/images/samples/banana.jpg": {
+    "file": "dashboard/compiled/jpg/banana.jpg",
+    "src": "dashboard/static/images/samples/banana.jpg"
+  },
+  "dashboard/static/images/samples/bg-mountain.jpg": {
+    "file": "dashboard/compiled/jpg/bg-mountain.jpg",
+    "src": "dashboard/static/images/samples/bg-mountain.jpg"
+  },
+  "dashboard/static/images/samples/building.jpg": {
+    "file": "dashboard/compiled/jpg/building.jpg",
+    "src": "dashboard/static/images/samples/building.jpg"
+  },
+  "dashboard/static/images/samples/error-403.svg": {
+    "file": "dashboard/compiled/svg/error-403.svg",
+    "src": "dashboard/static/images/samples/error-403.svg"
+  },
+  "dashboard/static/images/samples/error-404.svg": {
+    "file": "dashboard/compiled/svg/error-404.svg",
+    "src": "dashboard/static/images/samples/error-404.svg"
+  },
+  "dashboard/static/images/samples/error-500.svg": {
+    "file": "dashboard/compiled/svg/error-500.svg",
+    "src": "dashboard/static/images/samples/error-500.svg"
+  },
+  "dashboard/static/images/samples/jump.jpg": {
+    "file": "dashboard/compiled/jpg/jump.jpg",
+    "src": "dashboard/static/images/samples/jump.jpg"
+  },
+  "dashboard/static/images/samples/motorcycle.jpg": {
+    "file": "dashboard/compiled/jpg/motorcycle.jpg",
+    "src": "dashboard/static/images/samples/motorcycle.jpg"
+  },
+  "dashboard/static/images/samples/origami.jpg": {
+    "file": "dashboard/compiled/jpg/origami.jpg",
+    "src": "dashboard/static/images/samples/origami.jpg"
+  },
+  "dashboard/static/images/samples/water.jpg": {
+    "file": "dashboard/compiled/jpg/water.jpg",
+    "src": "dashboard/static/images/samples/water.jpg"
+  },
+  "dashboard/static/images/svg-loaders/audio.svg": {
+    "file": "dashboard/compiled/svg/audio.svg",
+    "src": "dashboard/static/images/svg-loaders/audio.svg"
+  },
+  "dashboard/static/images/svg-loaders/ball-triangle.svg": {
+    "file": "dashboard/compiled/svg/ball-triangle.svg",
+    "src": "dashboard/static/images/svg-loaders/ball-triangle.svg"
+  },
+  "dashboard/static/images/svg-loaders/circles.svg": {
+    "file": "dashboard/compiled/svg/circles.svg",
+    "src": "dashboard/static/images/svg-loaders/circles.svg"
+  },
+  "dashboard/static/images/svg-loaders/grid.svg": {
+    "file": "dashboard/compiled/svg/grid.svg",
+    "src": "dashboard/static/images/svg-loaders/grid.svg"
+  },
+  "dashboard/static/images/svg-loaders/hearts.svg": {
+    "file": "dashboard/compiled/svg/hearts.svg",
+    "src": "dashboard/static/images/svg-loaders/hearts.svg"
+  },
+  "dashboard/static/images/svg-loaders/oval.svg": {
+    "file": "dashboard/compiled/svg/oval.svg",
+    "src": "dashboard/static/images/svg-loaders/oval.svg"
+  },
+  "dashboard/static/images/svg-loaders/puff.svg": {
+    "file": "dashboard/compiled/svg/puff.svg",
+    "src": "dashboard/static/images/svg-loaders/puff.svg"
+  },
+  "dashboard/static/images/svg-loaders/rings.svg": {
+    "file": "dashboard/compiled/svg/rings.svg",
+    "src": "dashboard/static/images/svg-loaders/rings.svg"
+  },
+  "auth.css": {
+    "file": "dashboard/compiled/css/auth.css",
+    "src": "auth.css"
+  },
+  "error.css": {
+    "file": "dashboard/compiled/css/error.css",
+    "src": "error.css"
+  },
+  "form-editor-summernote.css": {
+    "file": "dashboard/compiled/css/form-editor-summernote.css",
+    "src": "form-editor-summernote.css"
+  },
+  "iconly.css": {
+    "file": "dashboard/compiled/css/iconly.css",
+    "src": "iconly.css"
+  },
+  "table-datatable-jquery.css": {
+    "file": "dashboard/compiled/css/table-datatable-jquery.css",
+    "src": "table-datatable-jquery.css"
+  },
+  "table-datatable.css": {
+    "file": "dashboard/compiled/css/table-datatable.css",
+    "src": "table-datatable.css"
+  },
+  "ui-icons-dripicons.css": {
+    "file": "dashboard/compiled/css/ui-icons-dripicons.css",
+    "src": "ui-icons-dripicons.css"
+  },
+  "ui-widgets-chatbox.css": {
+    "file": "dashboard/compiled/css/ui-widgets-chatbox.css",
+    "src": "ui-widgets-chatbox.css"
+  },
+  "ui-widgets-todolist.css": {
+    "file": "dashboard/compiled/css/ui-widgets-todolist.css",
+    "src": "ui-widgets-todolist.css"
+  }
+}
