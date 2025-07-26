@@ -6,6 +6,82 @@
 @push('styles')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 <style>
+    /* Glassmorphism modal */
+.glass-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 25px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 20px;
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+.glass-modal-content {
+  position: relative;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+.file-info {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.glass-frame {
+  width: 100%;
+  height: 400px;
+  border-radius: 10px;
+  display: none;
+}
+
+/* Glass button */
+.glass-button {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Loading Spinner */
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  animation: spin 0.8s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
     :root {
         --primary-color: #1e3a8a; /* Biru Kominfo */
         --secondary-color: #000000; /* Hitam */
@@ -33,7 +109,20 @@
     }
 
 
-    
+    #previewModal.modal {
+    display: block; /* agar bisa dimanipulasi manual */
+    position: fixed;
+    top: 20px; /* posisi di atas tombol */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    background-color: rgba(0, 0, 0, 0.5); /* semi transparan latar */
+}
+
+#previewModal .modal-dialog {
+    margin: 0 auto;
+}
+
 
     @keyframes floatingLights {
         0%, 100% {
@@ -838,7 +927,7 @@
             </div>
 
             <!-- Informasi Umum -->
-            <div class="card">
+            <div class="card mx-4 w-auto">
                 <div class="card-header">
                     <h5 class="card-title mb-0">
                         <i class="fas fa-info-circle me-2"></i>
@@ -933,7 +1022,7 @@
 @endphp
 
 @if($semuaMahasiswa->count())
-<div class="card">
+<div class="card mx-4 w-auto">
     <div class="card-header">
         <h5 class="card-title mb-0">
             <i class="fas fa-users me-2"></i>
@@ -999,7 +1088,7 @@
 
             <!-- Dokumen Pengajuan -->
             @if($pengajuan->documents->count())
-            <div class="card">
+            <div class="card mx-4 w-auto">
                 <div class="card-header">
                     <h5 class="card-title mb-0">
                         <i class="fas fa-file-alt me-2"></i>
@@ -1133,41 +1222,7 @@
                     @endif
                 </div>
             </div>
-            @endif
-
-            @if (!empty($statusOptions))
-<div class="card">
-    <div class="card-header">
-        <h5 class="card-title mb-0">
-            <i class="fas fa-cogs me-2"></i>
-            Aksi Pengajuan
-        </h5>
-    </div>
-    <div class="card-body">
-        <div class="d-flex align-items-center justify-content-between">
-            <div>
-                <p class="mb-0">Silakan pilih tindakan yang ingin dilakukan terhadap pengajuan ini</p>
-            </div>
-
-            {{-- Form Status --}}
-            <form id="formStatus" method="POST" action="{{ route('admin.pengajuan.updateStatus', $pengajuan->id) }}">
-                @csrf
-                @method('PUT')
-                <label for="statusSelect" class="form-label me-3 mb-0">Ubah Status:</label>
-                <select name="status" id="statusSelect" class="form-control me-2" style="width: auto;">
-                    @foreach ($statusOptions as $status)
-                        <option value="{{ $status }}" {{ $pengajuan->status === $status ? 'selected' : '' }}>
-                            {{ ucfirst($status) }}
-                        </option>
-                    @endforeach
-                </select>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-save me-1"></i> Simpan
-                </button>
-            </form>
-        </div>
-    </div>
-</div>
+           
 
 {{-- Modal Catatan jika diterima --}}
 <div class="modal fade" id="modalCatatanDiterima" tabindex="-1" aria-labelledby="modalCatatanDiterimaLabel" aria-hidden="true">
@@ -1236,6 +1291,38 @@
 </div>
 
 
+<div class="card mx-4 w-auto">
+    <div class="card-header">
+        <h5 class="card-title mb-0">
+            <i class="fas fa-cogs me-2"></i>
+            Aksi Pengajuan
+        </h5>
+    </div>
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between">
+            <div>
+                <p class="mb-0">Silakan pilih tindakan yang ingin dilakukan terhadap pengajuan ini</p>
+            </div>
+            <form action="{{ route('admin.pengajuan.updateStatus', $pengajuan->id) }}" method="POST" class="d-flex align-items-center">
+                @csrf
+                @method('PUT')
+                <label for="status" class="form-label me-3 mb-0">Ubah Status:</label>
+                <select name="status" id="status" class="form-control me-2" style="width: auto;">
+                    @foreach ($statusOptions as $status)
+                        <option value="{{ $status }}" {{ $pengajuan->status === $status ? 'selected' : '' }}>
+                            {{ ucfirst($status) }}
+                        </option>
+                    @endforeach
+                </select>
+                <button type="submit" onclick="return confirm('Apakah Anda yakin ingin mengubah status?')" class="btn btn-primary">
+                    <i class="fas fa-save me-1"></i>
+                    Simpan
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- Modal -->
 <div class="modal fade bg-transparent" id="updateTanggalModal" tabindex="-1" aria-labelledby="updateTanggalModalLabel" aria-hidden="true">
   <div class="modal-dialog-centered modal-dialog modal-dialog-scrollable">
@@ -1289,9 +1376,9 @@
 
 <form action="{{ route('admin.pengajuan.kirimCatatan', $pengajuan->id) }}" method="POST">
     @csrf
-
-    <div class="mb-3">
-        <label for="tujuan" class="form-label ms-4">Tujuan Komentar</label>
+<div class="card mx-3 w-auto p-4 ">
+    <div class="mb-3 d-flex align-items-center">
+        <label for="tujuan" class="form-label ms-4 mb-0 p-0">Tujuan Komentar :</label>
         <select name="tujuan" id="tujuan" class="form-select w-25 ms-3" required>
             <option value="user">User</option>
             <option value="admin_bidang">Admin Bidang</option>
@@ -1304,27 +1391,32 @@
     </div>
 
     <button type="submit" class="btn btn-primary mb-5 ms-3">Kirim</button>
+</div>
+    
 </form>
-
+{{-- 
 @if(auth('admin')->check() && (
     (auth('admin')->user()->role === 'admin_bidang' && auth('admin')->user()->id === $pengajuan->databidang->admin_id) ||
     auth('admin')->user()->role === 'superadmin'
 ))
     <form action="{{ route('admin.pengajuan.kesediaan.generate', $pengajuan->id) }}" method="POST">
         @csrf
-        <h5 class="font-bold mb-3">Buat Form Kesediaan Magang</h5>
+        <div class="card p-4 w-auto mx-3 text-light">
+            <h3 class="font-bold mb-3">Buat Form Kesediaan Magang</h3>
 
-        <div class="mb-2">
-            <label>Penanggung Jawab</label>
+        <div class="mb-3">
+            <label class="mb-2">Penanggung Jawab</label>
             <input type="text" name="penanggung_jawab" class="form-control" required>
         </div>
-
-        <div class="mb-2">
-            <label>Nama Project</label>
+        <div class="mb-3">
+            <label class="mb-2">Nama Project</label>
             <textarea name="nama_project" class="form-control" rows="3" placeholder="Masukkan judul/deskripsi project" required></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary mt-2">Generate Form</button>
+        </div>
+        
+
     </form>
 
     @if($pengajuan->form_kesediaan_magang)
@@ -1332,13 +1424,13 @@
             Lihat Form Kesediaan Magang
         </a>
     @endif
-@endif
+@endif --}}
 
 
 <!-- Preview Modal -->
-<div id="previewModal" class="modal">
+<div id="previewModal" class="modal" style="display: none;">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="glass-modal-content">
             <div class="modal-header">
                 <div>
                     <h5 class="modal-title">Preview Dokumen</h5>
@@ -1381,7 +1473,7 @@
 <script>
 let currentFileUrl = '';
 let currentFileName = '';
-
+let currentAbortController = null; 
 function showPreview(url, fileName = '') {
     const modal = document.getElementById('previewModal');
     const loading = document.getElementById('previewLoading');
@@ -1389,7 +1481,7 @@ function showPreview(url, fileName = '') {
     const frame = document.getElementById('previewFrame');
     const title = document.getElementById('previewTitle');
     const fileInfo = document.getElementById('fileInfo');
-    
+    modal.style.display = 'block';
     modal.classList.add('show');
     loading.style.display = 'flex';
     content.style.display = 'none';
@@ -1417,13 +1509,14 @@ function isRouteUrl(url) {
 }
 
 function handleRoutePreview(url, fileExtension) {
-    // Fetch file melalui route dan convert ke blob
+    currentAbortController = new AbortController();
     fetch(url, {
         method: 'GET',
         headers: {
             'X-Requested-With': 'XMLHttpRequest',
             'Accept': 'application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,image/*'
-        }
+        },
+        signal: currentAbortController.signal
     })
     .then(response => {
         if (!response.ok) {
@@ -1433,9 +1526,14 @@ function handleRoutePreview(url, fileExtension) {
     })
     .then(blob => {
         const blobUrl = URL.createObjectURL(blob);
+        currentFileUrl = blobUrl;
         loadPreviewFrame(blobUrl, fileExtension);
     })
     .catch(error => {
+        if (error.name === 'AbortError') {
+            console.log('Preview fetch aborted');
+            return;
+        }
         console.error('Error fetching file:', error);
         showPreviewError('Gagal memuat dokumen. Silakan coba lagi.');
     });
@@ -1577,18 +1675,29 @@ function getFileExtension(filename) {
 function closePreview() {
     const modal = document.getElementById('previewModal');
     const frame = document.getElementById('previewFrame');
-    
+
+    // Sembunyikan modal
     modal.classList.remove('show');
+    modal.style.display = 'none';
+    // Hentikan pemuatan iframe
     frame.src = '';
-    
-    // Clean up blob URLs to prevent memory leaks
+
+    // Revoke blob URL untuk mencegah memory leak
     if (currentFileUrl && currentFileUrl.startsWith('blob:')) {
         URL.revokeObjectURL(currentFileUrl);
     }
-    
+
+    // Batalkan fetch jika sedang berlangsung
+    if (currentAbortController) {
+        currentAbortController.abort();
+        currentAbortController = null;
+    }
+
+    // Reset variabel
     currentFileUrl = '';
     currentFileName = '';
 }
+
 
 function downloadFile() {
     if (currentFileUrl) {

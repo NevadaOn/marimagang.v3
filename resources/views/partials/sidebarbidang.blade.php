@@ -1,49 +1,54 @@
-<nav id="sidebar" class="sidebar js-sidebar  " >
-    <div class="sidebar-content js-simplebar  bg-nav " >
-        <a class="sidebar-brand " style="text-align: center; "  href="{{ url('/') }}"> {{-- Menggunakan helper url() untuk link root --}}
-            <img src="{{ asset('img/logo-kominfo.png') }}" class="rounded-circle p-2 mb-4 mt-4 " style="background-color: rgb(0, 0, 0); box-shadow: 0 0 20px 4px rgba(102, 212, 255, 0.379);" alt="kominfo" width="160px">
-            <br>
-            <span class="align-start text-muted">Portal Admin Bidang</span>
-            <br>
-            <span class="align-start text-muted fs-5">DISKOMINFO Kab.Malang</span>
+<nav id="sidebar" class="sidebar js-sidebar">
+    <div class="sidebar-content js-simplebar">
+        {{-- Partikel efek opsional --}}
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+
+        <a class="sidebar-brand text-center" href="{{ url('/') }}">
+            <div class="logo-container mx-auto">
+                <img src="{{ asset('img/logo-kominfo.png') }}"
+                     class="logo-image"
+                     alt="kominfo">
+            </div>
+            <div class="brand-text mt-4">
+                <div class="brand-subtitle">Portal Admin Bidang</div>
+                <div class="brand-title">DISKOMINFO Kab.Malang</div>
+            </div>
         </a>
 
-        <ul class="sidebar-nav  bg-nav" >
-            <li class="sidebar-header  bg-nav">
-                Pages
+        <ul class="sidebar-nav px-3">
+            <li class="sidebar-header">
+                <i class="fas fa-grip-horizontal me-2"></i> Pages
             </li>
 
-            {{-- Perhatikan penambahan class 'active' menggunakan Request::routeIs() --}}
-            <li class="sidebar-item  {{ Request::routeIs('admin.dashboard') ? 'active' : '' }}">
+            <li class="sidebar-item {{ Request::routeIs('admin.dashboard') ? 'active' : '' }}">
                 <a class="sidebar-link" href="{{ route('admin.dashboard') }}">
-                    <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
                 </a>
             </li>
 
             <li class="sidebar-item {{ Request::routeIs('admin.pengajuan.bidang') ? 'active' : '' }}">
                 <a class="sidebar-link" href="{{ route('admin.pengajuan.bidang') }}">
-                    <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Daftar Pengajuan</span>
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Daftar Pengajuan</span>
                 </a>
             </li>
 
-
-            {{-- <li class="sidebar-item">
-                <a class="sidebar-link" href="maps-google.html">
-                    <i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>
+            {{-- <li class="sidebar-item disabled">
+                <a class="sidebar-link" href="#" style="pointer-events: none; opacity: 0.5;">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Laporan</span>
                 </a>
-            </li> --}}
-        </ul>
+            </li>
 
-        {{-- <div class="sidebar-cta">
-            <div class="sidebar-cta-content">
-                <strong class="d-inline-block mb-2">Upgrade to Pro</strong>
-                <div class="mb-3 text-sm">
-                    Are you looking for more components? Check out our premium version.
-                </div>
-                <div class="d-grid">
-                    <a href="upgrade-to-pro.html" class="btn btn-primary">Upgrade to Pro</a>
-                </div>
-            </div>
-        </div> --}}
+            <li class="sidebar-item disabled">
+                <a class="sidebar-link" href="#" style="pointer-events: none; opacity: 0.5;">
+                    <i class="fas fa-cog"></i>
+                    <span>Pengaturan</span> --}}
+                </a>
+            </li>
+        </ul>
     </div>
 </nav>

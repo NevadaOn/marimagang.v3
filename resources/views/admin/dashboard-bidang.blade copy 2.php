@@ -483,39 +483,54 @@
             background: var(--gradient-2);
         }
     </style>
-    <div class="main-content">
-        <div class="content-wrapper">
+    <div class="main-content py-4">
+        <div class="container content-wrapper">
             @if(!$bidang)
-            <div class="alert alert-warning glass-card">
+            <div class="alert alert-warning glass-card d-flex align-items-center">
                 <i class="fas fa-exclamation-triangle me-2"></i>
-                Anda belum ditugaskan ke bidang manapun. Silakan hubungi Super Admin untuk informasi lebih lanjut.
+                <span>Anda belum ditugaskan ke bidang manapun. Silakan hubungi Super Admin untuk informasi lebih lanjut.</span>
             </div>
             @else
-            
-            <!-- Bidang Information -->
-            <div class="info-card mb-4">
-                <h1 class="mb-4 text-white "><i class="fas fa-info-circle " style="color: var(--primary-color); font-weight: 600;"></i>INFORMASI BIDANG</h1>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <div class="info-label">Nama Bidang</div>
-                            <div class="info-value">{{ $bidang->nama }}</div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <div class="info-label">Deskripsi</div>
-                            <div class="info-value">{{ $bidang->deskripsi ?? 'Tidak ada deskripsi' }}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    
+            <!-- INFORMASI BIDANG -->
+            <div class="info-card mb-5 p-4 border-0 shadow" style="
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+">
+    <div class="d-flex align-items-center mb-4">
+        <div class="rounded-circle d-flex align-items-center justify-content-center me-3" style="
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        ">
+            <i class="fas fa-info-circle text-white fs-4"></i>
+        </div>
+        <h2 class="m-0 text-white" style="font-weight: 600; font-size: 1.6rem;">Informasi Bidang</h2>
+    </div>
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="text-uppercase text-white-50 small mb-1">Nama Bidang</div>
+            <div class="fs-5 text-white fw-medium">{{ $bidang->nama }}</div>
+        </div>
+        <div class="col-md-6">
+            <div class="text-uppercase text-white-50 small mb-1">Deskripsi</div>
+            <div class="fs-5 text-white fw-medium">{{ $bidang->deskripsi ?? 'Tidak ada deskripsi' }}</div>
+        </div>
+    </div>
+</div>
 
-            <!-- Statistics -->
+    
+            <!-- STATISTIK -->
             <div class="row g-4 mb-5">
                 <div class="col-md-4 col-lg-2">
-                    <div class="stats-card card-1">
-                        <i class="fas fa-clipboard-list stats-icon"></i>
+                    <div class="stats-card card-1 text-center p-3 h-100">
+                        <i class="fas fa-clipboard-list stats-icon mb-2"></i>
                         <div class="stats-content">
                             <div class="stats-value">{{ $totalPengajuan }}</div>
                             <div class="stats-label">Total Pengajuan</div>
@@ -523,8 +538,8 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-2">
-                    <div class="stats-card card-2">
-                        <i class="fas fa-clock stats-icon"></i>
+                    <div class="stats-card card-2 text-center p-3 h-100">
+                        <i class="fas fa-clock stats-icon mb-2"></i>
                         <div class="stats-content">
                             <div class="stats-value">{{ $pengajuanPending }}</div>
                             <div class="stats-label">Pending</div>
@@ -532,8 +547,8 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-2">
-                    <div class="stats-card card-3">
-                        <i class="fas fa-check-circle stats-icon"></i>
+                    <div class="stats-card card-3 text-center p-3 h-100">
+                        <i class="fas fa-check-circle stats-icon mb-2"></i>
                         <div class="stats-content">
                             <div class="stats-value">{{ $pengajuanDiterima }}</div>
                             <div class="stats-label">Diterima</div>
@@ -541,8 +556,8 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-2">
-                    <div class="stats-card card-4">
-                        <i class="fas fa-times-circle stats-icon"></i>
+                    <div class="stats-card card-4 text-center p-3 h-100">
+                        <i class="fas fa-times-circle stats-icon mb-2"></i>
                         <div class="stats-content">
                             <div class="stats-value">{{ $pengajuanDitolak }}</div>
                             <div class="stats-label">Ditolak</div>
@@ -550,8 +565,8 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-2">
-                    <div class="stats-card card-5">
-                        <i class="fas fa-envelope stats-icon"></i>
+                    <div class="stats-card card-5 text-center p-3 h-100">
+                        <i class="fas fa-envelope stats-icon mb-2"></i>
                         <div class="stats-content">
                             <div class="stats-value">{{ $statusDokumen->ada_surat_pengantar ?? 0 }}</div>
                             <div class="stats-label">Surat Pengantar</div>
@@ -559,8 +574,8 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-2">
-                    <div class="stats-card card-6">
-                        <i class="fas fa-file-alt stats-icon"></i>
+                    <div class="stats-card card-6 text-center p-3 h-100">
+                        <i class="fas fa-file-alt stats-icon mb-2"></i>
                         <div class="stats-content">
                             <div class="stats-value">{{ $statusDokumen->ada_proposal ?? 0 }}</div>
                             <div class="stats-label">Proposal</div>
@@ -568,17 +583,16 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Statistics Table -->
-            <div class="card mb-5">
-                <div class="card-header">
-                    <i class="fas fa-chart-bar me-2"></i>
-                    Statistik Semua Bidang
+    
+            <!-- TABEL BIDANG -->
+            <div class="card mb-5 glass-card">
+                <div class="card-header d-flex align-items-center">
+                    <i class="fas fa-chart-bar me-2"></i> Statistik Semua Bidang
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-hover mb-0">
-                            <thead>
+                        <table class="table table-hover mb-0 text-white">
+                            <thead class="table-light text-dark">
                                 <tr>
                                     <th>Nama Bidang</th>
                                     <th>Jumlah Pengajuan</th>
@@ -596,17 +610,16 @@
                     </div>
                 </div>
             </div>
-
-            <!-- User Table -->
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-users me-2"></i>
-                    Daftar User Pengajuan
+    
+            <!-- TABEL USER -->
+            <div class="card glass-card">
+                <div class="card-header d-flex align-items-center">
+                    <i class="fas fa-users me-2"></i> Daftar User Pengajuan
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-hover mb-0">
-                            <thead>
+                        <table class="table table-hover mb-0 text-white">
+                            <thead class="table-light text-dark">
                                 <tr>
                                     <th>Nama</th>
                                     <th>Email</th>
@@ -623,19 +636,17 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->nama_universitas }}</td>
                                     <td>
-                                        <span class="badge {{ $user->status }}">
-                                            {{ ucfirst($user->status) }}
-                                        </span>
+                                        <span class="badge {{ $user->status }}">{{ ucfirst($user->status) }}</span>
                                     </td>
                                     <td>{{ \Carbon\Carbon::parse($user->tanggal_pengajuan)->format('d/m/Y') }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <button class="btn btn-sm btn-outline-primary  bg-white" 
+                                            <button class="btn btn-sm btn-outline-primary bg-white"
                                                     onclick="showUserDetails({{ $user->pengajuan_id }})"
                                                     title="Lihat Detail">
                                                 <i class="fas fa-eye"></i> Detail
                                             </button>
-                                            <a href="{{ route('admin.pengajuan.showbidang', $user->pengajuan_id) }}" 
+                                            <a href="{{ route('admin.pengajuan.showbidang', $user->pengajuan_id) }}"
                                                class="btn btn-sm btn-primary"
                                                title="Edit">
                                                 <i class="fas fa-edit"></i> Edit
@@ -645,10 +656,10 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="6">
+                                    <td colspan="6" class="text-center py-4">
                                         <div class="empty-state">
-                                            <i class="fas fa-inbox fa-3x"></i>
-                                            <h6 class="mt-3 mb-1">Belum ada pengajuan</h6>
+                                            <i class="fas fa-inbox fa-3x mb-2"></i>
+                                            <h6 class="mb-1">Belum ada pengajuan</h6>
                                             <p class="text-muted">Data pengajuan akan muncul di sini</p>
                                         </div>
                                     </td>
@@ -659,9 +670,11 @@
                     </div>
                 </div>
             </div>
+    
             @endif
         </div>
     </div>
+    
     <script>
         function showUserDetails(pengajuanId) {
             // Implementasi modal atau detail view
