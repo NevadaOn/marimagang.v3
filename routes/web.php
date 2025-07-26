@@ -125,13 +125,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
-    // Dashboard
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-    // Dokumentasi Kegiatan
     Route::resource('documentation', DocumentationController::class);
 
-    // Pengajuan
     Route::controller(AdminPengajuanController::class)->prefix('pengajuan')->name('pengajuan.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/bidang', 'bidang')->name('bidang');
@@ -149,13 +146,10 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
         Route::post('/{id}/generate-kesediaan', 'generateSuratKesediaan')->name('kesediaan.generate');
     });
 
-    // Data Pengguna per Pengajuan
     Route::get('/user-details/{pengajuanId}', [AdminDashboardController::class, 'getUserDetails'])
         ->name('user.details');
 
-    // Hanya untuk Superadmin
     Route::middleware('superadmin')->group(function () {
-        // Manajemen User
         Route::controller(AdminUserController::class)->prefix('users')->name('users.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/{id}', 'show')->name('show');
@@ -163,7 +157,6 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
             Route::delete('/{id}', 'destroy')->name('destroy');
         });
 
-        // Manajemen Bidang
         Route::controller(AdminBidangController::class)->prefix('bidang')->name('bidang.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
@@ -174,7 +167,6 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
             Route::delete('/{id}', 'destroy')->name('destroy');
         });
 
-        // Manajemen Admin
         Route::prefix('admin-management')->name('admin.')->group(function () {
             Route::get('/', [AdminController::class, 'index'])->name('index');
             Route::get('/create', [AdminController::class, 'create'])->name('create');
@@ -184,7 +176,6 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
             Route::delete('/{id}', [AdminController::class, 'destroy'])->name('destroy');
         });
 
-        // Laporan
         Route::prefix('reports')->name('reports.')->group(function () {
             Route::get('/pengajuan', [ReportController::class, 'pengajuan'])->name('pengajuan');
             Route::get('/users', [ReportController::class, 'users'])->name('users');
