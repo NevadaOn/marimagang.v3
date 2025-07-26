@@ -20,8 +20,15 @@ use App\Http\Controllers\{
     Admin\AdminController,
     Admin\AdminBidangController,
     Admin\ReportController,
-    BidangController
+    BidangController,
+    LandingDocumentationController,
+    Admin\DocumentationController
 };
+
+Route::prefix('dokumentasi')->name('landing.documentation.')->group(function () {
+    Route::get('/', [LandingDocumentationController::class, 'index'])->name('index');
+    Route::get('/{id}', [LandingDocumentationController::class, 'show'])->name('show');
+});
 
 Route::get('/', fn () => view('welcome'));
 
@@ -117,8 +124,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('logbook', LogbookController::class);
 });
 
-Route::prefix('admin')->middleware('admin')->group(function () {
+Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::resource('documentation', DocumentationController::class);
     
     Route::get('/user-details/{pengajuanId}', [AdminDashboardController::class, 'getUserDetails'])
         ->name('admin.user.details');

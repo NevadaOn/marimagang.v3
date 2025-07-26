@@ -507,6 +507,17 @@
       </div>
     </div>
   </main>
+  @foreach(\App\Models\Documentation::with('images')->latest()->take(3)->get() as $doc)
+    <div class="card">
+        <h3>{{ $doc->judul_kegiatan ?? 'Tanpa Judul' }}</h3>
+        @if($doc->images->first())
+            <img src="{{ asset('storage/' . $doc->images->first()->image_path) }}" style="max-height: 200px">
+        @endif
+        <a href="{{ route('dokumentasi.show', $doc->id) }}">Lihat Selengkapnya</a>
+    </div>
+@endforeach
+<a href="{{ route('dokumentasi.index') }}">Lihat Semua Dokumentasi</a>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-1 bg-gray-850 border-gray-800">
