@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -30,8 +29,8 @@
       <div class="main-header">
         <div class="header-logo">
           <a class="d-flex" href="{{ url('/') }}">
-            <img class="logo-night" alt="Diskominfo" src="{{ asset('img/rb_3083.png') }}" width="90px">
-            <img class="d-none logo-day" alt="Diskominfo" src="{{ asset('img/rb_3083.png') }}" width="90px">
+            <img class="logo-night" alt="Diskominfo" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" >
+            <img class="d-none logo-day" alt="Diskominfo" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" >
           </a>
         </div>
         <div class="header-nav">
@@ -447,8 +446,8 @@
       <div class="footer-1 bg-gray-850 border-gray-800">
         <div class="row">
           <div class="col-lg-4 mb-30"><a class="wow animate__animated animate__fadeInUp" href="index.html"><img
-                class="logo-night" src="{{ asset('img/rb_3083.png') }}" width="110px" alt="Genz"><img
-                class="d-none logo-day" alt="GenZ" src="{{ asset('img/rb_3083.png') }}" width="110px"></a>
+                class="logo-night" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" width="110px" alt="Genz"><img
+                class="d-none logo-day" alt="GenZ" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" width="110px"></a>
             <p class="mb-20 mt-20 text-sm color-gray-500 wow animate__animated animate__fadeInUp">Kementerian Komunikasi
               dan Informatika, yang merupakan kementerian dalam pemerintahan Indonesia yang bertanggung jawab atas
               urusan di bidang komunikasi dan informatika. </p>
