@@ -5555,13 +5555,13 @@ iframe.google-map {
   width: 20px;
 }
 .icon-media.icon-fb {
-  background-image: url(../imgs/page/single/fb.svg);
+  background-image: url("{{ asset('assets/imgs/page/single/fb.svg') }}");
 }
 .icon-media.icon-tw {
-  background-image: url(../imgs/page/single/tw.svg);
+  background-image: url("{{ asset('assets/imgs/page/single/tw.svg') }}");
 }
 .icon-media.icon-printest {
-  background-image: url(../imgs/page/single/pi.svg);
+  background-image: url("{{ asset('assets/imgs/page/single/pi.svg') }}");
 }
 
 .box-share {
