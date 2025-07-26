@@ -36,8 +36,6 @@ class Notification extends Model
         return $query->where('type', $type);
     }
 
-    // Tambahan fungsi bantu dari kode referensi
-
     public function markAsRead()
     {
         return $this->update(['is_read' => true]);
@@ -88,7 +86,7 @@ class Notification extends Model
             'sedang_direview' => 'Pengajuan magang Anda sedang direview oleh admin',
             'disetujui_admin1' => 'Pengajuan magang Anda telah disetujui admin, menunggu persetujuan bidang',
             'disetujui_bidang' => 'Pengajuan magang Anda telah disetujui bidang, menunggu persetujuan admin 2',
-            'disetujui' => 'Selamat! Pengajuan magang Anda telah disetujui',
+            'diterima' => 'Selamat! Pengajuan magang Anda telah diterima',
             'sedang_magang' => 'Selamat! Anda sudah dapat memulai kegiatan magang',
             'selesai' => 'Kegiatan magang Anda telah selesai',
             'ditolak' => 'Pengajuan magang Anda ditolak, silakan ajukan kembali'
@@ -98,7 +96,7 @@ class Notification extends Model
             $userId,
             'Status Pengajuan Diperbarui',
             $statusMessages[$newStatus] ?? "Status pengajuan Anda berubah menjadi {$newStatus}",
-            $newStatus === 'ditolak' ? 'error' : ($newStatus === 'disetujui' ? 'success' : 'info'),
+            $newStatus === 'ditolak' ? 'error' : ($newStatus === 'diterima' ? 'success' : 'info'),
             [
                 'pengajuan_id' => $pengajuanId,
                 'old_status' => $oldStatus,
