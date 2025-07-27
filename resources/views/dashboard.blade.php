@@ -87,9 +87,9 @@
 
                     </li>
                     <li class="sidebar-menu__item">
-                        <a href="anggota.html" class="sidebar-menu__link">
+                        <a href="{{ route('profile.edit') }}" class="sidebar-menu__link">
                             <span class="icon"><i class="ph ph-users-three"></i></span>
-                            <span class="text">Anggota</span>
+                            <span class="text">Profil</span>
                         </a>
                     </li>
                     <li class="sidebar-menu__item">
@@ -98,7 +98,6 @@
                             <span class="text">Jadwal</span>
                         </a>
                     </li>
-
                     <li class="sidebar-menu__item">
                         <span
                             class="text-gray-300 text-sm px-20 pt-20 fw-semibold border-top border-gray-100 d-block text-uppercase">Settings</span>

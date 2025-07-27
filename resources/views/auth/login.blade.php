@@ -9,12 +9,33 @@
     <meta name="description" content="Index page">
     <meta name="keywords" content="index, page">
     <meta name="author" content="">
+    <title>Login – Mari-Magang</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/template/favicon.svg') }}">
     <link href="{{ asset('assets/css/style.css?v=2.0') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
 
     <title>Login - Personal Blog  HTML Template</title>
   </head>
   <body>
+    <style>
+    .viewpass {
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #ccc;
+        cursor: pointer;
+        font-size: 1.1rem;
+        z-index: 10;
+    }
+    .d-none {
+        display: none !important;
+    }
+    </style>
+
     <div id="preloader-active">
       <div class="preloader d-flex align-items-center justify-content-center">
         <div class="preloader-inner position-relative">
@@ -62,13 +83,17 @@
                     </div>
 
                     <div class="form-group position-relative">
-                        <input class="form-control bg-gray-850 border-gray-800 password" 
-                            type="password" 
-                            name="password" 
-                            id="password" 
-                            placeholder="Password" 
+                        <input class="form-control bg-gray-850 border-gray-800 password"
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder="Password"
                             required>
-                        <span class="viewpass"></span>
+                        
+                        <button type="button" class="viewpass" aria-label="Toggle password visibility">
+                            <i class="fas fa-eye" id="eye-open"></i>
+                            <i class="fas fa-eye-slash d-none" id="eye-closed"></i>
+                        </button>
                     </div>
 
                     <div class="form-group">
@@ -96,7 +121,6 @@
       </div>
     </main>
     
-   
     <script src="{{ asset('assets/js/vendors/modernizr-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendors/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendors/jquery-migrate-3.3.0.min.js') }}"></script>
@@ -107,6 +131,23 @@
     <script src="{{ asset('assets/js/vendors/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendors/jquery.progressScroll.min.js') }}"></script>
     <script src="{{ asset('assets/js/main.js?v=2.0') }}"></script>
+    <script>
+      $('.viewpass').on('click', function () {
+          const input = $(this).siblings('input');
+          const eyeOpen = $(this).find('#eye-open');
+          const eyeClosed = $(this).find('#eye-closed');
+          
+          if (input.attr('type') === 'password') {
+              input.attr('type', 'text');
+              eyeOpen.addClass('d-none');
+              eyeClosed.removeClass('d-none');
+          } else {
+              input.attr('type', 'password');
+              eyeOpen.removeClass('d-none');
+              eyeClosed.addClass('d-none');
+          }
+      });
+    </script>
 
   </body>
 </html>

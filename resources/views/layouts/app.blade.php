@@ -121,9 +121,9 @@
                             <span class="icon" aria-hidden="true"><i class="ph ph-calendar-dots"></i></span>
                             <span class="text">Jadwal</span>
                         </a> --}}
-                        <a href="anggota.html" class="sidebar-menu__link">
+                        <a href="{{ route('profile.edit') }}" class="sidebar-menu__link">
                             <span class="icon"><i class="ph ph-users-three"></i></span>
-                            <span class="text">Anggota</span>
+                            <span class="text">Profil</span>
                         </a>
                     </li>
 

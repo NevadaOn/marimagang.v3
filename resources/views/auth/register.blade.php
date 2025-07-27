@@ -8,13 +8,29 @@
     <meta name="template-color"        content="#0E0E0E">
     <meta name="description"           content="Register page">
     <meta name="keywords"              content="register, auth">
-    <title>Register – My App</title>
-
+    <title>Register – Mari-Magang</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/template/favicon.svg') }}">
     <link href="{{ asset('assets/css/style.css?v=2.0') }}" rel="stylesheet">
 </head>
 <body>
-    {{-- Pre‑loader (opsional) --}}
+    <style>
+    .viewpass {
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #ccc;
+        cursor: pointer;
+        font-size: 1.1rem;
+        z-index: 10;
+    }
+    .d-none {
+        display: none !important;
+    }
+    </style>
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
@@ -26,7 +42,6 @@
         </div>
     </div>
 
-    {{-- HEADER kosong (kalau perlu navbar tambahkan di sini) --}}
     <header class="header sticky-bar">
         <div class="container">
             <div class="row align-items-start">
@@ -38,7 +53,6 @@
         </div>
     </header>
 
-    {{-- MAIN --}}
     <main class="main">
         <div class="cover-home3">
             <div class="container">
@@ -48,10 +62,8 @@
                             <h2 class="color-linear d-inline-block">Register</h2>
                         </div>
 
-                        {{-- BOX ‑ FORM --}}
                         <div class="box-form-login pb-50">
                             <div class="form-login bg-gray-850 border-gray-800 text-start">
-                                {{-- Tampilkan error validasi --}}
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <ul class="mb-0">
@@ -65,7 +77,6 @@
                                 <form method="POST" action="{{ url('/register') }}">
                                     @csrf
 
-                                    {{-- Nama --}}
                                     <div class="form-group">
                                         <input
                                             class="form-control bg-gray-850 border-gray-800"
@@ -77,7 +88,6 @@
                                             required>
                                     </div>
 
-                                    {{-- Email --}}
                                     <div class="form-group">
                                         <input
                                             class="form-control bg-gray-850 border-gray-800"
@@ -90,7 +100,6 @@
 
                                     </div>
 
-                                    {{-- Telepon --}}
                                     <div class="form-group">
                                         <input
                                             class="form-control bg-gray-850 border-gray-800"
@@ -102,19 +111,20 @@
                                             required>
                                     </div>
 
-                                    {{-- Password --}}
                                     <div class="form-group position-relative">
-                                        <input
-                                            class="form-control bg-gray-850 border-gray-800 password"
+                                        <input class="form-control bg-gray-850 border-gray-800 password"
                                             type="password"
                                             name="password"
                                             id="password"
                                             placeholder="Password"
                                             required>
-                                        <span class="viewpass"></span>
+                                        
+                                        <button type="button" class="viewpass" aria-label="Toggle password visibility">
+                                            <i class="fas fa-eye" id="eye-open"></i>
+                                            <i class="fas fa-eye-slash d-none" id="eye-closed"></i>
+                                        </button>
                                     </div>
 
-                                    {{-- Konfirmasi Password --}}
                                     <div class="form-group position-relative">
                                         <input
                                             class="form-control bg-gray-850 border-gray-800 password"
@@ -123,15 +133,16 @@
                                             id="password_confirmation"
                                             placeholder="Confirm password"
                                             required>
-                                        <span class="viewpass"></span>
+                                        <button type="button" class="viewpass" aria-label="Toggle password visibility">
+                                            <i class="fas fa-eye" id="eye-open"></i>
+                                            <i class="fas fa-eye-slash d-none" id="eye-closed"></i>
+                                        </button>
                                     </div>
 
-                                    {{-- Submit --}}
                                     <div class="form-group">
                                         <input class="btn btn-linear color-gray-850 hover-up" type="submit" value="Create an account">
                                     </div>
 
-                                    {{-- Link login --}}
                                     <div class="form-group mb-0">
                                         <span>Already have an account?</span>
                                         <a class="color-linear" href="{{ route('login') }}"> Sign In</a>
@@ -139,7 +150,6 @@
                                 </form>
                             </div>
 
-                            {{-- Separator line & Google sign‑up (opsional) --}}
                             <div class="box-line"><span class="bg-gray-900">Or, sign up with your email</span></div>
                             <div class="box-login-gmail bg-gray-850 border-gray-800 hover-up">
                                 <a class="btn btn-login-gmail color-gray-500" href="#">Sign up with Google</a>
@@ -166,5 +176,22 @@
     <script src="{{ asset('assets/js/vendors/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendors/jquery.progressScroll.min.js') }}"></script>
     <script src="{{ asset('assets/js/main.js?v=2.0') }}"></script>
+        <script>
+      $('.viewpass').on('click', function () {
+          const input = $(this).siblings('input');
+          const eyeOpen = $(this).find('#eye-open');
+          const eyeClosed = $(this).find('#eye-closed');
+          
+          if (input.attr('type') === 'password') {
+              input.attr('type', 'text');
+              eyeOpen.addClass('d-none');
+              eyeClosed.removeClass('d-none');
+          } else {
+              input.attr('type', 'password');
+              eyeOpen.removeClass('d-none');
+              eyeClosed.addClass('d-none');
+          }
+      });
+    </script>
 </body>
 </html>
