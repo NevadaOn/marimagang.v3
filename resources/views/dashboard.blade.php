@@ -664,11 +664,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <div class=" flex-between gap-4">
                                             <div class="flex-align gap-8">
                                                 <div class="">
-                                                    @if($displayPengajuan->komentar_admin)
-                                                    
-                                                    <h6 class="mb-2">Komentar Admin:</h6>
-                                                    <span class="">{{ $displayPengajuan->komentar_admin }}</span>
+                                                    @if($displayPengajuan && $displayPengajuan->komentar_admin)
+                                                        <h6 class="mb-2">Komentar Admin:</h6>
+                                                        <span>{{ $displayPengajuan->komentar_admin }}</span>
                                                     @endif
+
                                                 </div>
                                             </div>
                                             <div class="dropdown flex-shrink-0">
