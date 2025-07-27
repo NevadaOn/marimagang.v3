@@ -60,7 +60,7 @@
 
 <body>
     <!-- Skip to main content for accessibility -->
-    <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+    {{-- <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a> --}}
 
     <div class="preloader" aria-label="Loading...">
         <div class="loader"></div>
