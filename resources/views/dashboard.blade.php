@@ -474,7 +474,166 @@
         </button>
     </div>
 </div>
+                  
 
+                </div>
+                <div class="col-lg-3">
+
+                    <!-- Calendar Start -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="calendar">
+                                <div class="calendar__header">
+                                    <button type="button" class="calendar__arrow left"><i
+                                            class="ph ph-caret-left"></i></button>
+                                    <p class="display h6 mb-0">""</p>
+                                    <button type="button" class="calendar__arrow right"><i
+                                            class="ph ph-caret-right"></i></button>
+                                </div>
+
+                                <div class="calendar__week week">
+                                    <div class="calendar__week-text">Su</div>
+                                    <div class="calendar__week-text">Mo</div>
+                                    <div class="calendar__week-text">Tu</div>
+                                    <div class="calendar__week-text">We</div>
+                                    <div class="calendar__week-text">Th</div>
+                                    <div class="calendar__week-text">Fr</div>
+                                    <div class="calendar__week-text">Sa</div>
+                                </div>
+                                <div class="days"></div>
+                            </div>
+ @php
+    $completionLevel = $completionLevel ?? null;
+    $pengajuanAktif = $pengajuanAktif ?? null;
+    $undanganPengajuan = $undanganPengajuan ?? null;
+    $keanggotaanAktif = null;
+
+    if (!$pengajuanAktif && !$undanganPengajuan) {
+        $keanggotaanAktif = \App\Models\Anggota::where('user_id', auth()->id())
+            ->where('status', 'accepted')
+            ->with(['pengajuan.databidang', 'pengajuan.user', 'pengajuan.anggota.user'])
+            ->first();
+    }
+
+    $displayPengajuan = $pengajuanAktif ?? ($keanggotaanAktif ? $keanggotaanAktif->pengajuan : null);
+    $isAnggota = !$pengajuanAktif && $keanggotaanAktif;
+@endphp
+
+<div class="">
+
+    {{-- Komentar Admin jika ada --}}
+    @if($displayPengajuan && $displayPengajuan->komentar_admin)
+        <div class="mt-24 mb-24">
+            <div class="flex-align mb-8 gap-16">
+                <span class="text-sm text-gray-300 flex-shrink-0">Today</span>
+                <span class="border border-gray-50 border-dashed flex-grow-1"></span>
+            </div>
+            <div class="event-item bg-gray-50 rounded-8 p-16">
+                <div class="flex-between gap-4">
+                    <div>
+                        <h6 class="mb-2">Komentar Admin:</h6>
+                        <span>{{ $displayPengajuan->komentar_admin }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if($undanganPengajuan)
+        <div class="event-item bg-gray-50 rounded-8 p-16 mt-16">
+            <div class="flex-between gap-4">
+                <div class="flex-align gap-8">
+                    <span class="icon d-flex w-44 h-44 bg-white rounded-8 flex-center text-2xl">
+                        <i class="ph ph-magic-wand"></i>
+                    </span>
+                    <div>
+                        <h6 class="mb-2">Anda memiliki undangan untuk bergabung dalam kelompok magang.</h6>
+                        <p class="mb-3">Silakan terima atau tolak undangan tersebut.</p>
+                        <form method="POST" action="{{ route('invitation.accept', $undanganPengajuan->id) }}" style="display: inline-block;">
+                            @csrf
+                            <button type="submit" class="btn btn-success">Terima Undangan</button>
+                        </form>
+                        <form method="POST" action="{{ route('invitation.reject', $undanganPengajuan->id) }}" style="display: inline-block;">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Tolak Undangan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    {{-- Tindakan jika profil belum lengkap --}}
+    @if ($completionStatus['level'] !== 'skills-complete')
+        <div class="event-item bg-gray-50 rounded-8 p-16 mt-16">
+            <div class="flex-between gap-4">
+                <div class="flex-align gap-8">
+                    <span class="icon d-flex w-44 h-44 bg-white rounded-8 flex-center text-2xl">
+                        <i class="ph ph-warning"></i>
+                    </span>
+                    <div>
+                        <h6 class="mb-2">Lengkapi Profil Terlebih Dahulu</h6>
+                        <p class="mb-3">
+                            @switch($completionLevel)
+                                @case('incomplete')
+                                    Lengkapi data universitas dan informasi pribadi Anda terlebih dahulu.
+                                    @break
+                                @case('profile-complete')
+                                    Tambahkan keahlian Anda untuk melengkapi profil.
+                                    @break
+                                @case('skills-complete')
+                                    Periksa kembali bagian profil agar lengkap seluruhnya.
+                                    @break
+                                @default
+                                    Silakan lengkapi semua bagian profil Anda terlebih dahulu.
+                            @endswitch
+                        </p>
+                        <a href="{{ route('profile.edit') }}" class="btn btn-primary">Lengkapi Profil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @elseif(!$pengajuanAktif && !$keanggotaanAktif)
+        {{-- Hanya muncul jika profil lengkap & belum ada pengajuan/keanggotaan --}}
+        <div class="event-item bg-gray-50 rounded-8 p-16 mt-16">
+            <div class="flex-between gap-4">
+                <div class="flex-align gap-8">
+                    <span class="icon d-flex w-44 h-44 bg-white rounded-8 flex-center text-2xl">
+                        <i class="ph ph-briefcase"></i>
+                    </span>
+                    <div>
+                        <h6 class="mb-2">Siap untuk Mengajukan Magang</h6>
+                        <p class="mb-3">Profil Anda sudah lengkap. Klik tombol di bawah untuk memulai pengajuan magang.</p>
+                        <a href="{{ route('pengajuan.tipe') }}" class="btn btn-primary">Ajukan Magang Sekarang</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <a href="{{ route('pengajuan.index') }}" class="btn btn-main w-100 mt-24">Cek Status Pengajuan</a>
+</div>
+
+                            <!-- Events End -->
+                        </div>
+                    </div>
+                    <!-- Calendar End -->
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-footer">
+            <div class="flex-between flex-wrap gap-16">
+                <p class="text-gray-300 text-13 fw-normal"> &copy; Copyright Kominfo, All Right Reserverd</p>
+
+            </div>
+        </div>
+    </div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Ambil data dari controller Laravel
@@ -596,252 +755,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-                    @php
-                // Cek apakah user adalah anggota dari pengajuan yang sudah diterima
-                $keanggotaanAktif = null;
-                if (!isset($pengajuanAktif) && !isset($undanganPengajuan)) {
-                    $keanggotaanAktif = \App\Models\Anggota::where('user_id', auth()->user()->id)
-                        ->where('status', 'accepted')
-                        ->with(['pengajuan.databidang', 'pengajuan.user', 'pengajuan.anggota.user'])
-                        ->first();
-                } elseif (!$pengajuanAktif && !$undanganPengajuan) {
-                    $keanggotaanAktif = \App\Models\Anggota::where('user_id', auth()->user()->id)
-                        ->where('status', 'accepted')
-                        ->with(['pengajuan.databidang', 'pengajuan.user', 'pengajuan.anggota.user'])
-                        ->first();
-                }
-                
-                $displayPengajuan = $pengajuanAktif ?? ($keanggotaanAktif ? $keanggotaanAktif->pengajuan : null);
-                $isAnggota = !$pengajuanAktif && $keanggotaanAktif;
-                
-                $statusLabels = [
-                    'pending' => 'Menunggu review admin',
-                    'diproses' => 'Sedang direview oleh admin 1 dokumen sedang disiapkan',
-                    'diteruskan' => 'Dokumen lolos tahap pertama dan sedang diteruskan ke Admin Bidang',
-                    'disetujui_bidang' => 'Menunggu persetujuan admin 2',
-                    'disetujui' => 'Pengajuan disetujui, siap memulai magang',
-                    'sedang_magang' => 'Sedang menjalani magang',
-                    'selesai' => 'Magang selesai',
-                    'ditolak' => 'Pengajuan ditolak'
-                ];
-            @endphp
-
-                </div>
-                <div class="col-lg-3">
-
-                    <!-- Calendar Start -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="calendar">
-                                <div class="calendar__header">
-                                    <button type="button" class="calendar__arrow left"><i
-                                            class="ph ph-caret-left"></i></button>
-                                    <p class="display h6 mb-0">""</p>
-                                    <button type="button" class="calendar__arrow right"><i
-                                            class="ph ph-caret-right"></i></button>
-                                </div>
-
-                                <div class="calendar__week week">
-                                    <div class="calendar__week-text">Su</div>
-                                    <div class="calendar__week-text">Mo</div>
-                                    <div class="calendar__week-text">Tu</div>
-                                    <div class="calendar__week-text">We</div>
-                                    <div class="calendar__week-text">Th</div>
-                                    <div class="calendar__week-text">Fr</div>
-                                    <div class="calendar__week-text">Sa</div>
-                                </div>
-                                <div class="days"></div>
-                            </div>
-
-                            <!-- Events start -->
-                            <div class="">
-                                <div class="mt-24 mb-24">
-                                    <div class="flex-align mb-8 gap-16">
-                                        <span class="text-sm text-gray-300 flex-shrink-0">Today</span>
-                                        <span class="border border-gray-50 border-dashed flex-grow-1"></span>
-                                    </div>
-                                    <div class="event-item bg-gray-50 rounded-8 p-16">
-                                        <div class=" flex-between gap-4">
-                                            <div class="flex-align gap-8">
-                                                <div class="">
-                                                    @if($displayPengajuan && $displayPengajuan->komentar_admin)
-                                                        <h6 class="mb-2">Komentar Admin:</h6>
-                                                        <span>{{ $displayPengajuan->komentar_admin }}</span>
-                                                    @endif
-
-                                                </div>
-                                            </div>
-                                            <div class="dropdown flex-shrink-0">
-                                                <button class="text-gray-400 text-xl d-flex rounded-4" type="button"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ph-fill ph-dots-three-outline"></i>
-                                                </button>
-                                                <div
-                                                    class="dropdown-menu dropdown-menu--md border-0 bg-transparent p-0">
-                                                    <div
-                                                        class="card border border-gray-100 rounded-12 box-shadow-custom">
-                                                        <div class="card-body p-12">
-                                                            <div class="max-h-200 overflow-y-auto scroll-sm pe-8">
-                                                                <ul>
-                                                                    <li class="mb-0">
-                                                                        <button type="button"
-                                                                            class="delete-btn py-6 text-15 px-8 hover-bg-gray-50 text-gray-300 w-100 rounded-8 fw-normal text-xs d-block text-start hover-text-gray-600">
-                                                                            <span
-                                                                                class="text d-flex align-items-center gap-8">
-                                                                                <i class="ph ph-trash"></i>
-                                                                                Remove</span>
-                                                                        </button>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="">
-                                @if(isset($undanganPengajuan) && $undanganPengajuan)
-                                <div class="mt-24">
-                                    <div class="flex-align mb-8 gap-16">
-                                        
-                                        <span class="text-sm text-gray-300 flex-shrink-0">Tindakan yang Diperlukan</span>
-                                        <span class="border border-gray-50 border-dashed flex-grow-1"></span>
-                                    </div>
-                                    <div class="event-item bg-gray-50 rounded-8 p-16">
-                                        <div class=" flex-between gap-4">
-                                            <div class="flex-align gap-8">
-                                                <span
-                                                    class="icon d-flex w-44 h-44 bg-white rounded-8 flex-center text-2xl"><i
-                                                        class="ph ph-magic-wand"></i></span>
-                                                <div class="">
-                                                    <h6 class="mb-2">Anda memiliki undangan untuk bergabung dalam kelompok magang. Silakan terima atau tolak undangan tersebut.</h6>
-                                                    <span class="">
-                                                        <form method="POST" action="{{ route('invitation.accept', $undanganPengajuan->id) }}" style="display: inline-block;" onsubmit="handleFormSubmit(this)">
-                                                            @csrf
-                                                            <button type="submit" class="btn btn-success">Terima Undangan</button>
-                                                        </form>
-                                                        <form method="POST" action="{{ route('invitation.reject', $undanganPengajuan->id) }}" style="display: inline-block;" onsubmit="handleFormSubmit(this)">
-                                                            @csrf
-                                                            <button type="submit" class="btn btn-danger">Tolak Undangan</button>
-                                                        </form>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="dropdown flex-shrink-0">
-                                                <button class="text-gray-400 text-xl d-flex rounded-4" type="button"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ph-fill ph-dots-three-outline"></i>
-                                                </button>
-                                                <div
-                                                    class="dropdown-menu dropdown-menu--md border-0 bg-transparent p-0">
-                                                    <div
-                                                        class="card border border-gray-100 rounded-12 box-shadow-custom">
-                                                        <div class="card-body p-12">
-                                                            <div class="max-h-200 overflow-y-auto scroll-sm pe-8">
-                                                                <ul>
-                                                                    <li class="mb-0">
-                                                                        <button type="button"
-                                                                            class="delete-btn py-6 text-15 px-8 hover-bg-gray-50 text-gray-300 w-100 rounded-8 fw-normal text-xs d-block text-start hover-text-gray-600">
-                                                                            <span
-                                                                                class="text d-flex align-items-center gap-8">
-                                                                                <i class="ph ph-trash"></i>
-                                                                                Remove</span>
-                                                                        </button>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @elseif((!isset($pengajuanAktif) || !$pengajuanAktif) && (!isset($keanggotaanAktif) || !$keanggotaanAktif))
-                                    <div class="event-item bg-gray-50 rounded-8 p-16 mt-16">
-                                        <div class=" flex-between gap-4">
-                                            <div class="flex-align gap-8">
-                                                <span
-                                                    class="icon d-flex w-44 h-44 bg-white rounded-8 flex-center text-2xl"><i
-                                                        class="ph ph-briefcase"></i></span>
-                                                <div class="">
-                                                    <h6 class="mb-2">{{ (isset($completionLevel) && $completionLevel === 'skills-complete') ? 'Siap untuk Mengajukan Magang' : 'Lengkapi Profil Terlebih Dahulu' }}</h6>
-                                                    {{-- <span class="">09:00 - 10:00 AM</span> --}}
-                                                    @if(isset($completionLevel) && $completionLevel === 'skills-complete')
-                                                        <p class="mb-3">Profil Anda sudah lengkap. Klik tombol di bawah untuk memulai pengajuan magang.</p>
-                                                        <a href="{{ route('pengajuan.tipe') }}" class="btn btn-primary">Ajukan Magang Sekarang</a>
-                                                    @else
-                                                        <p class="mb-3">
-                                                            @if(isset($completionLevel) && $completionLevel === 'incomplete')
-                                                                Lengkapi data universitas dan profil Anda terlebih dahulu.
-                                                            @else
-                                                                Tambahkan keahlian Anda untuk melengkapi profil.
-                                                            @endif
-                                                        </p>
-                                                        @if(isset($completionLevel) && $completionLevel === 'incomplete')
-                                                            <a href="{{ route('profile.edit') }}" class="btn btn-primary">Lengkapi Profil</a>
-                                                        @else
-                                                            <a href="{{ route('profile.edit') }}#pills-profile" class="btn btn-primary">Tambah Keahlian</a>
-                                                        @endif
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <div class="dropdown flex-shrink-0">
-                                                <button class="text-gray-400 text-xl d-flex rounded-4" type="button"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ph-fill ph-dots-three-outline"></i>
-                                                </button>
-                                                <div
-                                                    class="dropdown-menu dropdown-menu--md border-0 bg-transparent p-0">
-                                                    <div
-                                                        class="card border border-gray-100 rounded-12 box-shadow-custom">
-                                                        <div class="card-body p-12">
-                                                            <div class="max-h-200 overflow-y-auto scroll-sm pe-8">
-                                                                <ul>
-                                                                    <li class="mb-0">
-                                                                        <button type="button"
-                                                                            class="delete-btn py-6 text-15 px-8 hover-bg-gray-50 text-gray-300 w-100 rounded-8 fw-normal text-xs d-block text-start hover-text-gray-600">
-                                                                            <span
-                                                                                class="text d-flex align-items-center gap-8">
-                                                                                <i class="ph ph-trash"></i>
-                                                                                Remove</span>
-                                                                        </button>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endif
-                                <a href="{{ route('pengajuan.index') }}" class="btn btn-main w-100 mt-24">Cek Status Pengajuan</a>
-                            </div>
-                            <!-- Events End -->
-                        </div>
-                    </div>
-                    <!-- Calendar End -->
-
-
-
-
-
-                </div>
-            </div>
-        </div>
-
-        <div class="dashboard-footer">
-            <div class="flex-between flex-wrap gap-16">
-                <p class="text-gray-300 text-13 fw-normal"> &copy; Copyright Kominfo, All Right Reserverd</p>
-
-            </div>
-        </div>
-    </div>
-
     <!-- Jquery js -->
 <script src="{{ asset('style/js/jquery-3.7.1.min.js') }}"></script>
 <!-- Bootstrap Bundle Js -->
