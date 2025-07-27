@@ -218,94 +218,159 @@
               </div>
             </div>
             <h2 class="color-linear d-inline-block mb-10 wow animate__animated animate__fadeInUp">Alur Magang</h2>
-            <p class="text-lg color-gray-500 wow animate__animated animate__fadeInUp">Tahapan Magang Diskominfo</p>
-            <div class="box-features bg-gray-850 border-gray-800 mt-70">
-              <div class="row ">
-                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn  " data-wow-delay="0s"><span
-                    class="item-icon bg-gray-950 icon-motion "></span>
-                  <h5 class="color-white mb-15">Regristrasi &<br>Login Akun</h5>
-                  <p class="text-base color-gray-700">Anda telah melakukan pendaftaran dan masuk pada akun anda</p>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.1s"><span
-                    class="item-icon bg-gray-950 icon-ui"></span>
-                  <h5 class="color-white mb-15">Lengkapi<br>Profil</h5>
-                  <p class="text-base color-gray-700">Anda sudah melengkapi <br> profil anda</p>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s"><span
-                    class="item-icon bg-gray-950 icon-branding"></span>
-                  <h5 class="color-white mb-15">Permohonan<br>Magang</h5>
-                  <p class="text-base color-gray-700">Dalam proses <br>admin</p>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0s"><span
-                    class="item-icon bg-gray-950 icon-social"></span>
-                  <h5 class="color-white mb-15">Acc Admin 1</h5>
-                  <p class="text-base color-gray-700">Pending</p>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.1s"><span
-                    class="item-icon bg-gray-950 icon-social"></span>
-                  <h5 class="color-white mb-15">Acc Admin Bidang</h5>
-                  <p class="text-base color-gray-700">Pending</p>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s"><span
-                    class="item-icon bg-gray-950 icon-social"></span>
-                  <h5 class="color-white mb-15">Acc Admin 2</h5>
-                  <p class="text-base color-gray-700">Pending</p>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s"><span
-                    class="item-icon bg-gray-950 icon-social"></span>
-                  <h5 class=" mb-15 color-white">Kegiatan Magang</h5>
-                  <p class="text-base color-gray-700">Pending</p>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s"><span
-                    class="item-icon bg-gray-950 icon-social"></span>
-                  <h5 class="color-white mb-15">Magang Selesai</h5>
-                  <p class="text-base color-gray-700">Pending</p>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s"><span
-                    class="item-icon bg-gray-950 icon-social"></span>
-                  <h5 class="color-white mb-15">Evaluasi</h5>
-                  <p class="text-base color-gray-700">Pending</p>
-                </div>
-              </div>
-            </div>
+<p class="text-lg color-gray-500 wow animate__animated animate__fadeInUp">Tahapan proses pendaftaran dan pelaksanaan magang di Diskominfo</p>
+<div class="box-features bg-gray-850 border-gray-800 mt-70">
+  <div class="row">
+
+    <!-- Tahap 1 -->
+    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0s">
+      <span class="item-icon bg-gray-950 icon-motion"></span>
+      <h5 class="color-white mb-15">1. Registrasi & Login</h5>
+      <p class="text-base color-gray-700">Calon peserta membuat akun dan login ke sistem untuk memulai proses pendaftaran magang.</p>
+    </div>
+
+    <!-- Tahap 2 -->
+    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.1s">
+      <span class="item-icon bg-gray-950 icon-ui"></span>
+      <h5 class="color-white mb-15">2. Lengkapi Profil</h5>
+      <p class="text-base color-gray-700">Peserta melengkapi data diri, keahlian, dan dokumen pendukung seperti CV dan surat pengantar.</p>
+    </div>
+
+    <!-- Tahap 3 -->
+    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s">
+      <span class="item-icon bg-gray-950 icon-branding"></span>
+      <h5 class="color-white mb-15">3. Ajukan Permohonan</h5>
+      <p class="text-base color-gray-700">Peserta mengajukan permohonan magang dan memilih bidang yang diminati.</p>
+    </div>
+
+    <!-- Tahap 4 -->
+    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0s">
+      <span class="item-icon bg-gray-950 icon-social"></span>
+      <h5 class="color-white mb-15">4. Verifikasi Admin Dinas</h5>
+      <p class="text-base color-gray-700">Admin Dinas memeriksa kelengkapan data dan kesesuaian permohonan magang.</p>
+    </div>
+
+    <!-- Tahap 5 -->
+    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.1s">
+      <span class="item-icon bg-gray-950 icon-social"></span>
+      <h5 class="color-white mb-15">5. Persetujuan Bidang</h5>
+      <p class="text-base color-gray-700">Bidang yang dituju memverifikasi dan memberikan persetujuan atau penolakan berdasarkan kuota dan kebutuhan.</p>
+    </div>
+
+    <!-- Tahap 6 -->
+    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s">
+      <span class="item-icon bg-gray-950 icon-social"></span>
+      <h5 class="color-white mb-15">6. Pelaksanaan Magang</h5>
+      <p class="text-base color-gray-700">Peserta yang diterima menjalankan kegiatan magang sesuai penempatan dan jadwal yang ditentukan.</p>
+    </div>
+
+    <!-- Tahap 7 -->
+    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s">
+      <span class="item-icon bg-gray-950 icon-social"></span>
+      <h5 class="color-white mb-15">7. Magang Selesai</h5>
+      <p class="text-base color-gray-700">Magang dinyatakan selesai setelah peserta memenuhi seluruh tugas dan durasi yang ditentukan.</p>
+    </div>
+
+    <!-- Tahap 8 -->
+    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s">
+      <span class="item-icon bg-gray-950 icon-social"></span>
+      <h5 class="color-white mb-15">8. Evaluasi</h5>
+      <p class="text-base color-gray-700">Peserta menerima evaluasi kinerja dan umpan balik dari pembimbing serta admin bidang.</p>
+    </div>
+
+  </div>
+</div>
+
             <div class="row mt-70" id="dokumentasi">
-              <div class="col-lg-8">
                 <h2 class="color-linear d-inline-block mb-10">Dokumentasi Kegiatan</h2>
                 <p class="text-lg color-gray-500">Mari magang bersama kami</p>
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="content-detail border-gray-800">
+<style>
+  .masonry-grid {
+    /* display: flex; */
+    /* margin-left: -10px; */
+    width: auto;
+  }
 
-                      <div class="row mt-50 wow animate__animated animate__fadeIn ">
-                        <div class="col-lg-6 gallery-left"><img class="img-bdrd-16 mb-30"
-                            src="assets/imgs/page/portfolio/portfolio-2.png" alt="Genz"></div>
-                        <div class="col-lg-6 gallery-right"><img class="img-bdrd-16 mb-20"
-                            src="assets/imgs/page/portfolio/portfolio-3.png" alt="Genz"><img class="img-bdrd-16"
-                            src="assets/imgs/page/portfolio/portfolio-4.png" alt="Genz"></div>
-                      </div>
-                      <div class="row mt-50 wow animate__animated animate__fadeIn">
-                        <div class="col-lg-6 gallery-left"><img class="img-bdrd-16 mb-30"
-                            src="assets/imgs/page/portfolio/portfolio-2.png" alt="Genz"></div>
-                        <div class="col-lg-6 gallery-right"><img class="img-bdrd-16 mb-20"
-                            src="assets/imgs/page/portfolio/portfolio-3.png" alt="Genz"><img class="img-bdrd-16"
-                            src="assets/imgs/page/portfolio/portfolio-4.png" alt="Genz"></div>
-                      </div>
-                      <div class="row mt-50 wow animate__animated animate__fadeIn">
-                        <div class="col-lg-6 gallery-left"><img class="img-bdrd-16 mb-30"
-                            src="assets/imgs/page/portfolio/portfolio-2.png" alt="Genz"></div>
-                        <div class="col-lg-6 gallery-right"><img class="img-bdrd-16 mb-20"
-                            src="assets/imgs/page/portfolio/portfolio-3.png" alt="Genz"><img class="img-bdrd-16"
-                            src="assets/imgs/page/portfolio/portfolio-4.png" alt="Genz"></div>
-                      </div>
+  .masonry-sizer,
+  .masonry-item {
+    width: 22.333%; /* 3 kolom */
+    padding-left: 5px;
+    margin-bottom: 10px;
+  }
 
-                    </div>
+  @media (max-width: 768px) {
+    .masonry-sizer,
+    .masonry-item {
+      width: 50%; /* 2 kolom tablet */
+    }
+  }
 
-                  </div>
+  @media (max-width: 480px) {
+    .masonry-sizer,
+    .masonry-item {
+      width: 100%; /* 1 kolom mobile */
+    }
+  }
 
-                </div>
+  .image-masonry {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 11px;
+  }
+</style>
+<div class="col-lg-12">
+  <div class="content-detail border-gray-800">
+    @php
+      $docs = \App\Models\Documentation::with('images')->latest()->get();
+      $allImages = [];
 
-              </div>
-              <div class="col-lg-4">
+      foreach ($docs as $doc) {
+          foreach ($doc->images as $image) {
+              $allImages[] = [
+                  'path' => $image->image_path,
+                  'title' => $doc->judul_kegiatan ?? 'Tanpa Judul',
+                  'docId' => $doc->id,
+              ];
+          }
+      }
+    @endphp
+
+    <div class="masonry-grid">
+      <div class="masonry-sizer"></div> <!-- Ini penting untuk Masonry layout -->
+
+      @foreach($allImages as $img)
+        <div class="masonry-item">
+          <a href="{{ route('landing.documentation.show', $img['docId']) }}">
+            <img class="image-masonry" src="{{ asset('storage/' . $img['path']) }}" alt="{{ $img['title'] }}">
+          </a>
+        </div>
+      @endforeach
+    </div>
+
+    <div class="mt-20 text-center">
+      <a class="btn btn-primary" href="{{ route('landing.documentation.index') }}">Lihat Semua Dokumentasi</a>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var grid = document.querySelector('.masonry-grid');
+    imagesLoaded(grid, function () {
+      new Masonry(grid, {
+        itemSelector: '.masonry-item',
+        columnWidth: '.masonry-sizer',
+        gutter: 10,
+        percentPosition: true
+      });
+    });
+  });
+</script>
+
+              {{-- <div class="col-lg-4">
                 <div class="sidebar">
                   <div class="box-sidebar bg-gray-850 border-gray-800">
                     <div class="head-sidebar wow animate__animated animate__fadeIn">
@@ -423,23 +488,14 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> --}}
             </div>
           </div>
         </div>
       </div>
     </div>
   </main>
-  @foreach(\App\Models\Documentation::with('images')->latest()->take(3)->get() as $doc)
-    <div class="card">
-    <h3>{{ $doc->judul_kegiatan ?? 'Tanpa Judul' }}</h3>
-    @if($doc->images->first())
-    <img src="{{ asset('storage/' . $doc->images->first()->image_path) }}" style="max-height: 200px">
-    @endif
-    <a href="{{ route('landing.documentation.show', $doc->id) }}">Lihat Selengkapnya</a>
-    </div>
-  @endforeach
-  <a href="{{ route('landing.documentation.index') }}">Lihat Semua Dokumentasi</a>
+
 
   <footer class="footer">
     <div class="container">
