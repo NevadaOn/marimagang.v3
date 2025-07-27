@@ -84,18 +84,28 @@ Route::controller(ResetPasswordController::class)->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+     Route::get('/notifikasi', [NotificationController::class, 'userNotifications'])->name('notifications.page');
+
+    Route::post('/notifikasi/{id}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+    Route::post('/notifikasi/read-all', [NotificationController::class, 'markAllAsRead'])->name('notifications.readAll');
 
     Route::controller(ProfileController::class)->prefix('profile')->group(function () {
+        
+        // === PROFILE MANAGEMENT ===
         Route::get('/edit', 'edit')->name('profile.edit');
-        Route::put('/update', 'update')->name('profile.update');
-    });
-
-    Route::controller(SkillController::class)->group(function () {
-        Route::get('/skills/edit', 'edit')->name('skills.edit');
-        Route::post('/skills/update', 'update')->name('skills.update');
-        Route::delete('/skills/{id}', 'destroy')->name('skills.destroy');
-        Route::delete('/skills/{id}/project', 'destroyProject')->name('skills.destroyProject');
-        Route::get('/abilities', 'index')->name('abilities.index');
+        Route::put('/update', 'updateProfile')->name('profile.update'); // Khusus untuk profile saja
+        
+        // === SKILLS MANAGEMENT ===
+        Route::post('/skills', 'storeSkill')->name('profile.skills.store');
+        Route::put('/skills/{userSkillId}', 'updateSkill')->name('profile.skills.update');
+        Route::delete('/skills/{userSkillId}', 'destroySkill')->name('profile.skills.destroy');
+        
+        // === PROJECTS MANAGEMENT ===
+        // Project data tersimpan di Skill model sesuai struktur existing
+        Route::delete('/skills/{userSkillId}/project', 'destroyProject')->name('profile.projects.destroy');
+        
+        // === UTILITIES ===
+        Route::post('/search-nim', 'searchByNIM')->name('profile.search-nim');
     });
 
     Route::controller(PengajuanController::class)->group(function () {

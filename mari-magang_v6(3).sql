@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 26, 2025 at 05:54 AM
+-- Generation Time: Jul 27, 2025 at 09:49 AM
 -- Server version: 10.11.11-MariaDB
 -- PHP Version: 8.2.29
 
@@ -273,11 +273,16 @@ INSERT INTO `notifications` (`id`, `user_id`, `title`, `message`, `type`, `data`
 (57, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:12:51', '2025-07-25 18:12:51'),
 (58, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:16:19', '2025-07-25 18:16:19'),
 (59, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:17:27', '2025-07-25 18:17:27'),
-(60, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:19:49', '2025-07-25 18:19:49'),
-(61, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:20:31', '2025-07-25 18:20:31'),
-(62, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:21:28', '2025-07-25 18:21:28'),
-(63, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:23:55', '2025-07-25 18:23:55'),
-(64, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 0, '2025-07-25 18:25:09', '2025-07-25 18:25:09');
+(60, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 1, '2025-07-25 18:19:49', '2025-07-27 02:40:24'),
+(61, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 1, '2025-07-25 18:20:31', '2025-07-27 02:28:14'),
+(62, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 1, '2025-07-25 18:21:28', '2025-07-27 02:40:21'),
+(63, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 1, '2025-07-25 18:23:55', '2025-07-27 02:29:19'),
+(64, 17, 'Pengajuan Diterima', 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.', 'success', '{\"pengajuan_id\":22,\"kode_pengajuan\":\"MGG-2025-QYGX0J\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/pengajuan\\/MGG-2025-QYGX0J\"}', 1, '2025-07-25 18:25:09', '2025-07-27 02:30:40'),
+(65, 20, 'Catatan dari Admin', 'halo', 'catatan_pengajuan', '\"{\\\"pengajuan_id\\\":23,\\\"dari_admin\\\":\\\"Admin\\\"}\"', 0, '2025-07-25 23:09:46', '2025-07-25 23:09:46'),
+(66, 17, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: ASDFG', 'skill_added', '{\"skill_name\":\"ASDFG\"}', 1, '2025-07-26 19:22:20', '2025-07-27 02:27:12'),
+(67, 17, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: arfann', 'skill_added', '{\"skill_name\":\"arfann\"}', 1, '2025-07-27 01:19:06', '2025-07-27 02:27:01'),
+(68, 17, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: a', 'skill_added', '{\"skill_name\":\"a\"}', 1, '2025-07-27 01:21:32', '2025-07-27 02:24:01'),
+(69, 17, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: ar', 'skill_added', '{\"skill_name\":\"ar\"}', 1, '2025-07-27 01:21:42', '2025-07-27 02:24:07');
 
 -- --------------------------------------------------------
 
@@ -394,8 +399,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('AiPDeQCQW22FVWFpfZwcrmJ4dQap9F2a6aLy13Ko', 1, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTWJvRjZ0S2V0UGJ2RGlpWUhWdkFuQlptbUZHNmZMUW1NRVhoOXRaUyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZG1pbi9wZW5nYWp1YW4iO31zOjUyOiJsb2dpbl9hZG1pbl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1753499814),
-('f23ufbG285iICKC5Y3IrpGSMySFBusB96VoRAvlH', NULL, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiTHNwNXVoVkZWSWZpNWQxdm9JZ3lqNVZEdEp0TjdXUzBPOUpjeVhZayI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kb2t1bWVudGFzaS8yIjt9czo1MjoibG9naW5fYWRtaW5fNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6NDc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wZW5nYWp1YW4vTUdHLTIwMjUtUVlHWDBKIjt9fQ==', 1753500738);
+('MKCCtdt1nUywbGV39IbsJoCGIfDaJr8jkOd4ey8j', 17, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYzFZc0hvQ0hIelRnN0dCSUJKS081T2pFWEdDVlgyTXpldVVkMEF2YyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NjA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zdHlsZS9pbWFnZXMvbG9nby9hcHBsZS10b3VjaC1pY29uLnBuZyI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE3O30=', 1753609741);
 
 -- --------------------------------------------------------
 
@@ -423,7 +427,6 @@ CREATE TABLE `skill` (
 INSERT INTO `skill` (`id`, `databidang_id`, `nama`, `judul_proyek`, `deskripsi`, `file_path`, `link_project`, `is_required`, `created_at`, `updated_at`) VALUES
 (3, 2, 'Pemrograman Web', NULL, 'Kemampuan dalam pengembangan aplikasi web', NULL, NULL, 1, '2025-06-27 11:28:04', '2025-06-27 11:28:04'),
 (4, 2, 'Database Management', NULL, 'Kemampuan dalam pengelolaan database', NULL, NULL, 0, '2025-06-27 11:28:04', '2025-06-27 11:28:04'),
-(5, 3, 'Jaringan Komputer', NULL, 'Pemahaman tentang infrastruktur jaringan', NULL, NULL, 1, '2025-06-27 11:28:04', '2025-06-27 11:28:04'),
 (6, 3, 'Troubleshooting', NULL, 'Kemampuan dalam pemecahan masalah teknis', NULL, NULL, 1, '2025-06-27 11:28:04', '2025-06-27 11:28:04'),
 (7, 4, 'Content Writing', NULL, 'Kemampuan dalam penulisan konten', NULL, NULL, 1, '2025-06-27 11:28:04', '2025-06-27 11:28:04'),
 (8, 4, 'Social Media Management', NULL, 'Kemampuan mengelola media sosial', NULL, NULL, 1, '2025-06-27 11:28:04', '2025-06-27 11:28:04'),
@@ -439,11 +442,12 @@ INSERT INTO `skill` (`id`, `databidang_id`, `nama`, `judul_proyek`, `deskripsi`,
 (22, NULL, 'ksehfd', NULL, NULL, NULL, NULL, 0, '2025-07-01 02:10:58', '2025-07-01 02:10:58'),
 (23, NULL, 'sc', NULL, NULL, NULL, NULL, 0, '2025-07-03 20:56:52', '2025-07-03 20:56:52'),
 (24, NULL, 'lkjikhjkbutubjg', NULL, NULL, NULL, NULL, 0, '2025-07-13 23:20:32', '2025-07-13 23:20:32'),
-(25, NULL, 'awsdfg', 'oqiwaudjfcv', 'adfhv', NULL, NULL, 0, '2025-07-15 06:41:51', '2025-07-18 09:54:33'),
 (26, NULL, 'Python', 'mari magang', 'lorem ipsum dolor soet', NULL, NULL, 0, '2025-07-16 21:08:28', '2025-07-16 21:08:28'),
-(27, NULL, 'poqweirdfg', NULL, NULL, NULL, NULL, 0, '2025-07-18 09:54:50', '2025-07-18 09:54:50'),
-(28, NULL, 'aszdxfgvhb', NULL, NULL, NULL, NULL, 0, '2025-07-18 09:55:06', '2025-07-18 09:55:06'),
-(29, NULL, 'asdfgh', NULL, NULL, NULL, NULL, 0, '2025-07-18 09:55:15', '2025-07-18 09:55:15');
+(32, NULL, 'zxczx', 'asd', 'lsajlckn', NULL, NULL, 0, '2025-07-27 00:03:41', '2025-07-27 00:03:41'),
+(33, NULL, 'eh', 'ies', 'akwd', NULL, 'http://127.0.0.1:8000/profile/edit', 0, '2025-07-27 00:05:34', '2025-07-27 00:05:34'),
+(34, NULL, 'arfann', 'alsdjfh', 'sadfguyiop', 'projects/ws2B81CUsXb1zdyuajNO2Y5EIylO2u7FVipflwlG.png', NULL, 0, '2025-07-27 01:19:06', '2025-07-27 01:19:06'),
+(37, NULL, 'a', NULL, NULL, NULL, NULL, 0, '2025-07-27 01:21:32', '2025-07-27 01:22:24'),
+(38, NULL, 'ar', 'alsdjfh', 'sadfguyiop', NULL, NULL, 0, '2025-07-27 01:21:42', '2025-07-27 01:21:42');
 
 -- --------------------------------------------------------
 
@@ -501,7 +505,10 @@ INSERT INTO `universitas` (`id`, `nama_universitas`, `fakultas`, `prodi`, `creat
 (34, 'Universitas Brawijaya', 'Ilmu Komputer', 'Informatika', '2025-07-03 20:57:27', '2025-07-03 20:57:27'),
 (35, 'polinema', 'saintek', 'teknik informatika', '2025-07-15 06:59:20', '2025-07-15 06:59:20'),
 (36, 'Uniersitas Islam Raden Rahmat Malang', 'Saintek', 'Agrotek', '2025-07-16 21:09:29', '2025-07-16 21:09:29'),
-(37, 'Politeknik Negeri Malang', 'Teknik', 'Teknik Elektro', '2025-07-18 09:41:09', '2025-07-18 09:41:09');
+(37, 'Politeknik Negeri Malang', 'Teknik', 'Teknik Elektro', '2025-07-18 09:41:09', '2025-07-18 09:41:09'),
+(38, 'Saintek', 'Teknik', 'Teknik Elektro', '2025-07-26 17:11:11', '2025-07-26 17:11:11'),
+(39, 'Saintek', 'Teknik informatika', 'Teknik Elektro', '2025-07-27 00:42:05', '2025-07-27 00:42:05'),
+(40, 'Unira Malang', 'sains dan teknologi', 'Teknik informatika', '2025-07-27 00:42:31', '2025-07-27 00:42:31');
 
 -- --------------------------------------------------------
 
@@ -522,25 +529,27 @@ CREATE TABLE `users` (
   `status` enum('active','inactive','suspended') NOT NULL DEFAULT 'active',
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `bio` text DEFAULT NULL,
+  `alamat` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `nama`, `universitas_id`, `nim`, `telepon`, `email`, `email_verified_at`, `password`, `foto`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'arfan nur ivandi', 23, '22552021032', '085171015682', 'arfanvn@gmail.com', '2025-06-30 08:04:13', '$2y$12$zw6faTnxT7iHwJgf4LM3wuS8bTj/pJH.HZOxp7AE.XKHmB4mx0QMu', 'foto_user/wUFF3tiQShVL58o04358TYCbxmwgOFBUSk9sQshV.png', 'active', 'Mm5V5UqfxQ8M5RX1Wu9BJyCQJMhwOeMmrksohICBlFPPYgSAO6YeRnwT2HUw', '2025-06-28 06:44:26', '2025-07-13 18:21:08'),
-(2, 'aurii1', 23, '0987655', '09876543111', 'contoh@gmail.com', NULL, '$2y$12$QjtSJz5k6jJnQn2Z7HrXTe2p3aJKiV8OU5Kn5cPPh797zO1OfbX.C', 'foto_user/0Di2uLipc0sdAU8N1AfwLHJHI4Ie2EUdQEheG4Fq.jpg', 'active', NULL, '2025-06-29 03:09:22', '2025-06-29 03:18:45'),
-(3, 'aurfghj', 33, '2212122112', '876543219', 'user1@gmail.com', NULL, '$2y$12$cKRpIIuXENPpVtRz8RRWZOvRw.80hXbdk8Ea.vtTciP4mKH4y6Hm2', NULL, 'active', NULL, '2025-06-30 04:30:22', '2025-06-30 04:35:51'),
-(13, 'arfa', 34, '987654321', '9876324325345', 'ivanarfan57@gmail.com', '2025-07-03 20:56:44', '$2y$12$rCByZEs4M6JcvNpfwcgryuNLUcUNRBOE31s0QNiVVr61lQeTG9NeC', NULL, 'active', NULL, '2025-07-03 20:56:10', '2025-07-03 20:57:27'),
-(14, 'fajarpdf', NULL, NULL, '1234567890', 'skafajar3@gmail.com', NULL, '$2y$12$74b1C9kavNcg4WSMwdTpBuMP/Dckxk3.HlKHNaBUtOp6zPn7z7Fym', NULL, 'active', NULL, '2025-07-05 07:17:15', '2025-07-05 07:17:15'),
-(15, 'contoh', NULL, NULL, '29345678', 'contoh1@gmail.com', NULL, '$2y$12$r0UW8Kt1JkXrPQzNCoynW.lpFTCc1kBuX6BIVvR2xS6iGJUoeRP4e', NULL, 'active', NULL, '2025-07-05 08:52:33', '2025-07-05 08:52:33'),
-(16, 'NUR KHOLIS MAJID', 23, '22552021052', '083764736473', 'majidholes8304@gmail.com', '2025-07-13 23:17:58', '$2y$12$/7TA/RLuWfnjd80H17PVVugZbfb3JEcEylxxDN.em/imFxWK5b0QK', 'foto_user/0M8BTumDaKaxSPcRJlRUljXdlZrmIfpaetNOMIAS.jpg', 'active', NULL, '2025-07-13 23:16:50', '2025-07-16 21:02:22'),
-(17, 'arfan ivan', 37, '230201023090', '086547955677542', 'ivanandi775@gmail.com', '2025-07-15 06:37:46', '$2y$12$a1a39RcZqotzURzWTPlmPemdJpVLwQ060h5EYs4YMM4RZHoeW0xTq', 'foto_user/bGnnQTkSL2yu0XI2OxuzttEwvQ1zKnLJdcLk27YK.png', 'active', NULL, '2025-07-15 06:37:15', '2025-07-18 09:42:12'),
-(18, 'kingM', NULL, NULL, '083764736470', 'nurkholismajid802@gmail.com', NULL, '$2y$12$z9ItnAgfFnYp49vL3yotuOzpMrZbMtHQreHhkqw76WCYMFdBhEsIq', NULL, 'active', NULL, '2025-07-16 21:00:26', '2025-07-16 21:00:26'),
-(19, 'Zainul fanani Al tegar', NULL, NULL, '089650760660', 'pixelate368@gmail.com', '2025-07-16 21:04:20', '$2y$12$0QyFR5sacvFgCWqRxsj37e/hjxHTAGyVddouYHxVoJAY0oHfLPlwe', NULL, 'active', NULL, '2025-07-16 21:03:07', '2025-07-16 21:04:20'),
-(20, 'fajar', 36, '22552021066', '085808228865', 'jajantaro9@gmail.com', '2025-07-16 21:06:58', '$2y$12$7Wx4jJa01SynNuQDrL3PYeNnVIBGrK2i5XMoWzR5X17MhBV1jtCEe', 'foto_user/X3F2hnc9FWzoww2XVYDh0KmUNVLAm18IF0sYj3vS.png', 'active', NULL, '2025-07-16 21:03:42', '2025-07-16 21:32:56');
+INSERT INTO `users` (`id`, `nama`, `universitas_id`, `nim`, `telepon`, `email`, `email_verified_at`, `password`, `foto`, `status`, `remember_token`, `created_at`, `updated_at`, `bio`, `alamat`) VALUES
+(1, 'arfan nur ivandi', 23, '22552021032', '085171015682', 'arfanvn@gmail.com', '2025-06-30 08:04:13', '$2y$12$zw6faTnxT7iHwJgf4LM3wuS8bTj/pJH.HZOxp7AE.XKHmB4mx0QMu', 'foto_user/wUFF3tiQShVL58o04358TYCbxmwgOFBUSk9sQshV.png', 'active', 'Mm5V5UqfxQ8M5RX1Wu9BJyCQJMhwOeMmrksohICBlFPPYgSAO6YeRnwT2HUw', '2025-06-28 06:44:26', '2025-07-13 18:21:08', NULL, NULL),
+(2, 'aurii1', 23, '0987655', '09876543111', 'contoh@gmail.com', NULL, '$2y$12$QjtSJz5k6jJnQn2Z7HrXTe2p3aJKiV8OU5Kn5cPPh797zO1OfbX.C', 'foto_user/0Di2uLipc0sdAU8N1AfwLHJHI4Ie2EUdQEheG4Fq.jpg', 'active', NULL, '2025-06-29 03:09:22', '2025-06-29 03:18:45', NULL, NULL),
+(3, 'aurfghj', 33, '2212122112', '876543219', 'user1@gmail.com', NULL, '$2y$12$cKRpIIuXENPpVtRz8RRWZOvRw.80hXbdk8Ea.vtTciP4mKH4y6Hm2', NULL, 'active', NULL, '2025-06-30 04:30:22', '2025-06-30 04:35:51', NULL, NULL),
+(13, 'arfa', 34, '987654321', '9876324325345', 'ivanarfan57@gmail.com', '2025-07-03 20:56:44', '$2y$12$rCByZEs4M6JcvNpfwcgryuNLUcUNRBOE31s0QNiVVr61lQeTG9NeC', NULL, 'active', NULL, '2025-07-03 20:56:10', '2025-07-03 20:57:27', NULL, NULL),
+(14, 'fajarpdf', NULL, NULL, '1234567890', 'skafajar3@gmail.com', NULL, '$2y$12$74b1C9kavNcg4WSMwdTpBuMP/Dckxk3.HlKHNaBUtOp6zPn7z7Fym', NULL, 'active', NULL, '2025-07-05 07:17:15', '2025-07-05 07:17:15', NULL, NULL),
+(15, 'contoh', NULL, NULL, '29345678', 'contoh1@gmail.com', NULL, '$2y$12$r0UW8Kt1JkXrPQzNCoynW.lpFTCc1kBuX6BIVvR2xS6iGJUoeRP4e', NULL, 'active', NULL, '2025-07-05 08:52:33', '2025-07-05 08:52:33', NULL, NULL),
+(16, 'NUR KHOLIS MAJID', 23, '22552021052', '083764736473', 'majidholes8304@gmail.com', '2025-07-13 23:17:58', '$2y$12$/7TA/RLuWfnjd80H17PVVugZbfb3JEcEylxxDN.em/imFxWK5b0QK', 'foto_user/0M8BTumDaKaxSPcRJlRUljXdlZrmIfpaetNOMIAS.jpg', 'active', NULL, '2025-07-13 23:16:50', '2025-07-16 21:02:22', NULL, NULL),
+(17, 'Arfan Nur Ivandi', 40, '230201023090', '086547955677542', 'ivanandi775@gmail.com', '2025-07-15 06:37:46', '$2y$12$a1a39RcZqotzURzWTPlmPemdJpVLwQ060h5EYs4YMM4RZHoeW0xTq', 'foto_user/bGnnQTkSL2yu0XI2OxuzttEwvQ1zKnLJdcLk27YK.png', 'active', NULL, '2025-07-15 06:37:15', '2025-07-27 00:43:26', 'Saya Adalah Mahasiswa unira malang yang berfokus pada pengembangan informasi dan digitalisasi', 'Jl Sumbersari Panggungrejo Kepanjen Malang'),
+(18, 'kingM', NULL, NULL, '083764736470', 'nurkholismajid802@gmail.com', NULL, '$2y$12$z9ItnAgfFnYp49vL3yotuOzpMrZbMtHQreHhkqw76WCYMFdBhEsIq', NULL, 'active', NULL, '2025-07-16 21:00:26', '2025-07-16 21:00:26', NULL, NULL),
+(19, 'Zainul fanani Al tegar', NULL, NULL, '089650760660', 'pixelate368@gmail.com', '2025-07-16 21:04:20', '$2y$12$0QyFR5sacvFgCWqRxsj37e/hjxHTAGyVddouYHxVoJAY0oHfLPlwe', NULL, 'active', NULL, '2025-07-16 21:03:07', '2025-07-16 21:04:20', NULL, NULL),
+(20, 'fajar', 36, '22552021066', '085808228865', 'jajantaro9@gmail.com', '2025-07-16 21:06:58', '$2y$12$7Wx4jJa01SynNuQDrL3PYeNnVIBGrK2i5XMoWzR5X17MhBV1jtCEe', 'foto_user/X3F2hnc9FWzoww2XVYDh0KmUNVLAm18IF0sYj3vS.png', 'active', NULL, '2025-07-16 21:03:42', '2025-07-16 21:32:56', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -570,12 +579,13 @@ INSERT INTO `user_skills` (`id`, `user_id`, `pengajuan_id`, `skill_id`, `level`,
 (7, 3, NULL, 18, 'Dasar', NULL, '2025-06-30 04:33:36', '2025-06-30 04:33:36'),
 (8, 3, NULL, 19, 'Menengah', NULL, '2025-06-30 04:37:25', '2025-06-30 04:37:25'),
 (13, 16, NULL, 24, 'Menengah', NULL, '2025-07-13 23:20:32', '2025-07-13 23:20:32'),
-(14, 17, NULL, 25, 'Dasar', NULL, '2025-07-15 06:41:51', '2025-07-15 06:41:51'),
 (15, 20, NULL, 26, 'Lanjutan', 'sertifikat/sYzm95HcD7mS7jkkEuFcHIUMtgD2SFfg07h4OHms.pdf', '2025-07-16 21:08:28', '2025-07-16 21:34:35'),
 (16, 20, NULL, 26, 'Lanjutan', NULL, '2025-07-16 21:08:28', '2025-07-16 21:08:28'),
-(17, 17, NULL, 27, 'Dasar', NULL, '2025-07-18 09:54:50', '2025-07-18 09:54:50'),
-(18, 17, NULL, 28, 'Dasar', NULL, '2025-07-18 09:55:06', '2025-07-18 09:55:06'),
-(19, 17, NULL, 29, 'Dasar', NULL, '2025-07-18 09:55:15', '2025-07-18 09:55:15');
+(23, 17, NULL, 32, 'Dasar', NULL, '2025-07-27 00:03:41', '2025-07-27 00:03:41'),
+(24, 17, NULL, 33, 'Dasar', NULL, '2025-07-27 00:05:34', '2025-07-27 00:05:34'),
+(25, 17, NULL, 34, 'Mahir', 'sertifikat/KU2AzJFlKfetFMsSZBbkFS3lYRzbHjZi6PUNUohS.pdf', '2025-07-27 01:19:06', '2025-07-27 01:19:06'),
+(26, 17, NULL, 37, 'Mahir', NULL, '2025-07-27 01:21:32', '2025-07-27 01:21:32'),
+(27, 17, NULL, 38, 'Mahir', NULL, '2025-07-27 01:21:42', '2025-07-27 01:21:42');
 
 --
 -- Indexes for dumped tables
@@ -793,7 +803,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `pengajuan`
@@ -817,13 +827,13 @@ ALTER TABLE `pengajuan_status_history`
 -- AUTO_INCREMENT for table `skill`
 --
 ALTER TABLE `skill`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `universitas`
 --
 ALTER TABLE `universitas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -835,7 +845,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_skills`
 --
 ALTER TABLE `user_skills`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables

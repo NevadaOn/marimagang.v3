@@ -21,11 +21,11 @@ class DashboardController extends Controller
         $this->notificationService = $notificationService;
     }
 
+    // Update method index() untuk mengirim data completion yang lebih detail
     public function index()
     {
         try {
             $user = auth()->user();
-
             $user->load(['universitas', 'userSkills.skill', 'pengajuanMagang.databidang', 'pengajuanMagang.anggota.user']);
 
             $pengajuanAktif = $user->pengajuanMagang()
@@ -42,7 +42,8 @@ class DashboardController extends Controller
                     ->first();
             }
 
-            $completionLevel = $this->getProfileCompletionStatus($user);
+            // Get detailed completion status
+            $completionStatus = $this->getProfileCompletionStatus($user);
 
             $notifications = [];
             $unreadCount = 0;
@@ -61,7 +62,7 @@ class DashboardController extends Controller
             return view('dashboard', compact(
                 'pengajuanAktif',
                 'undanganPengajuan', 
-                'completionLevel',
+                'completionStatus',
                 'notifications', 
                 'unreadCount'
             ));
@@ -71,7 +72,6 @@ class DashboardController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan saat memuat dashboard.');
         }
     }
-
     public function acceptInvitation($anggotaId)
     {
         try {
@@ -175,22 +175,38 @@ class DashboardController extends Controller
     private function getProfileCompletionStatus($user)
     {
         $hasUniversityInfo = !empty($user->universitas_id) && 
-                           !empty($user->telepon) && 
-                           !empty($user->nim);
+                            !empty($user->telepon) && 
+                            !empty($user->nim) &&
+                            !empty($user->foto);
 
         $hasValidSkills = $user->userSkills->isNotEmpty() &&
             $user->userSkills->every(function($userSkill) {
                 return $userSkill->skill && 
-                       !empty($userSkill->skill->nama) && 
-                       !empty($userSkill->level);
+                    !empty($userSkill->skill->nama) && 
+                    !empty($userSkill->level);
             });
 
         if (!$hasUniversityInfo) {
-            return 'incomplete';
+            return [
+                'level' => 'incomplete',
+                'percentage' => 33,
+                'next_step' => 'Complete Personal Information',
+                'next_action' => 'profile-edit'
+            ];
         } elseif (!$hasValidSkills) {
-            return 'profile-complete';
+            return [
+                'level' => 'profile-complete',
+                'percentage' => 66,
+                'next_step' => 'Add Your Skills',
+                'next_action' => 'skills-edit'
+            ];
         } else {
-            return 'skills-complete';
+            return [
+                'level' => 'skills-complete',
+                'percentage' => 100,
+                'next_step' => 'View Profile',
+                'next_action' => 'profile'
+            ];
         }
     }
 

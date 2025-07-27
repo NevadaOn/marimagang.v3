@@ -53,7 +53,7 @@ class NotificationController extends Controller
         $userId = auth()->id();
         $this->notificationService->markAsRead($id, $userId);
 
-        return response()->json(['message' => 'Notification marked as read']);
+        return redirect()->back();
     }
 
     public function markAllAsRead(Request $request)

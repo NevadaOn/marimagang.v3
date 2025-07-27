@@ -3,6 +3,9 @@
 namespace App\Providers;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Notification;
+use Illuminate\Support\Facades\View;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,5 +17,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Carbon::setLocale('id');
+        View::composer('*', function ($view) {
+            $view->with('notifications', Notification::latest()->take(10)->get());
+        });
+
     }
 }

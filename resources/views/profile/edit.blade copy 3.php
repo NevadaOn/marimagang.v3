@@ -4,33 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Title -->
-    <title> Edmate Learning Dashboard HTML Template</title>
+    <title>{{ config('app.name', 'Edmate Learning Dashboard') }}</title>
+
     <!-- Favicon -->
-    <link rel="shortcut icon" href="dashboard/images/logo/favicon.png">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="dashboard/css/bootstrap.min.css">
-    <!-- file upload -->
-    <link rel="stylesheet" href="dashboard/css/file-upload.css">
-    <!-- file upload -->
-    <link rel="stylesheet" href="dashboard/css/plyr.css">
-    <!-- DataTables -->
+    <link rel="shortcut icon" href="{{ asset('style/images/logo/favicon.png') }}">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="{{ asset('style/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('style/css/file-upload.css') }}">
+    <link rel="stylesheet" href="{{ asset('style/css/plyr.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
-    <!-- full calendar -->
-    <link rel="stylesheet" href="dashboard/css/full-calendar.css">
-    <!-- jquery Ui -->
-    <link rel="stylesheet" href="dashboard/css/jquery-ui.css">
-    <!-- editor quill Ui -->
-    <link rel="stylesheet" href="dashboard/css/editor-quill.css">
-    <!-- apex charts Css -->
-    <link rel="stylesheet" href="dashboard/css/apexcharts.css">
-    <!-- calendar Css -->
-    <link rel="stylesheet" href="dashboard/css/calendar.css">
-    <!-- jvector map Css -->
-    <link rel="stylesheet" href="dashboard/css/jquery-jvectormap-2.0.5.css">
-    <!-- Main css -->
-    <link rel="stylesheet" href="dashboard/css/main.css">
-</head> 
+    <link rel="stylesheet" href="{{ asset('style/css/full-calendar.css') }}">
+    <link rel="stylesheet" href="{{ asset('style/css/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('style/css/editor-quill.css') }}">
+    <link rel="stylesheet" href="{{ asset('style/css/apexcharts.css') }}">
+    <link rel="stylesheet" href="{{ asset('style/css/calendar.css') }}">
+    <link rel="stylesheet" href="{{ asset('style/css/jquery-jvectormap-2.0.5.css') }}">
+    <link rel="stylesheet" href="{{ asset('style/css/main.css') }}">
+</head>
+
 <body>
     
 <!--==================== Preloader Start ====================-->
@@ -51,7 +45,7 @@
     <!-- sidebar close btn -->
     
     <a href="index.html" class="sidebar__logo text-center p-20 position-sticky inset-block-start-0 bg-white w-100 z-1 pb-10">
-        <img src="dashboard/images/logo/logo.png" alt="Logo">
+        <img src="{{asset('style/images/logo/logo.png')}}" alt="Logo">
     </a>
 
     <div class="sidebar-menu-wrapper overflow-y-auto scroll-sm">
@@ -148,7 +142,7 @@
                             </div>
                             <div class="p-24 max-h-270 overflow-y-auto scroll-sm">
                                 <div class="d-flex align-items-start gap-12">
-                                    <img src="dashboard/images/thumbs/notification-img1.png" alt="" class="w-48 h-48 rounded-circle object-fit-cover">
+                                    <img src="{{asset('style/images/thumbs/notification-img1.png')}}" alt="" class="w-48 h-48 rounded-circle object-fit-cover">
                                     <div class="border-bottom border-gray-100 mb-24 pb-24">
                                         <div class="flex-align gap-4">
                                             <a href="#" class="fw-medium text-15 mb-0 text-gray-300 hover-text-main-600 text-line-2">Ashwin Bose is requesting access to Design File - Final Project. </a>
@@ -186,7 +180,7 @@
                                             <!-- Three Dot Dropdown End -->
                                         </div>
                                         <div class="flex-align gap-6 mt-8">
-                                            <img src="dashboard/images/icons/google-drive.png" alt="">
+                                            <img src="{{asset('style/images/icons/google-drive.png')}}" alt="">
                                             <div class="flex-align gap-4">
                                                 <p class="text-gray-900 text-sm text-line-1">Design brief and ideas.txt</p>
                                                 <span class="text-xs text-gray-200 flex-shrink-0">2.2 MB</span>
@@ -200,7 +194,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-start gap-12">
-                                    <img src="dashboard/images/thumbs/notification-img2.png" alt="" class="w-48 h-48 rounded-circle object-fit-cover">
+                                    <img src="{{asset('style/images/thumbs/notification-img2.png')}}" alt="" class="w-48 h-48 rounded-circle object-fit-cover">
                                     <div class="">
                                         <a href="#" class="fw-medium text-15 mb-0 text-gray-300 hover-text-main-600 text-line-2">Patrick added a comment on Design Assets - Smart Tags file:</a>
                                         <span class="text-gray-200 text-13">2 mins ago</span>
@@ -222,7 +216,7 @@
         <div class="dropdown">
             <button class="users arrow-down-icon border border-gray-200 rounded-pill p-4 d-inline-block pe-40 position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="position-relative">
-                    <img src="dashboard/images/thumbs/user-img.png" alt="Image" class="h-32 w-32 rounded-circle">
+                    <img src="{{asset('style/images/thumbs/user-img.png')}}" alt="Image" class="h-32 w-32 rounded-circle">
                     <span class="activation-badge w-8 h-8 position-absolute inset-block-end-0 inset-inline-end-0"></span>
                 </span>
             </button>
@@ -230,9 +224,9 @@
                 <div class="card border border-gray-100 rounded-12 box-shadow-custom">
                     <div class="card-body">
                         <div class="flex-align gap-8 mb-20 pb-20 border-bottom border-gray-100">
-                            <img src="dashboard/images/thumbs/user-img.png" alt="" class="w-54 h-54 rounded-circle">
+                            <img src="{{asset('style/images/thumbs/user-img.png')}}" alt="" class="w-54 h-54 rounded-circle">
                             <div class="">
-                                <h4 class="mb-0">Michel John</h4>
+                                <h4 class="mb-0">{{ old('nama', $user->nama) }}</h4>
                                 <p class="fw-medium text-13 text-gray-200">examplemail@mail.com</p>
                             </div>
                         </div>
@@ -294,7 +288,9 @@
     </ul>
 </div>
 <!-- Breadcrumb End -->
-             
+             @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
             <div class="card overflow-hidden">
                 <div class="card-body p-0">
                     <div class="cover-img position-relative">
@@ -302,7 +298,8 @@
                         <div class="avatar-upload">
                             <input type='file' id="coverImageUpload" accept=".png, .jpg, .jpeg">
                             <div class="avatar-preview">
-                                <div id="coverImagePreview" style="background-image: url('dashboard/images/thumbs/setting-cover-img.png');">
+                                <div id="coverImagePreview" style="background-image: url('{{ asset('style/images/thumbs/setting-cover-img.png') }}');">
+
                                 </div>
                             </div>
                         </div>
@@ -311,32 +308,40 @@
                     <div class="setting-profile px-24">
                         <div class="flex-between">
                             <div class="d-flex align-items-end flex-wrap mb-32 gap-24">
-                                <img src="dashboard/images/thumbs/setting-profile-img.jpg" alt="" class="w-120 h-120 rounded-circle border border-white">
+                                <img src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('style/images/thumbs/setting-profile-img.jpg') }}" alt="" class="w-120 h-120 rounded-circle border border-white">
                                 <div>
-                                    <h4 class="mb-8">Mohid Khan</h4>
+                                    <h4 class="mb-8">{{ old('nama', $user->nama) }}</h4>
+                                    @error('nama')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                     <div class="setting-profile__infos flex-align flex-wrap gap-16">
                                         <div class="flex-align gap-6">
                                             <span class="text-gray-600 d-flex text-lg"><i class="ph ph-swatches"></i></span>
-                                            <span class="text-gray-600 d-flex text-15">UX Designer</span>
+                                            <span class="text-gray-600 d-flex text-15">{{ old('telepon', $user->telepon) }}</span>
                                         </div>
                                         <div class="flex-align gap-6">
                                             <span class="text-gray-600 d-flex text-lg"><i class="ph ph-map-pin"></i></span>
-                                            <span class="text-gray-600 d-flex text-15">Sans Fransisco</span>
+                                            <span class="text-gray-600 d-flex text-15">{{ old('alamat', $user->alamat) }}</span>
                                         </div>
                                         <div class="flex-align gap-6">
                                             <span class="text-gray-600 d-flex text-lg"><i class="ph ph-calendar-dots"></i></span>
-                                            <span class="text-gray-600 d-flex text-15">Join August 2024</span>
+                                            <span class="text-gray-600 d-flex text-15">{{ old('nim', $user->nim) }}</span>
+                                        </div>
+                                        <div class="flex-align gap-6">
+                                            <span class="text-gray-600 d-flex text-lg"><i class="ph ph-calendar-dots"></i></span>
+                                            <span class="text-gray-600 d-flex text-15">{{ old('nama_universitas', $user->universitas->nama_universitas ?? '') }}</span>
                                         </div>
                                     </div>
                                 </div>
+                                
                             </div>
                         </div>
                         <ul class="nav common-tab style-two nav-pills mb-0" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
-                              <button class="nav-link active" id="pills-details-tab" data-bs-toggle="pill" data-bs-target="#pills-details" type="button" role="tab" aria-controls="pills-details" aria-selected="true">My Details</button>
+                              <button class="nav-link active" id="pills-details-tab" data-bs-toggle="pill" data-bs-target="#pills-details" type="button" role="tab" aria-controls="pills-details" aria-selected="true">Data Diri</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                              <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+                              <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Skill</button>
                             </li>
                             <li class="nav-item" role="presentation">
                               <button class="nav-link" id="pills-password-tab" data-bs-toggle="pill" data-bs-target="#pills-password" type="button" role="tab" aria-controls="pills-password" aria-selected="false">Password</button>
@@ -356,27 +361,36 @@
                 <div class="tab-pane fade show active" id="pills-details" role="tabpanel" aria-labelledby="pills-details-tab" tabindex="0">
                     <div class="card mt-24">
                         <div class="card-header border-bottom">
-                            <h4 class="mb-4">My Details</h4>
-                            <p class="text-gray-600 text-15">Please fill full details about yourself</p>
+                            <h4 class="mb-4">Data Diri</h4>
+                            <p class="text-gray-600 text-15">Lengkapi Data Diri Anda</p>
                         </div>
                         <div class="card-body">
-                            <form action="#">
+                            <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
                                 <div class="row gy-4">
                                     <div class="col-sm-6 col-xs-6">
-                                        <label for="fname" class="form-label mb-8 h6">First Name</label>
-                                        <input type="text" class="form-control py-11" id="fname" placeholder="Enter First Name">
+                                        <label for="fname" class="form-label mb-8 h6">Nama Lengkap</label>
+                                        <input type="text" class="form-control py-11" name="nama" id="fname" value="{{ old('nama', $user->nama) }}">
+                                        @error('nama')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-sm-6 col-xs-6">
-                                        <label for="lname" class="form-label mb-8 h6">Last Name</label>
-                                        <input type="text" class="form-control py-11" id="lname" placeholder="Enter Last Name">
+                                        <label for="Alamat" class="form-label mb-8 h6">Alamat</label>
+                                        <input type="text" class="form-control py-11" id="Alamat" name="alamat" placeholder="Alamat tempat tinggal" value="{{ old('alamat', $user->alamat) }}">
                                     </div>
-                                    <div class="col-sm-6 col-xs-6">
+                                    {{-- <div class="col-sm-6 col-xs-6">
                                         <label for="email" class="form-label mb-8 h6">Email</label>
                                         <input type="email" class="form-control py-11" id="email" placeholder="Enter Email">
-                                    </div>
+                                    </div> --}}
                                     <div class="col-sm-6 col-xs-6">
-                                        <label for="phone" class="form-label mb-8 h6">Phone Number</label>
-                                        <input type="number" class="form-control py-11" id="phone" placeholder="Enter Phone Number">
+                                        <label for="phone" class="form-label mb-8 h6">No Telp</label>
+                                        <input type="number" class="form-control py-11" name="telepon" id="phone" value="{{ old('telepon', $user->telepon) }}">
+                                        {{-- <input type="text" name="telepon" class="form-control" value="{{ old('telepon', $user->telepon) }}"> --}}
+                                        @error('telepon')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-12">
                                         <label for="imageUpload" class="form-label mb-8 h6">Your Photo</label>
@@ -388,34 +402,70 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="avatar-upload-box text-center position-relative flex-grow-1 py-24 px-4 rounded-16 border border-main-300 border-dashed bg-main-50 hover-bg-main-100 hover-border-main-400 transition-2 cursor-pointer">
+                                            <div id="dropArea"
+                                                class="avatar-upload-box text-center position-relative flex-grow-1 py-24 px-4 rounded-16 border border-main-300 border-dashed bg-main-50 hover-bg-main-100 hover-border-main-400 transition-2 cursor-pointer">
+                                                
                                                 <label for="imageUpload" class="position-absolute inset-block-start-0 inset-inline-start-0 w-100 h-100 rounded-16 cursor-pointer z-1"></label>
+                                                
                                                 <span class="text-32 icon text-main-600 d-inline-flex"><i class="ph ph-upload"></i></span>
                                                 <span class="text-13 d-block text-gray-400 text my-8">Click to upload or drag and drop</span>
                                                 <span class="text-13 d-block text-main-600">SVG, PNG, JPEG OR GIF (max 1080px1200px)</span>
+
+                                                <input type="file" name="foto" id="imageUpload" class="form-control d-none" accept="image/*">
+                                                
+                                                @error('foto')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-xs-6">
-                                        <label for="role" class="form-label mb-8 h6">Role</label>
-                                        <input type="text" class="form-control py-11" id="role" placeholder="Enter Role">
+                                        <label for="nim" class="form-label mb-8 h6">Nim</label>
+                                        <input type="text" class="form-control py-11" name="nim" id="nim" value="{{ old('nim', $user->nim ?: 'Masukkan Nim') }}">
+                                        {{-- <input type="text" name="nim" class="form-control" value="{{ old('nim', $user->nim) }}"> --}}
+                                        @error('nim')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-sm-6 col-xs-6">
-                                        <label for="zip" class="form-label mb-8 h6">ZIP Code</label>
-                                        <input type="number" class="form-control py-11" id="zip" placeholder="Enter ZIP Code">
+                                        <label for="fakultas" class="form-label mb-8 h6">Fakultas</label>
+                                        <input type="text" class="form-control py-11" name="fakultas" id="fakultas" value="{{ old('fakultas', $user->universitas->fakultas ?? '') }}">
+                                        {{-- <input type="text" name="fakultas" class="form-control"
+                                            value="{{ old('fakultas', $user->universitas->fakultas ?? '') }}"> --}}
+                                        @error('fakultas')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="prodi" class="form-label mb-8 h6">Program Studi (Prodi)</label>
+                                        <input type="text" class="form-control py-11" name="prodi" id="prodi" value="{{ old('prodi', $user->universitas->prodi ?? '') }}">
+                                        {{-- <input type="text" name="prodi" class="form-control"
+                                            value="{{ old('prodi', $user->universitas->prodi ?? '') }}"> --}}
+                                        @error('prodi')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="universitas" class="form-label mb-8 h6">Universitas</label>
+                                        <input type="text" class="form-control py-11" name="nama_universitas" id="universitas" value="{{ old('nama_universitas', $user->universitas->nama_universitas ?? '') }}">
+                                        {{-- <input type="text" name="nama_universitas" class="form-control"
+                                            value="{{ old('nama_universitas', $user->universitas->nama_universitas ?? '') }}"> --}}
+                                        @error('nama_universitas')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-12">
                                         <div class="editor">
-                                            <label class="form-label mb-8 h6">Bio</label>
-                                            <div id="editor">
-                                                <p>I'm a Product Designer based in Melbourne, Australia. I specialise in UX/UI design, brand strategy, and Webflow development.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                                            </div>
+                                            <label class="form-label mb-8 h6">Tentang Saya</label>
+                                            <textarea class="form-control" name="bio" placeholder="Deskripsikan Diri Anda">{{ old('bio', $user->bio) }}</textarea>
                                         </div>
                                     </div>
+
                                     <div class="col-12">
                                         <div class="flex-align justify-content-end gap-8">
                                             <button type="reset" class="btn btn-outline-main bg-main-100 border-main-100 text-main-600 rounded-pill py-9">Cancel</button>
-                                            <button type="submit" class="btn btn-main rounded-pill py-9">Save  Changes</button>
+                                            <button type="submit" class="btn btn-main rounded-pill py-9">Simpan Perubahan</button>
                                         </div>
                                     </div>
                                 </div>
@@ -431,8 +481,8 @@
                         <div class="col-lg-6">
                             <div class="card mt-24">
                                 <div class="card-body">
-                                    <h6 class="mb-12">About Me</h6>
-                                    <p class="text-gray-600 text-15 rounded-8 border border-gray-100 p-16">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo pellentesque massa tellus ac augue. Lectus arcu at in in rhoncus malesuada ipsum turpis.</p>
+                                    <h6 class="mb-12">Tentang Saya</h6>
+                                    <p class="text-gray-600 text-15 rounded-8 border border-gray-100 p-16">{{ old('bio', $user->bio) }}</p>
                                 </div>
                             </div>
                             <div class="card mt-24">
@@ -831,41 +881,49 @@
         </div>
         <div class="dashboard-footer">
     <div class="flex-between flex-wrap gap-16">
-        <p class="text-gray-300 text-13 fw-normal"> &copy; Copyright Kominfo, All Right Reserverd</p>
+        <p class="text-gray-300 text-13 fw-normal"> &copy; Copyright Diskominfo, All Right Reserverd</p>
         
     </div>
 </div>
     </div>
         
-        <!-- Jquery js -->
-    <script src="dashboard/js/jquery-3.7.1.min.js"></script>
-    <!-- Bootstrap Bundle Js -->
-    <script src="dashboard/js/boostrap.bundle.min.js"></script>
-    <!-- Phosphor Js -->
-    <script src="dashboard/js/phosphor-icon.js"></script>
-    <!-- file upload -->
-    <script src="dashboard/js/file-upload.js"></script>
-    <!-- file upload -->
-    <script src="dashboard/js/plyr.js"></script>
-    <!-- dataTables -->
+    <!-- jQuery -->
+    <script src="{{ asset('style/js/jquery-3.7.1.min.js') }}"></script>
+
+    <!-- Bootstrap Bundle -->
+    <script src="{{ asset('style/js/boostrap.bundle.min.js') }}"></script>
+
+    <!-- Phosphor Icon -->
+    <script src="{{ asset('style/js/phosphor-icon.js') }}"></script>
+
+    <!-- File Upload -->
+    <script src="{{ asset('style/js/file-upload.js') }}"></script>
+
+    <!-- Plyr -->
+    <script src="{{ asset('style/js/plyr.js') }}"></script>
+
+    <!-- DataTables -->
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-    <!-- full calendar -->
-    <script src="dashboard/js/full-calendar.js"></script>
+
+    <!-- Full Calendar -->
+    <script src="{{ asset('style/js/full-calendar.js') }}"></script>
+
     <!-- jQuery UI -->
-    <script src="dashboard/js/jquery-ui.js"></script>
-    <!-- jQuery UI -->
-    <script src="dashboard/js/editor-quill.js"></script>
-    <!-- apex charts -->
-    <script src="dashboard/js/apexcharts.min.js"></script>
-    <!-- Calendar Js -->
-    <script src="dashboard/js/calendar.js"></script>
-    <!-- jvectormap Js -->
-    <script src="dashboard/js/jquery-jvectormap-2.0.5.min.js"></script>
-    <!-- jvectormap world Js -->
-    <script src="dashboard/js/jquery-jvectormap-world-mill-en.js"></script>
-    
-    <!-- main js -->
-    <script src="dashboard/js/main.js"></script>
+    <script src="{{ asset('style/js/jquery-ui.js') }}"></script>
+
+    <!-- ApexCharts -->
+    <script src="{{ asset('style/js/apexcharts.min.js') }}"></script>
+
+    <!-- Calendar -->
+    <script src="{{ asset('style/js/calendar.js') }}"></script>
+
+    <!-- jVectorMap -->
+    <script src="{{ asset('style/js/jquery-jvectormap-2.0.5.min.js') }}"></script>
+    <script src="{{ asset('style/js/jquery-jvectormap-world-mill-en.js') }}"></script>
+
+    <!-- Main JS -->
+    <script src="{{ asset('style/js/main.js') }}"></script>
+
 
 
 
@@ -888,37 +946,24 @@
         uploadImageFunction('#coverImageUpload', '#coverImagePreview'); 
         uploadImageFunction('#imageUpload', '#profileImagePreview');
 
-        
-        // ============================= Initialize Quill editor js Start ============================= 
-        function editorFunction (editorId) {
-            const quill = new Quill(editorId, {
-                theme: 'snow'
-            });
-        }
-        editorFunction('#editor'); 
-        editorFunction('#editorTwo'); 
-        // ============================= Initialize Quill editor js End ============================= 
-
-
-        // Table Header Checkbox checked all js Start
+        // ============================= Table Header Checkbox checked all js ============================= 
         $('#selectAll').on('change', function () {
             $('.form-check .form-check-input').prop('checked', $(this).prop('checked')); 
         }); 
-    
-        // Data Tables
+
+        // ============================= Data Tables ============================= 
         new DataTable('#studentTable', {
             searching: false,
             lengthChange: false,
             info: false,   // Bottom Left Text => Showing 1 to 10 of 12 entries
             pagination: false,
-            info: false,   // Bottom Left Text => Showing 1 to 10 of 12 entries
             paging: false,
             "columnDefs": [
                 { "orderable": false, "targets": [0, 6] } // Disables sorting on the 1st & 7th column (index 6)
             ]
         });
-
     </script>
+
 
     </body>
 </html>
