@@ -783,7 +783,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                                         @if(isset($completionLevel) && $completionLevel === 'incomplete')
                                                             <a href="{{ route('profile.edit') }}" class="btn btn-primary">Lengkapi Profil</a>
                                                         @else
-                                                            <a href="{{ route('skills.edit') }}" class="btn btn-primary">Tambah Keahlian</a>
+                                                            <a href="{{ route('profile.edit') }}" class="btn btn-primary">Tambah Keahlian</a>
                                                         @endif
                                                     @endif
                                                 </div>
