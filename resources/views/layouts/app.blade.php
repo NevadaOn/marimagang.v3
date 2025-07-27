@@ -247,19 +247,24 @@
                             aria-expanded="false"
                             aria-label="User menu">
                         <span class="position-relative">
-                            @if (auth()->user()->foto)
-                                <img src="{{ asset('storage/' . auth()->user()->foto) }}" 
-                                     alt="Foto Profil {{ auth()->user()->nama }}" 
-                                     class="h-32 w-32 rounded-circle"
-                                     loading="lazy"
-                                     onerror="this.src='{{ asset('img/avatar-default.png') }}'">
-                            @else
-                                <div class="h-32 w-32 rounded-circle bg-primary-100 d-flex align-items-center justify-content-center">
-                                    <span class="text-primary-600 fw-bold">
-                                        {{ strtoupper(substr(auth()->user()->nama, 0, 2)) }}
-                                    </span>
-                                </div>
-                            @endif
+                            @auth
+                                @php $user = auth()->user(); @endphp
+
+                                @if ($user->foto)
+                                    <img src="{{ asset('storage/' . $user->foto) }}" 
+                                        alt="Foto Profil {{ $user->nama }}" 
+                                        class="h-32 w-32 rounded-circle"
+                                        loading="lazy"
+                                        onerror="this.src='{{ asset('img/avatar-default.png') }}'">
+                                @else
+                                    <div class="h-32 w-32 rounded-circle bg-primary-100 d-flex align-items-center justify-content-center">
+                                        <span class="text-primary-600 fw-bold">
+                                            {{ strtoupper(substr($user->nama, 0, 2)) }}
+                                        </span>
+                                    </div>
+                                @endif
+                            @endauth
+
                             <span class="activation-badge w-8 h-8 position-absolute inset-block-end-0 inset-inline-end-0"
                                   aria-label="Online status"></span>
                         </span>

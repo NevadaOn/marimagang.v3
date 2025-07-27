@@ -1,12 +1,12 @@
-<nav class="navbar navbar-expand " style="background-color: rgba(41, 50, 65, 0.5)">
-    <a class="sidebar-toggle js-sidebar-toggle text-light">
-        <i class="hamburger align-self-center text-light" style="color: white !important;" ></i>
+<nav class="navbar navbar-expand " >
+    <a class="sidebar-toggle js-sidebar-toggle">
+        <i class="hamburger align-self-center"></i>
     </a>
 
     <div class="navbar-collapse collapse ">
         <ul class="navbar-nav navbar-align ">
             <li  class="nav-item dropdown ">
-                <a class="nav-icon dropdown-toggle text-light" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
+                <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
                    <div class="position-relative">
                         <i class="align-middle" data-feather="bell"></i>
                         <span class="indicator">4</span>
@@ -73,7 +73,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
                     <div class="position-relative">
-                        <i class="align-middle text-light" data-feather="message-square"></i>
+                        <i class="align-middle" data-feather="message-square"></i>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="messagesDropdown">
@@ -86,7 +86,7 @@
                         <a href="#" class="list-group-item">
                             <div class="row g-0 align-items-center">
                                 <div class="col-2">
-                                    <img src="{{ asset('img/avatars/avatar-5.jpg') }}" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
+                                    <img src="{{ asset('img/kab_malang.jpg') }}" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
                                 </div>
                                 <div class="col-10 ps-2">
                                     <div class="text-dark">Vanessa Tucker</div>
@@ -142,11 +142,9 @@
                     <i class="align-middle" data-feather="settings"></i>
                 </a>
 
-                <a class="nav-link dropdown-toggle d-none d-sm-inline-block text-light" href="#" data-bs-toggle="dropdown">
+                <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
                     {{-- Ganti dengan avatar user yang login --}}
-                    <span class="text-light ">
                         {{ auth()->guard('admin')->user()->nama ?? 'Guest' }}
-                    </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a> {{-- Ganti dengan route('admin.profile') --}}

@@ -161,7 +161,7 @@
 
 									<h5 class="card-title mb-0">Kalender</h5>
 								</div>
-								<div class="card-body d-flex">
+								<div class="card-body">
 									<div class="align-self-center w-100">
 										<div class="chart">
 											<div id="datetimepicker-dashboard"></div>

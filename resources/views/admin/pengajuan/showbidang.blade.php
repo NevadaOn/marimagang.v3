@@ -1394,7 +1394,7 @@
 </div>
     
 </form>
-{{-- 
+
 @if(auth('admin')->check() && (
     (auth('admin')->user()->role === 'admin_bidang' && auth('admin')->user()->id === $pengajuan->databidang->admin_id) ||
     auth('admin')->user()->role === 'superadmin'
@@ -1424,7 +1424,7 @@
             Lihat Form Kesediaan Magang
         </a>
     @endif
-@endif --}}
+@endif
 
 
 <!-- Preview Modal -->
@@ -1655,7 +1655,7 @@ function showPreviewError(message) {
                 <div class="error-icon">📄</div>
                 <div class="error-message">${message}</div>
                 <a href="${currentFileUrl}" class="download-btn" target="_blank">
-                    📥 Download File
+                     Download File
                 </a>
             </div>
         </body>

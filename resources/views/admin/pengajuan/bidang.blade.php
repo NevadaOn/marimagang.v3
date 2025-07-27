@@ -1,107 +1,73 @@
-@extends('layouts.adminbidang')
+@extends('layouts.superadmin')
 
-@section('title', 'Data Pengajuan')
-@push('styles')
-<style>
-    .title{
-        background-color: rgba(41, 50, 65, 0.5); 
-        width: fit-content;
-        padding: 20px;
-        border-radius: 20px;
-    }
-     .bg-glass {
-        background-color: rgba(41, 50, 65, 0.5); 
-        backdrop-filter: blur(18px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        position: relative;
-        z-index: 1;
-        border-radius: 20px;
-    }
-
-    .table-glass {
-        width: 100%;
-        table-layout: fixed;
-        --bs-table-bg: transparent;
-        --bs-table-border-color: rgba(255, 255, 255, 0.15);
-        --bs-table-hover-bg: rgba(255, 255, 255, 0.1);
-        border-collapse: separate;
-        border-spacing: 0;
-        color: #e0e0e0;
-    }
-
-    .table-glass thead th {
-        border-bottom: 2px solid rgba(0, 0, 255, 0.15);
-        text-transform: uppercase;
-        font-size: 0.8rem;
-        letter-spacing: 0.05em;
-        color: #48B6FFFF;
-       
-    }
-   
-    .table-glass td, .table-glass th {
-        border: none;
-        word-wrap: break-word;
-        white-space: nowrap; 
-    }
-    .table-glass .bg{
-       background-color: rgba(21, 73, 105, 0.6);
-       white-space: wrap;
-       border: none;
-    }
-    .badge-glass {
-        padding: 0.4em 0.8em;
-        color: #fff;
-        font-weight: 600;
-        border-radius: 50rem;
-        text-transform: capitalize;
-        transition: all 0.3s ease;
-        white-space: nowrap; 
-    }
-    .badge-glass:hover {
-        transform: translateY(-2px) scale(1.05);
-        cursor: default;
-        background-color: rgba(25, 93, 135, 0.6);
-    }
-
-    .badge-glass.status-disetujui {
-        background-color: rgba(25, 135, 84, 0.6);
-        box-shadow: 0 0 15px rgba(25, 135, 84, 0.6);
-    }
-    .badge-glass.status-ditolak {
-        background-color: rgba(220, 53, 69, 0.6);
-        box-shadow: 0 0 15px rgba(220, 53, 69, 0.6);
-    }
-    .badge-glass.status-menunggu {
-        background-color: rgba(255, 193, 7, 0.6);
-        box-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
-    }
-
-    .title-glow {
-        text-shadow: 0 0 12px rgba(52, 144, 220, 0.4);
-    }
-
-    .btn-glass-action {
-        padding: 0.25rem 0.75rem;
-        font-size: 0.8rem;
-        font-weight: 600;
-        color: #fff;
-        background-color: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 50rem;
-        transition: all 0.2s ease-in-out;
-    }
-    .btn-glass-action:hover {
-        background-color: rgba(25, 93, 135, 0.6);
-        color: #fff;
-        transform: scale(1.05);
-    }
-
-    .pagination .page-link { background-color: transparent; border-color: rgba(255, 255, 255, 0.2); }
-    .pagination .page-item.active .page-link { background-color: #0d6efd; border-color: #0d6efd; }
-    .pagination .page-item.disabled .page-link { border-color: rgba(255, 255, 255, 0.2); color: var(--bs-secondary-color); }
-</style>
-@endpush
+@section('title', 'Kelola Pengajuan')
 
 @section('content')
-    @include('admin.pengajuan.index', ['pengajuan' => $pengajuan])
+<div data-bs-theme="dark">
+    <div class="container py-5">
+    <h1 class="fw-bold mb-4 title">Daftar Pengajuan</h1>
+
+
+        @if (session('success'))
+            <div class="alert bg-glass border-success mb-4" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <div class="bg-glass rounded-4 shadow-lg p-2">
+            <table class="table table-glass align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center py-3 px-3" style="width: 5%;">No</th>
+                        <th scope="col" class="py-3 px-3" style="width: 18%;">Nama Pengusul</th>
+                        <th scope="col" class="py-3 px-3" style="width: 15%;">NIM</th>
+                        <th scope="col" class="py-3 px-3" style="width: 20%;">Bidang</th>
+                        <th scope="col" class="text-center py-3 px-3 bg" style="width: 15%;">Mulai</th>
+                        <th scope="col" class="text-center py-3 px-3" style="width: 15%;">Selesai</th>
+                        <th scope="col" class="text-center py-3 px-3 bg" style="width: 15%;">Diajukan</th>
+                        <th scope="col" class="text-center py-3 px-3" style="width: 15%;">Status</th>
+                        <th scope="col" class="text-center py-3 px-3" style="width: 10%;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($pengajuan as $index => $item)
+                        <tr>
+                            <td class="text-center py-3 px-3 ">{{ $pengajuan->firstItem() + $index }}</td>
+                            <td class="py-3 px-3">{{ $item->user->nama }}</td>
+                            <td class="py-3 px-3 ">{{ $item->user->nim }}</td>
+                            <td class="py-3 px-3">{{ $item->databidang->nama ?? '-' }}</td>
+                            <td class="text-center py-3 px-3 bg">{{ optional($item->tanggal_mulai)->format('d M Y') }}</td>
+                            <td class="text-center py-3 px-3">{{ optional($item->tanggal_selesai)->format('d M Y') }}</td>
+                            <td class="text-center py-3 px-3 bg">{{ $item->created_at->format('d M Y') }}</td>
+                            <td class="text-center py-3 px-3 ">
+                                @if ($item->status == 'disetujui')
+                                    <span class="badge-glass status-disetujui">Disetujui</span>
+                                @elseif($item->status == 'ditolak')
+                                    <span class="badge-glass status-ditolak">Ditolak</span>
+                                @else
+                                    <span class="badge-glass status-menunggu">Menunggu</span>
+                                @endif
+                            </td>
+                            
+                            <td class="text-center py-3 px-3 ">
+                                <a href="{{ route('admin.pengajuan.showbidang', $item->id) }}"
+                                    class="btn btn-glass-action text-decoration-none">Detail</a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="9" class="text-center py-5 text-body-secondary">Tidak ada data pengajuan.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
+        @if ($pengajuan->hasPages())
+        <div class="d-flex justify-content-center mt-4">
+            {{ $pengajuan->links() }}
+        </div>
+        @endif
+    </div>
+</div>
 @endsection

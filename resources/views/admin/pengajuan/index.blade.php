@@ -1,12 +1,15 @@
+@extends('layouts.superadmin')
 
-{{-- components/pengajuan-tabel.blade.php --}}
+@section('title', 'Kelola Pengajuan')
+
+@section('content')
 <div data-bs-theme="dark">
     <div class="container py-5">
-    <h1 class="fw-bold mb-4 text-white title">Daftar Pengajuan</h1>
+    <h1 class="fw-bold mb-4 title">Daftar Pengajuan</h1>
 
 
         @if (session('success'))
-            <div class="alert bg-glass border-success text-light mb-4" role="alert">
+            <div class="alert bg-glass border-success mb-4" role="alert">
                 {{ session('success') }}
             </div>
         @endif
@@ -67,3 +70,4 @@
         @endif
     </div>
 </div>
+@endsection
