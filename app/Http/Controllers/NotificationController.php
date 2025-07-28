@@ -32,7 +32,7 @@ class NotificationController extends Controller
         $userId = auth()->id();
         $notifications = Notification::where('user_id', $userId)
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->get();        
 
         return view('notifications', compact('notifications'));
     }
@@ -71,4 +71,22 @@ class NotificationController extends Controller
 
         return response()->json(['unread_count' => $count]);
     }
+
+    public function destroyAll()
+    {
+        $notification = Notification::where('user_id', auth()->id())->delete();
+        return response()->json(['message' => 'Berhasil menghapus semua notifikasi']);
+    }
+
+    public function destroy($id)
+    {
+        $notification = Notification::where('user_id', auth()->id())->findOrFail($id);
+        $notification->delete();
+
+        return response()->json(['message' => 'Notifikasi dihapus']);
+    }
+
+    
+
 }
+

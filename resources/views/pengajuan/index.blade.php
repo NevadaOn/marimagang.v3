@@ -1,8 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.user.app')
 
 @section('title', 'Daftar Pengajuan')
 
 @section('content')
+@include('layouts.user.components.breadcrumb', [
+    'items' => [
+        ['label' => 'Pengajuan', 'url' => null]
+  
+    ]
+])
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h4>Pengajuan Magang Saya</h4>

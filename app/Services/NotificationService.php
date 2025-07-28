@@ -268,7 +268,8 @@ class NotificationService
     public function markAllAsRead($userId)
     {
         return Notification::where('user_id', $userId)
-            ->update(['is_read' => true]);
+        ->where('is_read', false) // hanya update yg belum dibaca
+        ->update(['is_read' => true]);
     }
 
     public function getUnreadCount($userId)

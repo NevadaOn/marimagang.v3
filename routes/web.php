@@ -30,7 +30,11 @@ Route::prefix('dokumentasi')->name('landing.documentation.')->group(function () 
     Route::get('/{id}', [LandingDocumentationController::class, 'show'])->name('show');
 });
 
+<<<<<<< HEAD
 // Route::get('/', fn () => view('welcome'));
+=======
+Route::get('/', fn() => view('welcome'));
+>>>>>>> fc75234 (notif)
 
 Route::get('/', [BidangController::class, 'index'])->name('welcome');
 Route::get('/bidang/{slug}', [BidangController::class, 'show'])->name('bidang.show');
@@ -45,7 +49,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::prefix('email')->group(function () {
-    Route::get('/verify', fn () => view('auth.verify-email'))
+    Route::get('/verify', fn() => view('auth.verify-email'))
         ->middleware('auth')
         ->name('verification.notice');
 
@@ -84,26 +88,28 @@ Route::controller(ResetPasswordController::class)->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-     Route::get('/notifikasi', [NotificationController::class, 'userNotifications'])->name('notifications.page');
+    Route::get('/notifikasi', [NotificationController::class, 'userNotifications'])->name('notifications.page');
 
     Route::post('/notifikasi/{id}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
     Route::post('/notifikasi/read-all', [NotificationController::class, 'markAllAsRead'])->name('notifications.readAll');
+    
+
 
     Route::controller(ProfileController::class)->prefix('profile')->group(function () {
-        
+
         // === PROFILE MANAGEMENT ===
         Route::get('/edit', 'edit')->name('profile.edit');
         Route::put('/update', 'updateProfile')->name('profile.update'); // Khusus untuk profile saja
-        
+
         // === SKILLS MANAGEMENT ===
         Route::post('/skills', 'storeSkill')->name('profile.skills.store');
         Route::put('/skills/{userSkillId}', 'updateSkill')->name('profile.skills.update');
         Route::delete('/skills/{userSkillId}', 'destroySkill')->name('profile.skills.destroy');
-        
+
         // === PROJECTS MANAGEMENT ===
         // Project data tersimpan di Skill model sesuai struktur existing
         Route::delete('/skills/{userSkillId}/project', 'destroyProject')->name('profile.projects.destroy');
-        
+
         // === UTILITIES ===
         Route::post('/search-nim', 'searchByNIM')->name('profile.search-nim');
     });
@@ -118,11 +124,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/user/search-nim', [ProfileController::class, 'searchByNIM'])->name('user.search-nim');
 
     Route::controller(NotificationController::class)->prefix('notifications')->group(function () {
-        Route::get('/', 'userNotifications')->name('notifications.user'); 
-        Route::get('/json', 'index')->name('notifications.json'); 
+        Route::get('/', 'userNotifications')->name('notifications.user');
+        Route::get('/json', 'index')->name('notifications.json');
         Route::post('/{id}/read', 'markAsRead');
         Route::post('/read-all', 'markAllAsRead');
         Route::get('/unread-count', 'getUnreadCount');
+
+        Route::delete('/delete-all', 'destroyAll')->name('notifications.deleteAll');
+        Route::delete('/{id}', 'destroy')->name('notifications.destroy');
+        
+        
+
     });
 
 

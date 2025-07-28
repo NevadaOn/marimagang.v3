@@ -1,6 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.user.app')
 
 @section('content')
+@include('layouts.user.components.breadcrumb', [
+    'items' => [
+        ['label' => 'Pengajuan', 'url' => route('pengajuan.index')],
+        ['label' => 'Buat Pengajuan', 'url' => null]
+  
+    ]
+])
 <div class="container">
     <h1>Pilih Tipe Pengajuan</h1>
 
