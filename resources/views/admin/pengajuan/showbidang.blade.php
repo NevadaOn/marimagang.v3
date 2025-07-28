@@ -1426,10 +1426,9 @@
     @endif
 @endif
 
-
 <!-- Preview Modal -->
 <div id="previewModal" class="modal" style="display: none;">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl">
         <div class="glass-modal-content">
             <div class="modal-header">
                 <div>
@@ -1445,7 +1444,7 @@
                     <div class="spinner"></div>
                     <p class="mt-3">Memuat dokumen...</p>
                 </div>
-                <div id="previewContent" style="display: none; height: 100%;">
+                <div id="previewContent" style="display: none;">
                     <iframe id="previewFrame" class="preview-container"></iframe>
                 </div>
             </div>
@@ -1467,6 +1466,48 @@
         </div>
     </div>
 </div>
+
+<style>
+.modal-dialog.modal-xl {
+    max-width: 95vw;
+    height: 90vh;
+    margin: 2.5vh auto;
+}
+
+.glass-modal-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-body {
+    flex: 1;
+    overflow: hidden;
+    padding: 1rem;
+    height: calc(90vh - 120px);
+}
+
+#previewContent {
+    height: 100%;
+    width: 100%;
+}
+
+.preview-container {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 4px;
+}
+
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+</style>
+
 @endsection
 
 @push('scripts')
@@ -1474,6 +1515,7 @@
 let currentFileUrl = '';
 let currentFileName = '';
 let currentAbortController = null; 
+
 function showPreview(url, fileName = '') {
     const modal = document.getElementById('previewModal');
     const loading = document.getElementById('previewLoading');
@@ -1481,6 +1523,7 @@ function showPreview(url, fileName = '') {
     const frame = document.getElementById('previewFrame');
     const title = document.getElementById('previewTitle');
     const fileInfo = document.getElementById('fileInfo');
+    
     modal.style.display = 'block';
     modal.classList.add('show');
     loading.style.display = 'flex';
@@ -1493,18 +1536,14 @@ function showPreview(url, fileName = '') {
     const fileExtension = getFileExtension(currentFileName);
     fileInfo.textContent = `${fileExtension ? fileExtension.toUpperCase() : 'FILE'} • ${currentFileName}`;
     
-    // Cek apakah URL adalah route download atau direct asset
     if (isRouteUrl(url)) {
-        // Jika route download, konversi ke blob URL untuk preview
         handleRoutePreview(url, fileExtension);
     } else {
-        // Jika direct asset, gunakan cara lama
         handleDirectPreview(url, fileExtension);
     }
 }
 
 function isRouteUrl(url) {
-    // Cek apakah URL mengandung route pattern (misal: mengandung 'download' atau parameter)
     return url.includes('/download') || url.includes('/admin/pengajuan/') || url.includes('?') || url.includes('&');
 }
 
@@ -1540,7 +1579,6 @@ function handleRoutePreview(url, fileExtension) {
 }
 
 function handleDirectPreview(url, fileExtension) {
-    // Langsung load dengan delay seperti biasa
     setTimeout(() => {
         loadPreviewFrame(url, fileExtension);
     }, 500);
@@ -1553,10 +1591,8 @@ function loadPreviewFrame(url, fileExtension) {
     
     try {
         if (fileExtension === 'pdf') {
-            // Untuk PDF, load langsung
             frame.src = url + '#toolbar=1&navpanes=1&scrollbar=1&view=FitH';
         } else if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].includes(fileExtension)) {
-            // Untuk gambar, buat img element di dalam iframe
             const imgHtml = `
                 <html>
                 <head>
@@ -1572,20 +1608,16 @@ function loadPreviewFrame(url, fileExtension) {
             `;
             frame.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(imgHtml);
         } else {
-            // Untuk dokumen lain, coba Google Docs Viewer
             frame.src = `https://docs.google.com/viewer?url=${encodeURIComponent(url)}&embedded=true`;
         }
         
-        // Handle iframe load event
         frame.onload = function() {
             loading.style.display = 'none';
             content.style.display = 'block';
         };
         
-        // Fallback jika iframe tidak load dalam 10 detik
         setTimeout(() => {
             if (loading.style.display !== 'none') {
-                // Jika Google Docs Viewer gagal, coba direct link
                 if (frame.src.includes('docs.google.com')) {
                     frame.src = url;
                 } else {
@@ -1676,32 +1708,25 @@ function closePreview() {
     const modal = document.getElementById('previewModal');
     const frame = document.getElementById('previewFrame');
 
-    // Sembunyikan modal
     modal.classList.remove('show');
     modal.style.display = 'none';
-    // Hentikan pemuatan iframe
     frame.src = '';
 
-    // Revoke blob URL untuk mencegah memory leak
     if (currentFileUrl && currentFileUrl.startsWith('blob:')) {
         URL.revokeObjectURL(currentFileUrl);
     }
 
-    // Batalkan fetch jika sedang berlangsung
     if (currentAbortController) {
         currentAbortController.abort();
         currentAbortController = null;
     }
 
-    // Reset variabel
     currentFileUrl = '';
     currentFileName = '';
 }
 
-
 function downloadFile() {
     if (currentFileUrl) {
-        // Jika blob URL, trigger download dengan nama file
         if (currentFileUrl.startsWith('blob:')) {
             const link = document.createElement('a');
             link.href = currentFileUrl;
@@ -1710,27 +1735,23 @@ function downloadFile() {
             link.click();
             document.body.removeChild(link);
         } else {
-            // Jika URL biasa, buka di tab baru
             window.open(currentFileUrl, '_blank');
         }
     }
 }
 
-// Close modal when clicking outside
 document.getElementById('previewModal').addEventListener('click', function(e) {
     if (e.target === this) {
         closePreview();
     }
 });
 
-// Close modal with Escape key
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && document.getElementById('previewModal').classList.contains('show')) {
         closePreview();
     }
 });
 
-// Submit button loading state
 document.querySelectorAll('form button[type="submit"]').forEach(button => {
     button.addEventListener('click', function (e) {
         const form = this.closest('form');

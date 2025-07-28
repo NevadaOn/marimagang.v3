@@ -1,46 +1,66 @@
 @extends('layouts.superadmin')
 
 @section('content')
-<h1 class="text-xl font-bold mb-4">Manajemen Admin</h1>
+<div class="container py-4">
+    <h1 class="h4 fw-bold mb-4">Manajemen Admin</h1>
 
-{{-- Flash messages --}}
-@if (session('success'))
-    <div class="bg-green-100 text-green-800 p-3 rounded mb-4">
-        {{ session('success') }}
+    {{-- Flash messages --}}
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    <div class="mb-3">
+        <a href="{{ route('admin.admin.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i> Tambah Admin
+        </a>
     </div>
-@endif
-@if (session('error'))
-    <div class="bg-red-100 text-red-800 p-3 rounded mb-4">
-        {{ session('error') }}
+
+    <div class="table-responsive bg-white rounded shadow-sm">
+        <table class="table table-bordered table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th class="text-center">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($admins as $admin)
+                <tr>
+                    <td>{{ $admin->nama }}</td>
+                    <td>{{ $admin->email }}</td>
+                    <td>
+                        <span class="badge bg-secondary text-capitalize">{{ $admin->role }}</span>
+                    </td>
+                    <td class="text-center">
+                        <a href="{{ route('admin.admin.edit', $admin->id) }}" 
+                           class="btn btn-sm btn-info text-white me-1">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <form action="{{ route('admin.admin.destroy', $admin->id) }}" method="POST" class="d-inline"
+                              onsubmit="return confirm('Hapus admin ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash-alt"></i> Hapus
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
-@endif
-
-<a href="{{ route('admin.admin.create') }}" class="btn btn-primary mb-4">+ Tambah Admin</a>
-
-<table class="table-auto w-full border">
-    <thead class="bg-gray-100">
-        <tr>
-            <th class="border p-2">Nama</th>
-            <th class="border p-2">Email</th>
-            <th class="border p-2">Role</th>
-            <th class="border p-2">Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($admins as $admin)
-        <tr>
-            <td class="border p-2">{{ $admin->nama }}</td>
-            <td class="border p-2">{{ $admin->email }}</td>
-            <td class="border p-2">{{ $admin->role }}</td>
-            <td class="border p-2">
-                <a href="{{ route('admin.admin.edit', $admin->id) }}" class="btn btn-sm btn-info">Edit</a>
-                <form action="{{ route('admin.admin.destroy', $admin->id) }}" method="POST" class="inline">
-                    @csrf @method('DELETE')
-                    <button class="btn btn-sm btn-danger" onclick="return confirm('Hapus admin ini?')">Hapus</button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+</div>
 @endsection

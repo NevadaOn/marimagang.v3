@@ -10,8 +10,6 @@
         border-radius: 0.35rem;
         margin-bottom: 1.5rem;
         box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
-        margin-left: 10px;
-        margin-right: 10px;
     }
     
     .card-header {
@@ -227,7 +225,7 @@
         justify-content: space-between;
         padding: 1rem 1.5rem;
         border-bottom: 1px solid #dee2e6;
-        background: linear-gradient(135deg, rgb(11, 87, 189) 0%, rgb(95, 164, 228) 50%, rgb(160, 210, 235) 100%);
+        background-color: #007bff;
         color: #fff;
     }
     
@@ -235,9 +233,6 @@
         flex: 1;
         padding: 0;
         overflow: hidden;
-    }
-    .modal-title{
-        color: white;
     }
     
     .modal-footer {
@@ -390,48 +385,12 @@
 
             <!-- Informasi Umum -->
             <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
+                <div class="card-header">
                     <h5 class="card-title mb-0">
                         <i class="fas fa-info-circle me-2"></i>
                         Informasi Umum
                     </h5>
-
-                    <!-- Dropdown Button -->
-                    <div class="dropdown">
-                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Opsi
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                            <li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalKelolaSurat">
-                                    Kelola Surat Bangkespol
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalKomentar">
-                                    Komentar ke Admin/User
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#updateTanggalModal">
-                                    Ubah Tanggal
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalBidang">
-                                    Ubah Bidang
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalForm">
-                                    Form Kesediaan Magang
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
                 </div>
-
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -502,23 +461,6 @@
                     </div>
                     @endif
                 </div>
-<p class="fw-semibold mb-2" style="text-align: center;">Lampiran surat dari Dinas:</p>
-<div class="d-flex justify-content-between align-items-center flex-wrap gap-2" style="margin: 15px;">
-    @if($pengajuan->form_kesediaan_magang)
-        <a href="{{ asset('storage/' . $pengajuan->form_kesediaan_magang) }}" class="btn btn-success" target="_blank">
-            Lihat Form Kesediaan Magang
-        </a>
-    @endif
-
-    @if ($pengajuan->surat_pdf)
-        <button onclick="showPreview('{{ asset('storage/' . $pengajuan->surat_pdf) }}', '{{ basename($pengajuan->surat_pdf) }}')"
-                class="btn btn-primary btn-sm">
-            <i class="fas fa-eye me-1"></i>
-            Lihat Surat Bangkespol
-        </button>
-    @endif
-</div>
-
             </div>
 
            <!-- Anggota Kelompok (termasuk Ketua) -->
@@ -662,90 +604,82 @@
                     $statusOptions = ['diproses', 'diterima', 'ditolak'];
                 }
             @endphp
-            <div class="modal fade" id="modalKelolaSurat" tabindex="-1" aria-labelledby="modalKelolaSuratLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0;">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalKelolaSuratLabel">
-                    Kelola Surat Bangkespol
+
+            <!-- Kelola Surat & Komentar -->
+            @if (in_array($admin->role, ['superadmin', 'admin_dinas']))
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-file-pdf me-2"></i>
+                        Kelola Surat & Komentar
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                 </div>
-                <div class="modal-body">
-                    <!-- Tempatkan form surat di sini seperti sebelumnya -->
-                    @include('partials.kelola_surat_pengajuan') 
-                    {{-- Atau langsung tempel kode form jika tidak menggunakan partial --}}
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="modal fade" id="modalBidang" tabindex="-1" aria-labelledby="modalBidangLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0;">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalBidangLabel">
-                    Ubah Bidang
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Tempatkan form surat di sini seperti sebelumnya -->
-                    @include('partials.ubah_bidang') 
-                    {{-- Atau langsung tempel kode form jika tidak menggunakan partial --}}
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="modal fade" id="updateTanggalModal" tabindex="-1" aria-labelledby="updateTanggalModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0;">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalKelolaSuratLabel">
-                    Ubah  Tanggal
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-                </div>
-                    <!-- Tempatkan form surat di sini seperti sebelumnya -->
-                    @include('partials.ubah_tanggal') 
-                    {{-- Atau langsung tempel kode form jika tidak menggunakan partial --}}
-                </div>
-            </div>
-            </div>
-            <div class="modal fade" id="modalKomentar" tabindex="-1" aria-labelledby="modalKomentarLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0;">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalKomentarLabel">
-                    Kirim Komentar
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Tempatkan form surat di sini seperti sebelumnya -->
-                    @include('partials.kirim_komentar') 
-                    {{-- Atau langsung tempel kode form jika tidak menggunakan partial --}}
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="modalFormLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0;">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalFormLabel">
-                    Form Kesediaan Magang
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Tempatkan form surat di sini seperti sebelumnya -->
-                    @include('partials.form_kesediaan_magang') 
-                    {{-- Atau langsung tempel kode form jika tidak menggunakan partial --}}
-                </div>
+                <div class="card-body">
+                    <!-- Form upload surat PDF -->
+                    <form action="{{ route('admin.pengajuan.uploadSurat', $pengajuan->id) }}" method="POST" enctype="multipart/form-data" class="mb-4">
+                        @csrf
+                        <div class="form-group">
+                            <label class="form-label">Unggah Surat (PDF)</label>
+                            <input type="file" name="surat_pdf" accept="application/pdf" class="form-control">
+                        </div>
+                        {{-- <div class="form-group">
+                            <label class="form-label">Komentar Admin</label>
+                            <textarea name="komentar_admin" rows="4" class="form-control">{{ old('komentar_admin', $pengajuan->komentar_admin) }}</textarea>
+                        </div> --}}
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i>
+                            Simpan Surat
+                        </button>
+                    </form>
+
+                    <!-- Form generate surat otomatis -->
+                    <h6>Buat Surat Otomatis</h6>
+                    <form action="{{ route('admin.pengajuan.generateSurat', $pengajuan->id) }}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Nomor Surat</label>
+                                    <input type="text" name="nomor_surat" class="form-control" placeholder="Contoh: 001/ADM/PKL/2025" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">NIP</label>
+                                    <input type="text" name="nip_penanggung_jawab" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Nama Penanggung Jawab</label>
+                                    <input type="text" name="nama_penanggung_jawab" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Jabatan</label>
+                                    <input type="text" name="jabatan_penanggung_jawab" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Nama Kegiatan</label>
+                                    <input type="text" name="nama_kegiatan" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-plus me-1"></i>
+                            Buat Surat Otomatis
+                        </button>
+                    </form>
+
+                    @if ($pengajuan->surat_pdf)
+                    <div class="mt-3">
+                        <button onclick="showPreview('{{ asset('storage/' . $pengajuan->surat_pdf) }}', '{{ basename($pengajuan->surat_pdf) }}')"
+                                class="btn btn-primary btn-sm">
+                            <i class="fas fa-eye me-1"></i>
+                            Lihat / Unduh Surat PDF
+                        </button>
+                    </div>
+                    @endif
                 </div>
             </div>
-            </div>
-            
+            @endif
 
             @if (!empty($statusOptions))
             <div class="card">
@@ -781,11 +715,13 @@
             </div>
             @endif
 
-{{-- <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateTanggalModal">
+<!-- Tombol untuk membuka modal -->
+<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateTanggalModal">
     Ubah Tanggal Magang
-</button> --}}
-{{-- <div class="modal fade" id="updateTanggalModal" tabindex="-1" aria-labelledby="updateTanggalModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0;">
+</button>
+<!-- Modal -->
+<div class="modal fade" id="updateTanggalModal" tabindex="-1" aria-labelledby="updateTanggalModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       <form action="{{ route('admin.pengajuan.updateTanggal', $pengajuan->id) }}" method="POST">
         @csrf
@@ -815,8 +751,8 @@
       </form>
     </div>
   </div>
-</div> --}}
-{{-- @if (in_array(auth()->guard('admin')->user()->role, ['superadmin', 'admin_dinas']))
+</div>
+@if (in_array(auth()->guard('admin')->user()->role, ['superadmin', 'admin_dinas']))
     <form action="{{ route('admin.pengajuan.updateBidang', $pengajuan->id) }}" method="POST" class="mb-3">
         @csrf
         @method('PATCH')
@@ -832,9 +768,9 @@
 
         <button type="submit" class="btn btn-primary mt-2">Simpan Bidang</button>
     </form>
-@endif --}}
+@endif
 
-{{-- <form action="{{ route('admin.pengajuan.kirimCatatan', $pengajuan->id) }}" method="POST">
+<form action="{{ route('admin.pengajuan.kirimCatatan', $pengajuan->id) }}" method="POST">
     @csrf
 
     <div class="mb-3">
@@ -851,9 +787,9 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Kirim</button>
-</form> --}}
+</form>
 
-{{-- @if(auth('admin')->check() && (
+@if(auth('admin')->check() && (
     (auth('admin')->user()->role === 'admin_bidang' && auth('admin')->user()->id === $pengajuan->databidang->admin_id) ||
     auth('admin')->user()->role === 'superadmin'
 ))
@@ -880,7 +816,7 @@
         </a>
     @endif
 @endif
- --}}
+
 
 <!-- Preview Modal -->
 <div id="previewModal" class="modal">

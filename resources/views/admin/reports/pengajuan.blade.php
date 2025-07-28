@@ -1,27 +1,44 @@
-@extends('layouts.admin')
+@extends('layouts.superadmin')
+
 @section('content')
-<h1 class="text-xl font-bold mb-4">Laporan Pengajuan</h1>
+<div class="container py-4">
+    <h1 class="h4 fw-bold mb-4">Laporan Pengajuan</h1>
 
-<a href="{{ route('admin.reports.export.pengajuan') }}" class="btn btn-success mb-4">📥 Export Excel</a>
+    <div class="mb-3">
+        <a href="{{ route('admin.reports.export.pengajuan') }}" class="btn btn-success">
+            <i class="fas fa-file-excel me-1"></i> Export Excel
+        </a>
+    </div>
 
-<table class="table-auto w-full border">
-    <thead>
-        <tr>
-            <th>Nama</th>
-            <th>Bidang</th>
-            <th>Status</th>
-            <th>Tanggal</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($pengajuan as $item)
-        <tr>
-            <td>{{ $item->user->nama }}</td>
-            <td>{{ $item->databidang->nama ?? '-' }}</td>
-            <td>{{ $item->status }}</td>
-            <td>{{ $item->created_at->format('Y-m-d') }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+    <div class="table-responsive bg-white shadow-sm rounded">
+        <table class="table table-bordered table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Nama</th>
+                    <th>Bidang</th>
+                    <th>Status</th>
+                    <th>Tanggal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($pengajuan as $item)
+                <tr>
+                    <td>{{ $item->user->nama }}</td>
+                    <td>{{ $item->databidang->nama ?? '-' }}</td>
+                    <td>
+                        <span class="badge 
+                            @if($item->status === 'disetujui') bg-success
+                            @elseif($item->status === 'ditolak') bg-danger
+                            @else bg-secondary
+                            @endif">
+                            {{ ucfirst($item->status) }}
+                        </span>
+                    </td>
+                    <td>{{ $item->created_at->format('Y-m-d') }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
 @endsection
