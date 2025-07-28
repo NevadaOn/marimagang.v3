@@ -30,7 +30,7 @@ Route::prefix('dokumentasi')->name('landing.documentation.')->group(function () 
     Route::get('/{id}', [LandingDocumentationController::class, 'show'])->name('show');
 });
 
-Route::get('/', fn () => view('welcome'));
+// Route::get('/', fn () => view('welcome'));
 
 Route::get('/', [BidangController::class, 'index'])->name('welcome');
 Route::get('/bidang/{slug}', [BidangController::class, 'show'])->name('bidang.show');

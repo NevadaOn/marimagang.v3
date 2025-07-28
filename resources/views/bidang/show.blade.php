@@ -37,7 +37,7 @@
         <div class="header-nav">
           <nav class="nav-main-menu d-none d-xl-block">
             <ul class="main-menu">
-              <li><a class="active" href="{{ route('index') }}">Home</a></li>
+              <li><a class="active" href="">Home</a></li>
 
               </li>
               <li><a class="color-gray-500" href="#bidangKerja">Alur Magang</a>
@@ -93,7 +93,7 @@
               </div>
               <div class="row mt-50 align-items-end">
                 <div class="col-lg-8 m-auto text-center">
-                  <h2 class="color-linear">Business Card Design</h2>
+                  <h2 class="color-linear">{{ $bidang->nama }}</h2>
                 </div>
               </div>
               <div class="row mt-30 mb-50">
@@ -118,9 +118,9 @@
               <div class="row">
                 <div class="col-lg-8">
                   <div class="content-detail border-gray-800">
-                    <h3 class="color-white mb-30 wow animate__animated animate__fadeIn">Project Details</h3>
-                    <p class="text-lg color-gray-500 wow animate__animated animate__fadeIn">Thirty there & time wear across days, make inside on these you. Can young a really, roses blog small of song their dreamy life pretty? Because really duo living to noteworthy bloom bell. Transform clean daydreaming cute twenty process rooms cool. White white dreamy dramatically place everything although. Place out apartment afternoon whimsical kinder, little romantic joy we flowers handmade. Thirty she a studio of she whimsical projects, afternoon effect going an floated maybe.</p>
-                    <p class="text-lg color-gray-500 wow animate__animated animate__fadeIn">Tortor placerat bibendum consequat sapien, facilisi facilisi pellentesque morbi. Id consectetur ut vitae a massa a. Lacus ut bibendum sollicitudin fusce sociis mi. Dictum volutpat praesent ornare accumsan elit venenatis. Congue sodales nunc quis ultricies odio porta. Egestas mauris placerat leo phasellus ut sit.</p>
+                    <h3 class="color-white mb-30 wow animate__animated animate__fadeIn">Deskripsi Bidang</h3>
+                    <p class="text-lg color-gray-500 wow animate__animated animate__fadeIn">{{ $bidang->deskripsi }}</p>
+                    {{-- <p class="text-lg color-gray-500 wow animate__animated animate__fadeIn">Tortor placerat bibendum consequat sapien, facilisi facilisi pellentesque morbi. Id consectetur ut vitae a massa a. Lacus ut bibendum sollicitudin fusce sociis mi. Dictum volutpat praesent ornare accumsan elit venenatis. Congue sodales nunc quis ultricies odio porta. Egestas mauris placerat leo phasellus ut sit.</p> --}}
                     <div class="row mt-50 wow animate__animated animate__fadeIn">
                       <div class="col-lg-6 gallery-left"><img class="img-bdrd-16 mb-30" src="{{ asset('assets/imgs/page/portfolio/portfolio-2.png') }}" alt="Genz"></div>
                       <div class="col-lg-6 gallery-right"><img class="img-bdrd-16 mb-20" src="{{ asset('assets/imgs/page/portfolio/portfolio-3.png') }}" alt="Genz"><img class="img-bdrd-16" src="{{ asset('assets/imgs/page/portfolio/portfolio-4.png') }}" alt="Genz"></div>
