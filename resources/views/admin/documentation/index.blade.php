@@ -28,7 +28,6 @@
 
   .image-grid-js img {
     width: 100%;
-    height: 180px;
     object-fit: cover;
     display: block;
   }
