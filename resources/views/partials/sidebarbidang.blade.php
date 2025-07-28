@@ -1,54 +1,61 @@
-<nav id="sidebar" class="sidebar js-sidebar">
-    <div class="sidebar-content js-simplebar">
-        {{-- Partikel efek opsional --}}
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
 
-        <a class="sidebar-brand text-center" href="{{ url('/') }}">
-            <div class="logo-container mx-auto">
-                <img src="{{ asset('img/logo-kominfo.png') }}"
-                     class="logo-image"
-                     alt="kominfo">
-            </div>
-            <div class="brand-text mt-4">
-                <div class="brand-subtitle">Portal Admin Bidang</div>
-                <div class="brand-title">DISKOMINFO Kab.Malang</div>
-            </div>
-        </a>
+  <aside class="fixed h-screen w-64 bg text-white rounded-xl flex flex-col justify-between p-4">
+    <!-- Top Logo & Search -->
+    <div>
+      <div class="flex items-center gap-3 mb-6 mt-4 ">
+        <div class="bg-indigo-500 text-white text-xl font-bold rounded-md px-2 py-1">CL</div>
+        <div>
+          <h1 class="text-base font-semibold text-white">Portal Admin</h1>
+          <p class="text-xs text-muted">DISKOMINFO Kab.Malang</p>
+        </div>
+      </div>
 
-        <ul class="sidebar-nav px-3">
-            <li class="sidebar-header">
-                <i class="fas fa-grip-horizontal me-2"></i> Pages
-            </li>
+      <div class="mb-5">
+        <input
+          type="text"
+          placeholder="Search..."
+          class="w-full px-4 py-2 rounded-md bg-gray-700 text-sm placeholder-gray-400 focus:outline-none"
+        />
+      </div>
 
-            <li class="sidebar-item {{ Request::routeIs('admin.dashboard') ? 'active' : '' }}">
-                <a class="sidebar-link" href="{{ route('admin.dashboard') }}">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
+     <!-- Sidebar Menu -->
+<nav class="flex flex-col gap-3 text-sm">
+    <!-- Dashboard -->
+    <a href="{{ route('admin.dashboard') }}"
+   class="flex items-center gap-3 px-4 py-2 rounded-md transition-all duration-150
+          text-sm no-underline hover:no-underline focus:no-underline active:no-underline
+          {{ Request::routeIs('admin.dashboard') ? 'bg-gray-700 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
+    <i class="fas fa-home w-5"></i>
+    <span>Dashboard</span>
+</a>
 
-            <li class="sidebar-item {{ Request::routeIs('admin.pengajuan.bidang') ? 'active' : '' }}">
-                <a class="sidebar-link" href="{{ route('admin.pengajuan.bidang') }}">
-                    <i class="fas fa-clipboard-list"></i>
-                    <span>Daftar Pengajuan</span>
-                </a>
-            </li>
 
-            {{-- <li class="sidebar-item disabled">
-                <a class="sidebar-link" href="#" style="pointer-events: none; opacity: 0.5;">
-                    <i class="fas fa-chart-bar"></i>
-                    <span>Laporan</span>
-                </a>
-            </li>
+    <!-- Pengajuan -->
+    <a href="{{ route('admin.pengajuan.bidang') }}"
+   class="flex items-center gap-3 px-4 py-2 rounded-md transition-all duration-150
+          text-sm no-underline hover:no-underline focus:no-underline active:no-underline
+          {{ Request::routeIs('admin.pengajuan.bidang') ? 'bg-gray-700 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
+    <i class="fas fa-chart-line w-5"></i>
+    <span>Pengajuan</span>
+</a>
 
-            <li class="sidebar-item disabled">
-                <a class="sidebar-link" href="#" style="pointer-events: none; opacity: 0.5;">
-                    <i class="fas fa-cog"></i>
-                    <span>Pengaturan</span> --}}
-                </a>
-            </li>
-        </ul>
-    </div>
 </nav>
+
+        <!-- <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-gray-800 rounded-md">
+          <i class="fas fa-bell w-5 text-gray-400"></i> Notifications
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-gray-800 rounded-md">
+          <i class="fas fa-chart-pie w-5 text-gray-400"></i> Analytics
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-gray-800 rounded-md">
+          <i class="fas fa-heart w-5 text-gray-400"></i> Likes
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-gray-800 rounded-md">
+          <i class="fas fa-wallet w-5 text-gray-400"></i> Wallets
+        </a> -->
+      </nav>
+    </div>
+
+   
+  </aside>
+

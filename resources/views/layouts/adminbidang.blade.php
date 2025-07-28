@@ -9,11 +9,9 @@
     <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
+     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
-
-    <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
     <title>@yield('title', 'Admin Bidang Dashboard - Diskominfo Kab.malang')</title>
 
@@ -23,33 +21,16 @@
     {{-- Anda bisa menambahkan CSS atau script tambahan khusus untuk head di sini --}}
     @stack('styles')
     <style>
-        margin-left: 260px;
+       .main{
+        margin-left: 250px;
     min-height: 100vh;
     padding: 20px;
     position: relative;
-    z-index: 1;
+       } 
 
-    
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 260px;
-    height: 100vh;
-    z-index: 1000;
-    backdrop-filter: blur(20px);
-    background: rgba(13, 0, 255, 0.08);
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
 
-.sidebar-content {
-    height: 100%;
-    padding: 1rem 0;
-    overflow-y: auto;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-}
+
+
 
 .logo-container .logo-image {
     width: 110px;
@@ -148,7 +129,12 @@
       #0F172A ;
     min-height: 100vh;
     }
-
+.bg{
+     background: 
+      radial-gradient(circle at top right, rgba(148, 169, 201, 0.2), transparent 50%),
+      radial-gradient(circle at bottom left, rgba(148, 169, 201, 0.15), transparent 50%),
+      #0F172A ;
+}
     .div.wrapper{
         background-color: #0F172A
     }
