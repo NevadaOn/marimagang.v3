@@ -472,9 +472,9 @@ document.addEventListener('DOMContentLoaded', function () {
       @endforeach
     </div>
 
-    <div class="mt-20 text-center">
+    {{-- <div class="mt-20 text-center">
       <a class="btn btn-primary" href="{{ route('landing.documentation.index') }}">Lihat Semua Dokumentasi</a>
-    </div>
+    </div> --}}
   </div>
 </div>
 
