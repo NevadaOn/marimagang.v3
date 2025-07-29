@@ -353,17 +353,51 @@
         {{-- ============================================= --}}
         {{-- ============ KOLOM KANAN: PANEL AKSI ============ --}}
         {{-- ============================================= --}}
-       <div class="lg:col-span-1 space-y-8 lg:sticky top-8"">
-   
-    {{-- Card Tab Utama --}}
-    <div class="card p-6 space-y-6">
-        @php
+       <div class="lg:col-span-1 space-y-8 lg:sticky top-8">
+         @php
             $admin = auth('admin')->user();
             $statusOptions = [];
             if ($admin->role === 'superadmin') { $statusOptions = ['pending', 'diproses', 'diteruskan', 'diterima', 'ditolak']; } 
             elseif ($admin->role === 'admin_dinas' && $pengajuan->status === 'pending') { $statusOptions = ['diteruskan', 'ditolak']; } 
             elseif ($admin->role === 'admin_bidang' && $pengajuan->status === 'diteruskan') { $statusOptions = ['diproses', 'diterima', 'ditolak']; }
         @endphp
+    {{-- Card Tab Lainnya --}}
+    <div  class="card p-6 space-y-4">
+        <button type="button" class="btn btn-warning w-100" onclick="openModal()">Ubah Tanggal Magang</button>
+
+        @if (in_array($admin->role, ['superadmin', 'admin_dinas']))
+        <div class="card p-3">
+            <form action="{{ route('admin.pengajuan.updateBidang', $pengajuan->id) }}" method="POST">
+                @csrf @method('PATCH')
+                <label for="databidang_id" class="form-label">Pilih Bidang</label>
+                <select name="databidang_id" class="form-select" required>
+                    @foreach ($listBidang as $bidang)
+                        <option value="{{ $bidang->id }}" {{ $pengajuan->databidang_id == $bidang->id ? 'selected' : '' }}>{{ $bidang->nama }}</option>
+                    @endforeach
+                </select>
+                <button type="submit" class="btn btn-primary mt-2 w-100">Simpan Bidang</button>
+            </form>
+        </div>
+        @endif
+
+        @if(auth('admin')->check() && (($admin->role === 'admin_bidang' && $admin->id === $pengajuan->databidang->admin_id) || $admin->role === 'superadmin'))
+        <div class="card p-3">
+            <form action="{{ route('admin.pengajuan.kesediaan.generate', $pengajuan->id) }}" method="POST">
+                @csrf
+                <label class="form-label">Buat Form Kesediaan</label>
+                <input type="text" name="nomor_surat" class="form-control mb-2" placeholder="Nomor Surat" required>
+                <input type="text" name="penanggung_jawab" class="form-control mb-2" placeholder="Penanggung Jawab" required>
+                <button type="submit" class="btn btn-primary mt-2 w-100">Generate Form</button>
+            </form>
+            @if($pengajuan->form_kesediaan_magang)
+            <a href="{{ asset('storage/' . $pengajuan->form_kesediaan_magang) }}" class="btn btn-success mt-2 w-100" target="_blank">Lihat Form</a>
+            @endif
+        </div>
+        @endif
+    </div>
+    {{-- Card Tab Utama --}}
+    <div class="card p-6 space-y-6">
+       
 {{-- Card Tab Surat --}}
 @if (in_array($admin->role, ['superadmin', 'admin_dinas']))
 <div class="card p-6 space-y-6">
@@ -425,40 +459,7 @@
 
     
 
-    {{-- Card Tab Lainnya --}}
-    <div  class="card p-6 space-y-4">
-        <button type="button" class="btn btn-warning w-100" onclick="openModal()">Ubah Tanggal Magang</button>
-
-        @if (in_array($admin->role, ['superadmin', 'admin_dinas']))
-        <div class="card p-3">
-            <form action="{{ route('admin.pengajuan.updateBidang', $pengajuan->id) }}" method="POST">
-                @csrf @method('PATCH')
-                <label for="databidang_id" class="form-label">Pilih Bidang</label>
-                <select name="databidang_id" class="form-select" required>
-                    @foreach ($listBidang as $bidang)
-                        <option value="{{ $bidang->id }}" {{ $pengajuan->databidang_id == $bidang->id ? 'selected' : '' }}>{{ $bidang->nama }}</option>
-                    @endforeach
-                </select>
-                <button type="submit" class="btn btn-primary mt-2 w-100">Simpan Bidang</button>
-            </form>
-        </div>
-        @endif
-
-        @if(auth('admin')->check() && (($admin->role === 'admin_bidang' && $admin->id === $pengajuan->databidang->admin_id) || $admin->role === 'superadmin'))
-        <div class="card p-3">
-            <form action="{{ route('admin.pengajuan.kesediaan.generate', $pengajuan->id) }}" method="POST">
-                @csrf
-                <label class="form-label">Buat Form Kesediaan</label>
-                <input type="text" name="nomor_surat" class="form-control mb-2" placeholder="Nomor Surat" required>
-                <input type="text" name="penanggung_jawab" class="form-control mb-2" placeholder="Penanggung Jawab" required>
-                <button type="submit" class="btn btn-primary mt-2 w-100">Generate Form</button>
-            </form>
-            @if($pengajuan->form_kesediaan_magang)
-            <a href="{{ asset('storage/' . $pengajuan->form_kesediaan_magang) }}" class="btn btn-success mt-2 w-100" target="_blank">Lihat Form</a>
-            @endif
-        </div>
-        @endif
-    </div>
+   
 </div>
 
 
