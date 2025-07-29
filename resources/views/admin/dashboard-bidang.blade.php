@@ -456,7 +456,7 @@
             </button>
         </div>
         
-        <div id="userDetailContent" class="space-y-6">
+        <div id="userDetailContent" class="space-y-4">
             <!-- Content will be loaded here -->
         </div>
     </div>
@@ -484,7 +484,7 @@ function showUserDetails(pengajuanId) {
     setTimeout(() => {
         content.innerHTML = `
             <div class="grid md:grid-cols-2 gap-6">
-                <div class="glass-morphism rounded-2xl p-6 border border-white/10">
+                <div class="glass-morphism rounded-2xl p-4 border border-white/10">
                     <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
                         <i class="fas fa-user mr-2 text-blue-400"></i>
                         Informasi Pribadi
@@ -505,7 +505,7 @@ function showUserDetails(pengajuanId) {
                     </div>
                 </div>
                 
-                <div class="glass-morphism rounded-2xl p-6 border border-white/10">
+                <div class="glass-morphism rounded-2xl p-4 border border-white/10">
                     <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
                         <i class="fas fa-file-alt mr-2 text-green-400"></i>
                         Status Pengajuan
@@ -525,7 +525,7 @@ function showUserDetails(pengajuanId) {
                 </div>
             </div>
             
-            <div class="glass-morphism rounded-2xl p-6 border border-white/10">
+            <div class="glass-morphism rounded-2xl p-4 border border-white/10">
                 <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
                     <i class="fas fa-paperclip mr-2 text-purple-400"></i>
                     Dokumen Terlampir
