@@ -6,7 +6,7 @@
 <div class="min-h-screen text-white py-10 px-4">
     <div class="max-w-7xl mx-auto">
 
-         <div class="rounded-3xl mb-4 bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 p-3 border-b border-white/10">
+         <div class="rounded-3xl mb-4 bg-gradient-to-r from-blue-500/10 via-cyan-500/10 to-blue-500/20 p-3 border-b border-white/10">
                     
         <h1 class="text-3xl font-bold mb-6 m-3 text-white" >Daftar Pengajuan</h1>
 

@@ -99,7 +99,7 @@
                         <h3 class="text-xl font-bold text-white mb-2">Akses Ditolak</h3>
                         <p class="text-white/80 mb-4">Anda belum ditugaskan ke bidang manapun. Silakan hubungi Super Admin untuk informasi lebih lanjut.</p>
                         <div class="flex flex-wrap gap-3">
-                            <button class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-xl text-white font-semibold transform hover:scale-105 transition-all duration-200">
+                            <button class="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 rounded-xl text-white font-semibold transform hover:scale-105 transition-all duration-200">
                                 Hubungi Admin
                             </button>
                             <button class="px-4 py-2 glass-morphism hover:bg-white/20 rounded-xl text-white font-semibold border border-white/20 transform hover:scale-105 transition-all duration-200">
@@ -123,7 +123,7 @@
                             <p class="text-white/60 text-lg">Selamat datang kembali! Kelola pengajuan dengan mudah.</p>
                         </div>
                         <div class="hidden md:block">
-                            <div class="w-20 h-20 bg-gradient-to-br from-blue-400 via-purple-500 to-cyan-400 rounded-3xl flex items-center justify-center animate-rotate-slow">
+                            <div class="w-20 h-20 bg-gradient-to-br from-blue-400 via-cyan-500 to-cyan-400 rounded-3xl flex items-center justify-center animate-rotate-slow">
                                 <i class="fas fa-tachometer-alt text-white text-3xl"></i>
                             </div>
                         </div>
@@ -211,10 +211,10 @@
                         </div>
                         <div class="flex w-full mb-3 items-center justify-between p-4 glass-morphism rounded-xl">
                             <div class="flex items-center">
-                                <div class="w-3 h-3 bg-purple-400 rounded-full mr-3 animate-pulse"></div>
+                                <div class="w-3 h-3 bg-cyan-400 rounded-full mr-3 animate-pulse"></div>
                                 <span class="text-white/80">Surat Pengantar</span>
                             </div>
-                            <span class="text-2xl font-bold text-purple-400">{{ $statusDokumen->ada_surat_pengantar ?? 0 }}</span>
+                            <span class="text-2xl font-bold text-cyan-400">{{ $statusDokumen->ada_surat_pengantar ?? 0 }}</span>
                         </div>
                         <div class="flex w-full mb-3 items-center justify-between p-4 glass-morphism rounded-xl">
                             <div class="flex items-center">
@@ -260,10 +260,10 @@
                 <!-- Recent Activity Section -->
         <div class="animate-slide-up ">
             <div class="glass-strong rounded-3xl overflow-hidden shadow-2xl h-full">
-                <div class="bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 p-6 border-b border-white/10">
+                <div class="bg-gradient-to-r from-blue-500/10 via-cyan-500/10 to-blue-500/20 p-6 border-b border-white/10">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+                            <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-cyan-600 rounded-xl flex items-center justify-center">
                                 <i class="fas fa-history text-white text-xl"></i>
                             </div>
                             <div>
@@ -280,9 +280,9 @@
                 <div class="p-6">
                     <div class="space-y-4">
                         @forelse($userPengajuan->take(5) as $activity)
-                        <div class="flex items-start space-x-4 p-4 glass-morphism rounded-xl hover:border-purple-400/30 transition-all duration-300 group">
+                        <div class="flex items-start space-x-4 p-4 glass-morphism rounded-xl hover:border-cyan-400/30 transition-all duration-300 group">
                             <div class="flex-shrink-0">
-                                <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold group-hover:animate-bounce-gentle">
+                                <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold group-hover:animate-bounce-gentle">
                                     {{ substr($activity->nama, 0, 1) }}
                                 </div>
                             </div>
@@ -312,7 +312,7 @@
                                                 Diterima
                                             </span>
                                         @else
-                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-red-400 to-pink-500 text-white mt-1">
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-red-400 to-blue-500 text-white mt-1">
                                                 Ditolak
                                             </span>
                                         @endif
@@ -348,10 +348,10 @@
     <!-- Tabel User - Span 3 columns -->
     <div class="lg:col-span-3">
         <div class="glass-strong rounded-3xl overflow-hidden shadow-2xl">
-            <div class="bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 p-6 border-b border-white/10">
+            <div class="bg-gradient-to-r from-blue-500/20 via-cyan-500/20 to-cyan-500/20 p-6 border-b border-white/10">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center">
                             <i class="fas fa-users text-white text-xl"></i>
                         </div>
                         <div>
@@ -381,10 +381,10 @@
                     </thead>
                     <tbody class="divide-y divide-white/5">
                         @forelse($userPengajuan as $user)
-                        <tr class="hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-purple-500/5 transition-all duration-300 group">
+                        <tr class="hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-cyan-500/5 transition-all duration-300 group">
                             <td class="px-3 py-4">
                                 <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold">
                                         {{ substr($user->nama, 0, 1) }}
                                     </div>
                                     <div>
@@ -404,7 +404,7 @@
                                         <i class="fas fa-check mr-1"></i>{{ ucfirst($user->status) }}
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-red-400 to-pink-500 text-white">
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-red-400 to-blue-500 text-white">
                                         <i class="fas fa-times mr-1"></i>{{ ucfirst($user->status) }}
                                     </span>
                                 @endif
@@ -417,7 +417,7 @@
                                         <i class="fas fa-eye mr-1"></i>Detail
                                     </button>
                                     <a href="{{ route('admin.pengajuan.showbidang', $user->pengajuan_id) }}" 
-                                       class="px-3 py-1 text-sm bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-lg text-white font-semibold transition-all duration-200 hover:scale-105">
+                                       class="px-3 py-1 text-sm bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 rounded-lg text-white font-semibold transition-all duration-200 hover:scale-105">
                                         <i class="fas fa-edit mr-1"></i>Edit
                                     </a>
                                 </div>
@@ -534,7 +534,7 @@ function showUserDetails(pengajuanId) {
             
             <div class="glass-morphism rounded-2xl p-4 border border-white/10">
                 <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
-                    <i class="fas fa-paperclip mr-2 text-purple-400"></i>
+                    <i class="fas fa-paperclip mr-2 text-cyan-400"></i>
                     Dokumen Terlampir
                 </h4>
                 <div class="grid md:grid-cols-2 gap-4">
@@ -562,7 +562,7 @@ function showUserDetails(pengajuanId) {
                 <button class="px-6 py-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-xl text-white font-semibold transition-all duration-200">
                     <i class="fas fa-check mr-2"></i>Terima
                 </button>
-                <button class="px-6 py-2 bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 rounded-xl text-white font-semibold transition-all duration-200">
+                <button class="px-6 py-2 bg-gradient-to-r from-red-500 to-blue-600 hover:from-red-600 hover:to-blue-700 rounded-xl text-white font-semibold transition-all duration-200">
                     <i class="fas fa-times mr-2"></i>Tolak
                 </button>
             </div>
