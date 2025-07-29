@@ -152,22 +152,22 @@
                     <div class="space-y-4">
                         <div class="flex items-center justify-between p-4 glass-morphism rounded-xl">
                             <div class="flex items-center">
-                                <div class="w-3 h-3 bg-green-400 rounded-full mr-3 animate-pulse"></div>
-                                <span class="text-white/80">Pengajuan Baru</span>
+                                <div class="w-3 h-3 bg-yellow-400 rounded-full mr-3 animate-pulse"></div>
+                                <span class="text-white/80">Pengajuan Sedang Diproses</span>
                             </div>
-                            <span class="text-2xl font-bold text-green-400">+{{ $pengajuanPending }}</span>
+                            <span class="text-2xl font-bold text-yellow-400">{{ $pengajuanPending }}</span>
                         </div>
                         <div class="flex items-center justify-between p-4 glass-morphism rounded-xl">
                             <div class="flex items-center">
                                 <div class="w-3 h-3 bg-blue-400 rounded-full mr-3 animate-pulse"></div>
-                                <span class="text-white/80">Total Diproses</span>
+                                <span class="text-green/80">Pengajuan Diterima</span>
                             </div>
                             <span class="text-2xl font-bold text-blue-400">{{ $pengajuanDiterima }}</span>
                         </div>
                         <div class="flex items-center justify-between p-4 glass-morphism rounded-xl">
                             <div class="flex items-center">
                                 <div class="w-3 h-3 bg-red-400 rounded-full mr-3 animate-pulse"></div>
-                                <span class="text-white/80">Perlu Review</span>
+                                <span class="text-white/80">Pengajuan Ditolak</span>
                             </div>
                             <span class="text-2xl font-bold text-red-400">{{ $pengajuanDitolak }}</span>
                         </div>
@@ -181,24 +181,31 @@
      <div class="glass-strong rounded-3xl overflow-hidden  shadow-2xl">
         <div class="lass-strong rounded-3xl p-8">
             <!-- Total Pengajuan -->
-                         <div class="flex w-full mb-3 items-center justify-between p-4 glass-morphism rounded-xl">
+             <div class="flex w-full mb-3 items-center justify-between p-4 glass-morphism rounded-xl">
                             <div class="flex items-center">
                                 <div class="w-3 h-3 bg-green-400 rounded-full mr-3 animate-pulse"></div>
-                                <span class="text-white/80">Pengajuan Baru</span>
+                                <span class="text-white/80">Total Pengajuan</span>
                             </div>
-                            <span class="text-2xl font-bold text-green-400">+{{ $pengajuanPending }}</span>
+                            <span class="text-2xl font-bold text-green-400">{{ $totalPengajuan }}</span>
+                        </div>
+                         <div class="flex w-full mb-3 items-center justify-between p-4 glass-morphism rounded-xl">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-yellow-400 rounded-full mr-3 animate-pulse"></div>
+                                <span class="text-white/80">Pengajuan Sedang Diproses</span>
+                            </div>
+                            <span class="text-2xl font-bold text-yellow-400">{{ $pengajuanPending }}</span>
                         </div>
                         <div class="flex w-full mb-3 items-center justify-between p-4 glass-morphism rounded-xl">
                             <div class="flex items-center">
                                 <div class="w-3 h-3 bg-blue-400 rounded-full mr-3 animate-pulse"></div>
-                                <span class="text-white/80">Total Diproses</span>
+                                <span class="text-white/80">Pengajuan Diterima</span>
                             </div>
                             <span class="text-2xl font-bold text-blue-400">{{ $pengajuanDiterima }}</span>
                         </div>
                         <div class="flex w-full mb-3 items-center justify-between p-4 glass-morphism rounded-xl">
                             <div class="flex items-center">
                                 <div class="w-3 h-3 bg-red-400 rounded-full mr-3 animate-pulse"></div>
-                                <span class="text-white/80">Perlu Review</span>
+                                <span class="text-white/80">Pengajuan Ditolak</span>
                             </div>
                             <span class="text-2xl font-bold text-red-400">{{ $pengajuanDitolak }}</span>
                         </div>
@@ -252,7 +259,7 @@
 
                 <!-- Recent Activity Section -->
         <div class="animate-slide-up ">
-            <div class="glass-strong rounded-3xl overflow-hidden shadow-2xl">
+            <div class="glass-strong rounded-3xl overflow-hidden shadow-2xl h-full">
                 <div class="bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 p-6 border-b border-white/10">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-4">
