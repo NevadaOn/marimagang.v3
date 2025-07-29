@@ -3,7 +3,7 @@
     <!-- Top Logo & Search -->
     <div>
       <div class="flex items-center gap-3 mb-6 mt-4 ">
-        <div class="bg-light text-white text-xl font-bold rounded-lg px-2 py-1"><img src="{{ asset('img/logo-kominfo.png') }}" alt="Logo" class="h-15 w-auto">
+        <div class="bg-light text-white text-xl font-bold rounded-lg px-2 py-1"><img src="{{ asset('img/logo-kominfo.png') }}" alt="Logo" class="h-10 w-auto">
 </div>
         <div>
           <h1 class="text-base font-semibold text-white">Portal Admin</h1>
