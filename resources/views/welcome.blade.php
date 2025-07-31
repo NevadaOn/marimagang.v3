@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -30,14 +31,14 @@
       <div class="main-header">
         <div class="header-logo">
           <a class="d-flex" href="{{ url('/') }}">
-            <img class="logo-night" alt="Diskominfo" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" >
-            <img class="d-none logo-day" alt="Diskominfo" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" >
+            <img class="logo-night" alt="Diskominfo" src="{{ asset('assets/imgs/template/rb_3083.svg') }}">
+            <img class="d-none logo-day" alt="Diskominfo" src="{{ asset('assets/imgs/template/rb_3083.svg') }}">
           </a>
         </div>
         <div class="header-nav">
           <nav class="nav-main-menu d-none d-xl-block">
             <ul class="main-menu">
-               <li><a class="active" href="{{ route('welcome') }}">Home</a></li>
+              <li><a class="active" href="{{ route('welcome') }}">Home</a></li>
 
               </li>
               <li><a class="color-gray-500" href="#bidangKerja">Alur Magang</a>
@@ -111,7 +112,7 @@
                 </div>
                 <div class="col-lg-6 text-center">
                   <div class="banner-img position-relative wow animate__animated animate__fadeIn"><img
-                      src="{{asset('assets\imgs\page\homepage1\3danime.png')}}" alt="Genz">
+                      src="{{asset('assets\imgs\page\homepage1\banerFix.png')}}" alt="Genz">
                     <div class="pattern-1"><img src="assets/imgs/template/pattern-1.svg" alt="Genz"></div>
                     <div class="pattern-2"><img src="assets/imgs/template/pattern-2.svg" alt="Genz"></div>
                     <div class="pattern-3"><img src="assets/imgs/template/pattern-3.svg" alt="Genz"></div>
@@ -219,280 +220,299 @@
               </div>
             </div>
             <h2 class="color-linear d-inline-block mb-10 wow animate__animated animate__fadeInUp">Alur Magang</h2>
-<p class="text-lg color-gray-500 wow animate__animated animate__fadeInUp">Tahapan proses pendaftaran dan pelaksanaan magang di Diskominfo</p>
-<div class="box-features bg-gray-850 border-gray-800 mt-70">
-  <div class="row">
+            <p class="text-lg color-gray-500 wow animate__animated animate__fadeInUp">Tahapan proses pendaftaran dan
+              pelaksanaan magang di Diskominfo</p>
+            <div class="box-features bg-gray-850 border-gray-800 mt-70">
+              <div class="row">
 
-    <!-- Tahap 1 -->
-    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0s">
-      <span class="item-icon bg-gray-950 icon-motion"></span>
-      <h5 class="color-white mb-15">1. Registrasi & Login</h5>
-      <p class="text-base color-gray-700">Calon peserta membuat akun dan login ke sistem untuk memulai proses pendaftaran magang.</p>
-    </div>
+                <!-- Tahap 1 -->
+                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0s">
+                  <span class="item-icon bg-gray-950 icon-motion"></span>
+                  <h5 class="color-white mb-15">1. Registrasi & Login</h5>
+                  <p class="text-base color-gray-700">Calon peserta membuat akun dan login ke sistem untuk memulai
+                    proses pendaftaran magang.</p>
+                </div>
 
-    <!-- Tahap 2 -->
-    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.1s">
-      <span class="item-icon bg-gray-950 icon-ui"></span>
-      <h5 class="color-white mb-15">2. Lengkapi Profil</h5>
-      <p class="text-base color-gray-700">Peserta melengkapi data diri, keahlian, dan dokumen pendukung seperti CV dan surat pengantar.</p>
-    </div>
+                <!-- Tahap 2 -->
+                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.1s">
+                  <span class="item-icon bg-gray-950 icon-ui"></span>
+                  <h5 class="color-white mb-15">2. Lengkapi Profil</h5>
+                  <p class="text-base color-gray-700">Peserta melengkapi data diri, keahlian, dan dokumen pendukung
+                    seperti CV dan surat pengantar.</p>
+                </div>
 
-    <!-- Tahap 3 -->
-    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s">
-      <span class="item-icon bg-gray-950 icon-branding"></span>
-      <h5 class="color-white mb-15">3. Ajukan Permohonan</h5>
-      <p class="text-base color-gray-700">Peserta mengajukan permohonan magang dan memilih bidang yang diminati.</p>
-    </div>
+                <!-- Tahap 3 -->
+                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s">
+                  <span class="item-icon bg-gray-950 icon-branding"></span>
+                  <h5 class="color-white mb-15">3. Ajukan Permohonan</h5>
+                  <p class="text-base color-gray-700">Peserta mengajukan permohonan magang dan memilih bidang yang
+                    diminati.</p>
+                </div>
 
-    <!-- Tahap 4 -->
-    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0s">
-      <span class="item-icon bg-gray-950 icon-social"></span>
-      <h5 class="color-white mb-15">4. Verifikasi Admin Dinas</h5>
-      <p class="text-base color-gray-700">Admin Dinas memeriksa kelengkapan data dan kesesuaian permohonan magang.</p>
-    </div>
+                <!-- Tahap 4 -->
+                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0s">
+                  <span class="item-icon bg-gray-950 icon-social"></span>
+                  <h5 class="color-white mb-15">4. Verifikasi Admin Dinas</h5>
+                  <p class="text-base color-gray-700">Admin Dinas memeriksa kelengkapan data dan kesesuaian permohonan
+                    magang.</p>
+                </div>
 
-    <!-- Tahap 5 -->
-    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.1s">
-      <span class="item-icon bg-gray-950 icon-social"></span>
-      <h5 class="color-white mb-15">5. Persetujuan Bidang</h5>
-      <p class="text-base color-gray-700">Bidang yang dituju memverifikasi dan memberikan persetujuan atau penolakan berdasarkan kuota dan kebutuhan.</p>
-    </div>
+                <!-- Tahap 5 -->
+                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.1s">
+                  <span class="item-icon bg-gray-950 icon-social"></span>
+                  <h5 class="color-white mb-15">5. Persetujuan Bidang</h5>
+                  <p class="text-base color-gray-700">Bidang yang dituju memverifikasi dan memberikan persetujuan atau
+                    penolakan berdasarkan kuota dan kebutuhan.</p>
+                </div>
 
-    <!-- Tahap 6 -->
-    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s">
-      <span class="item-icon bg-gray-950 icon-social"></span>
-      <h5 class="color-white mb-15">6. Pelaksanaan Magang</h5>
-      <p class="text-base color-gray-700">Peserta yang diterima menjalankan kegiatan magang sesuai penempatan dan jadwal yang ditentukan.</p>
-    </div>
+                <!-- Tahap 6 -->
+                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s">
+                  <span class="item-icon bg-gray-950 icon-social"></span>
+                  <h5 class="color-white mb-15">6. Pelaksanaan Magang</h5>
+                  <p class="text-base color-gray-700">Peserta yang diterima menjalankan kegiatan magang sesuai
+                    penempatan dan jadwal yang ditentukan.</p>
+                </div>
 
-    <!-- Tahap 7 -->
-    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s">
-      <span class="item-icon bg-gray-950 icon-social"></span>
-      <h5 class="color-white mb-15">7. Magang Selesai</h5>
-      <p class="text-base color-gray-700">Magang dinyatakan selesai setelah peserta memenuhi seluruh tugas dan durasi yang ditentukan.</p>
-    </div>
+                <!-- Tahap 7 -->
+                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s">
+                  <span class="item-icon bg-gray-950 icon-social"></span>
+                  <h5 class="color-white mb-15">7. Magang Selesai</h5>
+                  <p class="text-base color-gray-700">Magang dinyatakan selesai setelah peserta memenuhi seluruh tugas
+                    dan durasi yang ditentukan.</p>
+                </div>
 
-    <!-- Tahap 8 -->
-    <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s">
-      <span class="item-icon bg-gray-950 icon-social"></span>
-      <h5 class="color-white mb-15">8. Evaluasi</h5>
-      <p class="text-base color-gray-700">Peserta menerima evaluasi kinerja dan umpan balik dari pembimbing serta admin bidang.</p>
-    </div>
+                <!-- Tahap 8 -->
+                <div class="col-lg-4 col-md-6 mb-50 wow animate__animated animate__fadeIn" data-wow-delay="0.2s">
+                  <span class="item-icon bg-gray-950 icon-social"></span>
+                  <h5 class="color-white mb-15">8. Evaluasi</h5>
+                  <p class="text-base color-gray-700">Peserta menerima evaluasi kinerja dan umpan balik dari pembimbing
+                    serta admin bidang.</p>
+                </div>
 
-  </div>
-</div>
-<div class="row mt-70">
-<h2 class="color-linear d-inline-block mb-10">Statistik Lamaran Magang</h2>
-<p class="text-lg color-gray-500">Lihat total dan presentase lamaran yang masuk dari berbagai universitas, termasuk universitasmu!</p>
+              </div>
+            </div>
+            <div class="row mt-70">
+              <h2 class="color-linear d-inline-block mb-10">Statistik Lamaran Magang</h2>
+              <p class="text-lg color-gray-500">Lihat total dan presentase lamaran yang masuk dari berbagai universitas,
+                termasuk universitasmu!</p>
 
-<section class="container my-5">
-  <div class="row text-center">
-    @php
-      $cards = [
-        ['label' => 'Total Pengguna', 'value' => $totalUsers],
-        ['label' => 'Total Lamaran', 'value' => $totalPengajuan],
-        ['label' => 'Jumlah Bidang', 'value' => $totalBidang],
-        ['label' => 'Total Universitas', 'value' => $totalUniversitas],
-      ];
-    @endphp
+              <section class="container my-5 ">
+                <div class="row text-center">
+                  @php
+          $cards = [
+            ['label' => 'Total Pengguna', 'value' => $totalUsers],
+            ['label' => 'Total Lamaran', 'value' => $totalPengajuan],
+            ['label' => 'Jumlah Bidang', 'value' => $totalBidang],
+            ['label' => 'Total Universitas', 'value' => $totalUniversitas],
+          ];
+        @endphp
 
-    @foreach ($cards as $card)
-    <div class="col-md-3 mb-4">
-      <div class="p-3 rounded-xl border bg-gray-850 border-gray-800 shadow-sm text-center">
-        <h6 class="text-muted mb-1">{{ $card['label'] }}</h6>
-        <h4 class="color-white">{{ $card['value'] }}</h4>
-      </div>
-    </div>
-    @endforeach
-  </div>
+                  @foreach ($cards as $card)
+            <div class="col-md-3 mb-4">
+            <div class="p-3 rounded-xl border bg-gray-850 border-gray-800 shadow-sm text-center">
+              <h6 class="text-muted mb-1">{{ $card['label'] }}</h6>
+              <h4 class="color-white">{{ $card['value'] }}</h4>
+            </div>
+            </div>
+          @endforeach
+                </div>
 
-  @if($universitasTerbanyak->count())
-  <div class="row mt-4">
-    <div class="col-md-6 mb-4 d-flex">
-      <div class="flex-fill d-flex flex-column p-3 rounded-xl border bg-gray-850 border-gray-800 shadow-sm w-100">
-        <h6 class="text-center text-muted mb-3">Statistik Pengguna Berdasarkan Universitas</h6>
-        <div class="flex-grow-1 position-relative" style="min-height: 300px;">
-          <canvas id="pieChart" class="w-100 h-100"></canvas>
-        </div>
-      </div>
-    </div>
+                @if($universitasTerbanyak->count())
+          <div class="row mt-4">
+            <div class="col-md-6 mb-4 d-flex">
+            <div
+              class="flex-fill d-flex flex-column p-3 rounded-xl border bg-gray-850 border-gray-800 shadow-sm w-100">
+              <h6 class="text-center text-muted mb-3">Statistik Pengguna Berdasarkan Universitas</h6>
+              <div class="flex-grow-1 position-relative" style="min-height: 300px;">
+              <canvas id="pieChart" class="w-100 h-100"></canvas>
+              </div>
+            </div>
+            </div>
 
-    <div class="col-md-6 mb-4 d-flex">
-      <div class="flex-fill d-flex flex-column p-3 rounded-xl border bg-gray-850 border-gray-800 shadow-sm w-100">
-        <h6 class="text-center text-muted mb-3">Pengajuan Terbanyak Berdasarkan Bidang</h6>
-        <div class="flex-grow-1 position-relative" style="min-height: 300px;">
-          <canvas id="barChart" class="w-100 h-100"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-  @endif
-</section>
+            <div class="col-md-6 mb-4 d-flex">
+            <div
+              class="flex-fill d-flex flex-column p-3 rounded-xl border bg-gray-850 border-gray-800 shadow-sm w-100">
+              <h6 class="text-center text-muted mb-3">Pengajuan Terbanyak Berdasarkan Bidang</h6>
+              <div class="flex-grow-1 position-relative" style="min-height: 300px;">
+              <canvas id="barChart" class="w-100 h-100"></canvas>
+              </div>
+            </div>
+            </div>
+          </div>
+        @endif
+              </section>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const textColor = getComputedStyle(document.body).color;
+              <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                  const textColor = getComputedStyle(document.body).color;
 
-  const pieCtx = document.getElementById('pieChart').getContext('2d');
-  new Chart(pieCtx, {
-    type: 'doughnut',
-    data: {
-      labels: {!! json_encode($universitasTerbanyak->pluck('nama_universitas')) !!},
-      datasets: [{
-        data: {!! json_encode($universitasTerbanyak->pluck('users_count')) !!},
-        backgroundColor: [
-          'rgba(13,110,253,1)',
-          'rgba(13,110,253,0.8)',
-          'rgba(13,110,253,0.6)',
-          'rgba(13,110,253,0.4)',
-          'rgba(13,110,253,0.2)'
-        ],
-        borderWidth: 0
-      }]
-    },
-    options: {
-      cutout: '75%',
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            color: textColor
-          }
-        }
-      }
-    }
-  });
+                  const pieCtx = document.getElementById('pieChart').getContext('2d');
+                  new Chart(pieCtx, {
+                    type: 'doughnut',
+                    data: {
+                      labels: {!! json_encode($universitasTerbanyak->pluck('nama_universitas')) !!},
+                      datasets: [{
+                        data: {!! json_encode($universitasTerbanyak->pluck('users_count')) !!},
+                        backgroundColor: [
+                          'rgba(13,110,253,1)',
+                          'rgba(13,110,253,0.8)',
+                          'rgba(13,110,253,0.6)',
+                          'rgba(13,110,253,0.4)',
+                          'rgba(13,110,253,0.2)'
+                        ],
+                        borderWidth: 0
+                      }]
+                    },
+                    options: {
+                      cutout: '75%',
+                      maintainAspectRatio: false,
+                      plugins: {
+                        legend: {
+                          position: 'bottom',
+                          labels: {
+                            color: textColor
+                          }
+                        }
+                      }
+                    }
+                  });
 
-  const barCanvas = document.getElementById('barChart');
-  const barCtx = barCanvas.getContext('2d');
+                  const barCanvas = document.getElementById('barChart');
+                  const barCtx = barCanvas.getContext('2d');
 
-  const gradient = barCtx.createLinearGradient(0, 0, 0, barCanvas.height);
-  gradient.addColorStop(0, 'rgba(13,110,253,0.9)');
-  gradient.addColorStop(1, 'rgba(13,110,253,0.3)');
+                  const gradient = barCtx.createLinearGradient(0, 0, 0, barCanvas.height);
+                  gradient.addColorStop(0, 'rgba(13,110,253,0.9)');
+                  gradient.addColorStop(1, 'rgba(13,110,253,0.3)');
 
-  new Chart(barCtx, {
-    type: 'bar',
-    data: {
-      labels: {!! json_encode($pengajuanPerBidang->pluck('databidang.nama')) !!},
-      datasets: [{
-        label: 'Total Pengajuan',
-        data: {!! json_encode($pengajuanPerBidang->pluck('total')) !!},
-        backgroundColor: gradient,
-        borderRadius: 8,
-        barPercentage: 0.6
-      }]
-    },
-    options: {
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: { color: textColor },
-          grid: { color: 'rgba(255,255,255,0.1)' }
-        },
-        x: {
-          ticks: { color: textColor },
-          grid: { display: false }
-        }
-      },
-      plugins: {
-        legend: { display: false }
-      }
-    }
-  });
-});
-</script>
-</div>
+                  new Chart(barCtx, {
+                    type: 'bar',
+                    data: {
+                      labels: {!! json_encode($pengajuanPerBidang->pluck('databidang.nama')) !!},
+                      datasets: [{
+                        label: 'Total Pengajuan',
+                        data: {!! json_encode($pengajuanPerBidang->pluck('total')) !!},
+                        backgroundColor: gradient,
+                        borderRadius: 8,
+                        barPercentage: 0.6
+                      }]
+                    },
+                    options: {
+                      maintainAspectRatio: false,
+                      scales: {
+                        y: {
+                          beginAtZero: true,
+                          ticks: { color: textColor },
+                          grid: { color: 'rgba(255,255,255,0.1)' }
+                        },
+                        x: {
+                          ticks: { color: textColor },
+                          grid: { display: false }
+                        }
+                      },
+                      plugins: {
+                        legend: { display: false }
+                      }
+                    }
+                  });
+                });
+              </script>
+            </div>
 
             <div class="row mt-70" id="dokumentasi">
-                <h2 class="color-linear d-inline-block mb-10">Dokumentasi Kegiatan</h2>
-                <p class="text-lg color-gray-500">Mari magang bersama kami</p>
-<style>
-  .masonry-grid {
-    /* display: flex; */
-    /* margin-left: -10px; */
-    width: auto;
-  }
+              <h2 class="color-linear d-inline-block mb-10">Dokumentasi Kegiatan</h2>
+              <p class="text-lg color-gray-500">Mari magang bersama kami</p>
+              <style>
+                .masonry-grid {
+                  /* display: flex; */
+                  /* margin-left: -10px; */
+                  width: auto;
+                }
 
-  .masonry-sizer,
-  .masonry-item {
-    width: 22.333%; /* 3 kolom */
-    padding-left: 5px;
-    margin-bottom: 10px;
-  }
+                .masonry-sizer,
+                .masonry-item {
+                  width: 22.333%;
+                  /* 3 kolom */
+                  padding-left: 5px;
+                  margin-bottom: 10px;
+                }
 
-  @media (max-width: 768px) {
-    .masonry-sizer,
-    .masonry-item {
-      width: 50%; /* 2 kolom tablet */
-    }
-  }
+                @media (max-width: 768px) {
 
-  @media (max-width: 480px) {
-    .masonry-sizer,
-    .masonry-item {
-      width: 100%; /* 1 kolom mobile */
-    }
-  }
+                  .masonry-sizer,
+                  .masonry-item {
+                    width: 50%;
+                    /* 2 kolom tablet */
+                  }
+                }
 
-  .image-masonry {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 11px;
-  }
-</style>
-<div class="col-lg-12">
-  <div class="content-detail border-gray-800">
-    @php
-      $docs = \App\Models\Documentation::with('images')->latest()->get();
-      $allImages = [];
+                @media (max-width: 480px) {
 
-      foreach ($docs as $doc) {
-          foreach ($doc->images as $image) {
-              $allImages[] = [
-                  'path' => $image->image_path,
-                  'title' => $doc->judul_kegiatan ?? 'Tanpa Judul',
-                  'docId' => $doc->id,
-              ];
+                  .masonry-sizer,
+                  .masonry-item {
+                    width: 100%;
+                    /* 1 kolom mobile */
+                  }
+                }
+
+                .image-masonry {
+                  display: block;
+                  width: 100%;
+                  height: auto;
+                  border-radius: 11px;
+                }
+              </style>
+              <div class="col-lg-12">
+                <div class="content-detail border-gray-800">
+                  @php
+          $docs = \App\Models\Documentation::with('images')->latest()->get();
+          $allImages = [];
+
+          foreach ($docs as $doc) {
+            foreach ($doc->images as $image) {
+            $allImages[] = [
+              'path' => $image->image_path,
+              'title' => $doc->judul_kegiatan ?? 'Tanpa Judul',
+              'docId' => $doc->id,
+            ];
+            }
           }
-      }
-    @endphp
+        @endphp
 
-    <div class="masonry-grid">
-      <div class="masonry-sizer"></div> <!-- Ini penting untuk Masonry layout -->
+                  <div class="masonry-grid">
+                    <div class="masonry-sizer"></div> <!-- Ini penting untuk Masonry layout -->
 
-      @foreach($allImages as $img)
-        <div class="masonry-item">
-          <a href="{{ route('landing.documentation.show', $img['docId']) }}">
-            <img class="image-masonry" src="{{ asset('storage/' . $img['path']) }}" alt="{{ $img['title'] }}">
-          </a>
-        </div>
-      @endforeach
-    </div>
+                    @foreach($allImages as $img)
+            <div class="masonry-item">
+              <a href="{{ route('landing.documentation.show', $img['docId']) }}">
+              <img class="image-masonry" src="{{ asset('storage/' . $img['path']) }}"
+                alt="{{ $img['title'] }}">
+              </a>
+            </div>
+          @endforeach
+                  </div>
 
-    {{-- <div class="mt-20 text-center">
-      <a class="btn btn-primary" href="{{ route('landing.documentation.index') }}">Lihat Semua Dokumentasi</a>
-    </div> --}}
-  </div>
-</div>
+                  {{-- <div class="mt-20 text-center">
+                    <a class="btn btn-primary" href="{{ route('landing.documentation.index') }}">Lihat Semua
+                      Dokumentasi</a>
+                  </div> --}}
+                </div>
+              </div>
 
-<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var grid = document.querySelector('.masonry-grid');
-    imagesLoaded(grid, function () {
-      new Masonry(grid, {
-        itemSelector: '.masonry-item',
-        columnWidth: '.masonry-sizer',
-        gutter: 10,
-        percentPosition: true
-      });
-    });
-  });
-</script>
+              <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+              <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+              <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                  var grid = document.querySelector('.masonry-grid');
+                  imagesLoaded(grid, function () {
+                    new Masonry(grid, {
+                      itemSelector: '.masonry-item',
+                      columnWidth: '.masonry-sizer',
+                      gutter: 10,
+                      percentPosition: true
+                    });
+                  });
+                });
+              </script>
 
               {{-- <div class="col-lg-4">
                 <div class="sidebar">
@@ -627,7 +647,8 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="row">
           <div class="col-lg-4 mb-30"><a class="wow animate__animated animate__fadeInUp" href="index.html"><img
                 class="logo-night" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" width="110px" alt="Genz"><img
-                class="d-none logo-day" alt="GenZ" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" width="110px"></a>
+                class="d-none logo-day" alt="GenZ" src="{{ asset('assets/imgs/template/rb_3083.svg') }}"
+                width="110px"></a>
             <p class="mb-20 mt-20 text-sm color-gray-500 wow animate__animated animate__fadeInUp">Kementerian Komunikasi
               dan Informatika, yang merupakan kementerian dalam pemerintahan Indonesia yang bertanggung jawab atas
               urusan di bidang komunikasi dan informatika. </p>
