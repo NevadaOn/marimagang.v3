@@ -111,7 +111,7 @@
                 </div>
                 <div class="col-lg-6 text-center">
                   <div class="banner-img position-relative wow animate__animated animate__fadeIn"><img
-                      src="{{asset('assets/imgs/page/homepage1/banner.svg')}}" alt="Genz">
+                      src="{{asset('assets\imgs\page\homepage1\3danime.png')}}" alt="Genz">
                     <div class="pattern-1"><img src="assets/imgs/template/pattern-1.svg" alt="Genz"></div>
                     <div class="pattern-2"><img src="assets/imgs/template/pattern-2.svg" alt="Genz"></div>
                     <div class="pattern-3"><img src="assets/imgs/template/pattern-3.svg" alt="Genz"></div>
