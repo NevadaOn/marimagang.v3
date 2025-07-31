@@ -1,659 +1,622 @@
 @extends('layouts.adminbidang')
 
 @section('content')
-    <style>
-        :root {
-            --primary-color: #1e3a8a; /* Biru Kominfo */
-            --secondary-color: #000000; /* Hitam */
-            --accent-color: #3b82f6;
-            --glass-bg: rgba(0, 0, 0, 0.075);
-            --glass-border: rgba(0, 0, 0, 0.055);
-            --text-primary: #1f2937;
-            --text-secondary: #6b7280;
-            --gradient-1: linear-gradient(135deg, #1e3a8a, #3b82f6);
-            --gradient-2: linear-gradient(135deg, rgb(242, 255, 56), rgb(141, 160, 31));
-            --gradient-3: linear-gradient(135deg, #059669, #10b981);
-            --gradient-4: linear-gradient(135deg, #dc2626, #ef4444);
-            --gradient-5: linear-gradient(135deg, #7c3aed, #a855f7);
-            --gradient-6: linear-gradient(135deg, #ea580c, #f97316);
-        }
-
-        body {
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
-        .main-content {
-            padding: 0;
-            background: transparent;
-            position: relative;
-        }
-
-        .main-content::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 25% 25%, rgba(30, 59, 138, 0.146) 0%, transparent 50%),
-                radial-gradient(circle at 75% 30%, rgba(59, 131, 246, 0.094) 0%, transparent 60%),
-                radial-gradient(circle at 80% 80%, rgba(30, 59, 138, 0.114) 0%, transparent 70%),
-                radial-gradient(circle at 20% 70%, rgba(147, 196, 253, 0.071) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: -2;
-            animation: floatingLights 20s ease-in-out infinite;
-        }
-
-        .main-content::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 60% 10%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 10% 60%, rgba(30, 58, 138, 0.15) 0%, transparent 45%);
-            pointer-events: none;
-            z-index: -1;
-            animation: floatingLights 25s ease-in-out infinite reverse;
-        }
-
-        @keyframes floatingLights {
-            0%, 100% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 1;
-            }
-            33% {
-                transform: translate(30px, -30px) rotate(120deg);
-                opacity: 0.8;
-            }
-            66% {
-                transform: translate(-20px, 20px) rotate(240deg);
-                opacity: 0.9;
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        darkMode: 'class',
+        theme: {
+            extend: {
+                animation: {
+                    'float': 'float 6s ease-in-out infinite',
+                    'glow': 'glow 2s ease-in-out infinite alternate',
+                    'slide-up': 'slideUp 0.5s ease-out',
+                    'fade-in': 'fadeIn 0.6s ease-out',
+                    'bounce-gentle': 'bounceGentle 2s ease-in-out infinite',
+                    'rotate-slow': 'rotateSlow 20s linear infinite',
+                },
+                keyframes: {
+                    float: {
+                        '0%, 100%': { transform: 'translateY(0px)' },
+                        '50%': { transform: 'translateY(-10px)' },
+                    },
+                    glow: {
+                        '0%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)' },
+                        '100%': { boxShadow: '0 0 40px rgba(59, 130, 246, 0.6)' },
+                    },
+                    slideUp: {
+                        '0%': { opacity: '0', transform: 'translateY(30px)' },
+                        '100%': { opacity: '1', transform: 'translateY(0)' },
+                    },
+                    fadeIn: {
+                        '0%': { opacity: '0' },
+                        '100%': { opacity: '1' },
+                    },
+                    bounceGentle: {
+                        '0%, 100%': { transform: 'translateY(0)' },
+                        '50%': { transform: 'translateY(-5px)' },
+                    },
+                    rotateSlow: {
+                        '0%': { transform: 'rotate(0deg)' },
+                        '100%': { transform: 'rotate(360deg)' },
+                    }
+                }
             }
         }
+    }
+</script>
 
-        .content-wrapper {
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                0 2px 16px rgba(255, 255, 255, 0.05) inset,
-                0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.4),
-                0 4px 16px rgba(255, 255, 255, 0.1) inset,
-                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-        }
-
-        .stats-card {
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                0 2px 8px rgba(255, 255, 255, 0.05) inset;
-        }
-
-        .stats-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--card-gradient, var(--gradient-1));
-            opacity: 0.1;
-            transition: opacity 0.4s ease;
-            z-index: 1;
-        }
-
-        .stats-card:hover::before {
-            opacity: 0.2;
-        }
-
-        .stats-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.4),
-                0 8px 32px rgba(255, 255, 255, 0.08) inset,
-                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-        }
-
-        .stats-card .stats-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .stats-card.card-1 { --card-gradient: var(--gradient-1); }
-        .stats-card.card-2 { --card-gradient: var(--gradient-2); }
-        .stats-card.card-3 { --card-gradient: var(--gradient-3); }
-        .stats-card.card-4 { --card-gradient: var(--gradient-4); }
-        .stats-card.card-5 { --card-gradient: var(--gradient-5); }
-        .stats-card.card-6 { --card-gradient: var(--gradient-6); }
-
-        .stats-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: var(--card-gradient, var(--gradient-1));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-            transition: all 0.3s ease;
-        }
-
-        .stats-card:hover .stats-value {
-            transform: scale(1.1);
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
-        }
-
-        .stats-label {
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .stats-icon {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-            z-index: 2;
-        }
-
-        .stats-card:hover .stats-icon {
-            color: rgba(255, 255, 255, 0.6);
-            transform: scale(1.2) rotate(10deg);
-        }
-
-        .info-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                0 2px 8px rgba(255, 255, 255, 0.05) inset;
-        }
-
-        .info-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-1);
-            border-radius: 20px 20px 0 0;
-        }
-
-        .info-label {
-            
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 700;
-        }
-
-        .info-value {
-            
-            color: rgba(255, 255, 255, 0.95);
-            font-size: 0.85rem;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                0 2px 8px rgba(255, 255, 255, 0.05) inset;
-            overflow: hidden;
-        }
-
-        .card-header {
-            background: rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.95);
-            position: relative;
-        }
-
-        .card-header::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--gradient-1);
-        }
-
-        .table {
-            background: transparent;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .table-hover tbody tr:hover {
-            background: rgba(30, 58, 138, 0.2);
-        }
-
-        .table thead th {
-            background: rgba(255, 255, 255, 0.05);
-            border: none;
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 0.85rem;
-        }
-
-        .table tbody td {
-            border-color: rgba(255, 255, 255, 0.08);
-            vertical-align: middle;
-            color: rgba(255, 255, 255, 0.85);
-        }
-
-        .table tbody td.fw-semibold {
-            color: rgba(255, 255, 255, 0.95);
-        }
-
-        .btn-primary {
-            background: var(--gradient-1);
-            border: none;
-            border-radius: 12px;
-            padding: 0.5rem 1.2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(30, 58, 138, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(30, 58, 138, 0.4);
-            background: var(--gradient-1);
-        }
-
-        .btn-outline-primary {
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-            border-radius: 12px;
-            padding: 0.4rem 1rem;
-            font-weight: 600;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline-primary:hover {
-            background: var(--primary-color);
-            color: black;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(30, 58, 138, 0.3);
-        }
-
-        .badge {
-            border-radius: 12px;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .badge.pending {
-            background: linear-gradient(135deg, #f59e0b, #fbbf24);
-            color: white;
-        }
-
-        .badge.diterima {
-            background: linear-gradient(135deg, #10b981, #34d399);
-            color: white;
-        }
-
-        .badge.ditolak {
-            background: linear-gradient(135deg, #ef4444, #f87171);
-            color: white;
-        }
-
-        .badge.bg-secondary {
-            background: var(--gradient-1) !important;
-            color: white;
-        }
-
-        .alert {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            border-radius: 20px;
-            color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn-group .btn {
-            margin: 0 0.2rem;
-        }
-
-        .table-responsive {
-            border-radius: 0 0 24px 24px;
-        }
-
-        .empty-state {
-            padding: 4rem 2rem;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .empty-state i {
-            opacity: 0.4;
-            margin-bottom: 1rem;
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .empty-state h6 {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .empty-state .text-muted {
-            color: rgba(255, 255, 255, 0.5) !important;
-        }
-
-        /* Animasi loading untuk stats cards */
-        .stats-card {
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        .stats-card:nth-child(1) { animation-delay: 0.1s; }
-        .stats-card:nth-child(2) { animation-delay: 0.2s; }
-        .stats-card:nth-child(3) { animation-delay: 0.3s; }
-        .stats-card:nth-child(4) { animation-delay: 0.4s; }
-        .stats-card:nth-child(5) { animation-delay: 0.5s; }
-        .stats-card:nth-child(6) { animation-delay: 0.6s; }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
-    <div class="main-content py-4">
-        <div class="container content-wrapper">
-            @if(!$bidang)
-            <div class="alert alert-warning glass-card d-flex align-items-center">
-                <i class="fas fa-exclamation-triangle me-2"></i>
-                <span>Anda belum ditugaskan ke bidang manapun. Silakan hubungi Super Admin untuk informasi lebih lanjut.</span>
-            </div>
-            @else
+<style>
+    body {
+        background: radial-gradient(ellipse at top, #1e293b 0%, #0f172a 100%);
+        min-height: 100vh;
+    }
     
-            <!-- INFORMASI BIDANG -->
-            <div class="info-card mb-5 p-4 border-0 shadow" style="
-    background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border-radius: 20px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-">
-    <div class="d-flex align-items-center mb-4">
-        <div class="rounded-circle d-flex align-items-center justify-content-center me-3" style="
-            width: 48px;
-            height: 48px;
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        ">
-            <i class="fas fa-info-circle text-white fs-4"></i>
+    .glass-morphism {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .glass-strong {
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    
+    .floating-elements::before {
+        content: '';
+        position: fixed;
+        top: -10%;
+        left: -10%;
+        width: 120%;
+        height: 120%;
+        background: radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+                    radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 60%);
+        animation: float 20s ease-in-out infinite;
+        pointer-events: none;
+        z-index: -1;
+    }
+</style>
+
+<div class="min-h-screen text-white relative floating-elements">
+    <div class="container mx-auto px-4 py-8 space-y-8">
+        
+        @if(!$bidang)
+        <!-- Alert Section dengan Layout Baru -->
+        <div class="relative overflow-hidden">
+            <div class="glass-morphism rounded-3xl p-8 border shadow-2xl animate-slide-up">
+                <div class="flex items-start space-x-6">
+                    <div class="flex-shrink-0">
+                        <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center animate-bounce-gentle">
+                            <i class="fas fa-exclamation-triangle text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-white mb-2">Akses Ditolak</h3>
+                        <p class="text-white/80 mb-4">Anda belum ditugaskan ke bidang manapun. Silakan hubungi Super Admin untuk informasi lebih lanjut.</p>
+                        <div class="flex flex-wrap gap-3">
+                            <button class="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 rounded-xl text-white font-semibold transform hover:scale-105 transition-all duration-200">
+                                Hubungi Admin
+                            </button>
+                            <button class="px-4 py-2 glass-morphism hover:bg-white/20 rounded-xl text-white font-semibold border border-white/20 transform hover:scale-105 transition-all duration-200">
+                                Kembali
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h2 class="m-0 text-white" style="font-weight: 600; font-size: 1.6rem;">Informasi Bidang</h2>
+        @else
+
+        <!-- Hero Dashboard Section dengan Layout Grid Modern -->
+        <div class="grid lg:grid-cols-3 gap-8 animate-fade-in">
+            <!-- Main Dashboard Info -->
+            <div class="lg:col-span-2">
+                <div class="glass-strong rounded-3xl p-8 h-full">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h1 class="text-4xl font-black text-white mb-2">Dashboard Admin</h1>
+                            <p class="text-white/60 text-lg">Selamat datang kembali! Kelola pengajuan dengan mudah.</p>
+                        </div>
+                        <div class="hidden md:block">
+                            <div class="w-20 h-20 bg-gradient-to-br from-blue-400 via-cyan-500 to-cyan-400 rounded-3xl flex items-center justify-center animate-rotate-slow">
+                                <i class="fas fa-tachometer-alt text-white text-3xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Informasi Bidang dalam Card Terpisah -->
+                    <div class="glass-morphism rounded-2xl p-6 border border-white/20 w-auto">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-building text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">{{ $bidang->nama }}</h3>
+                        </div>
+                        <p class="text-white/80">{{ $bidang->deskripsi ?? 'Tidak ada deskripsi tersedia' }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Stats Sidebar -->
+            <div class="space-y-6">
+                <div class="glass-strong rounded-3xl p-8">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+                        <i class="fas fa-chart-line mr-3 text-cyan-400"></i>
+                        Ringkasan Hari Ini
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 glass-morphism rounded-xl">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-yellow-400 rounded-full mr-3 animate-pulse"></div>
+                                <span class="text-white/80">Pengajuan Sedang Diproses</span>
+                            </div>
+                            <span class="text-2xl font-bold text-yellow-400">{{ $pengajuanPending }}</span>
+                        </div>
+                        <div class="flex items-center justify-between p-4 glass-morphism rounded-xl">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-blue-400 rounded-full mr-3 animate-pulse"></div>
+                                <span class="text-green/80">Pengajuan Diterima</span>
+                            </div>
+                            <span class="text-2xl font-bold text-blue-400">{{ $pengajuanDiterima }}</span>
+                        </div>
+                        <div class="flex items-center justify-between p-4 glass-morphism rounded-xl">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-red-400 rounded-full mr-3 animate-pulse"></div>
+                                <span class="text-white/80">Pengajuan Ditolak</span>
+                            </div>
+                            <span class="text-2xl font-bold text-red-400">{{ $pengajuanDitolak }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<div class="d-flex justify-center space-x-7">
+    <!-- Statistics Grid dengan Layout Hexagonal -->
+     <div class="glass-strong rounded-3xl overflow-hidden  shadow-2xl">
+        <div class="lass-strong rounded-3xl p-8">
+            <!-- Total Pengajuan -->
+             <div class="flex w-full mb-3 items-center justify-between p-4 glass-morphism rounded-xl">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-green-400 rounded-full mr-3 animate-pulse"></div>
+                                <span class="text-white/80">Total Pengajuan</span>
+                            </div>
+                            <span class="text-2xl font-bold text-green-400">{{ $totalPengajuan }}</span>
+                        </div>
+                         <div class="flex w-full mb-3 items-center justify-between p-4 glass-morphism rounded-xl">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-yellow-400 rounded-full mr-3 animate-pulse"></div>
+                                <span class="text-white/80">Pengajuan Sedang Diproses</span>
+                            </div>
+                            <span class="text-2xl font-bold text-yellow-400">{{ $pengajuanPending }}</span>
+                        </div>
+                        <div class="flex w-full mb-3 items-center justify-between p-4 glass-morphism rounded-xl">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-blue-400 rounded-full mr-3 animate-pulse"></div>
+                                <span class="text-white/80">Pengajuan Diterima</span>
+                            </div>
+                            <span class="text-2xl font-bold text-blue-400">{{ $pengajuanDiterima }}</span>
+                        </div>
+                        <div class="flex w-full mb-3 items-center justify-between p-4 glass-morphism rounded-xl">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-red-400 rounded-full mr-3 animate-pulse"></div>
+                                <span class="text-white/80">Pengajuan Ditolak</span>
+                            </div>
+                            <span class="text-2xl font-bold text-red-400">{{ $pengajuanDitolak }}</span>
+                        </div>
+                        <div class="flex w-full mb-3 items-center justify-between p-4 glass-morphism rounded-xl">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-cyan-400 rounded-full mr-3 animate-pulse"></div>
+                                <span class="text-white/80">Surat Pengantar</span>
+                            </div>
+                            <span class="text-2xl font-bold text-cyan-400">{{ $statusDokumen->ada_surat_pengantar ?? 0 }}</span>
+                        </div>
+                        <div class="flex w-full mb-3 items-center justify-between p-4 glass-morphism rounded-xl">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-yellow-400 rounded-full mr-3 animate-pulse"></div>
+                                <span class="text-white/80">Proposal</span>
+                            </div>
+                            <span class="text-2xl font-bold text-yellow-400">{{ $statusDokumen->ada_proposal ?? 0 }}</span>
+                        </div>
+        </div></div>
+
+        <!-- Statistik Bidang -->
+                <div class="glass-strong rounded-3xl overflow-hidden  shadow-2xl">
+                    <div class="bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-cyan-500/20 p-3 border-b border-white/10">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-chart-bar text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Statistik Bidang</h3>
+                                <p class="text-white/60">Overview semua bidang</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-3 space-y-2">
+                        @foreach ($bidangStats as $b)
+                        <div class="flex items-center justify-between p-4 glass-morphism rounded-xl hover:border-emerald-400/30 transition-all duration-300 group">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full animate-pulse"></div>
+                                <span class="text-white/90 font-semibold">{{ $b->nama }}</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-2xl font-bold text-emerald-400">{{ $b->total_pengajuan }}</span>
+                                <div class="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center group-hover:animate-bounce-gentle">
+                                    <i class="fas fa-arrow-up text-white text-sm"></i>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Recent Activity Section -->
+        <div class="animate-slide-up ">
+            <div class="glass-strong rounded-3xl overflow-hidden shadow-2xl h-full">
+                <div class="bg-gradient-to-r from-blue-500/10 via-cyan-500/10 to-blue-500/20 p-6 border-b border-white/10">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-cyan-600 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-history text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Aktivitas Terbaru</h3>
+                                <p class="text-white/60">Update terkini dari sistem</p>
+                            </div>
+                        </div>
+                        <button class="px-4 py-2 glass-morphism hover:bg-white/20 rounded-xl text-white font-semibold border border-white/20 transition-all duration-200">
+                            <i class="fas fa-sync-alt mr-2"></i>Refresh
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="space-y-4">
+                        @forelse($userPengajuan->take(5) as $activity)
+                        <div class="flex items-start space-x-4 p-4 glass-morphism rounded-xl hover:border-cyan-400/30 transition-all duration-300 group">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold group-hover:animate-bounce-gentle">
+                                    {{ substr($activity->nama, 0, 1) }}
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="text-white font-semibold">{{ $activity->nama }}</h4>
+                                        <p class="text-white/70 text-sm">
+                                            @if($activity->status == 'pending')
+                                                Mengajukan permohonan baru
+                                            @elseif($activity->status == 'diterima')
+                                                Pengajuan telah diterima
+                                            @else
+                                                Pengajuan ditolak
+                                            @endif
+                                        </p>
+                                        <p class="text-white/50 text-xs">{{ $activity->nama_universitas }}</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-white/60 text-sm">{{ \Carbon\Carbon::parse($activity->tanggal_pengajuan)->diffForHumans() }}</div>
+                                        @if($activity->status == 'pending')
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-yellow-400 to-orange-500 text-white mt-1">
+                                                Pending
+                                            </span>
+                                        @elseif($activity->status == 'diterima')
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-green-400 to-emerald-500 text-white mt-1">
+                                                Diterima
+                                            </span>
+                                        @else
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-red-400 to-blue-500 text-white mt-1">
+                                                Ditolak
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @empty
+                        <div class="text-center py-12">
+                            <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-clock text-white/30 text-3xl"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold text-white/80 mb-2">Belum ada aktivitas</h4>
+                            <p class="text-white/50">Aktivitas terbaru akan muncul di sini</p>
+                        </div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @endif
     </div>
-    <div class="row g-4">
-        <div class="col-md-6">
-            <div class="text-uppercase text-white-50 small mb-1">Nama Bidang</div>
-            <div class="fs-5 text-white fw-medium">{{ $bidang->nama }}</div>
+</div>
+
+</div>
+        
+
+        <!-- Main Content Grid - 2 Column Layout -->
+<div class="w-full px-4 md:px-8">
+
+
+    <!-- Tabel User - Span 3 columns -->
+    <div class="lg:col-span-3">
+        <div class="glass-strong rounded-3xl overflow-hidden shadow-2xl">
+            <div class="bg-gradient-to-r from-blue-500/20 via-cyan-500/20 to-cyan-500/20 p-6 border-b border-white/10">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-users text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Daftar User Pengajuan</h3>
+                            <p class="text-white/60">Kelola semua pengajuan pengguna</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="px-4 py-2 glass-morphism hover:bg-white/20 rounded-xl text-white font-semibold border border-white/20 transition-all duration-200">
+                            <i class="fas fa-filter mr-2"></i>Filter
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-white">
+                    <thead class="bg-white/5">
+                        <tr>
+                            <th class="px-3 py-4 text-left text-sm font-bold text-white/90 uppercase tracking-wide">Nama</th>
+                            <th class="px-3 py-4 text-left text-sm font-bold text-white/90 uppercase tracking-wide">Email</th>
+                            <th class="px-3 py-4 text-left text-sm font-bold text-white/90 uppercase tracking-wide">Universitas</th>
+                            <th class="px-3 py-4 text-left text-sm font-bold text-white/90 uppercase tracking-wide">Status</th>
+                            <th class="px-3 py-4 text-left text-sm font-bold text-white/90 uppercase tracking-wide">Tanggal</th>
+                            <th class="px-3 py-4 text-left text-sm font-bold text-white/90 uppercase tracking-wide">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5">
+                        @forelse($userPengajuan as $user)
+                        <tr class="hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-cyan-500/5 transition-all duration-300 group">
+                            <td class="px-3 py-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold">
+                                        {{ substr($user->nama, 0, 1) }}
+                                    </div>
+                                    <div>
+                                        <div class="text-white/90 font-semibold">{{ $user->nama }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-3 py-4 text-white/80">{{ $user->email }}</td>
+                            <td class="px-3 py-4 text-white/80">{{ $user->nama_universitas }}</td>
+                            <td class="px-3 py-4">
+                                @if($user->status == 'pending')
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-yellow-400 to-orange-500 text-white">
+                                        <i class="fas fa-clock mr-1"></i>{{ ucfirst($user->status) }}
+                                    </span>
+                                @elseif($user->status == 'diterima')
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-green-400 to-emerald-500 text-white">
+                                        <i class="fas fa-check mr-1"></i>{{ ucfirst($user->status) }}
+                                    </span>
+                                @else
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-red-400 to-blue-500 text-white">
+                                        <i class="fas fa-times mr-1"></i>{{ ucfirst($user->status) }}
+                                    </span>
+                                @endif
+                            </td>
+                            <td class="px-3 py-4 text-white/80">{{ \Carbon\Carbon::parse($user->tanggal_pengajuan)->format('d/m/Y') }}</td>
+                            <td class="px-3 py-4">
+                                <div class="flex space-x-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
+                                    <button onclick="showUserDetails({{ $user->pengajuan_id }})" 
+                                            class="px-3 py-1 text-sm glass-morphism hover:bg-white/20 border border-white/20 rounded-lg text-white font-semibold transition-all duration-200 hover:scale-105">
+                                        <i class="fas fa-eye mr-1"></i>Detail
+                                    </button>
+                                    <a href="{{ route('admin.pengajuan.showbidang', $user->pengajuan_id) }}" 
+                                       class="px-3 py-1 text-sm bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 rounded-lg text-white font-semibold transition-all duration-200 hover:scale-105">
+                                        <i class="fas fa-edit mr-1"></i>Edit
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="6" class="px-6 py-16 text-center">
+                                <div class="flex flex-col items-center space-y-4">
+                                    <div class="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-inbox text-white/30 text-4xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-semibold text-white/80 mb-2">Belum ada pengajuan</h4>
+                                        <p class="text-white/50">Data pengajuan akan muncul di sini ketika ada user yang mengajukan</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="col-md-6">
-            <div class="text-uppercase text-white-50 small mb-1">Deskripsi</div>
-            <div class="fs-5 text-white fw-medium">{{ $bidang->deskripsi ?? 'Tidak ada deskripsi' }}</div>
+    </div>
+
+    <!-- Statistik Bidang Sidebar - Span 2 columns -->
+    <div class="lg:col-span-2 space-y-6">
+        {{-- Konten statistik atau info lainnya di sini --}}
+    </div>
+</div>
+
+<!-- Modal untuk Detail User -->
+<div id="userDetailModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
+    <div class="glass-strong rounded-3xl p-8 max-w-2xl w-full mx-4 border border-white/20 shadow-2xl animate-slide-up">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-white flex items-center">
+                <i class="fas fa-user-circle mr-3 text-blue-400"></i>
+                Detail Pengajuan
+            </h3>
+            <button onclick="closeUserDetails()" class="w-10 h-10 glass-morphism hover:bg-white/20 rounded-xl flex items-center justify-center text-white border border-white/20 transition-all duration-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div id="userDetailContent" class="space-y-4">
+            <!-- Content will be loaded here -->
         </div>
     </div>
 </div>
 
+
+<script>
+// Fungsi untuk menampilkan detail user
+function showUserDetails(pengajuanId) {
+    const modal = document.getElementById('userDetailModal');
+    const content = document.getElementById('userDetailContent');
     
-            <!-- STATISTIK -->
-            <div class="row g-4 mb-5">
-                <div class="col-md-4 col-lg-2">
-                    <div class="stats-card card-1 text-center p-3 h-100">
-                        <i class="fas fa-clipboard-list stats-icon mb-2"></i>
-                        <div class="stats-content">
-                            <div class="stats-value">{{ $totalPengajuan }}</div>
-                            <div class="stats-label">Total Pengajuan</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-2">
-                    <div class="stats-card card-2 text-center p-3 h-100">
-                        <i class="fas fa-clock stats-icon mb-2"></i>
-                        <div class="stats-content">
-                            <div class="stats-value">{{ $pengajuanPending }}</div>
-                            <div class="stats-label">Pending</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-2">
-                    <div class="stats-card card-3 text-center p-3 h-100">
-                        <i class="fas fa-check-circle stats-icon mb-2"></i>
-                        <div class="stats-content">
-                            <div class="stats-value">{{ $pengajuanDiterima }}</div>
-                            <div class="stats-label">Diterima</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-2">
-                    <div class="stats-card card-4 text-center p-3 h-100">
-                        <i class="fas fa-times-circle stats-icon mb-2"></i>
-                        <div class="stats-content">
-                            <div class="stats-value">{{ $pengajuanDitolak }}</div>
-                            <div class="stats-label">Ditolak</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-2">
-                    <div class="stats-card card-5 text-center p-3 h-100">
-                        <i class="fas fa-envelope stats-icon mb-2"></i>
-                        <div class="stats-content">
-                            <div class="stats-value">{{ $statusDokumen->ada_surat_pengantar ?? 0 }}</div>
-                            <div class="stats-label">Surat Pengantar</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-2">
-                    <div class="stats-card card-6 text-center p-3 h-100">
-                        <i class="fas fa-file-alt stats-icon mb-2"></i>
-                        <div class="stats-content">
-                            <div class="stats-value">{{ $statusDokumen->ada_proposal ?? 0 }}</div>
-                            <div class="stats-label">Proposal</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            <!-- TABEL BIDANG -->
-            <div class="card mb-5 glass-card">
-                <div class="card-header d-flex align-items-center">
-                    <i class="fas fa-chart-bar me-2"></i> Statistik Semua Bidang
-                </div>
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover mb-0 text-white">
-                            <thead class="table-light text-dark">
-                                <tr>
-                                    <th>Nama Bidang</th>
-                                    <th>Jumlah Pengajuan</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($bidangStats as $b)
-                                <tr>
-                                    <td class="fw-semibold">{{ $b->nama }}</td>
-                                    <td><span class="badge bg-secondary">{{ $b->total_pengajuan }}</span></td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-    
-            <!-- TABEL USER -->
-            <div class="card glass-card">
-                <div class="card-header d-flex align-items-center">
-                    <i class="fas fa-users me-2"></i> Daftar User Pengajuan
-                </div>
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover mb-0 text-white">
-                            <thead class="table-light text-dark">
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Universitas</th>
-                                    <th>Status</th>
-                                    <th>Tanggal</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($userPengajuan as $user)
-                                <tr>
-                                    <td class="fw-semibold">{{ $user->nama }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->nama_universitas }}</td>
-                                    <td>
-                                        <span class="badge {{ $user->status }}">{{ ucfirst($user->status) }}</span>
-                                    </td>
-                                    <td>{{ \Carbon\Carbon::parse($user->tanggal_pengajuan)->format('d/m/Y') }}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button class="btn btn-sm btn-outline-primary bg-white"
-                                                    onclick="showUserDetails({{ $user->pengajuan_id }})"
-                                                    title="Lihat Detail">
-                                                <i class="fas fa-eye"></i> Detail
-                                            </button>
-                                            <a href="{{ route('admin.pengajuan.showbidang', $user->pengajuan_id) }}"
-                                               class="btn btn-sm btn-primary"
-                                               title="Edit">
-                                                <i class="fas fa-edit"></i> Edit
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr>
-                                    <td colspan="6" class="text-center py-4">
-                                        <div class="empty-state">
-                                            <i class="fas fa-inbox fa-3x mb-2"></i>
-                                            <h6 class="mb-1">Belum ada pengajuan</h6>
-                                            <p class="text-muted">Data pengajuan akan muncul di sini</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-    
-            @endif
+    // Show loading
+    content.innerHTML = `
+        <div class="flex items-center justify-center py-12">
+            <div class="w-12 h-12 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
         </div>
-    </div>
+    `;
     
-    <script>
-        function showUserDetails(pengajuanId) {
-            // Implementasi modal atau detail view
-            alert('Detail untuk pengajuan ID: ' + pengajuanId);
+    // Show modal
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    
+    // Simulate loading data (replace with actual AJAX call)
+    setTimeout(() => {
+        content.innerHTML = `
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="glass-morphism rounded-2xl p-4 border border-white/10">
+                    <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+                        <i class="fas fa-user mr-2 text-blue-400"></i>
+                        Informasi Pribadi
+                    </h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-white/70">Nama:</span>
+                            <span class="text-white font-semibold">Loading...</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-white/70">Email:</span>
+                            <span class="text-white font-semibold">Loading...</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-white/70">Universitas:</span>
+                            <span class="text-white font-semibold">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-morphism rounded-2xl p-4 border border-white/10">
+                    <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+                        <i class="fas fa-file-alt mr-2 text-green-400"></i>
+                        Status Pengajuan
+                    </h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-white/70">Status:</span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-yellow-400 to-orange-500 text-white">
+                                <i class="fas fa-clock mr-1"></i>Pending
+                            </span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-white/70">Tanggal:</span>
+                            <span class="text-white font-semibold">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass-morphism rounded-2xl p-4 border border-white/10">
+                <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+                    <i class="fas fa-paperclip mr-2 text-cyan-400"></i>
+                    Dokumen Terlampir
+                </h4>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="flex items-center p-3 glass-morphism rounded-xl border border-white/10">
+                        <i class="fas fa-file-pdf text-red-400 text-xl mr-3"></i>
+                        <div>
+                            <div class="text-white font-semibold">Surat Pengantar</div>
+                            <div class="text-white/60 text-sm">PDF • 2.5 MB</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 glass-morphism rounded-xl border border-white/10">
+                        <i class="fas fa-file-word text-blue-400 text-xl mr-3"></i>
+                        <div>
+                            <div class="text-white font-semibold">Proposal</div>
+                            <div class="text-white/60 text-sm">DOC • 1.8 MB</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-end space-x-3 pt-4 border-t border-white/10">
+                <button onclick="closeUserDetails()" class="px-6 py-2 glass-morphism hover:bg-white/20 rounded-xl text-white font-semibold border border-white/20 transition-all duration-200">
+                    Tutup
+                </button>
+                <button class="px-6 py-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-xl text-white font-semibold transition-all duration-200">
+                    <i class="fas fa-check mr-2"></i>Terima
+                </button>
+                <button class="px-6 py-2 bg-gradient-to-r from-red-500 to-blue-600 hover:from-red-600 hover:to-blue-700 rounded-xl text-white font-semibold transition-all duration-200">
+                    <i class="fas fa-times mr-2"></i>Tolak
+                </button>
+            </div>
+        `;
+    }, 1000);
+}
+
+// Fungsi untuk menutup modal
+function closeUserDetails() {
+    const modal = document.getElementById('userDetailModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+// Close modal when clicking outside
+document.getElementById('userDetailModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeUserDetails();
+    }
+});
+
+// Animate elements on scroll
+window.addEventListener('scroll', function() {
+    const elements = document.querySelectorAll('.animate-slide-up');
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add('opacity-100');
         }
+    });
+});
 
-        // Mobile sidebar toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileToggle = document.querySelector('.mobile-toggle');
-            if (mobileToggle) {
-                mobileToggle.addEventListener('click', function() {
-                    document.querySelector('.sidebar')?.classList.toggle('show');
-                });
-            }
-
-            // Auto-close alerts
-            const alerts = document.querySelectorAll('.alert');
-            alerts.forEach(function (alert) {
-                setTimeout(() => {
-                    const bsAlert = new bootstrap.Alert(alert);
-                    bsAlert.close();
-                }, 5000);
-            });
-
-            // Add interactive stats card effects
-            const statsCards = document.querySelectorAll('.stats-card');
-            statsCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    // Add click effect
-                    this.style.transform = 'translateY(-8px) scale(0.98)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 150);
-                });
-            });
+// Initialize animations
+document.addEventListener('DOMContentLoaded', function() {
+    // Add staggered animations to stat cards
+    const statCards = document.querySelectorAll('.group');
+    statCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+    });
+    
+    // Add hover effects to interactive elements
+    const interactiveElements = document.querySelectorAll('button, .group');
+    interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
         });
+        
+        element.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+});
+</script>
 
-        // Smooth scrolling for better UX
-        document.documentElement.style.scrollBehavior = 'smooth';
-    </script>
 @endsection

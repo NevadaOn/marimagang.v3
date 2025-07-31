@@ -1,165 +1,110 @@
-<nav class="navbar navbar-expand " >
-    <a class="sidebar-toggle js-sidebar-toggle">
-        <i class="hamburger align-self-center"></i>
-    </a>
+<nav class="bg-white/10 backdrop-blur-md shadow-sm border-b border-white/10 px-4 py-3 rounded-xl flex items-center justify-between relative z-50">
+  <!-- Sidebar Toggle -->
+  <button class="text-white hover:text-gray-200 focus:outline-none js-sidebar-toggle">
+    <i class="fas fa-bars"></i>
+  </button>
 
-    <div class="navbar-collapse collapse ">
-        <ul class="navbar-nav navbar-align ">
-            <li  class="nav-item dropdown ">
-                <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
-                   <div class="position-relative">
-                        <i class="align-middle" data-feather="bell"></i>
-                        <span class="indicator">4</span>
-                    </div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
-                    <div class="dropdown-menu-header">
-                        4 New Notifications
-                    </div>
-                    <div class="list-group">
-                        <a href="#" class="list-group-item ">
-                            <div class="row g-0 align-items-center">
-                                <div class="col-2">
-                                    <i class="text-danger" data-feather="alert-circle"></i>
-                                </div>
-                                <div class="col-10">
-                                    <div class="text-dark">Update completed</div>
-                                    <div class="text-muted small mt-1">Restart server 12 to complete the update.</div>
-                                    <div class="text-muted small mt-1">30m ago</div>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <div class="row g-0 align-items-center">
-                                <div class="col-2">
-                                    <i class="text-warning" data-feather="bell"></i>
-                                </div>
-                                <div class="col-10">
-                                    <div class="text-dark">Lorem ipsum</div>
-                                    <div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate hendrerit et.</div>
-                                    <div class="text-muted small mt-1">2h ago</div>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <div class="row g-0 align-items-center">
-                                <div class="col-2">
-                                    <i class="text-primary" data-feather="home"></i>
-                                </div>
-                                <div class="col-10">
-                                    <div class="text-dark">Login from 192.186.1.8</div>
-                                    <div class="text-muted small mt-1">5h ago</div>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <div class="row g-0 align-items-center">
-                                <div class="col-2">
-                                    <i class="text-success" data-feather="user-plus"></i>
-                                </div>
-                                <div class="col-10">
-                                    <div class="text-dark">New connection</div>
-                                    <div class="text-muted small mt-1">Christina accepted your request.</div>
-                                    <div class="text-muted small mt-1">14h ago</div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="dropdown-menu-footer">
-                        <a href="#" class="text-muted ">Show all notifications</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
-                    <div class="position-relative">
-                        <i class="align-middle" data-feather="message-square"></i>
-                    </div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="messagesDropdown">
-                    <div class="dropdown-menu-header">
-                        <div class="position-relative">
-                            4 New Messages
-                        </div>
-                    </div>
-                    <div class="list-group">
-                        <a href="#" class="list-group-item">
-                            <div class="row g-0 align-items-center">
-                                <div class="col-2">
-                                    <img src="{{ asset('img/kab_malang.jpg') }}" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
-                                </div>
-                                <div class="col-10 ps-2">
-                                    <div class="text-dark">Vanessa Tucker</div>
-                                    <div class="text-muted small mt-1">Nam pretium turpis et arcu. Duis arcu tortor.</div>
-                                    <div class="text-muted small mt-1">15m ago</div>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <div class="row g-0 align-items-center">
-                                <div class="col-2">
-                                    <img src="{{ asset('img/avatars/avatar-2.jpg') }}" class="avatar img-fluid rounded-circle" alt="William Harris">
-                                </div>
-                                <div class="col-10 ps-2">
-                                    <div class="text-dark">William Harris</div>
-                                    <div class="text-muted small mt-1">Curabitur ligula sapien euismod vitae.</div>
-                                    <div class="text-muted small mt-1">2h ago</div>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <div class="row g-0 align-items-center">
-                                <div class="col-2">
-                                    <img src="{{ asset('img/avatars/avatar-4.jpg') }}" class="avatar img-fluid rounded-circle" alt="Christina Mason">
-                                </div>
-                                <div class="col-10 ps-2">
-                                    <div class="text-dark">Christina Mason</div>
-                                    <div class="text-muted small mt-1">Pellentesque auctor neque nec urna.</div>
-                                    <div class="text-muted small mt-1">4h ago</div>
-                                </div>
-                            </a>
-                        </div>
-                        <a href="#" class="list-group-item">
-                            <div class="row g-0 align-items-center">
-                                <div class="col-2">
-                                    <img src="{{ asset('img/avatars/avatar-3.jpg') }}" class="avatar img-fluid rounded-circle" alt="Sharon Lessman">
-                                </div>
-                                <div class="col-10 ps-2">
-                                    <div class="text-dark">Sharon Lessman</div>
-                                    <div class="text-muted small mt-1">Aenean tellus metus, bibendum sed, posuere ac, mattis non.</div>
-                                    <div class="text-muted small mt-1">5h ago</div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="dropdown-menu-footer">
-                        <a href="#" class="text-muted">Show all messages</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                    <i class="align-middle" data-feather="settings"></i>
-                </a>
-
-                <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                    {{-- Ganti dengan avatar user yang login --}}
-                        {{ auth()->guard('admin')->user()->nama ?? 'Guest' }}
-                </a>
-                <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a> {{-- Ganti dengan route('admin.profile') --}}
-                    <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a> {{-- Ganti dengan route('admin.settings') --}}
-                    <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
-                    <div class="dropdown-divider"></div>
-                    {{-- Logout form untuk Laravel --}}
-                    <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                </div>
-            </li>
-        </ul>
+  <!-- Right Items -->
+  <div class="flex items-center gap-6">
+    
+    <!-- Notifikasi -->
+    <div class="relative">
+      <button onclick="toggleDropdown('notifDropdown')" class="text-white relative">
+        <i class="fas fa-bell"></i>
+        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">4</span>
+      </button>
+      <div id="notifDropdown" class="absolute right-0 mt-2 w-80 bg-white/10 backdrop-blur-md text-white rounded-lg shadow-lg hidden z-40">
+        <div class="px-4 py-2 font-semibold border-b border-white/20">4 Notifikasi Baru</div>
+        <div class="divide-y divide-white/10">
+          <a href="#" class="block px-4 py-2 hover:bg-white/5">
+            <i class="fas fa-exclamation-circle text-red-500 me-2"></i>
+            Server butuh restart. <div class="text-xs text-gray-300">30m lalu</div>
+          </a>
+          <a href="#" class="block px-4 py-2 hover:bg-white/5">
+            <i class="fas fa-bell text-yellow-400 me-2"></i>
+            Reminder acara. <div class="text-xs text-gray-300">2 jam lalu</div>
+          </a>
+          <a href="#" class="block px-4 py-2 hover:bg-white/5">
+            <i class="fas fa-sign-in-alt text-blue-500 me-2"></i>
+            Login baru terdeteksi. <div class="text-xs text-gray-300">5 jam lalu</div>
+          </a>
+          <a href="#" class="block px-4 py-2 hover:bg-white/5">
+            <i class="fas fa-user-plus text-green-500 me-2"></i>
+            Permintaan koneksi. <div class="text-xs text-gray-300">14 jam lalu</div>
+          </a>
+        </div>
+        <div class="px-4 py-2 text-sm text-indigo-400 text-center hover:underline">
+          <a href="#">Lihat semua notifikasi</a>
+        </div>
+      </div>
     </div>
+
+    <!-- Pesan -->
+    <div class="relative">
+      <button onclick="toggleDropdown('pesanDropdown')" class="text-white">
+        <i class="fas fa-envelope"></i>
+      </button>
+      <div id="pesanDropdown" class="absolute right-0 mt-2 w-80 bg-white/10 backdrop-blur-md text-white rounded-lg shadow-lg hidden z-40">
+        <div class="px-4 py-2 font-semibold border-b border-white/20">4 Pesan Baru</div>
+        <div class="divide-y divide-white/10">
+          <a href="#" class="flex items-start gap-3 px-4 py-3 hover:bg-white/5">
+            <img src="{{ asset('img/kab_malang.jpg') }}" class="w-8 h-8 rounded-full" />
+            <div>
+              <div class="font-semibold">Vanessa Tucker</div>
+              <div class="text-sm text-gray-300">Nam pretium turpis et arcu.</div>
+              <div class="text-xs text-gray-400">15m lalu</div>
+            </div>
+          </a>
+        </div>
+        <div class="px-4 py-2 text-sm text-indigo-400 text-center hover:underline">
+          <a href="#">Lihat semua pesan</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profil -->
+    <div class="relative">
+      <button onclick="toggleDropdown('profileDropdown')" class="text-white flex items-center gap-2">
+        <span>{{ auth()->guard('admin')->user()->nama ?? 'Guest' }}</span>
+        <i class="fas fa-chevron-down text-sm"></i>
+      </button>
+      <div id="profileDropdown" class="absolute right-0 mt-2 w-56 bg-white/10 backdrop-blur-md text-white rounded-lg shadow-lg hidden z-40">
+        <a href="#" class="block px-4 py-2 hover:bg-white/5"><i class="fas fa-user me-2"></i> Profile</a>
+        <a href="#" class="block px-4 py-2 hover:bg-white/5"><i class="fas fa-chart-pie me-2"></i> Analytics</a>
+        <hr class="border-white/20 my-1">
+        <a href="#" class="block px-4 py-2 hover:bg-white/5"><i class="fas fa-cog me-2"></i> Settings</a>
+        <a href="#" class="block px-4 py-2 hover:bg-white/5"><i class="fas fa-question-circle me-2"></i> Help Center</a>
+        <hr class="border-white/20 my-1">
+        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-red-400 hover:bg-white/5">
+          <i class="fas fa-sign-out-alt me-2"></i> Logout
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">@csrf</form>
+      </div>
+    </div>
+  </div>
 </nav>
+
+<!-- Script toggle -->
+<script>
+  function toggleDropdown(id) {
+    const dropdowns = document.querySelectorAll('[id$="Dropdown"]');
+    dropdowns.forEach(el => {
+      if (el.id !== id) {
+        el.classList.add('hidden');
+      }
+    });
+
+    const target = document.getElementById(id);
+    if (target) {
+      target.classList.toggle('hidden');
+    }
+  }
+
+  // Optional: klik luar tutup dropdown
+  document.addEventListener('click', function (event) {
+    const isDropdownBtn = event.target.closest('button[onclick]');
+    if (!isDropdownBtn) {
+      document.querySelectorAll('[id$="Dropdown"]').forEach(el => el.classList.add('hidden'));
+    }
+  });
+</script>

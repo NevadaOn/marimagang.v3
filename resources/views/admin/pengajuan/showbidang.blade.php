@@ -2,86 +2,15 @@
 
 @section('title', 'Detail Pengajuan')
 
-
 @push('styles')
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+{{-- CDN LENGKAP: Font Awesome, Tailwind, Bootstrap (untuk Modal), Alpine (untuk Tab) --}}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
 <style>
-    /* Glassmorphism modal */
-.glass-modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  max-width: 800px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 25px;
-  backdrop-filter: blur(15px);
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  padding: 20px;
-  color: white;
-  transition: all 0.3s ease-in-out;
-}
-
-.glass-modal-content {
-  position: relative;
-}
-
-.close-btn {
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  color: white;
-  cursor: pointer;
-}
-
-.file-info {
-  font-size: 0.9rem;
-  margin-bottom: 10px;
-}
-
-.glass-frame {
-  width: 100%;
-  height: 400px;
-  border-radius: 10px;
-  display: none;
-}
-
-/* Glass button */
-.glass-button {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.glass-button:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* Loading Spinner */
-.spinner {
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  border-top: 4px solid white;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  animation: spin 0.8s linear infinite;
-  margin: 20px auto;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
+    /* Seluruh CSS dari file Anda diterapkan di sini untuk memastikan visual yang sama persis */
     :root {
         --primary-color: #1e3a8a; /* Biru Kominfo */
         --secondary-color: #000000; /* Hitam */
@@ -97,437 +26,33 @@
         --gradient-warning: linear-gradient(135deg, #d97706, #f59e0b);
         --gradient-info: linear-gradient(135deg, #0891b2, #06b6d4);
     }
-
-    body {
-        background: #000000;
-        min-height: 100vh;
-        overflow-x: hidden;
-    }
-
-    .container-fluid {
-        position: relative;
-    }
-
-
-    #previewModal.modal {
-    display: block; /* agar bisa dimanipulasi manual */
-    position: fixed;
-    top: 20px; /* posisi di atas tombol */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1050;
-    background-color: rgba(0, 0, 0, 0.5); /* semi transparan latar */
-}
-
-#previewModal .modal-dialog {
-    margin: 0 auto;
-}
-
-
-    @keyframes floatingLights {
-        0%, 100% {
-            transform: translate(0, 0) rotate(0deg);
-            opacity: 1;
-        }
-        33% {
-            transform: translate(30px, -30px) rotate(120deg);
-            opacity: 0.8;
-        }
-        66% {
-            transform: translate(-20px, 20px) rotate(240deg);
-            opacity: 0.9;
-        }
-    }
-
-    .card {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(30px);
-        -webkit-backdrop-filter: blur(30px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 24px;
-        margin-bottom: 2rem;
-        box-shadow: 
-            0 8px 32px rgba(0, 0, 0, 0.3),
-            0 2px 8px rgba(255, 255, 255, 0.05) inset;
-        overflow: hidden;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .card:hover {
-        transform: translateY(-2px);
-        background: rgba(255, 255, 255, 0.08);
-        border-color: rgba(255, 255, 255, 0.15);
-        box-shadow: 
-            0 12px 40px rgba(0, 0, 0, 0.4),
-            0 4px 16px rgba(255, 255, 255, 0.08) inset;
-    }
+    body { background: #000000; min-height: 100vh; overflow-x: hidden; color: var(--text-secondary); }
+    .card { background: var(--glass-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--glass-border); border-radius: 24px; margin-bottom: 0; /* Dihapus margin bottom agar spacing dikontrol oleh grid */ box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); overflow: hidden; animation: fadeInUp 0.6s ease-out; }
+    .card-header { background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid var(--glass-border); padding: 1.5rem; position: relative; }
+    .card-header::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--gradient-1); }
+    .card-header h5 { color: var(--text-primary); font-weight: 700; margin: 0; display: flex; align-items: center; }
+    .card-header i { margin-right: 0.75rem; color: #3b82f6; font-size: 1.2rem; }
+    .info-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+    .info-row:last-child { border-bottom: none; }
+    .table-responsive { max-height: 600px; overflow-y: auto; }
+    .status-badge { padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: inline-flex; align-items: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); }
+    .status-diterima { background: var(--gradient-success); color: white; }
+    .status-ditolak { background: var(--gradient-danger); color: white; }
+    .status-menunggu { background: var(--gradient-warning); color: white; }
+    .status-diproses { background: var(--gradient-info); color: white; }
+    .status-diteruskan { background: var(--gradient-2); color: white; }
+    .btn { padding: 0.75rem 1.5rem; border-radius: 16px; border: none; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(10px); position: relative; overflow: hidden; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.85rem; }
+    .btn-primary { background: var(--gradient-1); color: white; box-shadow: 0 4px 16px rgba(30, 58, 138, 0.4); }
+    .btn-success { background: var(--gradient-success); color: white; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4); }
+    .btn-warning { background: var(--gradient-warning); color: white; box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4); }
+    .form-control, .form-select { color: var(--text-primary); background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 16px; transition: all 0.3s ease; }
+    .form-control:focus, .form-select:focus { background: rgba(255, 255, 255, 0.12); border-color: #3b82f6; outline: 0; box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25); }
+    .form-label { margin-bottom: 0.75rem; font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.85rem; }
+    .badge { backdrop-filter: blur(10px); }
+    .badge-success { background: var(--gradient-success); }
+    .badge-info { background: var(--gradient-info); }
     
-    .card-header {
-        background: rgba(255, 255, 255, 0.05);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 1.5rem;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .card-header::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: var(--gradient-1);
-    }
-
-    .card-header h5 {
-        color: var(--text-primary);
-        font-weight: 700;
-        margin: 0;
-        display: flex;
-        align-items: center;
-    }
-
-    .card-header i {
-        margin-right: 0.75rem;
-        color: #3b82f6;
-        font-size: 1.2rem;
-    }
-    
-    .card-body {
-        padding: 1.5rem;
-        color: var(--text-secondary);
-    }
-
-    .card-title {
-        color: var(--text-primary) !important;
-        font-weight: 700;
-        margin-bottom: 0 !important;
-    }
-    
-    .status-badge {
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-size: 0.875rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        display: inline-flex;
-        align-items: center;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    }
-    
-    .status-diterima {
-        background: var(--gradient-success);
-        color: white;
-        border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-    
-    .status-ditolak {
-        background: var(--gradient-danger);
-        color: white;
-        border: 1px solid rgba(239, 68, 68, 0.3);
-    }
-    
-    .status-menunggu {
-        background: var(--gradient-warning);
-        color: white;
-        border: 1px solid rgba(245, 158, 11, 0.3);
-    }
-    
-    .status-diproses {
-        background: var(--gradient-info);
-        color: white;
-        border: 1px solid rgba(6, 182, 212, 0.3);
-    }
-    
-    .status-diteruskan {
-        background: var(--gradient-2);
-        color: white;
-        border: 1px solid rgba(107, 114, 128, 0.3);
-    }
-    
-    .info-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        transition: all 0.3s ease;
-    }
-
-    .info-row:hover {
-        background: rgba(255, 255, 255, 0.03);
-        border-radius: 12px;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    
-    .info-row:last-child {
-        border-bottom: none;
-    }
-
-    .info-row .fw-bold {
-        color: var(--text-primary);
-        font-weight: 700;
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-
-    .info-row span:not(.fw-bold) {
-        color: var(--text-secondary);
-        font-weight: 500;
-    }
-
-    .font-monospace {
-        font-family: 'Courier New', monospace;
-        background: rgba(255, 255, 255, 0.05);
-        padding: 0.25rem 0.5rem;
-        border-radius: 8px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        margin-bottom: 1rem;
-        background: transparent;
-        color: var(--text-secondary);
-    }
-    
-    .table th,
-    .table td {
-        padding: 1rem;
-        border: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        text-align: left;
-        vertical-align: middle;
-    }
-    
-    .table th {
-        background: rgba(255, 255, 255, 0.05);
-        font-weight: 700;
-        color: var(--text-primary);
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-size: 0.85rem;
-        position: sticky;
-        top: 0;
-        z-index: 10;
-    }
-
-    .table th:first-child {
-        border-radius: 12px 0 0 0;
-    }
-
-    .table th:last-child {
-        border-radius: 0 12px 0 0;
-    }
-    
-    .table tbody tr {
-        transition: all 0.3s ease;
-    }
-
-    .table tbody tr:hover {
-        background: rgba(30, 58, 138, 0.15);
-        transform: translateX(4px);
-    }
-
-    .table tbody td {
-        color: var(--text-secondary);
-    }
-
-    .table tbody td.fw-semibold {
-        color: var(--text-primary);
-        font-weight: 600;
-    }
-
-    .table-responsive {
-        border-radius: 0 0 24px 24px;
-        max-height: 600px;
-        overflow-y: auto;
-    }
-    
-    .btn {
-        padding: 0.75rem 1.5rem;
-        border-radius: 16px;
-        border: none;
-        font-weight: 600;
-        line-height: 1.5;
-        text-align: center;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        position: relative;
-        overflow: hidden;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-size: 0.85rem;
-    }
-
-    .btn::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.5s;
-    }
-
-    .btn:hover::before {
-        left: 100%;
-    }
-    
-    .btn-primary {
-        background: var(--gradient-1);
-        color: white;
-        box-shadow: 0 4px 16px rgba(30, 58, 138, 0.4);
-    }
-    
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 32px rgba(30, 58, 138, 0.6);
-        background: var(--gradient-2);
-    }
-    
-    .btn-success {
-        background: var(--gradient-success);
-        color: white;
-        box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
-    }
-    
-    .btn-success:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 32px rgba(16, 185, 129, 0.6);
-    }
-
-    .btn-warning {
-        background: var(--gradient-warning);
-        color: white;
-        box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);
-    }
-
-    .btn-warning:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 32px rgba(245, 158, 11, 0.6);
-    }
-
-    .btn-secondary {
-        background: rgba(255, 255, 255, 0.1);
-        color: var(--text-primary);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    .btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    }
-    
-    .btn-sm {
-        padding: 0.5rem 1rem;
-        font-size: 0.75rem;
-        border-radius: 12px;
-    }
-    
-    .form-control {
-        display: block;
-        width: 100%;
-        padding: 0.75rem 1rem;
-        font-size: 1rem;
-        line-height: 1.5;
-        color: var(--text-primary);
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 16px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    }
-    
-    .form-control:focus {
-        color: var(--text-primary);
-        background: rgba(255, 255, 255, 0.12);
-        border-color: #3b82f6;
-        outline: 0;
-        box-shadow: 
-            0 0 0 0.2rem rgba(59, 130, 246, 0.25),
-            0 4px 16px rgba(0, 0, 0, 0.2);
-        transform: translateY(-1px);
-    }
-
-    .form-control::placeholder {
-        color: rgba(255, 255, 255, 0.5);
-    }
-
-    .form-select {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e");
-    }
-    
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
-    
-    .form-label {
-        margin-bottom: 0.75rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-size: 0.85rem;
-    }
-    
-    .badge {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.5rem 1rem;
-        font-size: 0.75rem;
-        font-weight: 700;
-        line-height: 1;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: baseline;
-        border-radius: 16px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    }
-    
-    .badge-primary {
-        background: var(--gradient-1);
-        color: white;
-        border: 1px solid rgba(30, 58, 138, 0.3);
-    }
-    
-    .badge-success {
-        background: var(--gradient-success);
-        color: white;
-        border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-    
-    .badge-info {
-        background: var(--gradient-info);
-        color: white;
-        border: 1px solid rgba(6, 182, 212, 0.3);
-    }
-
-    .bg-primary {
-        background: var(--gradient-1) !important;
-    }
-    
-    .modal {
+      .modal {
         position: fixed;
         top: 0;
         left: 0;
@@ -657,779 +182,338 @@
         100% { transform: rotate(360deg); }
     }
     
-    .row {
-        display: flex;
-        flex-wrap: wrap;
-        margin-right: -15px;
-        margin-left: -15px;
-    }
-    
-    .col-md-6 {
-        flex: 0 0 50%;
-        max-width: 50%;
-        padding-right: 15px;
-        padding-left: 15px;
-    }
-    
-    .col-12 {
-        flex: 0 0 100%;
-        max-width: 100%;
-        padding-right: 15px;
-        padding-left: 15px;
-    }
-    
-    .text-center {
-        text-align: center;
-    }
-    
-    .mb-3 {
-        margin-bottom: 1rem;
-    }
-    
-    .mb-4 {
-        margin-bottom: 1.5rem;
-    }
+    /* Style spesifik untuk Preview Modal dari JS baru Anda */
+    #previewModal { position: fixed; top: 0; left: 0; z-index: 1055; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: none; }
+    #previewModal.show { display: flex; align-items: center; justify-content: center; }
+    .spinner { width: 40px; height: 40px; border: 4px solid rgba(255, 255, 255, 0.1); border-top: 4px solid #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-    .mb-5 {
-        margin-bottom: 2rem;
-    }
-    
-    .d-flex {
-        display: flex;
-    }
-    
-    .align-items-center {
-        align-items: center;
-    }
-    
-    .justify-content-between {
-        justify-content: space-between;
-    }
-    
-    .me-2 {
-        margin-right: 0.5rem;
-    }
-    
-    .me-3 {
-        margin-right: 1rem;
-    }
-
-    .ms-2 {
-        margin-left: 0.5rem;
-    }
-
-    .mt-2 {
-        margin-top: 0.5rem;
-    }
-
-    .mt-3 {
-        margin-top: 1rem;
-    }
-
-    .mt-4 {
-        margin-top: 1.5rem;
-    }
-
-    .ps-3 {
-        padding-left: 1rem;
-    }
-
-    .p-3 {
-        padding: 1rem;
-    }
-
-    .list-unstyled {
-        list-style: none;
-        padding-left: 0;
-    }
-
-    .list-unstyled li {
-        margin-bottom: 0.5rem;
-        padding: 0.5rem;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 8px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .text-muted {
-        color: rgba(255, 255, 255, 0.5) !important;
-    }
-
-    .font-bold {
-        font-weight: 700;
-        color: var(--text-primary);
-    }
-
-    /* Page title styling */
-    .page-title {
-        text-align: end;
-        padding: 20px 50px 10px 0px;
-        margin-bottom: 2rem;
-    }
-
-    .page-title h1 {
-        color: var(--text-primary);
-        font-weight: 800;
-        font-size: 2.5rem;
-        margin-bottom: 0.5rem;
-        background: var(--gradient-1);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .page-title p {
-        color: var(--text-secondary);
-        font-size: 1.1rem;
-        margin: 0;
-    }
-
-    /* Admin comment section */
-    .admin-comment {
-        background: rgba(30, 58, 138, 0.1);
-        border: 1px solid rgba(30, 58, 138, 0.2);
-        border-radius: 16px;
-        padding: 1.5rem;
-        margin-top: 1.5rem;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-    }
-
-    .admin-comment h6 {
-        color: var(--text-primary);
-        font-weight: 700;
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-    }
-
-    .admin-comment h6::before {
-        content: '💬';
-        margin-right: 0.5rem;
-    }
-
-    .admin-comment p {
-        color: var(--text-secondary);
-        line-height: 1.6;
-        margin: 0;
-    }
 
     /* Scrollbar styling */
-    .table-responsive::-webkit-scrollbar,
-    ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-    }
-
-    .table-responsive::-webkit-scrollbar-track,
-    ::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 4px;
-    }
-
-    .table-responsive::-webkit-scrollbar-thumb,
-    ::-webkit-scrollbar-thumb {
-        background: var(--gradient-1);
-        border-radius: 4px;
-    }
-
-    .table-responsive::-webkit-scrollbar-thumb:hover,
-    ::-webkit-scrollbar-thumb:hover {
-        background: var(--gradient-2);
-    }
-
-    /* Form styling improvements */
-    textarea.form-control {
-        min-height: 120px;
-        resize: vertical;
-    }
-
-    .btn-group {
-        display: flex;
-        gap: 0.5rem;
-    }
-
-    /* Status icons */
-    .status-badge i {
-        margin-right: 0.5rem;
-        font-size: 0.9rem;
-    }
-
-    /* Responsive design */
-    @media (max-width: 768px) {
-        .col-md-6 {
-            flex: 0 0 100%;
-            max-width: 100%;
-        }
-
-        .page-title {
-            text-align: center;
-            padding: 20px;
-        }
-
-        .page-title h1 {
-            font-size: 2rem;
-        }
-
-        .modal-dialog {
-            max-width: 95%;
-            margin: 1rem;
-        }
-
-        .btn {
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
-        }
-
-        .card-body {
-            padding: 1rem;
-        }
-
-        .info-row {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.5rem;
-        }
-    }
-
-    /* Animation for cards */
-    .card {
-        animation: fadeInUp 0.6s ease-out;
-    }
-
-    .card:nth-child(1) { animation-delay: 0.1s; }
-    .card:nth-child(2) { animation-delay: 0.2s; }
-    .card:nth-child(3) { animation-delay: 0.3s; }
-    .card:nth-child(4) { animation-delay: 0.4s; }
-    .card:nth-child(5) { animation-delay: 0.5s; }
-
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
+    ::-webkit-scrollbar-thumb { background: var(--gradient-1); border-radius: 4px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 @endpush
 
 @section('content')
-<div class="container-fluid p-0">
-    <div class="row">
-        <div class="col-12">
-            <!-- Page Title -->
-            <div class="mb-4" style="text-align: end; padding: 20px 50px 10px 0px;">
-                <h1 class="h3 mb-3 text-light fw-bold fs-1">Detail Pengajuan</h1>
-                <p class="text-muted">Informasi lengkap pengajuan magang mahasiswa</p>
-            </div>
+<div class="p-4 sm:p-6 lg:p-8">
 
-            <!-- Informasi Umum -->
-            <div class="card mx-4 w-auto">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-info-circle me-2"></i>
-                        Informasi Umum
-                    </h5>
-                </div>
-                <div class="card-body">
+    <div class="mb-4 card p-4 rounded-3xl mb-4 bg-gradient-to-r from-blue-500/20 via-blue-500/20 to-cyan-500/20 p-3 border-b border-white/10" style="text-align: left; padding: 20px 50px 10px 0px;">
+        <h1 class="h3 mb-3 fw-bold fs-1 " style="color: white; background: var(--gradient-1); text;background-clip: text;">Detail Pengajuan</h1>
+        <p class="text-muted">Informasi lengkap pengajuan magang mahasiswa</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+        {{-- ============================================= --}}
+        {{-- ============ KOLOM KIRI: KONTEN UTAMA ============ --}}
+        {{-- ============================================= --}}
+        <div class="lg:col-span-2 space-y-8">
+
+            {{-- START: Kartu Informasi Umum --}}
+            <div class="card">
+                <div class="card-header"><h5><i class="fas fa-info-circle"></i>Informasi Umum</h5></div>
+                <div class="card-body p-4">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="info-row">
-                                <span class="fw-bold">Kode Pengajuan:</span>
-                                <span class="font-monospace">{{ $pengajuan->kode_pengajuan }}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="fw-bold">Nama Mahasiswa:</span>
-                                <span>{{ $pengajuan->user->nama ?? '-' }}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="fw-bold">NIM:</span>
-                                <span class="font-monospace">{{ $pengajuan->user->nim ?? '-' }}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="fw-bold">Universitas:</span>
-                                <span>{{ $pengajuan->user->universitas->nama_universitas ?? '-' }}</span>
-                            </div>
+                            <div class="info-row"><span class="fw-bold text-white">Kode Pengajuan:</span><span class="card p-2 font-monospace text-blue-400">{{ $pengajuan->kode_pengajuan }}</span></div>
+                            <div class="info-row"><span class="fw-bold text-white">Nama Mahasiswa:</span><span>{{ $pengajuan->user->nama ?? '-' }}</span></div>
+                            <div class="info-row"><span class="fw-bold text-white">NIM:</span><span class="card p-2  font-monospace text-cyan-400">{{ $pengajuan->user->nim ?? '-' }}</span></div>
+                            <div class="info-row"><span class="fw-bold text-white">Universitas:</span><span class="">{{ $pengajuan->user->universitas->nama_universitas ?? '-' }}</span></div>
                         </div>
                         <div class="col-md-6">
-                            <div class="info-row">
-                                <span class="fw-bold">Bidang:</span>
-                                <span>{{ $pengajuan->databidang->nama ?? '-' }}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="fw-bold">Tanggal Mulai:</span>
-                                <span>{{ $pengajuan->tanggal_mulai->format('d M Y') }}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="fw-bold">Tanggal Selesai:</span>
-                                <span>{{ $pengajuan->tanggal_selesai->format('d M Y') }}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="fw-bold">Status:</span>
-                                <span class="status-badge
+                            <div class="info-row"><span class="fw-bold text-white">Bidang:</span><span>{{ $pengajuan->databidang->nama ?? '-' }}</span></div>
+                            <div class="info-row"><span class="fw-bold text-white">Tanggal Mulai:</span><span>{{ $pengajuan->tanggal_mulai->format('d M Y') }}</span></div>
+                            <div class="info-row"><span class="fw-bold text-white">Tanggal Selesai:</span><span>{{ $pengajuan->tanggal_selesai->format('d M Y') }}</span></div>
+                            <div class="info-row"><span class="fw-bold text-white">Status:</span>
+                                <span class="status-badge @switch($pengajuan->status) @case('diterima') status-diterima @break @case('ditolak') status-ditolak @break @case('diproses') status-diproses @break @case('diteruskan') status-diteruskan @break @default status-menunggu @endswitch">
                                     @switch($pengajuan->status)
-                                        @case('diterima') status-diterima @break
-                                        @case('ditolak') status-ditolak @break
-                                        @case('diproses') status-diproses @break
-                                        @case('diteruskan') status-diteruskan @break
-                                        @default status-menunggu
-                                    @endswitch">
-                                    @switch($pengajuan->status)
-                                        @case('diterima')
-                                            <i class="fas fa-check-circle me-1"></i> Diterima
-                                            @break
-                                        @case('ditolak')
-                                            <i class="fas fa-times-circle me-1"></i> Ditolak
-                                            @break
-                                        @case('diproses')
-                                            <i class="fas fa-spinner me-1"></i> Diproses
-                                            @break
-                                        @case('diteruskan')
-                                            <i class="fas fa-paper-plane me-1"></i> Diteruskan
-                                            @break
-                                        @default
-                                            <i class="fas fa-clock me-1"></i> Menunggu
+                                        @case('diterima')<i class="fas fa-check-circle me-1"></i> Diterima @break
+                                        @case('ditolak')<i class="fas fa-times-circle me-1"></i> Ditolak @break
+                                        @case('diproses')<i class="fas fa-spinner fa-spin me-1"></i> Diproses @break
+                                        @case('diteruskan')<i class="fas fa-paper-plane me-1"></i> Diteruskan @break
+                                        @default<i class="fas fa-clock me-1"></i> Menunggu
                                     @endswitch
                                 </span>
                             </div>
                         </div>
                     </div>
                     @if($pengajuan->komentar_admin)
-                    <div class="mt-4 p-3" style="background-color: #f8f9fa; border-radius: 0.25rem;">
-                        <h6 class="fw-bold mb-2">catatan Admin Dinas untuk Admin Bidang</h6>
-                        <p class="mb-0">{{ $pengajuan->komentar_admin }}</p>
-                    </div>
+                    <div class="admin-comment mt-4 p-4"><h6>Catatan Admin Dinas</h6><p class="mb-0">{{ $pengajuan->komentar_admin }}</p></div>
                     @endif
                 </div>
             </div>
+            {{-- END: Kartu Informasi Umum --}}
 
-           <!-- Anggota Kelompok (termasuk Ketua) -->
-@php
-    $semuaMahasiswa = collect([[
-        'user' => $pengajuan->user,
-        'status' => 'Ketua'
-    ]])->merge(
-        $pengajuan->anggota->map(function ($anggota) {
-            return [
-                'user' => $anggota->user,
-                'status' => ucfirst($anggota->status)
-            ];
-        })
-    )->unique(fn($item) => $item['user']->id);
-@endphp
-
-@if($semuaMahasiswa->count())
-<div class="card mx-4 w-auto">
-    <div class="card-header">
-        <h5 class="card-title mb-0">
-            <i class="fas fa-users me-2"></i>
-            Anggota Kelompok
-            <span class="badge badge-success ms-2">{{ $semuaMahasiswa->count() }} Orang</span>
-        </h5>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table align-middle">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>NIM</th>
-                        <th class="text-center">Status</th>
-                        <th class="text-center">Keahlian</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($semuaMahasiswa->values() as $i => $entry)
-                        @php $user = $entry['user']; @endphp
-                        <tr>
-                            <td class="text-center">{{ $i + 1 }}</td>
-                            <td>{{ $user->nama }}</td>
-                            <td class="font-monospace">{{ $user->nim }}</td>
-                            <td class="text-center">
-                                <span class="badge bg-primary">{{ $entry['status'] }}</span>
-                            </td>
-                            <td>
-                                @if($user->userSkills->isNotEmpty())
-                                    <ul class="mb-0 ps-3 list-unstyled">
-                                        @foreach($user->userSkills as $userSkill)
-                                            <li>
-                                                {{ $userSkill->skill->nama ?? 'Skill tidak ditemukan' }}
-                                                ({{ ucfirst($userSkill->level) }})
-                                                @if ($userSkill->sertifikat_path)
-                                                    {{-- <a href="{{ asset('storage/' . $userSkill->sertifikat_path) }}"
-                                                       target="_blank"
-                                                       class="btn btn-sm btn-link">Cek Sertifikat</a> --}}
-                                                       <button onclick="showPreview('{{ asset('storage/' . $userSkill->sertifikat_path) }}', '{{ basename($userSkill->sertifikat_path) }}')"
-                                                            class="btn btn-primary btn-sm" style="margin: 0px 0px 10px 10px">
-                                                        <i class="fas fa-eye me-1"></i>
-                                                        Lihat Sertifikat
-                                                    </button>
-                                                @endif
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @else
-                                    <span class="text-muted">Belum ada keahlian</span>
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-@endif
-
-
-            <!-- Dokumen Pengajuan -->
-            @if($pengajuan->documents->count())
-            <div class="card mx-4 w-auto">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-file-alt me-2"></i>
-                        Dokumen Pengajuan
-                        <span class="badge badge-info ms-2">{{ $pengajuan->documents->count() }} Dokumen</span>
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Jenis Dokumen</th>
-                                    <th>Nama File</th>
-                                    <th>Ukuran</th>
-                                    <th class="text-center">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($pengajuan->documents as $i => $doc)
-                                <tr>
-                                    <td class="text-center">{{ $i + 1 }}</td>
-                                    <td>
-                                        <span class="badge badge-primary">
-                                            {{ ucfirst(str_replace('_', ' ', $doc->document_type)) }}
-                                        </span>
-                                    </td>
-                                    <td class="font-monospace">{{ $doc->file_name }}</td>
-                                    <td>{{ number_format($doc->file_size / 1024, 2) }} KB</td>
-                                    <td class="text-center">
-                                        <button onclick="showPreview('{{ route('admin.pengajuan.download', ['id' => $pengajuan->id, 'document' => $doc->file_name]) }}', '{{ $doc->file_name }}')" 
-                                                class="btn btn-primary btn-sm">
-                                            <i class="fas fa-eye me-1"></i>
-                                            Preview
-                                        </button>
-                                    </td>
-                                </tr>
+            {{-- START: Tabel Anggota Kelompok --}}
+            @php
+                $semuaMahasiswa = collect([['user' => $pengajuan->user, 'status' => 'Ketua']])->merge($pengajuan->anggota->map(fn ($anggota) => ['user' => $anggota->user, 'status' => ucfirst($anggota->status)]))->unique(fn($item) => $item['user']->id);
+            @endphp
+            @if($semuaMahasiswa->count())
+            <div class="card">
+                <div class="card-header"><h5><i class="fas fa-users"></i>Anggota Kelompok <span class="badge badge-success ms-2">{{ $semuaMahasiswa->count() }} Orang</span></h5></div>
+                <div class="table-responsive">
+                     <table class="min-w-full divide-y divide-white/10 text-sm text-left text-white">
+        <thead class=" bg-white/5 backdrop-blur-sm text-white">
+            <tr>
+                <th class="px-4 py-3 font-semibold text-center">No</th>
+                <th class="px-4 py-3 font-semibold">Nama</th>
+                <th class="px-4 py-3 font-semibold">NIM</th>
+                <th class="px-4 py-3 font-semibold text-center">Status</th>
+                <th class="px-4 py-3 font-semibold">Keahlian</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-white/10 ">
+            @foreach($semuaMahasiswa->values() as $i => $entry)
+                @php $user = $entry['user']; @endphp
+                <tr class="hover:bg-white/10 transition duration-150">
+                    <td class="px-4 py-3 text-center">{{ $i + 1 }}</td>
+                    <td class="px-4 py-3">{{ $user->nama }}</td>
+                    <td class="px-4 py-3 font-mono">{{ $user->nim }}</td>
+                    <td class="px-4 py-3 text-center">
+                        <span class="inline-block rounded-full bg-blue-600/80 px-2 py-1 text-xs font-semibold text-white">
+                            {{ $entry['status'] }}
+                        </span>
+                    </td>
+                    <td class="px-4 py-3">
+                        @if($user->userSkills->isNotEmpty())
+                            <ul class="space-y-1 pl-4 list-disc">
+                                @foreach($user->userSkills as $userSkill)
+                                    <li>
+                                        {{ $userSkill->skill->nama ?? 'Skill tidak ditemukan' }}
+                                        ({{ ucfirst($userSkill->level) }})
+                                        @if ($userSkill->sertifikat_path)
+                                            <button onclick="showPreview('{{ asset('storage/' . $userSkill->sertifikat_path) }}', '{{ basename($userSkill->sertifikat_path) }}')" class="ml-2 inline-flex items-center gap-1 px-2 py-1 bg-blue-500 hover:bg-blue-600 text-white text-xs rounded shadow">
+                                                <i class="fas fa-eye"></i> Sertifikat
+                                            </button>
+                                        @endif
+                                    </li>
                                 @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            </ul>
+                        @else
+                            <span class="text-gray-300 italic">Belum ada keahlian</span>
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
                 </div>
             </div>
             @endif
+            {{-- END: Tabel Anggota Kelompok --}}
 
-            @php
-                $admin = auth('admin')->user();
-                $statusOptions = [];
-
-                if ($admin->role === 'superadmin') {
-                    $statusOptions = ['pending', 'diproses', 'diteruskan', 'diterima', 'ditolak'];
-                } elseif ($admin->role === 'admin_dinas' && $pengajuan->status === 'pending') {
-                    $statusOptions = ['diteruskan', 'ditolak'];
-                } elseif ($admin->role === 'admin_bidang' && $pengajuan->status === 'diteruskan') {
-                    $statusOptions = ['diproses', 'diterima', 'ditolak'];
-                }
-            @endphp
-
-            <!-- Kelola Surat & Komentar -->
-            @if (in_array($admin->role, ['superadmin', 'admin_dinas']))
+            {{-- START: Tabel Dokumen Pengajuan --}}
+            @if($pengajuan->documents->count())
             <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-file-pdf me-2"></i>
-                        Kelola Surat & Komentar
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <!-- Form upload surat PDF -->
-                    <form action="{{ route('admin.pengajuan.uploadSurat', $pengajuan->id) }}" method="POST" enctype="multipart/form-data" class="mb-4">
-                        @csrf
-                        <div class="form-group">
-                            <label class="form-label">Unggah Surat (PDF)</label>
-                            <input type="file" name="surat_pdf" accept="application/pdf" class="form-control">
-                        </div>
-                        {{-- <div class="form-group">
-                            <label class="form-label">Komentar Admin</label>
-                            <textarea name="komentar_admin" rows="4" class="form-control">{{ old('komentar_admin', $pengajuan->komentar_admin) }}</textarea>
-                        </div> --}}
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save me-1"></i>
-                            Simpan Surat
-                        </button>
-                    </form>
-
-                    <!-- Form generate surat otomatis -->
-                    <h6>Buat Surat Otomatis</h6>
-                    <form action="{{ route('admin.pengajuan.generateSurat', $pengajuan->id) }}" method="POST">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label">Nomor Surat</label>
-                                    <input type="text" name="nomor_surat" class="form-control" placeholder="Contoh: 001/ADM/PKL/2025" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">NIP</label>
-                                    <input type="text" name="nip_penanggung_jawab" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Nama Penanggung Jawab</label>
-                                    <input type="text" name="nama_penanggung_jawab" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label">Jabatan</label>
-                                    <input type="text" name="jabatan_penanggung_jawab" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Nama Kegiatan</label>
-                                    <input type="text" name="nama_kegiatan" class="form-control" required>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-success">
-                            <i class="fas fa-plus me-1"></i>
-                            Buat Surat Otomatis
-                        </button>
-                    </form>
-
-                    @if ($pengajuan->surat_pdf)
-                    <div class="mt-3">
-                        <button onclick="showPreview('{{ asset('storage/' . $pengajuan->surat_pdf) }}', '{{ basename($pengajuan->surat_pdf) }}')"
-                                class="btn btn-primary btn-sm">
-                            <i class="fas fa-eye me-1"></i>
-                            Lihat / Unduh Surat PDF
-                        </button>
-                    </div>
-                    @endif
+                <div class="card-header"><h5><i class="fas fa-file-alt"></i>Dokumen Pengajuan <span class="badge badge-info ms-2">{{ $pengajuan->documents->count() }} Dokumen</span></h5></div>
+                <div class="table-responsive">
+                   <table class="min-w-full divide-y divide-gray-300 text-sm text-left text-white">
+        <thead class="bg-gray-800 text-xs uppercase">
+            <tr>
+                <th class="px-4 py-3 text-center">No</th>
+                <th class="px-4 py-3">Jenis Dokumen</th>
+                <th class="px-4 py-3">Nama File</th>
+                <th class="px-4 py-3">Ukuran</th>
+                <th class="px-4 py-3 text-center">Aksi</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-700 bg-gray-900/40 backdrop-blur-sm">
+        @foreach($pengajuan->documents as $i => $doc)
+            <tr>
+                <td class="px-4 py-3 text-center">{{ $i + 1 }}</td>
+                <td class="px-4 py-3">
+                    <span class="inline-block bg-indigo-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                        {{ ucfirst(str_replace('_', ' ', $doc->document_type)) }}
+                    </span>
+                </td>
+                <td class="px-4 py-3 font-mono">{{ $doc->file_name }}</td>
+                <td class="px-4 py-3">{{ number_format($doc->file_size / 1024, 2) }} KB</td>
+                <td class="px-4 py-3 text-center">
+                    <button 
+                        onclick="showPreview('{{ route('admin.pengajuan.download', ['id' => $pengajuan->id, 'document' => $doc->file_name]) }}', '{{ $doc->file_name }}')" 
+                        class="inline-flex items-center px-3 py-1 text-xs bg-blue-500 text-white rounded hover:bg-blue-600">
+                        <i class="fas fa-eye mr-1"></i>Preview
+                    </button>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
                 </div>
             </div>
-           
-
-{{-- Modal Catatan jika diterima --}}
-<div class="modal fade" id="modalCatatanDiterima" tabindex="-1" aria-labelledby="modalCatatanDiterimaLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form id="formDiterima" action="{{ route('admin.pengajuan.updateStatus', $pengajuan->id) }}" method="POST">
-            @csrf
-            @method('PUT')
-            <input type="hidden" name="status" value="diterima">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalCatatanDiterimaLabel">Konfirmasi Penerimaan</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="catatan_admin" class="form-label">Catatan untuk User (Opsional)</label>
-                        <textarea name="catatan_admin" class="form-control" rows="4" placeholder="Tulis catatan..."></textarea>
-                    </div>
-
-                    @if($pengajuan->surat_pdf)
-                        <div class="mb-2">
-                            <label class="form-label">Surat Terkait:</label><br>
-                            <a href="{{ asset('storage/' . $pengajuan->surat_pdf) }}" target="_blank" class="btn btn-sm btn-outline-primary">
-                                <i class="fas fa-file-pdf me-1"></i> Lihat Surat
-                            </a>
-                        </div>
-                    @else
-                        <p class="text-warning">Tidak ada surat PDF yang terlampir pada pengajuan ini.</p>
-                    @endif
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success">Kirim Notifikasi & Email</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-{{-- Script --}}
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const formStatus = document.getElementById('formStatus');
-        const statusSelect = document.getElementById('statusSelect');
-        const modalCatatan = new bootstrap.Modal(document.getElementById('modalCatatanDiterima'));
-
-        formStatus.addEventListener('submit', function (e) {
-            const selectedStatus = statusSelect.value;
-            if (selectedStatus === 'diterima') {
-                e.preventDefault(); // Cegah pengiriman form utama
-                modalCatatan.show(); // Tampilkan modal
-            }
-        });
-    });
-</script>
-@endif
+            @endif
+            {{-- END: Tabel Dokumen Pengajuan --}}
 
         </div>
-    </div>
-</div>
 
-<!-- Tombol untuk membuka modal --><div class="d-flex justify-content-center">
-    <button type="button" class="btn btn-warning mb-4 w-50" data-bs-toggle="modal" data-bs-target="#updateTanggalModal">
-        Ubah Tanggal Magang
-    </button>
-</div>
+        {{-- ============================================= --}}
+        {{-- ============ KOLOM KANAN: PANEL AKSI ============ --}}
+        {{-- ============================================= --}}
+       <div class="lg:col-span-1 space-y-8 lg:sticky top-8">
+         @php
+            $admin = auth('admin')->user();
+            $statusOptions = [];
+            if ($admin->role === 'superadmin') { $statusOptions = ['pending', 'diproses', 'diteruskan', 'diterima', 'ditolak']; } 
+            elseif ($admin->role === 'admin_dinas' && $pengajuan->status === 'pending') { $statusOptions = ['diteruskan', 'ditolak']; } 
+            elseif ($admin->role === 'admin_bidang' && $pengajuan->status === 'diteruskan') { $statusOptions = ['diproses', 'diterima', 'ditolak']; }
+        @endphp
+    {{-- Card Tab Lainnya --}}
+    <div  class="card p-6 space-y-4">
+        <button type="button" class="btn btn-warning w-100" onclick="openModal()">Ubah Tanggal Magang</button>
 
-
-<div class="card mx-4 w-auto">
-    <div class="card-header">
-        <h5 class="card-title mb-0">
-            <i class="fas fa-cogs me-2"></i>
-            Aksi Pengajuan
-        </h5>
-    </div>
-    <div class="card-body">
-        <div class="d-flex align-items-center justify-content-between">
-            <div>
-                <p class="mb-0">Silakan pilih tindakan yang ingin dilakukan terhadap pengajuan ini</p>
-            </div>
-            <form action="{{ route('admin.pengajuan.updateStatus', $pengajuan->id) }}" method="POST" class="d-flex align-items-center">
-                @csrf
-                @method('PUT')
-                <label for="status" class="form-label me-3 mb-0">Ubah Status:</label>
-                <select name="status" id="status" class="form-control me-2" style="width: auto;">
-                    @foreach ($statusOptions as $status)
-                        <option value="{{ $status }}" {{ $pengajuan->status === $status ? 'selected' : '' }}>
-                            {{ ucfirst($status) }}
-                        </option>
+        @if (in_array($admin->role, ['superadmin', 'admin_dinas']))
+        <div class="card p-3">
+            <form action="{{ route('admin.pengajuan.updateBidang', $pengajuan->id) }}" method="POST">
+                @csrf @method('PATCH')
+                <label for="databidang_id" class="form-label">Pilih Bidang</label>
+                <select name="databidang_id" class="form-select" required>
+                    @foreach ($listBidang as $bidang)
+                        <option value="{{ $bidang->id }}" {{ $pengajuan->databidang_id == $bidang->id ? 'selected' : '' }}>{{ $bidang->nama }}</option>
                     @endforeach
                 </select>
-                <button type="submit" onclick="return confirm('Apakah Anda yakin ingin mengubah status?')" class="btn btn-primary">
-                    <i class="fas fa-save me-1"></i>
-                    Simpan
+                <button type="submit" class="btn btn-primary mt-2 w-100">Simpan Bidang</button>
+            </form>
+        </div>
+        @endif
+
+        @if(auth('admin')->check() && (($admin->role === 'admin_bidang' && $admin->id === $pengajuan->databidang->admin_id) || $admin->role === 'superadmin'))
+        <div class="card p-3">
+            <form action="{{ route('admin.pengajuan.kesediaan.generate', $pengajuan->id) }}" method="POST">
+                @csrf
+                <label class="form-label">Buat Form Kesediaan</label>
+                <input type="text" name="nomor_surat" class="form-control mb-2" placeholder="Nomor Surat" required>
+                <input type="text" name="penanggung_jawab" class="form-control mb-2" placeholder="Penanggung Jawab" required>
+                <button type="submit" class="btn btn-primary mt-2 w-100">Generate Form</button>
+            </form>
+            @if($pengajuan->form_kesediaan_magang)
+            <a href="{{ asset('storage/' . $pengajuan->form_kesediaan_magang) }}" class="btn btn-success mt-2 w-100" target="_blank">Lihat Form</a>
+            @endif
+        </div>
+        @endif
+    </div>
+    {{-- Card Tab Utama --}}
+    <div class="card p-6 space-y-6">
+       
+{{-- Card Tab Surat --}}
+@if (in_array($admin->role, ['superadmin', 'admin_dinas']))
+<div class="card p-6 space-y-6">
+    <div class="card p-3">
+        <form action="{{ route('admin.pengajuan.uploadSurat', $pengajuan->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <label class="form-label">Unggah Surat (PDF)</label>
+            <input type="file" name="surat_pdf" accept="application/pdf" class="form-control">
+            <button type="submit" class="btn btn-primary w-100 mt-3">Simpan Surat</button>
+        </form>
+    </div>
+    <div class="card p-3">
+        <h6 class="form-label">Buat Surat Otomatis</h6>
+        <form action="{{ route('admin.pengajuan.generateSurat', $pengajuan->id) }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-success w-100 mt-3">Buat Surat Otomatis</button>
+        </form>
+    </div>
+    @if ($pengajuan->surat_pdf)
+    <div class="text-center">
+        <button onclick="showPreview('{{ asset('storage/' . $pengajuan->surat_pdf) }}', '{{ basename($pengajuan->surat_pdf) }}')" class="btn btn-primary btn-sm">Lihat Surat PDF</button>
+    </div>
+    @endif
+</div>
+@endif
+
+        @if (!empty($statusOptions))
+        <div class="card p-3">
+            <label class="form-label">Ubah Status</label>
+            <form action="{{ route('admin.pengajuan.updateStatus', $pengajuan->id) }}" method="POST" class="d-flex align-items-center">
+                @csrf @method('PUT')
+                <select name="status" class="form-select me-2" style="flex-grow:1;">
+                    @foreach ($statusOptions as $status)
+                        <option value="{{ $status }}" {{ $pengajuan->status === $status ? 'selected' : '' }}>{{ ucfirst($status) }}</option>
+                    @endforeach
+                </select>
+                <button type="submit" onclick="return confirm('Anda yakin ingin mengubah status?')" class="btn btn-primary flex-shrink-0">
+                    <i class="fas fa-save"></i>
                 </button>
             </form>
         </div>
-    </div>
-</div>
+        @endif
 
-<!-- Modal -->
-<div class="modal fade bg-transparent" id="updateTanggalModal" tabindex="-1" aria-labelledby="updateTanggalModalLabel" aria-hidden="true">
-  <div class="modal-dialog-centered modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <form action="{{ route('admin.pengajuan.updateTanggal', $pengajuan->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-
-        <div class="modal-header">
-          <h5 class="modal-title" id="updateTanggalModalLabel">Ubah Tanggal Magang</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        <div class="card p-3">
+            <label class="form-label">Kirim Komentar</label>
+            <form action="{{ route('admin.pengajuan.kirimCatatan', $pengajuan->id) }}" method="POST" class="space-y-3">
+                @csrf
+                <textarea name="komentar_admin" class="form-control" rows="3" placeholder="Tulis komentar..." required>{{ old('komentar_admin') }}</textarea>
+                <div class="d-flex justify-content-between align-items-center">
+                    <select name="tujuan" class="form-select" style="width: 48%;">
+                        <option value="user">User</option>
+                        <option value="admin_bidang">Admin Bidang</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Kirim</button>
+                </div>
+            </form>
         </div>
-
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="tanggal_mulai" class="form-label">Tanggal Mulai</label>
-            <input type="date" name="tanggal_mulai" id="tanggal_mulai" class="form-control" value="{{ $pengajuan->tanggal_mulai }}">
-          </div>
-
-          <div class="mb-3">
-            <label for="tanggal_selesai" class="form-label">Tanggal Selesai</label>
-            <input type="date" name="tanggal_selesai" id="tanggal_selesai" class="form-control" value="{{ $pengajuan->tanggal_selesai }}">
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary">Simpan</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-@if (in_array(auth()->guard('admin')->user()->role, ['superadmin', 'admin_dinas']))
-    <form action="{{ route('admin.pengajuan.updateBidang', $pengajuan->id) }}" method="POST" class="mb-3">
-        @csrf
-        @method('PATCH')
-
-        <label for="databidang_id" class="form-label">Pilih Bidang</label>
-        <select name="databidang_id" id="databidang_id" class="form-select" required>
-            @foreach ($listBidang as $bidang)
-                <option value="{{ $bidang->id }}" {{ $pengajuan->databidang_id == $bidang->id ? 'selected' : '' }}>
-                    {{ $bidang->nama }}
-                </option>
-            @endforeach
-        </select>
-
-        <button type="submit" class="btn btn-primary mt-2">Simpan Bidang</button>
-    </form>
-@endif
-
-<form action="{{ route('admin.pengajuan.kirimCatatan', $pengajuan->id) }}" method="POST">
-    @csrf
-<div class="card mx-3 w-auto p-4 ">
-    <div class="mb-3 d-flex align-items-center">
-        <label for="tujuan" class="form-label ms-4 mb-0 p-0">Tujuan Komentar :</label>
-        <select name="tujuan" id="tujuan" class="form-select w-25 ms-3" required>
-            <option value="user">User</option>
-            <option value="admin_bidang">Admin Bidang</option>
-        </select>
     </div>
 
-    <div class="mb-3">
-        <label for="komentar_admin" class="form-label ms-4">Isi Komentar</label>
-        <textarea name="komentar_admin" class="form-control w-75 ms-3" rows="4" required>{{ old('komentar_admin') }}</textarea>
-    </div>
-
-    <button type="submit" class="btn btn-primary mb-5 ms-3">Kirim</button>
-</div>
     
-</form>
 
-@if(auth('admin')->check() && (
-    (auth('admin')->user()->role === 'admin_bidang' && auth('admin')->user()->id === $pengajuan->databidang->admin_id) ||
-    auth('admin')->user()->role === 'superadmin'
-))
-    <form action="{{ route('admin.pengajuan.kesediaan.generate', $pengajuan->id) }}" method="POST">
-        @csrf
-        <div class="card p-4 w-auto mx-3 text-light">
-            <h3 class="font-bold mb-3">Buat Form Kesediaan Magang</h3>
+   
+</div>
 
-        <div class="mb-3">
-            <label class="mb-2">Penanggung Jawab</label>
-            <input type="text" name="penanggung_jawab" class="form-control" required>
+
+{{-- ============================================= --}}
+{{-- ================ START: MODALS ================ --}}
+{{-- ============================================= --}}
+
+<!-- Modal Manual -->
+<div id="updateTanggalModal" class="fixed inset-0 z-50 hidden items-center justify-center">
+  
+  <!-- Backdrop -->
+  <div class="absolute inset-0 bg-black/50" onclick="closeModal()"></div>
+
+  <!-- Modal Box -->
+  <div class="relative z-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl w-full max-w-md mx-auto shadow-lg" onclick="event.stopPropagation();">
+    <form action="{{ route('admin.pengajuan.updateTanggal', $pengajuan->id) }}" method="POST" class="p-5 text-white">
+      @csrf
+      @method('PUT')
+
+      <!-- Header -->
+      <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+        <div>
+          <h5 class="text-lg font-semibold">Ubah Tanggal Magang</h5>
+          <small class="text-white/70">Perbarui periode magang mahasiswa</small>
         </div>
-        <div class="mb-3">
-            <label class="mb-2">Nama Project</label>
-            <textarea name="nama_project" class="form-control" rows="3" placeholder="Masukkan judul/deskripsi project" required></textarea>
-        </div>
+        <button type="button" onclick="closeModal()" class="text-white hover:text-red-400 text-2xl leading-none">&times;</button>
+      </div>
 
-        <button type="submit" class="btn btn-primary mt-2">Generate Form</button>
+      <!-- Body -->
+      <div class="space-y-4">
+        <div>
+          <label for="tanggal_mulai" class="block text-sm mb-1">Tanggal Mulai</label>
+          <input type="date" name="tanggal_mulai" id="tanggal_mulai" class="form-control w-full rounded px-3 py-2 text-black" value="{{ $pengajuan->tanggal_mulai }}">
         </div>
-        
+        <div>
+          <label for="tanggal_selesai" class="block text-sm mb-1">Tanggal Selesai</label>
+          <input type="date" name="tanggal_selesai" id="tanggal_selesai" class="form-control w-full rounded px-3 py-2 text-black" value="{{ $pengajuan->tanggal_selesai }}">
+        </div>
+      </div>
 
+      <!-- Footer -->
+      <div class="mt-6 flex justify-end gap-3 border-t border-white/10 pt-4">
+        <button type="button" onclick="closeModal()" class="btn btn-secondary">Batal</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+      </div>
     </form>
+  </div>
 
-    @if($pengajuan->form_kesediaan_magang)
-        <a href="{{ asset('storage/' . $pengajuan->form_kesediaan_magang) }}" class="btn btn-success mt-2" target="_blank">
-            Lihat Form Kesediaan Magang
-        </a>
-    @endif
-@endif
+</div>
 
 <!-- Preview Modal -->
-<div id="previewModal" class="modal" style="display: none;">
-    <div class="modal-dialog modal-xl">
-        <div class="glass-modal-content">
+<div id="previewModal" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header">
                 <div>
                     <h5 class="modal-title">Preview Dokumen</h5>
@@ -1444,7 +528,7 @@
                     <div class="spinner"></div>
                     <p class="mt-3">Memuat dokumen...</p>
                 </div>
-                <div id="previewContent" style="display: none;">
+                <div id="previewContent" style="display: none; height: 100%;">
                     <iframe id="previewFrame" class="preview-container"></iframe>
                 </div>
             </div>
@@ -1466,48 +550,6 @@
         </div>
     </div>
 </div>
-
-<style>
-.modal-dialog.modal-xl {
-    max-width: 95vw;
-    height: 90vh;
-    margin: 2.5vh auto;
-}
-
-.glass-modal-content {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.modal-body {
-    flex: 1;
-    overflow: hidden;
-    padding: 1rem;
-    height: calc(90vh - 120px);
-}
-
-#previewContent {
-    height: 100%;
-    width: 100%;
-}
-
-.preview-container {
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 4px;
-}
-
-.loading-spinner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-</style>
-
 @endsection
 
 @push('scripts')
@@ -1515,7 +557,25 @@
 let currentFileUrl = '';
 let currentFileName = '';
 let currentAbortController = null; 
+  function openModal() {
+    const modal = document.getElementById('updateTanggalModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
 
+  function closeModal() {
+    const modal = document.getElementById('updateTanggalModal');
+    modal.classList.remove('flex');
+    modal.classList.add('hidden');
+  }
+
+  // Tutup modal jika klik backdrop (area luar modal box)
+  document.getElementById('updateTanggalModal').addEventListener('click', function (e) {
+    // Pastikan hanya backdrop yang diklik, bukan modal box
+    if (e.target === this) {
+      closeModal();
+    }
+  });
 function showPreview(url, fileName = '') {
     const modal = document.getElementById('previewModal');
     const loading = document.getElementById('previewLoading');
