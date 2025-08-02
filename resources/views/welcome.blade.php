@@ -20,7 +20,7 @@
   <div id="preloader-active">
     <div class="preloader d-flex align-items-center justify-content-center">
       <div class="preloader-inner position-relative">
-        <div class="text-center"><img class="mb-10" src="{{ asset('assets/imgs/template/favicon.svg') }}" alt="GenZ">
+        <div class="text-center"><img class="mb-10" src="{{ asset('assets/imgs/template/favicon.svg') }}" alt="DiskominfoKab.Malang">
           <div class="preloader-dots"></div>
         </div>
       </div>
@@ -112,11 +112,11 @@
                 </div>
                 <div class="col-lg-6 text-center">
                   <div class="banner-img position-relative wow animate__animated animate__fadeIn"><img
-                      src="{{asset('assets\imgs\page\homepage1\banerFix.png')}}" alt="Genz">
-                    <div class="pattern-1"><img src="assets/imgs/template/pattern-1.svg" alt="Genz"></div>
-                    <div class="pattern-2"><img src="assets/imgs/template/pattern-2.svg" alt="Genz"></div>
-                    <div class="pattern-3"><img src="assets/imgs/template/pattern-3.svg" alt="Genz"></div>
-                    <div class="pattern-4"><img src="assets/imgs/template/pattern-4.svg" alt="Genz"></div>
+                      src="{{asset('assets\imgs\page\homepage1\banerFix.png')}}" alt="DiskominfoKab.Malang">
+                    <div class="pattern-1"><img src="assets/imgs/template/pattern-1.svg" alt="DiskominfoKab.Malang"></div>
+                    <div class="pattern-2"><img src="assets/imgs/template/pattern-2.svg" alt="DiskominfoKab.Malang"></div>
+                    <div class="pattern-3"><img src="assets/imgs/template/pattern-3.svg" alt="DiskominfoKab.Malang"></div>
+                    <div class="pattern-4"><img src="assets/imgs/template/pattern-4.svg" alt="DiskominfoKab.Malang"></div>
                   </div>
                 </div>
               </div>
@@ -646,8 +646,8 @@
       <div class="footer-1 bg-gray-850 border-gray-800">
         <div class="row">
           <div class="col-lg-4 mb-30"><a class="wow animate__animated animate__fadeInUp" href="index.html"><img
-                class="logo-night" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" width="110px" alt="Genz"><img
-                class="d-none logo-day" alt="GenZ" src="{{ asset('assets/imgs/template/rb_3083.svg') }}"
+                class="logo-night" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" width="110px" alt="DiskominfoKab.Malang"><img
+                class="d-none logo-day" alt="DiskominfoKab.Malang" src="{{ asset('assets/imgs/template/rb_3083.svg') }}"
                 width="110px"></a>
             <p class="mb-20 mt-20 text-sm color-gray-500 wow animate__animated animate__fadeInUp">Kementerian Komunikasi
               dan Informatika, yang merupakan kementerian dalam pemerintahan Indonesia yang bertanggung jawab atas
