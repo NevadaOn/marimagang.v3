@@ -14,7 +14,6 @@
     <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
     <title>@yield('title', 'Super Admin Dashboard - Diskominfo Kab.malang')</title>
-<script src="https://cdn.tailwindcss.com"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -26,7 +25,7 @@
         @include('partials.sidebar') 
 
         <div class="main ">
-            @include('partials.navbar')
+            @include('partials.navbarsuperadmin')
 
                     @yield('content')
         </div>

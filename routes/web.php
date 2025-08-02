@@ -93,20 +93,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::controller(ProfileController::class)->prefix('profile')->group(function () {
 
-        // === PROFILE MANAGEMENT ===
         Route::get('/edit', 'edit')->name('profile.edit');
-        Route::put('/update', 'updateProfile')->name('profile.update'); // Khusus untuk profile saja
+        Route::put('/update', 'updateProfile')->name('profile.update'); 
 
-        // === SKILLS MANAGEMENT ===
         Route::post('/skills', 'storeSkill')->name('profile.skills.store');
         Route::put('/skills/{userSkillId}', 'updateSkill')->name('profile.skills.update');
         Route::delete('/skills/{userSkillId}', 'destroySkill')->name('profile.skills.destroy');
 
-        // === PROJECTS MANAGEMENT ===
-        // Project data tersimpan di Skill model sesuai struktur existing
         Route::delete('/skills/{userSkillId}/project', 'destroyProject')->name('profile.projects.destroy');
-
-        // === UTILITIES ===
         Route::post('/search-nim', 'searchByNIM')->name('profile.search-nim');
     });
 
