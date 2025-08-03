@@ -88,7 +88,7 @@ class PengajuanController extends Controller
         return view('pengajuan.index', compact(
             'pengajuan',
             'statusAktif',
-            'completionLevel'
+            'completionLevel', 'user'
         ));
     }
 
