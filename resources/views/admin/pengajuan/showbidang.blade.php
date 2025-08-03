@@ -26,6 +26,11 @@
         --gradient-warning: linear-gradient(135deg, #d97706, #f59e0b);
         --gradient-info: linear-gradient(135deg, #0891b2, #06b6d4);
     }
+    * {
+    font-size: 0.85rem;
+}
+
+
     body { background: #000000; min-height: 100vh; overflow-x: hidden; color: var(--text-secondary); }
     .card { background: var(--glass-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--glass-border); border-radius: 24px; margin-bottom: 0; /* Dihapus margin bottom agar spacing dikontrol oleh grid */ box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); overflow: hidden; animation: fadeInUp 0.6s ease-out; }
     .card-header { background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid var(--glass-border); padding: 1.5rem; position: relative; }
@@ -362,7 +367,7 @@
             elseif ($admin->role === 'admin_bidang' && $pengajuan->status === 'diteruskan') { $statusOptions = ['diproses', 'diterima', 'ditolak']; }
         @endphp
     {{-- Card Tab Lainnya --}}
-    <div  class="card p-6 space-y-4">
+    <div  class="card p-4 space-y-4">
         <button type="button" class="btn btn-warning w-100" onclick="openModal()">Ubah Tanggal Magang</button>
 
         @if (in_array($admin->role, ['superadmin', 'admin_dinas']))
@@ -381,11 +386,11 @@
         @endif
 
         @if(auth('admin')->check() && (($admin->role === 'admin_bidang' && $admin->id === $pengajuan->databidang->admin_id) || $admin->role === 'superadmin'))
-        <div class="card p-3">
+        <div class="card p-3 text-light">
             <form action="{{ route('admin.pengajuan.kesediaan.generate', $pengajuan->id) }}" method="POST">
                 @csrf
                 <label class="form-label">Buat Form Kesediaan</label>
-                <input type="text" name="nomor_surat" class="form-control mb-2" placeholder="Nomor Surat" required>
+                <input type="text" name="nomor_surat" class="form-control mb-2 " placeholder="Nomor Surat" required>
                 <input type="text" name="penanggung_jawab" class="form-control mb-2" placeholder="Penanggung Jawab" required>
                 <button type="submit" class="btn btn-primary mt-2 w-100">Generate Form</button>
             </form>
@@ -396,11 +401,11 @@
         @endif
     </div>
     {{-- Card Tab Utama --}}
-    <div class="card p-6 space-y-6">
+    <div class="card p-4 space-y-6">
        
 {{-- Card Tab Surat --}}
 @if (in_array($admin->role, ['superadmin', 'admin_dinas']))
-<div class="card p-6 space-y-6">
+<div class="card p-2 space-y-6">
     <div class="card p-3">
         <form action="{{ route('admin.pengajuan.uploadSurat', $pengajuan->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -441,18 +446,19 @@
         </div>
         @endif
 
-        <div class="card p-3">
+        <div class="card p-3 w-full">
             <label class="form-label">Kirim Komentar</label>
             <form action="{{ route('admin.pengajuan.kirimCatatan', $pengajuan->id) }}" method="POST" class="space-y-3">
                 @csrf
                 <textarea name="komentar_admin" class="form-control" rows="3" placeholder="Tulis komentar..." required>{{ old('komentar_admin') }}</textarea>
-                <div class="d-flex justify-content-between align-items-center">
-                    <select name="tujuan" class="form-select" style="width: 48%;">
+                <div class="d-flex justify-content-between align-items-center gap-2 text-sm">
+                    <select name="tujuan" class="form-select w-full">
                         <option value="user">User</option>
                         <option value="admin_bidang">Admin Bidang</option>
                     </select>
-                    <button type="submit" class="btn btn-primary">Kirim</button>
+                    <button type="submit" class="btn btn-primary w-full">Kirim</button>
                 </div>
+                
             </form>
         </div>
     </div>

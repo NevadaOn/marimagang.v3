@@ -47,9 +47,13 @@
 </script>
 
 <style>
+     *{
+        font-size: 0.88rem;
+     }
+
     body {
         background: radial-gradient(ellipse at top, #1e293b 0%, #0f172a 100%);
-        min-height: 100vh;
+      
     }
     
     .glass-morphism {

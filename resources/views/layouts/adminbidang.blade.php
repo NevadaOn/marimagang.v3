@@ -154,6 +154,9 @@
         a.sidebar-link {
             background-color: transparent;
         }
+        *{
+            font-size: 0.9rem;
+        }
     </style>
     
 </head>
