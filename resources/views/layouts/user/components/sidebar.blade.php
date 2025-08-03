@@ -36,7 +36,7 @@
                     </a>
                 </li>
 
-                 <li class="sidebar-menu__item" role="none">
+                <li class="sidebar-menu__item" role="none">
                     <a href="#"
                         class="sidebar-menu__link {{ request()->routeIs('anggota.*') ? 'active' : '' }}"
                         role="menuitem">

@@ -21,25 +21,13 @@ class PengajuanController extends Controller
         $this->notificationService = $notificationService;
     }
 
-    /**
-     * Check if user has active pengajuan or pending invitation
-     */
     private function hasActivePengajuan($userId)
     {
-        $pengajuanAktif = Pengajuan::where('user_id', $userId)
+        return Pengajuan::where('user_id', $userId)
             ->whereNotIn('status', ['ditolak', 'selesai'])
             ->exists();
-
-        $keanggotaanAktif = Anggota::where('user_id', $userId)
-            ->where('status', 'accepted')
-            ->exists();
-
-        $undanganPending = Anggota::where('user_id', $userId)
-            ->where('status', 'pending')
-            ->exists();
-
-        return $pengajuanAktif || $keanggotaanAktif || $undanganPending;
     }
+
 
     public function index()
     {
@@ -156,6 +144,18 @@ class PengajuanController extends Controller
             'roles.*' => $tipe === 'kelompok' ? 'in:ketua,anggota' : 'nullable|in:ketua,anggota',
         ]);
 
+        if ($tipe === 'kelompok') {
+            $request->validate([
+                'anggota' => 'required|array|min:1',
+                'anggota.*.nama' => 'required|string|max:100',
+                'anggota.*.nim' => 'required|string|max:20',
+                'anggota.*.skill' => 'nullable|string',
+                'anggota.*.email' => 'nullable|email',
+                'anggota.*.no_hp' => 'nullable|string|max:20',
+            ]);
+        }
+
+
         $kode = 'MGG-' . date('Y') . '-' . strtoupper(Str::random(6));
 
         $pengajuan = Pengajuan::create([
@@ -184,32 +184,40 @@ class PengajuanController extends Controller
         }
 
         if ($tipe === 'kelompok') {
+            // Ketua (pengusul)
             Anggota::create([
                 'pengajuan_id' => $pengajuan->id,
-                'user_id' => auth()->id(),
-                'role' => 'ketua',
+                'nama' => auth()->user()->name,
+                'nim' => auth()->user()->nim,
+                'universitas' => auth()->user()->universitas->nama ?? null,
+                'prodi' => auth()->user()->prodi,
+                'fakultas' => auth()->user()->fakultas,
+                'email' => auth()->user()->email,
+                'no_hp' => auth()->user()->telepon,
                 'status' => 'accepted',
+                'role' => 'ketua',
             ]);
 
-            if ($request->has('user_ids')) {
-                foreach ($request->user_ids as $index => $userId) {
-                    if ($userId != auth()->id()) {
-                        if ($this->hasActivePengajuan($userId)) {
-                            return redirect()->back()
-                                ->with('error', 'Salah satu anggota yang dipilih sudah memiliki pengajuan aktif.');
-                        }
-
-                        Anggota::create([
-                            'pengajuan_id' => $pengajuan->id,
-                            'user_id' => $userId,
-                            'role' => $request->roles[$index] ?? 'anggota',
-                        ]);
-
-                        $this->notificationService->groupAssigned($userId, $pengajuan->kode_pengajuan);
-                    }
+            // Anggota lainnya (input manual)
+            if ($request->has('anggota')) {
+                foreach ($request->anggota as $anggota) {
+                    Anggota::create([
+                        'pengajuan_id' => $pengajuan->id,
+                        'nama' => $anggota['nama'],
+                        'nim' => $anggota['nim'],
+                        'skill' => $anggota['skill'] ?? null,
+                        'universitas' => auth()->user()->universitas->nama ?? null,
+                        'prodi' => auth()->user()->prodi,
+                        'fakultas' => auth()->user()->fakultas,
+                        'email' => $anggota['email'] ?? null,
+                        'no_hp' => $anggota['no_hp'] ?? null,
+                        'role' => 'anggota',
+                        'status' => 'pending',
+                    ]);
                 }
             }
         }
+
 
         $this->notificationService->internshipSubmitted(auth()->id(), $pengajuan->id);
 
@@ -237,35 +245,35 @@ class PengajuanController extends Controller
 
     public function storeAnggota(Request $request, Pengajuan $pengajuan)
     {
+        $this->authorize('update', $pengajuan);
+
         $request->validate([
-            'user_ids' => 'required|array',
-            'user_ids.*' => 'exists:users,id',
-            'roles' => 'required|array',
-            'roles.*' => 'in:ketua,anggota',
+            'anggota' => 'required|array|min:1',
+            'anggota.*.nama' => 'required|string|max:100',
+            'anggota.*.nim' => 'required|string|max:20',
+            'anggota.*.skill' => 'nullable|string',
+            'anggota.*.email' => 'nullable|email',
+            'anggota.*.no_hp' => 'nullable|string|max:20',
         ]);
 
-        foreach ($request->user_ids as $index => $userId) {
-            if ($this->hasActivePengajuan($userId)) {
-                return redirect()->back()
-                    ->with('error', 'Salah satu anggota yang dipilih sudah memiliki pengajuan aktif.');
-            }
-
-            $existingAnggota = Anggota::where('pengajuan_id', $pengajuan->id)
-                ->where('user_id', $userId)
-                ->exists();
-
-            if (!$existingAnggota) {
-                Anggota::create([
-                    'pengajuan_id' => $pengajuan->id,
-                    'user_id' => $userId,
-                    'role' => $request->roles[$index] ?? 'anggota',
-                ]);
-
-                $this->notificationService->groupAssigned($userId, $pengajuan->kode_pengajuan);
-            }
+        foreach ($request->anggota as $anggota) {
+            Anggota::create([
+                'pengajuan_id' => $pengajuan->id,
+                'nama' => $anggota['nama'],
+                'nim' => $anggota['nim'],
+                'skill' => $anggota['skill'] ?? null,
+                'universitas' => auth()->user()->universitas->nama ?? null,
+                'prodi' => auth()->user()->prodi,
+                'fakultas' => auth()->user()->fakultas,
+                'email' => $anggota['email'] ?? null,
+                'no_hp' => $anggota['no_hp'] ?? null,
+                'status' => 'pending',
+                'role' => 'anggota',
+            ]);
         }
 
         return redirect()->route('pengajuan.show', $pengajuan)
             ->with('success', 'Anggota berhasil ditambahkan.');
     }
+
 }

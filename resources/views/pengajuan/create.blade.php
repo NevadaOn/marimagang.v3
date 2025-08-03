@@ -61,17 +61,72 @@
                         <span class="text-muted">Anda otomatis menjadi ketua kelompok.</span>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="nim_cari" class="form-label">Cari Anggota Berdasarkan NIM</label>
-                        <input type="text" id="nim_cari" class="form-control" placeholder="Contoh: 12345678">
-                        <div id="hasil_pencarian" class="mt-2 small text-muted"></div>
+                    <div id="anggota-container">
+                        <div class="anggota-item card p-3 mb-3">
+                            <h5 class="fw-bold">Anggota 1</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <label>Nama</label>
+                                    <input type="text" name="anggota[0][nama]" class="form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label>NIM</label>
+                                    <input type="text" name="anggota[0][nim]" class="form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label>Email</label>
+                                    <input type="email" name="anggota[0][email]" class="form-control">
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label>No HP</label>
+                                    <input type="text" name="anggota[0][no_hp]" class="form-control">
+                                </div>
+                                <div class="col-12 mb-2">
+                                    <label>Skill</label>
+                                    <input type="text" name="anggota[0][skill]" class="form-control">
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="form-label fw-semibold">Anggota Ditambahkan</label>
-                        <div id="daftar_anggota" class="mb-2"></div>
-                        <small class="text-muted">Maksimal jumlah anggota sesuai ketentuan instansi.</small>
-                    </div>
+                    <button type="button" class="btn btn-outline-primary mb-4" onclick="tambahAnggota()">+ Tambah Anggota</button>
+
+                    <script>
+                        let anggotaIndex = 1;
+                        function tambahAnggota() {
+                            const container = document.getElementById('anggota-container');
+                            const item = document.createElement('div');
+                            item.className = 'anggota-item card p-3 mb-3';
+                            item.innerHTML = `
+                                <h5 class="fw-bold">Anggota ${anggotaIndex + 1}</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <label>Nama</label>
+                                        <input type="text" name="anggota[${anggotaIndex}][nama]" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label>NIM</label>
+                                        <input type="text" name="anggota[${anggotaIndex}][nim]" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label>Email</label>
+                                        <input type="email" name="anggota[${anggotaIndex}][email]" class="form-control">
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label>No HP</label>
+                                        <input type="text" name="anggota[${anggotaIndex}][no_hp]" class="form-control">
+                                    </div>
+                                    <div class="col-12 mb-2">
+                                        <label>Skill</label>
+                                        <input type="text" name="anggota[${anggotaIndex}][skill]" class="form-control">
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-danger mt-2" onclick="this.parentElement.parentElement.parentElement.remove()">Hapus</button>
+                                </div>
+                            `;
+                            container.appendChild(item);
+                            anggotaIndex++;
+                        }
+                    </script>
                 @endif
 
                 {{-- Dokumen --}}

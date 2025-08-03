@@ -136,7 +136,7 @@
                             <label for="imageUpload" class="form-label mb-8 h6">Your Photo</label>
                             <div class="flex-align gap-22">
                                 <div class="avatar-upload flex-shrink-0">
-                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg">
+                                    {{-- <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"> --}}
                                     <div class="avatar-preview">
                                         <div id="profileImagePreview"
                                             style="background-image: url('dashboard/images/thumbs/setting-profile-img.jpg');">
@@ -837,22 +837,6 @@
     uploadImageFunction('#coverImageUpload', '#coverImagePreview');
     uploadImageFunction('#imageUpload', '#profileImagePreview');
 
-    // ============================= Table Header Checkbox checked all js ============================= 
-    $('#selectAll').on('change', function () {
-        $('.form-check .form-check-input').prop('checked', $(this).prop('checked'));
-    });
-
-    // ============================= Data Tables ============================= 
-    new DataTable('#studentTable', {
-        searching: false,
-        lengthChange: false,
-        info: false,   // Bottom Left Text => Showing 1 to 10 of 12 entries
-        pagination: false,
-        paging: false,
-        "columnDefs": [
-            { "orderable": false, "targets": [0, 6] } // Disables sorting on the 1st & 7th column (index 6)
-        ]
-    });
 </script>
 
 @endpush

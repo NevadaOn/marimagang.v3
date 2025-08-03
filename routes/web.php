@@ -101,7 +101,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/skills/{userSkillId}', 'destroySkill')->name('profile.skills.destroy');
 
         Route::delete('/skills/{userSkillId}/project', 'destroyProject')->name('profile.projects.destroy');
-        Route::post('/search-nim', 'searchByNIM')->name('profile.search-nim');
     });
 
     Route::controller(PengajuanController::class)->group(function () {
@@ -110,8 +109,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/pengajuan/{pengajuan}/manage-anggota', 'editAnggota')->name('pengajuan.anggota.edit');
         Route::post('/pengajuan/{pengajuan}/manage-anggota', 'storeAnggota')->name('pengajuan.anggota.store');
     });
-
-    Route::get('/user/search-nim', [ProfileController::class, 'searchByNIM'])->name('user.search-nim');
 
     Route::controller(NotificationController::class)->prefix('notifications')->group(function () {
         Route::get('/', 'userNotifications')->name('notifications.user');
@@ -122,9 +119,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::delete('/delete-all', 'destroyAll')->name('notifications.deleteAll');
         Route::delete('/{id}', 'destroy')->name('notifications.destroy');
-        
-        
-
     });
 
 
