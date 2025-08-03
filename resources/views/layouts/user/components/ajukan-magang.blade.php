@@ -61,24 +61,32 @@
         </div>
     @endif
 
-    {{-- Tindakan jika profil belum lengkap --}}
-    @if ($completionStatus['level'] === 'skills-complete' && !$pengajuanAktif && !$keanggotaanAktif)
-        <div class="position-relative rounded-16 bg-success-100 overflow-hidden gap-16 flex-wrap z-1 mt-20">
+    @if ($completionStatus['level'] !== 'skills-complete')
+        <div class="position-relative rounded-16 bg-warning-50 overflow-hidden gap-16 flex-wrap z-1 mt-20">
             <div class="row gy-4">
                 <div class="col-sm-12">
                     <div class="px-20 py-20">
-                        
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <div>
-                                <h4 class="text-success mb-2">Siap untuk Mengajukan Magang</h4>
-                                <p class="text-14 fw-light text-black">
-                                    Profil Anda sudah lengkap dan siap untuk memulai pengalaman magang.
-                                </p>
-                            </div>
 
-                            <a href="{{ route('pengajuan.tipe') }}" class="btn btn-success btn-sm">
-                                Ajukan Sekarang
-                            </a>
+                        <div class="d-flex justify-content-between align-items-center mt-3">                  
+                            <div>
+                                <h4 class="mb-2"> Lengkapi Profil Terlebih Dahulu </h6>
+                                                    <p class="mb-3">
+                                                        @switch($completionLevel)
+                                                            @case('incomplete')
+                                                                Lengkapi data universitas dan informasi pribadi Anda terlebih dahulu.
+                                                                @break
+                                                            @case('profile-complete')
+                                                                Tambahkan keahlian Anda untuk melengkapi profil.
+                                                                @break
+                                                            @case('skills-complete')
+                                                                Periksa kembali bagian profil agar lengkap seluruhnya.
+                                                                @break
+                                                            @default
+                                                                Silakan lengkapi semua bagian profil Anda terlebih dahulu.
+                                                        @endswitch
+                                                    </p>
+                            </div>
+                            <a href="{{ route('profile.edit') }}" class="btn btn-warning">Lengkapi Profil</a>
                         </div>
 
                     </div>
@@ -86,6 +94,24 @@
             </div>
         </div>
 
+    @elseif(!$pengajuanAktif && !$keanggotaanAktif)
+         <div class="position-relative rounded-16 bg-primary-100 overflow-hidden gap-16 flex-wrap z-1 mt-20">
+            <div class="row gy-4">
+                <div class="col-sm-12">
+                    <div class="px-20 py-20">
+                        <div class="d-flex justify-content-between align-items-center mt-3">                  
+                            <div>
+                                <h4 class="mb-2">Profil Anda Sudah Lengkap</h6> 
+                                <p>Anda dapat melakukan pengajuan magang sekarang</p>                   
+                            </div>
+                            <a href="{{ route('pengajuan.tipe') }}" class="btn btn-primary">Ajukan Magang Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     @endif
+
+    
 
 </div>
