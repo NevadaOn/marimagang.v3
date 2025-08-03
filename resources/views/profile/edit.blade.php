@@ -23,7 +23,7 @@
                 <input type='file' id="coverImageUpload" accept=".png, .jpg, .jpeg">
                 <div class="avatar-preview">
                     <div id="coverImagePreview"
-                        style="background-image: url('{{ asset('style/images/thumbs/setting-cover-img.png') }}');">
+                        style="background-image: url('{{ asset('img/fdr.png') }}');">
 
                     </div>
                 </div>
