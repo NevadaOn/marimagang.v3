@@ -5,7 +5,7 @@
     'items' => [
         ['label' => 'Pengajuan', 'url' => route('pengajuan.index')],
         ['label' => 'Buat Pengajuan', 'url' => route('pengajuan.tipe')],
-        ['label' => 'Form Pengajuan', 'url' => null], // terakhir: aktif, tidak punya tautan
+        ['label' => 'Form Pengajuan', 'url' => null],
     ]
 ])
 
@@ -26,7 +26,7 @@
                             <option value="{{ $item->id }}" {{ $item->status === 'tutup' ? 'disabled' : '' }}
                                 style="{{ $item->status === 'tutup' ? 'color: #999;' : '' }}">
                                 {{ $item->nama }}
-                                {{ $item->status === 'tutup' ? '❌ (Tutup)' : '✅ (Tersedia)' }}
+                                {{ $item->status === 'tutup' ? '(Tutup)' : '(Tersedia)' }}
                             </option>
                         @endforeach
                     </select>
@@ -61,70 +61,141 @@
                         <span class="text-muted">Anda otomatis menjadi ketua kelompok.</span>
                     </div>
 
-                    <div id="anggota-container">
-                        <div class="anggota-item card p-3 mb-3">
-                            <h5 class="fw-bold">Anggota 1</h5>
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <label>Nama</label>
-                                    <input type="text" name="anggota[0][nama]" class="form-control" required>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label>NIM</label>
-                                    <input type="text" name="anggota[0][nim]" class="form-control" required>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label>Email</label>
-                                    <input type="email" name="anggota[0][email]" class="form-control">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label>No HP</label>
-                                    <input type="text" name="anggota[0][no_hp]" class="form-control">
-                                </div>
-                                <div class="col-12 mb-2">
-                                    <label>Skill</label>
-                                    <input type="text" name="anggota[0][skill]" class="form-control">
-                                </div>
+                    {{-- Form Input Anggota --}}
+                    <div class="card p-3 mb-3">
+                        <h5 class="fw-bold" id="form-title">Tambah Anggota</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label>Nama</label>
+                                <input type="text" id="input-nama" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label>NIM</label>
+                                <input type="text" id="input-nim" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label>Email</label>
+                                <input type="email" id="input-email" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label>No HP</label>
+                                <input type="text" id="input-nohp" class="form-control">
+                            </div>
+                            <div class="col-12 mb-2">
+                                <label>Skill</label>
+                                <input type="text" id="input-skill" class="form-control">
+                            </div>
+                            <div class="col-12 text-end">
+                                <button type="button" class="btn btn-primary mt-2" onclick="simpanAnggota()">Simpan Anggota</button>
                             </div>
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-outline-primary mb-4" onclick="tambahAnggota()">+ Tambah Anggota</button>
+                    {{-- Daftar Anggota --}}
+                    <div id="list-anggota"></div>
+
+                    {{-- Hidden Field untuk Data Final --}}
+                    <div id="anggota-hidden-inputs"></div>
 
                     <script>
-                        let anggotaIndex = 1;
-                        function tambahAnggota() {
-                            const container = document.getElementById('anggota-container');
-                            const item = document.createElement('div');
-                            item.className = 'anggota-item card p-3 mb-3';
-                            item.innerHTML = `
-                                <h5 class="fw-bold">Anggota ${anggotaIndex + 1}</h5>
-                                <div class="row">
-                                    <div class="col-md-6 mb-2">
-                                        <label>Nama</label>
-                                        <input type="text" name="anggota[${anggotaIndex}][nama]" class="form-control" required>
+                        let anggotaList = []
+                        let editingIndex = null;
+
+                        function simpanAnggota() {
+                            const nama = document.getElementById('input-nama').value.trim();
+                            const nim = document.getElementById('input-nim').value.trim();
+                            const email = document.getElementById('input-email').value.trim();
+                            const no_hp = document.getElementById('input-nohp').value.trim();
+                            const skill = document.getElementById('input-skill').value.trim();
+
+                            if (!nama || !nim) {
+                                alert("Nama dan NIM wajib diisi.");
+                                return;
+                            }
+
+                            const data = { nama, nim, email, no_hp, skill };
+
+                            if (editingIndex !== null) {
+                                anggotaList[editingIndex] = data;
+                                editingIndex = null;
+                            } else {
+                                if (anggotaList.length >= 7) {
+                                    alert("Maksimal 7 anggota (tidak termasuk ketua).");
+                                    return;
+                                }
+                                anggotaList.push(data);
+                            }
+
+                            resetForm();
+                            renderAnggotaList();
+                            renderHiddenInputs();
+                        }
+
+                        function resetForm() {
+                            document.getElementById('input-nama').value = '';
+                            document.getElementById('input-nim').value = '';
+                            document.getElementById('input-email').value = '';
+                            document.getElementById('input-nohp').value = '';
+                            document.getElementById('input-skill').value = '';
+                            document.getElementById('form-title').innerText = 'Tambah Anggota';
+                        }
+
+                        function renderAnggotaList() {
+                            const container = document.getElementById('list-anggota');
+                            container.innerHTML = '';
+
+                            anggotaList.forEach((item, index) => {
+                                const card = document.createElement('div');
+                                card.className = 'card p-3 mb-2 anggota-card';
+                                card.innerHTML = `
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>${item.nama}</strong> (${item.nim}) <br>
+                                            <small>${item.email || '-'} | ${item.no_hp || '-'}</small><br>
+                                            <em>${item.skill || '-'}</em>
+                                        </div>
+                                        <div>
+                                            <button type="button" class="btn btn-sm btn-outline-primary me-2" onclick="editAnggota(${index})">Edit</button>
+                                            <button type="button" class="btn btn-sm btn-outline-danger" onclick="hapusAnggota(${index})">Hapus</button>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 mb-2">
-                                        <label>NIM</label>
-                                        <input type="text" name="anggota[${anggotaIndex}][nim]" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <label>Email</label>
-                                        <input type="email" name="anggota[${anggotaIndex}][email]" class="form-control">
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <label>No HP</label>
-                                        <input type="text" name="anggota[${anggotaIndex}][no_hp]" class="form-control">
-                                    </div>
-                                    <div class="col-12 mb-2">
-                                        <label>Skill</label>
-                                        <input type="text" name="anggota[${anggotaIndex}][skill]" class="form-control">
-                                    </div>
-                                    <button type="button" class="btn btn-sm btn-danger mt-2" onclick="this.parentElement.parentElement.parentElement.remove()">Hapus</button>
-                                </div>
-                            `;
-                            container.appendChild(item);
-                            anggotaIndex++;
+                                `;
+                                container.appendChild(card);
+                            });
+                        }
+
+                        function editAnggota(index) {
+                            const item = anggotaList[index];
+                            document.getElementById('input-nama').value = item.nama;
+                            document.getElementById('input-nim').value = item.nim;
+                            document.getElementById('input-email').value = item.email;
+                            document.getElementById('input-nohp').value = item.no_hp;
+                            document.getElementById('input-skill').value = item.skill;
+                            editingIndex = index;
+                            document.getElementById('form-title').innerText = `Edit Anggota ${index + 1}`;
+                        }
+
+                        function hapusAnggota(index) {
+                            if (confirm("Hapus anggota ini?")) {
+                                anggotaList.splice(index, 1);
+                                renderAnggotaList();
+                                renderHiddenInputs();
+                                resetForm();
+                            }
+                        }
+
+                        function renderHiddenInputs() {
+                            const container = document.getElementById('anggota-hidden-inputs');
+                            container.innerHTML = '';
+                            anggotaList.forEach((item, i) => {
+                                for (const key in item) {
+                                    const input = document.createElement('input');
+                                    input.type = 'hidden';
+                                    input.name = `anggota[${i}][${key}]`;
+                                    input.value = item[key];
+                                    container.appendChild(input);
+                                }
+                            });
                         }
                     </script>
                 @endif
@@ -148,75 +219,4 @@
             </form>
         </div>
     </div>
-
-
-    @if ($tipe === 'kelompok')
-        <script>
-            const daftarAnggota = new Map();
-            const currentUserId = {{ auth()->id() }};
-
-            document.getElementById('nim_cari')?.addEventListener('input', function () {
-                const nim = this.value.trim();
-
-                if (nim.length < 6) {
-                    document.getElementById('hasil_pencarian').innerText = 'Masukkan minimal 6 karakter NIM.';
-                    return;
-                }
-
-                fetch(`/user/search-nim?nim=${encodeURIComponent(nim)}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        const hasil = document.getElementById('hasil_pencarian');
-                        if (data.message) {
-                            hasil.innerText = data.message;
-                        } else if (data.id === currentUserId) {
-                            hasil.innerText = 'Anda sudah otomatis menjadi ketua kelompok.';
-                        } else if (daftarAnggota.has(data.id)) {
-                            hasil.innerText = 'Pengguna sudah ditambahkan ke daftar anggota.';
-                        } else {
-                            hasil.innerHTML = `
-                                        <div class="card p-3">
-                                            <div><strong>${data.nama}</strong> (${data.nim})</div>
-                                            <div class="text-muted">${data.email}</div>
-                                            <button class="btn btn-sm btn-success mt-2" onclick="tambahAnggota(${data.id}, '${data.nama}', '${data.nim}')">Tambah Sebagai Anggota</button>
-                                        </div>
-                                    `;
-                        }
-                    })
-                    .catch(err => {
-                        document.getElementById('hasil_pencarian').innerText = 'Terjadi kesalahan saat pencarian.';
-                    });
-            });
-
-            function tambahAnggota(id, nama, nim) {
-                if (daftarAnggota.has(id) || id === currentUserId) return;
-
-                daftarAnggota.set(id, true);
-
-                const container = document.getElementById('daftar_anggota');
-                const anggotaDiv = document.createElement('div');
-                anggotaDiv.className = 'card p-3 mb-2';
-                anggotaDiv.innerHTML = `
-                            <div><strong>${nama}</strong> (${nim})</div>
-                            <input type="hidden" name="user_ids[]" value="${id}">
-                            <div class="mt-2">
-                                <label>Peran:</label>
-                                <select name="roles[]" class="form-select form-select-sm w-auto d-inline-block ms-2">
-                                    <option value="anggota">Anggota</option>
-                                    <option value="ketua">Ketua</option>
-                                </select>
-                                <button type="button" class="btn btn-sm btn-danger ms-2" onclick="hapusAnggota(this, ${id})">Hapus</button>
-                            </div>
-                        `;
-                container.appendChild(anggotaDiv);
-                document.getElementById('hasil_pencarian').innerText = '';
-                document.getElementById('nim_cari').value = '';
-            }
-
-            function hapusAnggota(button, id) {
-                daftarAnggota.delete(id);
-                button.closest('.card').remove();
-            }
-        </script>
-    @endif
 @endsection

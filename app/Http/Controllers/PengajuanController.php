@@ -35,17 +35,17 @@ class PengajuanController extends Controller
 
         $pengajuan = Pengajuan::with([
                 'databidang',
-                'anggota.user',
                 'documents',
                 'user',
             ])
-            ->where('user_id', $user->id)
+        ->where(function ($q) use ($user) {
+            $q->where('user_id', $user->id)
             ->orWhereHas('anggota', function ($query) use ($user) {
                 $query->where('user_id', $user->id);
-            })
-            ->get()
-            ->unique('id');
-
+            });
+        })
+        ->get()
+        ->unique('id');
         foreach ($pengajuan as $item) {
             $requiredDocuments = ['surat_pengantar', 'proposal'];
             $uploadedTypes = $item->documents->pluck('document_type')->toArray();
@@ -53,10 +53,7 @@ class PengajuanController extends Controller
 
             $item->dokumen_lengkap = empty($missingDocuments);
 
-            $item->total_anggota = $item->anggota->count();
-            $item->anggota_pending = $item->anggota->where('status', 'pending')->count();
-            $item->semua_anggota_accepted = $item->anggota->where('status', 'pending')->isEmpty();
-            $item->status_lengkap = $item->dokumen_lengkap && $item->semua_anggota_accepted;
+            $item->status_lengkap = $item->dokumen_lengkap;
         }
 
         $pengajuanAktif = $pengajuan->first(fn($p) => !in_array($p->status, ['ditolak', 'selesai']));
@@ -132,16 +129,11 @@ class PengajuanController extends Controller
         $request->validate([
             'databidang_id' => 'required|exists:databidang,id',
             'deskripsi' => 'nullable|string',
-            'tanggal_mulai' => 'required|date',
+            'tanggal_mulai' => 'required|date|after_or_equal:today',
             'tanggal_selesai' => 'required|date|after:tanggal_mulai',
 
             'dokumen.surat_pengantar' => 'required|file|mimes:pdf|max:2048',
             'dokumen.proposal' => 'required|file|mimes:pdf|max:2048',
-
-            'user_ids' => $tipe === 'kelompok' ? 'required|array' : 'nullable|array',
-            'user_ids.*' => $tipe === 'kelompok' ? 'exists:users,id' : 'nullable|exists:users,id',
-            'roles' => $tipe === 'kelompok' ? 'required|array' : 'nullable|array',
-            'roles.*' => $tipe === 'kelompok' ? 'in:ketua,anggota' : 'nullable|in:ketua,anggota',
         ]);
 
         if ($tipe === 'kelompok') {
@@ -154,7 +146,6 @@ class PengajuanController extends Controller
                 'anggota.*.no_hp' => 'nullable|string|max:20',
             ]);
         }
-
 
         $kode = 'MGG-' . date('Y') . '-' . strtoupper(Str::random(6));
 
@@ -184,40 +175,34 @@ class PengajuanController extends Controller
         }
 
         if ($tipe === 'kelompok') {
-            // Ketua (pengusul)
             Anggota::create([
                 'pengajuan_id' => $pengajuan->id,
-                'nama' => auth()->user()->name,
+                'nama' => auth()->user()->nama,
                 'nim' => auth()->user()->nim,
-                'universitas' => auth()->user()->universitas->nama ?? null,
+                'universitas' => auth()->user()->universitas->nama_universitas ?? null,
                 'prodi' => auth()->user()->prodi,
                 'fakultas' => auth()->user()->fakultas,
                 'email' => auth()->user()->email,
                 'no_hp' => auth()->user()->telepon,
-                'status' => 'accepted',
                 'role' => 'ketua',
+                'skill' => null, 
             ]);
 
-            // Anggota lainnya (input manual)
-            if ($request->has('anggota')) {
-                foreach ($request->anggota as $anggota) {
-                    Anggota::create([
-                        'pengajuan_id' => $pengajuan->id,
-                        'nama' => $anggota['nama'],
-                        'nim' => $anggota['nim'],
-                        'skill' => $anggota['skill'] ?? null,
-                        'universitas' => auth()->user()->universitas->nama ?? null,
-                        'prodi' => auth()->user()->prodi,
-                        'fakultas' => auth()->user()->fakultas,
-                        'email' => $anggota['email'] ?? null,
-                        'no_hp' => $anggota['no_hp'] ?? null,
-                        'role' => 'anggota',
-                        'status' => 'pending',
-                    ]);
-                }
+            foreach ($request->anggota as $anggota) {
+                Anggota::create([
+                    'pengajuan_id' => $pengajuan->id,
+                    'nama' => $anggota['nama'],
+                    'nim' => $anggota['nim'],
+                    'skill' => $anggota['skill'] ?? null,
+                    'universitas' => auth()->user()->universitas->nama_universitas ?? null,
+                    'prodi' => auth()->user()->prodi,
+                    'fakultas' => auth()->user()->fakultas,
+                    'email' => $anggota['email'] ?? null,
+                    'no_hp' => $anggota['no_hp'] ?? null,
+                    'role' => 'anggota',
+                ]);
             }
         }
-
 
         $this->notificationService->internshipSubmitted(auth()->id(), $pengajuan->id);
 
@@ -262,7 +247,7 @@ class PengajuanController extends Controller
                 'nama' => $anggota['nama'],
                 'nim' => $anggota['nim'],
                 'skill' => $anggota['skill'] ?? null,
-                'universitas' => auth()->user()->universitas->nama ?? null,
+                'universitas' => auth()->user()->universitas->nama_universitas ?? null,
                 'prodi' => auth()->user()->prodi,
                 'fakultas' => auth()->user()->fakultas,
                 'email' => $anggota['email'] ?? null,
