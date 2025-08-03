@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.2-1.fc42
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jul 27, 2025 at 09:49 AM
--- Server version: 10.11.11-MariaDB
--- PHP Version: 8.2.29
+-- Host: 127.0.0.1
+-- Generation Time: Aug 03, 2025 at 09:20 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -62,12 +62,26 @@ INSERT INTO `admins` (`id`, `nama`, `email`, `email_verified_at`, `password`, `r
 CREATE TABLE `anggota` (
   `id` int(10) UNSIGNED NOT NULL,
   `pengajuan_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
-  `status` enum('pending','accepted','rejected') NOT NULL DEFAULT 'pending',
-  `role` enum('ketua','anggota') NOT NULL DEFAULT 'anggota',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `nama` varchar(100) NOT NULL,
+  `nim` varchar(20) NOT NULL,
+  `skill` text DEFAULT NULL,
+  `universitas` varchar(255) DEFAULT NULL,
+  `prodi` varchar(255) DEFAULT NULL,
+  `fakultas` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `no_hp` varchar(20) DEFAULT NULL,
+  `role` enum('ketua','anggota') DEFAULT 'anggota',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `anggota`
+--
+
+INSERT INTO `anggota` (`id`, `pengajuan_id`, `nama`, `nim`, `skill`, `universitas`, `prodi`, `fakultas`, `email`, `no_hp`, `role`, `created_at`, `updated_at`) VALUES
+(5, 28, 'Arfan Nur Ivandi', '34233536', NULL, 'sdcx', NULL, NULL, 'arfanvn@gmail.com', '08171015681', 'ketua', '2025-08-03 11:27:26', '2025-08-03 11:27:26'),
+(6, 28, 'dfgdgfd', 'fghf5', 'asdafdsfd', 'sdcx', NULL, NULL, '4trgd@j.s', 'tytuyti', 'anggota', '2025-08-03 11:27:26', '2025-08-03 11:27:26');
 
 -- --------------------------------------------------------
 
@@ -80,14 +94,6 @@ CREATE TABLE `cache` (
   `value` mediumtext NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `cache`
---
-
-INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('mari_magang_cache_91032ad7bbcb6cf72875e8e8207dcfba80173f7c', 'i:1;', 1752725094),
-('mari_magang_cache_91032ad7bbcb6cf72875e8e8207dcfba80173f7c:timer', 'i:1752725094;', 1752725094);
 
 -- --------------------------------------------------------
 
@@ -148,13 +154,6 @@ CREATE TABLE `documentations` (
   `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `documentations`
---
-
-INSERT INTO `documentations` (`id`, `judul_kegiatan`, `judul_project`, `deskripsi`, `created_at`, `updated_at`) VALUES
-(2, 'hhhha', 'asd', 'ads', '2025-07-25 20:25:57', '2025-07-25 20:25:57');
-
 -- --------------------------------------------------------
 
 --
@@ -169,13 +168,6 @@ CREATE TABLE `documentation_images` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `documentation_images`
---
-
-INSERT INTO `documentation_images` (`id`, `documentation_id`, `image_path`, `caption`, `created_at`, `updated_at`) VALUES
-(2, 2, 'dokumentasi/NWNnoBb8bWkmGG8JQsPlx49DD2SssN1aFCO1jSEv.png', NULL, '2025-07-25 20:25:57', '2025-07-25 20:25:57');
 
 -- --------------------------------------------------------
 
@@ -241,9 +233,7 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `user_id`, `title`, `message`, `type`, `data`, `is_read`, `created_at`, `updated_at`) VALUES
-(6, 1, 'Profil Berhasil Dibuat', 'Profil Anda telah berhasil dibuat. Sekarang Anda dapat mengajukan magang.', 'profile_update', '[]', 0, '2025-06-30 04:10:41', '2025-06-30 04:10:41'),
 (7, 3, 'Profil Berhasil Dibuat', 'Profil Anda telah berhasil dibuat. Sekarang Anda dapat mengajukan magang.', 'profile_update', '[]', 0, '2025-06-30 04:30:58', '2025-06-30 04:30:58'),
-(25, 1, 'Dimasukkan ke Kelompok', 'Anda telah dimasukkan ke kelompok: MGG-2025-IOJYSZ', 'group_assigned', '{\"group_name\":\"MGG-2025-IOJYSZ\"}', 0, '2025-07-01 02:11:42', '2025-07-01 02:11:42'),
 (31, 13, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: sc', 'skill_added', '{\"skill_name\":\"sc\"}', 0, '2025-07-03 20:56:52', '2025-07-03 20:56:52'),
 (32, 13, 'Profil dasar sudah lengkap', 'Profil dasar sudah lengkap. Sekarang tambahkan keahlian Anda untuk melengkapi profil. Minimal isi Nama Kemampuan dan Tingkat Keahlian.', 'profile_update', '[]', 0, '2025-07-03 20:57:27', '2025-07-03 20:57:27'),
 (33, 13, 'Pengajuan Magang Terkirim', 'Pengajuan magang Anda telah berhasil dikirim dan sedang menunggu persetujuan Admin 1.', 'internship_submitted', '{\"internship_id\":21}', 0, '2025-07-03 20:58:10', '2025-07-03 20:58:10'),
@@ -282,7 +272,14 @@ INSERT INTO `notifications` (`id`, `user_id`, `title`, `message`, `type`, `data`
 (66, 17, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: ASDFG', 'skill_added', '{\"skill_name\":\"ASDFG\"}', 1, '2025-07-26 19:22:20', '2025-07-27 02:27:12'),
 (67, 17, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: arfann', 'skill_added', '{\"skill_name\":\"arfann\"}', 1, '2025-07-27 01:19:06', '2025-07-27 02:27:01'),
 (68, 17, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: a', 'skill_added', '{\"skill_name\":\"a\"}', 1, '2025-07-27 01:21:32', '2025-07-27 02:24:01'),
-(69, 17, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: ar', 'skill_added', '{\"skill_name\":\"ar\"}', 1, '2025-07-27 01:21:42', '2025-07-27 02:24:07');
+(69, 17, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: ar', 'skill_added', '{\"skill_name\":\"ar\"}', 1, '2025-07-27 01:21:42', '2025-07-27 02:24:07'),
+(70, 13, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: dfgdf', 'skill_added', '{\"skill_name\":\"dfgdf\"}', 0, '2025-08-03 01:36:49', '2025-08-03 01:36:49'),
+(71, 13, 'Profil dasar sudah lengkap', 'Profil dasar sudah lengkap. Sekarang tambahkan keahlian Anda untuk melengkapi profil.', 'profile_update', '[]', 0, '2025-08-03 01:38:05', '2025-08-03 01:38:05'),
+(72, 13, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: adsads', 'skill_added', '{\"skill_name\":\"adsads\"}', 0, '2025-08-03 01:38:35', '2025-08-03 01:38:35'),
+(73, 21, 'Skill Ditambahkan', 'Skill baru telah ditambahkan ke profil Anda: xczx', 'skill_added', '{\"skill_name\":\"xczx\"}', 1, '2025-08-03 07:21:26', '2025-08-03 08:53:28'),
+(74, 21, 'Profil dasar sudah lengkap', 'Profil dasar sudah lengkap. Sekarang tambahkan keahlian Anda untuk melengkapi profil.', 'profile_update', '[]', 1, '2025-08-03 07:22:02', '2025-08-03 08:53:28'),
+(75, 21, 'Profil dasar sudah lengkap', 'Profil dasar sudah lengkap. Sekarang tambahkan keahlian Anda untuk melengkapi profil.', 'profile_update', '[]', 0, '2025-08-03 09:29:24', '2025-08-03 09:29:24'),
+(76, 21, 'Pengajuan Magang Terkirim', 'Pengajuan magang Anda telah berhasil dikirim dan sedang menunggu persetujuan Admin 1.', 'internship_submitted', '{\"internship_id\":24}', 0, '2025-08-03 10:43:32', '2025-08-03 10:43:32');
 
 -- --------------------------------------------------------
 
@@ -331,9 +328,7 @@ CREATE TABLE `pengajuan` (
 --
 
 INSERT INTO `pengajuan` (`id`, `user_id`, `databidang_id`, `kode_pengajuan`, `deskripsi`, `tanggal_mulai`, `tanggal_selesai`, `status`, `surat_pdf`, `form_kesediaan_magang`, `komentar_admin`, `nilai_akhir`, `created_at`, `updated_at`) VALUES
-(21, 13, 2, 'MGG-2025-NERPJR', 'sdsc', '2025-07-26', '2025-10-25', 'diteruskan', 'surat_pengajuan/surat_MGG-2025-NERPJR.pdf', NULL, NULL, NULL, '2025-07-03 20:58:10', '2025-07-04 22:56:06'),
-(22, 17, 5, 'MGG-2025-QYGX0J', NULL, '2025-07-22', '2025-07-30', 'diterima', 'surat_pengajuan/surat_MGG-2025-QYGX0J.pdf', 'surat_pengajuan/form_kesediaan_MGG-2025-QYGX0J.pdf', 'asdfg', NULL, '2025-07-15 07:01:46', '2025-07-25 18:21:12'),
-(23, 20, 2, 'MGG-2025-Z3CKKX', NULL, '2025-07-18', '2025-08-19', 'diterima', 'surat_pengajuan/surat_MGG-2025-Z3CKKX.pdf', 'surat_pengajuan/form_kesediaan_MGG-2025-Z3CKKX.pdf', 'hkm', NULL, '2025-07-16 21:13:52', '2025-07-25 17:45:20');
+(28, 21, 2, 'MGG-2025-XW84IC', 'xc', '2025-08-20', '2025-09-03', 'pending', NULL, NULL, NULL, NULL, '2025-08-03 11:27:26', '2025-08-03 11:27:26');
 
 -- --------------------------------------------------------
 
@@ -356,12 +351,8 @@ CREATE TABLE `pengajuan_documents` (
 --
 
 INSERT INTO `pengajuan_documents` (`id`, `pengajuan_id`, `document_type`, `file_name`, `file_path`, `file_size`, `uploaded_at`) VALUES
-(50, 21, 'surat_pengantar', 'Penghargaan - arfannurivandi-5145 _ Microsoft Learn.pdf', 'dokumen_pengajuan/RuVmMe6mN7jg0un1TVm7iPrO9MdjZh6wIqcPFDdL.pdf', 372394, '2025-07-03 20:58:10'),
-(51, 21, 'proposal', 'e9be1754-fb92-4a26-9e52-ae223e66981f_Penghargaan_-_arfannurivandi-5145_1__Microsoft_Learn.pdf', 'dokumen_pengajuan/6jwmWJLr6BXD2s9BXHP6H9ODmWpnXkgAvqJKUO0p.pdf', 372538, '2025-07-03 20:58:10'),
-(52, 22, 'surat_pengantar', 'IDENTIFIKASI PEMASALAHAN DALAM PROSES PEMBAYARAN SANTRI UTS_METOPEN_KEL 8 A1A2 (1)_corrected-3.pdf', 'dokumen_pengajuan/fo4q2hLaaNW5YrE5IdzK4mNmuXwuPm8lk7WocNex.pdf', 656428, '2025-07-15 07:01:46'),
-(53, 22, 'proposal', '5eaa4ca3-35c2-4c59-b130-b716e3e9b6dc_Penghargaan_-_arfannurivandi-5145___Microsoft_Learn.pdf', 'dokumen_pengajuan/ew2ZE5HVgF4KAN4tkjY3niRQkoaTJEHtLdR5tIM1.pdf', 372394, '2025-07-15 07:01:46'),
-(54, 23, 'surat_pengantar', '22552021037_Tugas Pertemuan 1_Fajar Sasongko.pdf', 'dokumen_pengajuan/2VnbjHGs8awnIUVmupp27lV1559FzRcYBdGiu4yW.pdf', 126757, '2025-07-16 21:13:52'),
-(55, 23, 'proposal', '22552021037_Tugas Pertemuan 1_Fajar Sasongko.pdf', 'dokumen_pengajuan/zOd7a2e6pysIAU6pyhMaIzjOs2dryynNi9ryK86m.pdf', 126757, '2025-07-16 21:13:52');
+(64, 28, 'surat_pengantar', 'Surat Permohonan PKL KOMINFO.pdf', 'dokumen_pengajuan/FYqrn1rkGfFNTxvDrSLnjEEsCfSinkWU0usxVHvr.pdf', 399765, '2025-08-03 11:27:26'),
+(65, 28, 'proposal', 'ARFAN NUR IVANDI-resume-1.pdf', 'dokumen_pengajuan/4IBTtJua6412KHMt5H2tHnXviDkK7S05qEKcuFRo.pdf', 189707, '2025-08-03 11:27:26');
 
 -- --------------------------------------------------------
 
@@ -399,7 +390,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('MKCCtdt1nUywbGV39IbsJoCGIfDaJr8jkOd4ey8j', 17, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYzFZc0hvQ0hIelRnN0dCSUJKS081T2pFWEdDVlgyTXpldVVkMEF2YyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NjA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zdHlsZS9pbWFnZXMvbG9nby9hcHBsZS10b3VjaC1pY29uLnBuZyI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE3O30=', 1753609741);
+('HPUw7x78gWA4hPYepz6OhYjktwV2qvHhux2KWbbi', 21, '172.16.1.14', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZnJ0QU13WTIya05oMFhaZGljeURCa0d3bnkzbWJiUmduemxWSzlJeSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Nzg6Imh0dHA6Ly8xNzIuMTYuMS40OjgwMDAvcHJvZmlsZS9kYXNoYm9hcmQvaW1hZ2VzL3RodW1icy9zZXR0aW5nLXByb2ZpbGUtaW1nLmpwZyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjIxO30=', 1754248728);
 
 -- --------------------------------------------------------
 
@@ -447,7 +438,10 @@ INSERT INTO `skill` (`id`, `databidang_id`, `nama`, `judul_proyek`, `deskripsi`,
 (33, NULL, 'eh', 'ies', 'akwd', NULL, 'http://127.0.0.1:8000/profile/edit', 0, '2025-07-27 00:05:34', '2025-07-27 00:05:34'),
 (34, NULL, 'arfann', 'alsdjfh', 'sadfguyiop', 'projects/ws2B81CUsXb1zdyuajNO2Y5EIylO2u7FVipflwlG.png', NULL, 0, '2025-07-27 01:19:06', '2025-07-27 01:19:06'),
 (37, NULL, 'a', NULL, NULL, NULL, NULL, 0, '2025-07-27 01:21:32', '2025-07-27 01:22:24'),
-(38, NULL, 'ar', 'alsdjfh', 'sadfguyiop', NULL, NULL, 0, '2025-07-27 01:21:42', '2025-07-27 01:21:42');
+(38, NULL, 'ar', 'alsdjfh', 'sadfguyiop', NULL, NULL, 0, '2025-07-27 01:21:42', '2025-07-27 01:21:42'),
+(39, NULL, 'dfgdf', NULL, NULL, NULL, NULL, 0, '2025-08-03 01:36:49', '2025-08-03 01:36:49'),
+(40, NULL, 'adsads', NULL, NULL, NULL, NULL, 0, '2025-08-03 01:38:35', '2025-08-03 01:38:35'),
+(41, NULL, 'xczx', NULL, NULL, NULL, NULL, 0, '2025-08-03 07:21:26', '2025-08-03 07:21:26');
 
 -- --------------------------------------------------------
 
@@ -508,7 +502,8 @@ INSERT INTO `universitas` (`id`, `nama_universitas`, `fakultas`, `prodi`, `creat
 (37, 'Politeknik Negeri Malang', 'Teknik', 'Teknik Elektro', '2025-07-18 09:41:09', '2025-07-18 09:41:09'),
 (38, 'Saintek', 'Teknik', 'Teknik Elektro', '2025-07-26 17:11:11', '2025-07-26 17:11:11'),
 (39, 'Saintek', 'Teknik informatika', 'Teknik Elektro', '2025-07-27 00:42:05', '2025-07-27 00:42:05'),
-(40, 'Unira Malang', 'sains dan teknologi', 'Teknik informatika', '2025-07-27 00:42:31', '2025-07-27 00:42:31');
+(40, 'Unira Malang', 'sains dan teknologi', 'Teknik informatika', '2025-07-27 00:42:31', '2025-07-27 00:42:31'),
+(41, 'sdcx', 'asads', 'fgd', '2025-08-03 07:22:02', '2025-08-03 07:22:02');
 
 -- --------------------------------------------------------
 
@@ -539,17 +534,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nama`, `universitas_id`, `nim`, `telepon`, `email`, `email_verified_at`, `password`, `foto`, `status`, `remember_token`, `created_at`, `updated_at`, `bio`, `alamat`) VALUES
-(1, 'arfan nur ivandi', 23, '22552021032', '085171015682', 'arfanvn@gmail.com', '2025-06-30 08:04:13', '$2y$12$zw6faTnxT7iHwJgf4LM3wuS8bTj/pJH.HZOxp7AE.XKHmB4mx0QMu', 'foto_user/wUFF3tiQShVL58o04358TYCbxmwgOFBUSk9sQshV.png', 'active', 'Mm5V5UqfxQ8M5RX1Wu9BJyCQJMhwOeMmrksohICBlFPPYgSAO6YeRnwT2HUw', '2025-06-28 06:44:26', '2025-07-13 18:21:08', NULL, NULL),
 (2, 'aurii1', 23, '0987655', '09876543111', 'contoh@gmail.com', NULL, '$2y$12$QjtSJz5k6jJnQn2Z7HrXTe2p3aJKiV8OU5Kn5cPPh797zO1OfbX.C', 'foto_user/0Di2uLipc0sdAU8N1AfwLHJHI4Ie2EUdQEheG4Fq.jpg', 'active', NULL, '2025-06-29 03:09:22', '2025-06-29 03:18:45', NULL, NULL),
 (3, 'aurfghj', 33, '2212122112', '876543219', 'user1@gmail.com', NULL, '$2y$12$cKRpIIuXENPpVtRz8RRWZOvRw.80hXbdk8Ea.vtTciP4mKH4y6Hm2', NULL, 'active', NULL, '2025-06-30 04:30:22', '2025-06-30 04:35:51', NULL, NULL),
-(13, 'arfa', 34, '987654321', '9876324325345', 'ivanarfan57@gmail.com', '2025-07-03 20:56:44', '$2y$12$rCByZEs4M6JcvNpfwcgryuNLUcUNRBOE31s0QNiVVr61lQeTG9NeC', NULL, 'active', NULL, '2025-07-03 20:56:10', '2025-07-03 20:57:27', NULL, NULL),
+(13, 'arfa', 34, '987654321', '07563432332', 'ivanarfan57@gmail.com', '2025-07-03 20:56:44', '$2y$12$EHMO9d7fipBk5DhrZfYJ7.kyaPTugVpGMUsF03qgOMBoIWsDRfVD2', NULL, 'active', NULL, '2025-07-03 20:56:10', '2025-08-03 01:39:13', 'adsaaaaaaaaaa', 'dcvdfvds'),
 (14, 'fajarpdf', NULL, NULL, '1234567890', 'skafajar3@gmail.com', NULL, '$2y$12$74b1C9kavNcg4WSMwdTpBuMP/Dckxk3.HlKHNaBUtOp6zPn7z7Fym', NULL, 'active', NULL, '2025-07-05 07:17:15', '2025-07-05 07:17:15', NULL, NULL),
 (15, 'contoh', NULL, NULL, '29345678', 'contoh1@gmail.com', NULL, '$2y$12$r0UW8Kt1JkXrPQzNCoynW.lpFTCc1kBuX6BIVvR2xS6iGJUoeRP4e', NULL, 'active', NULL, '2025-07-05 08:52:33', '2025-07-05 08:52:33', NULL, NULL),
 (16, 'NUR KHOLIS MAJID', 23, '22552021052', '083764736473', 'majidholes8304@gmail.com', '2025-07-13 23:17:58', '$2y$12$/7TA/RLuWfnjd80H17PVVugZbfb3JEcEylxxDN.em/imFxWK5b0QK', 'foto_user/0M8BTumDaKaxSPcRJlRUljXdlZrmIfpaetNOMIAS.jpg', 'active', NULL, '2025-07-13 23:16:50', '2025-07-16 21:02:22', NULL, NULL),
 (17, 'Arfan Nur Ivandi', 40, '230201023090', '086547955677542', 'ivanandi775@gmail.com', '2025-07-15 06:37:46', '$2y$12$a1a39RcZqotzURzWTPlmPemdJpVLwQ060h5EYs4YMM4RZHoeW0xTq', 'foto_user/bGnnQTkSL2yu0XI2OxuzttEwvQ1zKnLJdcLk27YK.png', 'active', NULL, '2025-07-15 06:37:15', '2025-07-27 00:43:26', 'Saya Adalah Mahasiswa unira malang yang berfokus pada pengembangan informasi dan digitalisasi', 'Jl Sumbersari Panggungrejo Kepanjen Malang'),
 (18, 'kingM', NULL, NULL, '083764736470', 'nurkholismajid802@gmail.com', NULL, '$2y$12$z9ItnAgfFnYp49vL3yotuOzpMrZbMtHQreHhkqw76WCYMFdBhEsIq', NULL, 'active', NULL, '2025-07-16 21:00:26', '2025-07-16 21:00:26', NULL, NULL),
 (19, 'Zainul fanani Al tegar', NULL, NULL, '089650760660', 'pixelate368@gmail.com', '2025-07-16 21:04:20', '$2y$12$0QyFR5sacvFgCWqRxsj37e/hjxHTAGyVddouYHxVoJAY0oHfLPlwe', NULL, 'active', NULL, '2025-07-16 21:03:07', '2025-07-16 21:04:20', NULL, NULL),
-(20, 'fajar', 36, '22552021066', '085808228865', 'jajantaro9@gmail.com', '2025-07-16 21:06:58', '$2y$12$7Wx4jJa01SynNuQDrL3PYeNnVIBGrK2i5XMoWzR5X17MhBV1jtCEe', 'foto_user/X3F2hnc9FWzoww2XVYDh0KmUNVLAm18IF0sYj3vS.png', 'active', NULL, '2025-07-16 21:03:42', '2025-07-16 21:32:56', NULL, NULL);
+(20, 'fajar', 36, '22552021066', '085808228865', 'jajantaro9@gmail.com', '2025-07-16 21:06:58', '$2y$12$7Wx4jJa01SynNuQDrL3PYeNnVIBGrK2i5XMoWzR5X17MhBV1jtCEe', 'foto_user/X3F2hnc9FWzoww2XVYDh0KmUNVLAm18IF0sYj3vS.png', 'active', NULL, '2025-07-16 21:03:42', '2025-07-16 21:32:56', NULL, NULL),
+(21, 'Arfan Nur Ivandi', 41, '34233536', '08171015681', 'arfanvn@gmail.com', '2025-08-03 06:56:50', '$2y$12$.IN5hneuNLUI6D9wL.yIHuakqhYEIXb9C9NVFw2LLtr0AC7nFEX9S', 'foto_user/VZ815wrJevvYV5ttuPJpHbNQgo1sM0XA3x2Yh1XT.jpg', 'active', NULL, '2025-08-03 06:56:14', '2025-08-03 09:33:48', 'dfgdg', 'hjhbjhbb hh');
 
 -- --------------------------------------------------------
 
@@ -573,8 +568,6 @@ CREATE TABLE `user_skills` (
 --
 
 INSERT INTO `user_skills` (`id`, `user_id`, `pengajuan_id`, `skill_id`, `level`, `sertifikat_path`, `created_at`, `updated_at`) VALUES
-(4, 1, NULL, 15, 'Dasar', 'sertifikat/k0BlJMAxcErnZ8ECGDf9wMDhjDtIoKEvfdD6MUvN.pdf', '2025-06-29 01:24:47', '2025-06-29 02:45:20'),
-(5, 1, NULL, 16, 'Dasar', 'sertifikat/rZcwObWgZK50XHrXGCBgKdG08hdbmFMbqabIdHJj.pdf', '2025-06-29 02:46:38', '2025-06-29 02:46:38'),
 (6, 2, NULL, 17, 'Dasar', NULL, '2025-06-29 03:10:05', '2025-06-29 03:10:05'),
 (7, 3, NULL, 18, 'Dasar', NULL, '2025-06-30 04:33:36', '2025-06-30 04:33:36'),
 (8, 3, NULL, 19, 'Menengah', NULL, '2025-06-30 04:37:25', '2025-06-30 04:37:25'),
@@ -585,7 +578,10 @@ INSERT INTO `user_skills` (`id`, `user_id`, `pengajuan_id`, `skill_id`, `level`,
 (24, 17, NULL, 33, 'Dasar', NULL, '2025-07-27 00:05:34', '2025-07-27 00:05:34'),
 (25, 17, NULL, 34, 'Mahir', 'sertifikat/KU2AzJFlKfetFMsSZBbkFS3lYRzbHjZi6PUNUohS.pdf', '2025-07-27 01:19:06', '2025-07-27 01:19:06'),
 (26, 17, NULL, 37, 'Mahir', NULL, '2025-07-27 01:21:32', '2025-07-27 01:21:32'),
-(27, 17, NULL, 38, 'Mahir', NULL, '2025-07-27 01:21:42', '2025-07-27 01:21:42');
+(27, 17, NULL, 38, 'Mahir', NULL, '2025-07-27 01:21:42', '2025-07-27 01:21:42'),
+(28, 13, NULL, 39, 'Pemula', NULL, '2025-08-03 01:36:49', '2025-08-03 01:36:49'),
+(29, 13, NULL, 40, 'Menengah', NULL, '2025-08-03 01:38:35', '2025-08-03 01:38:35'),
+(30, 21, NULL, 41, 'Menengah', NULL, '2025-08-03 07:21:26', '2025-08-03 07:21:26');
 
 --
 -- Indexes for dumped tables
@@ -604,8 +600,7 @@ ALTER TABLE `admins`
 --
 ALTER TABLE `anggota`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_pengajuan_id` (`pengajuan_id`),
-  ADD KEY `anggota_user_fk` (`user_id`);
+  ADD KEY `fk_pengajuan_id` (`pengajuan_id`);
 
 --
 -- Indexes for table `cache`
@@ -736,9 +731,9 @@ ALTER TABLE `universitas`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `uk_nim` (`nim`),
   ADD UNIQUE KEY `uk_email` (`email`),
   ADD UNIQUE KEY `uk_telepon` (`telepon`),
+  ADD UNIQUE KEY `uk_nim` (`nim`),
   ADD KEY `idx_universitas_id` (`universitas_id`),
   ADD KEY `idx_status` (`status`),
   ADD KEY `idx_email_status` (`email`,`status`);
@@ -767,7 +762,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `databidang`
@@ -803,19 +798,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `pengajuan`
 --
 ALTER TABLE `pengajuan`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `pengajuan_documents`
 --
 ALTER TABLE `pengajuan_documents`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `pengajuan_status_history`
@@ -827,25 +822,25 @@ ALTER TABLE `pengajuan_status_history`
 -- AUTO_INCREMENT for table `skill`
 --
 ALTER TABLE `skill`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `universitas`
 --
 ALTER TABLE `universitas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `user_skills`
 --
 ALTER TABLE `user_skills`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables
@@ -855,8 +850,7 @@ ALTER TABLE `user_skills`
 -- Constraints for table `anggota`
 --
 ALTER TABLE `anggota`
-  ADD CONSTRAINT `anggota_user_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_anggota_pengajuan` FOREIGN KEY (`pengajuan_id`) REFERENCES `pengajuan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_pengajuan_id` FOREIGN KEY (`pengajuan_id`) REFERENCES `pengajuan` (`id`);
 
 --
 -- Constraints for table `databidang`
