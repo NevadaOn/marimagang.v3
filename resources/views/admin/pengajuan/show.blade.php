@@ -473,8 +473,11 @@
                                         @case('ditolak') status-ditolak @break
                                         @case('diproses') status-diproses @break
                                         @case('diteruskan') status-diteruskan @break
-                                        @default status-menunggu
+                                        @case('magang') status-magang @break
+                                        @case('selesai') status-selesai @break
+                                        @default status-pending
                                     @endswitch">
+                                    
                                     @switch($pengajuan->status)
                                         @case('diterima')
                                             <i class="fas fa-check-circle me-1"></i> Diterima
@@ -488,8 +491,14 @@
                                         @case('diteruskan')
                                             <i class="fas fa-paper-plane me-1"></i> Diteruskan
                                             @break
+                                        @case('magang')
+                                            <i class="fas fa-user-tie me-1"></i> Magang
+                                            @break
+                                        @case('selesai')
+                                            <i class="fas fa-check-double me-1"></i> Selesai
+                                            @break
                                         @default
-                                            <i class="fas fa-clock me-1"></i> Menunggu
+                                            <i class="fas fa-clock me-1"></i> Pending
                                     @endswitch
                                 </span>
                             </div>
