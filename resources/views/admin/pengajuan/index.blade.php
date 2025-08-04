@@ -104,18 +104,6 @@
         <div class="row">
             <div class="col-12">
                 <div class="card border-0 shadow-lg">
-                    <div class="card-header bg-transparent border-0 p-4">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">
-                                <i class="fas fa-list me-2"></i>Daftar Pengajuan
-                            </h5>
-                            <div class="d-flex align-items-center gap-3">
-                                <small class="text-muted">
-                                    Menampilkan {{ $pengajuan->firstItem() ?? 0 }} - {{ $pengajuan->lastItem() ?? 0 }} dari {{ $pengajuan->total() }} data
-                                </small>
-                            </div>
-                        </div>
-                    </div>
                     
                     <div class="card-body p-0">
                         <div class="table-responsive">
@@ -164,7 +152,7 @@
                                                 </div>
                                                 <div>
                                                     <div class="fw-semibold">{{ $item->user->nama }}</div>
-                                                    <small class="text-muted">Mahasiswa</small>
+                                                    {{-- <small class="text-muted">Mahasiswa</small> --}}
                                                 </div>
                                             </div>
                                         </td>
@@ -182,7 +170,6 @@
                                                 <div class="text-success fw-semibold">
                                                     {{ $item->tanggal_mulai->format('d M Y') }}
                                                 </div>
-                                                <small class="text-muted">{{ $item->tanggal_mulai->format('H:i') }}</small>
                                             @else
                                                 <span class="text-muted">-</span>
                                             @endif
@@ -192,7 +179,6 @@
                                                 <div class="text-danger fw-semibold">
                                                     {{ $item->tanggal_selesai->format('d M Y') }}
                                                 </div>
-                                                <small class="text-muted">{{ $item->tanggal_selesai->format('H:i') }}</small>
                                             @else
                                                 <span class="text-muted">-</span>
                                             @endif
@@ -223,31 +209,9 @@
                                             @endif
                                         </td>
                                         <td class="text-center py-4 px-4">
-                                            <div class="dropdown">
-                                                <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </button>
-                                                <ul class="dropdown-menu dropdown-menu-dark">
-                                                    <li>
-                                                        <a class="dropdown-item" 
-                                                        href="{{ auth()->user()->role === 'superadmin' ? route('admin.pengajuan.show', $item->id) : route('admin.pengajuan.showbidang', $item->id) }}">
-                                                            <i class="fas fa-eye me-2"></i>Detail
-                                                        </a>
-                                                    </li>
-
-                                                    <li><hr class="dropdown-divider"></li>
-                                                    <li>
-                                                        <a class="dropdown-item text-success" href="#">
-                                                            <i class="fas fa-check me-2"></i>Setujui
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item text-danger" href="#">
-                                                            <i class="fas fa-times me-2"></i>Tolak
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            <a href="{{ auth()->user()->role === 'superadmin' ? route('admin.pengajuan.show', $item->id) : route('admin.pengajuan.showbidang', $item->id) }}">
+                                                Detail
+                                            </a>
                                         </td>
                                     </tr>
                                     @empty
@@ -301,10 +265,10 @@
 }
 
 .avatar-circle {
-    width: 40px;
+    width: 60px;
     height: 40px;
     border-radius: 50%;
-    background: linear-gradient(45deg, #007bff, #6f42c1);
+    background: linear-gradient(45deg, #94c8ffff, #638abdff);
     display: flex;
     align-items: center;
     justify-content: center;
