@@ -180,7 +180,7 @@
             </div>
         </div>
 
-<div class="d-flex justify-center space-x-7">
+<div class="d-flex justify-between space-x-7">
     <!-- Statistics Grid dengan Layout Hexagonal -->
      <div class="glass-strong rounded-3xl overflow-hidden  shadow-2xl">
         <div class="lass-strong rounded-3xl p-8">
@@ -230,7 +230,7 @@
         </div></div>
 
         <!-- Statistik Bidang -->
-                <div class=" glass-strong rounded-3xl overflow-hidden  shadow-2xl">
+                <div class=" w-50 glass-strong rounded-3xl overflow-hidden  shadow-2xl">
                     <div class="bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-cyan-500/20 p-3 border-b border-white/10">
                         <div class="flex items-center space-x-4">
                             <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center">
@@ -346,11 +346,11 @@
         
 
         <!-- Main Content Grid - 2 Column Layout -->
-<div class="w-full px-4 md:px-8">
+<div class=" px-4 md:px-8 d-flex justify-center">
 
 
     <!-- Tabel User - Span 3 columns -->
-    <div class="lg:col-span-3">
+    <div class="lg:col-span-3 w-full">
         <div class="glass-strong rounded-3xl overflow-hidden shadow-2xl">
             <div class="bg-gradient-to-r from-blue-500/20 via-cyan-500/20 to-cyan-500/20 p-6 border-b border-white/10">
                 <div class="flex items-center justify-between">
