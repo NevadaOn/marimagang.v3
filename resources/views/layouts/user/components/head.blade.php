@@ -1,3 +1,4 @@
+<!-- head.blade.php -->
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +18,7 @@
 <link rel="preload" href="{{ asset('style/css/main.css') }}" as="style">
 <link rel="preload" href="{{ asset('style/js/main.js') }}" as="script">
 
-<!-- Bootstrap -->
+<!-- Bootstrap (Muat di seluruh halaman) -->
 <link rel="stylesheet" href="{{ asset('style/css/bootstrap.min.css') }}">
 
 <!-- File Upload -->
@@ -30,7 +31,9 @@
 <link rel="stylesheet" href="{{ asset('style/css/dataTables.min.css') }}">
 
 <!-- Full Calendar -->
-<link rel="stylesheet" href="{{ asset('style/css/full-calendar.css') }}">
+@if(request()->is('dashboard'))
+    <link rel="stylesheet" href="{{ asset('style/css/full-calendar.css') }}">
+@endif
 
 <!-- jQuery UI -->
 <link rel="stylesheet" href="{{ asset('style/css/jquery-ui.css') }}">
@@ -47,11 +50,11 @@
 <!-- JVector Map -->
 <link rel="stylesheet" href="{{ asset('style/css/jquery-jvectormap-2.0.5.css') }}">
 
-<!-- Main CSS -->
+<!-- Main CSS (Digunakan di hampir semua halaman) -->
 <link rel="stylesheet" href="{{ asset('style/css/main.css') }}">
 
+<!-- JS tambahan untuk halaman tertentu -->
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
-
-<!-- Additional page-specific CSS -->
-@stack('styles')
+<!-- Aset tambahan dari halaman tertentu -->
+@stack('styles') {{-- Untuk menambahkan gaya tambahan dari halaman tertentu --}}
