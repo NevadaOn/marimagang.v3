@@ -59,14 +59,7 @@
                     </a>
                 </li>
 
-                {{-- <li class="sidebar-menu__item" role="none">
-                    <a href="{{ route('pengaturan.index') }}"
-                        class="sidebar-menu__link {{ request()->routeIs('pengaturan.*') ? 'active' : '' }}"
-                        role="menuitem">
-                        <span class="icon" aria-hidden="true"><i class="ph ph-gear"></i></span>
-                        <span class="text">Pengaturan</span>
-                    </a>
-                </li> --}}
+           
             </ul>
         </div>
     </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @include('layouts.user.components.head')
+    @include('layouts.all-head')
     <title>@yield('title', 'MariMagang - Dashboard')</title>
 </head>
 <body>
