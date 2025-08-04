@@ -42,7 +42,7 @@
         color: #721c24;
     }
     
-    .status-menunggu {
+    .status-pending {
         background-color: #fff3cd;
         color: #856404;
     }
@@ -408,11 +408,6 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalKomentar">
-                                    Komentar ke Admin/User
-                                </a>
-                            </li>
-                            <li>
                                 <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#updateTanggalModal">
                                     Ubah Tanggal
                                 </a>
@@ -425,6 +420,11 @@
                             <li>
                                 <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalForm">
                                     Form Kesediaan Magang
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalKomentar">
+                                    Komentar ke Admin/User
                                 </a>
                             </li>
                         </ul>
@@ -473,8 +473,11 @@
                                         @case('ditolak') status-ditolak @break
                                         @case('diproses') status-diproses @break
                                         @case('diteruskan') status-diteruskan @break
-                                        @default status-menunggu
+                                        @case('magang') status-magang @break
+                                        @case('selesai') status-selesai @break
+                                        @default status-pending
                                     @endswitch">
+                                    
                                     @switch($pengajuan->status)
                                         @case('diterima')
                                             <i class="fas fa-check-circle me-1"></i> Diterima
@@ -488,8 +491,14 @@
                                         @case('diteruskan')
                                             <i class="fas fa-paper-plane me-1"></i> Diteruskan
                                             @break
+                                        @case('magang')
+                                            <i class="fas fa-user-tie me-1"></i> Magang
+                                            @break
+                                        @case('selesai')
+                                            <i class="fas fa-check-double me-1"></i> Selesai
+                                            @break
                                         @default
-                                            <i class="fas fa-clock me-1"></i> Menunggu
+                                            <i class="fas fa-clock me-1"></i> Pending
                                     @endswitch
                                 </span>
                             </div>
@@ -523,18 +532,41 @@
 
            <!-- Anggota Kelompok (termasuk Ketua) -->
 @php
-    $semuaMahasiswa = collect([[
-        'user' => $pengajuan->user,
-        'status' => 'Ketua'
-    ]])->merge(
-        $pengajuan->anggota->map(function ($anggota) {
-            return [
-                'user' => $anggota->user,
-                'status' => ucfirst($anggota->status)
-            ];
-        })
-    )->unique(fn($item) => $item['user']->id);
+    $ketuaUser = $pengajuan->user;
+
+    $semuaMahasiswa = collect([
+        [
+            'nama' => $ketuaUser->nama ?? '-',
+            'nim' => $ketuaUser->nim ?? '-',
+            'email' => $ketuaUser->email ?? '-',
+            'status' => 'Ketua',
+            'userSkills' => $ketuaUser->userSkills->map(function ($skill) {
+                return [
+                    'skill_name' => $skill->skill->nama ?? null,
+                    'level' => $skill->level,
+                    'sertifikat_path' => $skill->sertifikat_path,
+                ];
+            })->toArray(),
+        ]
+    ])->merge(
+        $pengajuan->anggota
+            ->filter(fn($a) => strtolower($a->role) !== 'ketua')
+            ->map(function ($anggota) {
+                return [
+                    'nama' => $anggota->nama,
+                    'nim' => $anggota->nim,
+                    'email' => $anggota->email,
+                    'status' => ucfirst($anggota->role ?? 'Anggota'),
+                    'userSkills' => $anggota->skill ? [[
+                        'skill_name' => $anggota->skill,
+                        'level' => '....', 
+                        'sertifikat_path' => null,
+                    ]] : [],
+                ];
+            })
+    );
 @endphp
+
 
 @if($semuaMahasiswa->count())
 <div class="card">
@@ -559,40 +591,37 @@
                 </thead>
                 <tbody>
                     @foreach($semuaMahasiswa->values() as $i => $entry)
-                        @php $user = $entry['user']; @endphp
-                        <tr>
-                            <td class="text-center">{{ $i + 1 }}</td>
-                            <td>{{ $user->nama }}</td>
-                            <td class="font-monospace">{{ $user->nim }}</td>
-                            <td class="text-center">
-                                <span class="badge bg-primary">{{ $entry['status'] }}</span>
-                            </td>
-                            <td>
-                                @if($user->userSkills->isNotEmpty())
-                                    <ul class="mb-0 ps-3 list-unstyled">
-                                        @foreach($user->userSkills as $userSkill)
-                                            <li>
-                                                {{ $userSkill->skill->nama ?? 'Skill tidak ditemukan' }}
-                                                ({{ ucfirst($userSkill->level) }})
-                                                @if ($userSkill->sertifikat_path)
-                                                    {{-- <a href="{{ asset('storage/' . $userSkill->sertifikat_path) }}"
-                                                       target="_blank"
-                                                       class="btn btn-sm btn-link">Cek Sertifikat</a> --}}
-                                                       <button onclick="showPreview('{{ asset('storage/' . $userSkill->sertifikat_path) }}', '{{ basename($userSkill->sertifikat_path) }}')"
-                                                            class="btn btn-primary btn-sm" style="margin: 0px 0px 10px 10px">
-                                                        <i class="fas fa-eye me-1"></i>
-                                                        Lihat Sertifikat
-                                                    </button>
-                                                @endif
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @else
-                                    <span class="text-muted">Belum ada keahlian</span>
-                                @endif
-                            </td>
-                        </tr>
+    <tr>
+        <td class="text-center">{{ $i + 1 }}</td>
+        <td>{{ $entry['nama'] }}</td>
+        <td class="font-monospace">{{ $entry['nim'] ?? '-' }}</td>
+        <td class="text-center">
+            <span class="badge bg-primary">{{ $entry['status'] }}</span>
+        </td>
+        <td>
+            @if(isset($entry['userSkills']) && count($entry['userSkills']) > 0)
+                <ul class="mb-0 ps-3 list-unstyled">
+                    @foreach($entry['userSkills'] as $userSkill)
+                        <li>
+                            {{ $userSkill['skill_name'] ?? 'Skill tidak ditemukan' }}
+                            ({{ ucfirst($userSkill['level']) }})
+                            @if (!empty($userSkill['sertifikat_path']))
+                                <button onclick="showPreview('{{ asset('storage/' . $userSkill['sertifikat_path']) }}', '{{ basename($userSkill['sertifikat_path']) }}')"
+                                        class="btn btn-primary btn-sm" style="margin: 0px 0px 10px 10px">
+                                    <i class="fas fa-eye me-1"></i>
+                                    Lihat Sertifikat
+                                </button>
+                            @endif
+                        </li>
                     @endforeach
+                </ul>
+            @else
+                <span class="text-muted">Belum ada keahlian</span>
+            @endif
+        </td>
+    </tr>
+@endforeach
+
                 </tbody>
             </table>
         </div>
@@ -663,21 +692,19 @@
                 }
             @endphp
             <div class="modal fade" id="modalKelolaSurat" tabindex="-1" aria-labelledby="modalKelolaSuratLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0;">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalKelolaSuratLabel">
-                    Kelola Surat Bangkespol
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                <div class="modal-dialog modal-lg" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0;">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalKelolaSuratLabel">
+                        Kelola Surat Bakesbangpol
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                    </div>
+                    <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                        @include('partials.kelola_surat_pengajuan') 
+                    </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <!-- Tempatkan form surat di sini seperti sebelumnya -->
-                    @include('partials.kelola_surat_pengajuan') 
-                    {{-- Atau langsung tempel kode form jika tidak menggunakan partial --}}
-                </div>
-                </div>
-            </div>
             </div>
             <div class="modal fade" id="modalBidang" tabindex="-1" aria-labelledby="modalBidangLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0;">
@@ -1104,7 +1131,7 @@ function showPreviewError(message) {
                 <div class="error-icon">📄</div>
                 <div class="error-message">${message}</div>
                 <a href="${currentFileUrl}" class="download-btn" target="_blank">
-                    📥 Download File
+                    Download File
                 </a>
             </div>
         </body>

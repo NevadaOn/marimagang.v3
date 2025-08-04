@@ -34,7 +34,7 @@ class AdminPengajuanController extends Controller
     {
         $pengajuan = Pengajuan::with([
             'user.userSkills.skill',
-            'anggota.user.userSkills.skill',
+            'anggota',
             'documents',
             'databidang'
         ])->findOrFail($id);
@@ -47,7 +47,7 @@ class AdminPengajuanController extends Controller
     {
         $pengajuan = Pengajuan::with([
             'user.userSkills.skill',
-            'anggota.user.userSkills.skill',
+            'anggota',
             'documents',
             'databidang'
         ])->findOrFail($id);
@@ -197,9 +197,10 @@ class AdminPengajuanController extends Controller
             'komentar_admin' => 'required|string',
         ]);
 
-        $pengajuan = Pengajuan::with('anggota.user')->findOrFail($id);
+        $pengajuan = Pengajuan::with('anggota')->findOrFail($id);
         $admin = auth()->guard('admin')->user();
         $message = $request->komentar_admin;
+        $title = 'Catatan dari Admin';
 
         if ($request->tujuan === 'admin_bidang') {
             $pengajuan->komentar_admin = $message;
@@ -207,8 +208,6 @@ class AdminPengajuanController extends Controller
 
             return back()->with('success', 'Komentar berhasil dikirim ke Admin Bidang.');
         }
-
-        $title = 'Catatan dari Admin';
 
         Notification::create([
             'user_id' => $pengajuan->user_id,
@@ -222,22 +221,9 @@ class AdminPengajuanController extends Controller
             'is_read' => 0,
         ]);
 
-        foreach ($pengajuan->anggota as $anggota) {
-            Notification::create([
-                'user_id' => $anggota->user_id,
-                'title' => $title,
-                'message' => $message,
-                'type' => 'catatan_pengajuan',
-                'data' => json_encode([
-                    'pengajuan_id' => $pengajuan->id,
-                    'dari_admin' => $admin->name ?? 'Admin'
-                ]),
-                'is_read' => 0,
-            ]);
-        }
-
-        return back()->with('success', 'Komentar berhasil dikirim ke semua user.');
+        return back()->with('success', 'Komentar berhasil dikirim ke user pengaju.');
     }
+
 
     public function approve($id)
     {

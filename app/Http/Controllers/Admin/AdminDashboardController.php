@@ -46,7 +46,7 @@ class AdminDashboardController extends Controller
             ->orderByDesc('total_pengajuan')
             ->get();
 
-        $userTerbaru = User::with('universitas')->latest()->take(10)->get();
+        $userTerbaru = User::with('universitas')->latest()->paginate(5);
         $pengajuanTerbaru = Pengajuan::with(['user', 'databidang'])->latest()->take(10)->get();
 
         $statusDokumen = DB::table('pengajuan_documents')

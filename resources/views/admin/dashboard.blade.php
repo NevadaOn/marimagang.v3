@@ -300,6 +300,43 @@
                             </table>
                         </div>
                     </div>
+                                                <div class="mt-3">
+                            <style>
+.pagination {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination li {
+    display: inline-block;
+}
+
+.pagination li a,
+.pagination li span {
+    display: inline-block;
+    padding: 6px 12px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.pagination li.active span {
+    background-color: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
+}
+
+.pagination li.disabled span {
+    color: #aaa;
+}
+</style>
+
+                                            {{ $userTerbaru->links() }}
+                                        </div>
                                 </div>
 								{{-- <div class="card-header">
 
