@@ -1,5 +1,5 @@
 {{-- resources/views/auth/verify-email.blade.php --}}
-@extends('layouts.app')
+@extends('layouts.user.app')
 
 @section('content')
 <div class="container">
