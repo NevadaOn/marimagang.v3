@@ -1,5 +1,5 @@
 
-  <aside class="fixed h-screen w-72 bg text-white rounded-xl flex flex-col justify-between p-4">
+  <aside  class="fixed h-screen w-72 bg text-white rounded-xl flex flex-col justify-between p-4">
     <!-- Top Logo & Search -->
     <div>
       <div class="flex items-center gap-3 mb-6 mt-4 ">

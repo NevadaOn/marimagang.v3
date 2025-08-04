@@ -230,7 +230,7 @@
         </div></div>
 
         <!-- Statistik Bidang -->
-                <div class="glass-strong rounded-3xl overflow-hidden  shadow-2xl">
+                <div class=" glass-strong rounded-3xl overflow-hidden  shadow-2xl">
                     <div class="bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-cyan-500/20 p-3 border-b border-white/10">
                         <div class="flex items-center space-x-4">
                             <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center">
@@ -263,7 +263,7 @@
 
                 <!-- Recent Activity Section -->
         <div class="animate-slide-up ">
-            <div class="glass-strong rounded-3xl overflow-hidden shadow-2xl h-full">
+            <div class="glass-strong rounded-3xl overflow-hidden shadow-2xl w-full h-full">
                 <div class="bg-gradient-to-r from-blue-500/10 via-cyan-500/10 to-blue-500/20 p-6 border-b border-white/10">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-4">
@@ -275,9 +275,9 @@
                                 <p class="text-white/60">Update terkini dari sistem</p>
                             </div>
                         </div>
-                        <button class="px-4 py-2 glass-morphism hover:bg-white/20 rounded-xl text-white font-semibold border border-white/20 transition-all duration-200">
+                        {{-- <button class="px-4 py-2 glass-morphism hover:bg-white/20 rounded-xl text-white font-semibold border border-white/20 transition-all duration-200">
                             <i class="fas fa-sync-alt mr-2"></i>Refresh
-                        </button>
+                        </button> --}}
                     </div>
                 </div>
                 
@@ -363,11 +363,11 @@
                             <p class="text-white/60">Kelola semua pengajuan pengguna</p>
                         </div>
                     </div>
-                    <div class="flex space-x-2">
+                    {{-- <div class="flex space-x-2">
                         <button class="px-4 py-2 glass-morphism hover:bg-white/20 rounded-xl text-white font-semibold border border-white/20 transition-all duration-200">
                             <i class="fas fa-filter mr-2"></i>Filter
                         </button>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             
@@ -503,15 +503,15 @@ function showUserDetails(pengajuanId) {
                     <div class="space-y-3">
                         <div class="flex justify-between">
                             <span class="text-white/70">Nama:</span>
-                            <span class="text-white font-semibold">Loading...</span>
+                            <span class="text-white font-semibold">{{ $user->nama }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-white/70">Email:</span>
-                            <span class="text-white font-semibold">Loading...</span>
+                            <span class="text-white font-semibold">{{ $user->email }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-white/70">Universitas:</span>
-                            <span class="text-white font-semibold">Loading...</span>
+                            <span class="text-white font-semibold">{{ $user->nama_universitas }}</span>
                         </div>
                     </div>
                 </div>
@@ -524,37 +524,29 @@ function showUserDetails(pengajuanId) {
                     <div class="space-y-3">
                         <div class="flex justify-between">
                             <span class="text-white/70">Status:</span>
-                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-yellow-400 to-orange-500 text-white">
-                                <i class="fas fa-clock mr-1"></i>Pending
-                            </span>
+                            @if($user->status == 'pending')
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-yellow-400 to-orange-500 text-white">
+                                        <i class="fas fa-clock mr-1"></i>{{ ucfirst($user->status) }}
+                                    </span>
+                                @elseif($user->status == 'diterima')
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-green-400 to-emerald-500 text-white">
+                                        <i class="fas fa-check mr-1"></i>{{ ucfirst($user->status) }}
+                                    </span>
+                                @else
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-red-400 to-blue-500 text-white">
+                                        <i class="fas fa-times mr-1"></i>{{ ucfirst($user->status) }}
+                                    </span>
+                                @endif
                         </div>
                         <div class="flex justify-between">
                             <span class="text-white/70">Tanggal:</span>
-                            <span class="text-white font-semibold">Loading...</span>
+                            <span class="text-white font-semibold">{{ \Carbon\Carbon::parse($user->tanggal_pengajuan)->format('d/m/Y') }}</span>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="glass-morphism rounded-2xl p-4 border border-white/10">
-                <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
-                    <i class="fas fa-paperclip mr-2 text-cyan-400"></i>
-                    Dokumen Terlampir
-                </h4>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="flex items-center p-3 glass-morphism rounded-xl border border-white/10">
-                        <i class="fas fa-file-pdf text-red-400 text-xl mr-3"></i>
-                        <div>
-                            <div class="text-white font-semibold">Surat Pengantar</div>
-                            <div class="text-white/60 text-sm">PDF • 2.5 MB</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center p-3 glass-morphism rounded-xl border border-white/10">
-                        <i class="fas fa-file-word text-blue-400 text-xl mr-3"></i>
-                        <div>
-                            <div class="text-white font-semibold">Proposal</div>
-                            <div class="text-white/60 text-sm">DOC • 1.8 MB</div>
-                        </div>
+           
                     </div>
                 </div>
             </div>
@@ -573,6 +565,26 @@ function showUserDetails(pengajuanId) {
         `;
     }, 1000);
 }
+
+// <div class="glass-morphism rounded-2xl p-4 border border-white/10">
+//                 <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+//                     <i class="fas fa-paperclip mr-2 text-cyan-400"></i>
+//                     Dokumen Terlampir
+//                 </h4>
+//                 <div class="grid md:grid-cols-2 gap-4">
+//                     <div class="flex items-center p-3 glass-morphism rounded-xl border border-white/10">
+//                         <i class="fas fa-file-pdf text-red-400 text-xl mr-3"></i>
+//                         <div>
+//                             <div class="text-white font-semibold">Surat Pengantar</div>
+//                             <div class="text-white/60 text-sm">PDF • 2.5 MB</div>
+//                         </div>
+//                     </div>
+//                     <div class="flex items-center p-3 glass-morphism rounded-xl border border-white/10">
+//                         <i class="fas fa-file-word text-blue-400 text-xl mr-3"></i>
+//                         <div>
+//                             <div class="text-white font-semibold">Proposal</div>
+//                             <div class="text-white/60 text-sm">DOC • 1.8 MB</div>
+//                         </div>
 
 // Fungsi untuk menutup modal
 function closeUserDetails() {
