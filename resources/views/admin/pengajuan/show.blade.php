@@ -42,7 +42,7 @@
         color: #721c24;
     }
     
-    .status-menunggu {
+    .status-pending {
         background-color: #fff3cd;
         color: #856404;
     }
@@ -1131,7 +1131,7 @@ function showPreviewError(message) {
                 <div class="error-icon">📄</div>
                 <div class="error-message">${message}</div>
                 <a href="${currentFileUrl}" class="download-btn" target="_blank">
-                    📥 Download File
+                    Download File
                 </a>
             </div>
         </body>
