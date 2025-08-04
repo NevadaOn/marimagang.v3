@@ -15,9 +15,10 @@
                         <p class="text-muted mb-0">Kelola dan monitor semua pengajuan mahasiswa</p>
                     </div>
                     <div class="d-flex gap-2">
-                        <button class="btn btn-primary btn-sm" onclick="refreshTable()">
-                            <i class="fas fa-sync-alt me-2"></i>Refresh
+                        <button class="btn btn-primary btn-sm" onclick="refreshTableById('tabelPengajuan')">
+                            Refresh
                         </button>
+
                     </div>
                 </div>
             </div>
@@ -106,7 +107,7 @@
                 <div class="card border-0 shadow-lg">
                     
                     <div class="card-body p-0">
-                        <div class="table-responsive">
+                        <div class="table-responsive" id="tabelPengajuan">
                             <table class="table table-hover align-middle mb-0">
                                 <thead class="table-dark">
                                     <tr>
@@ -194,17 +195,25 @@
                                                 <span class="badge bg-success d-inline-flex align-items-center">
                                                     <i class="fas fa-check me-1"></i>Diterima
                                                 </span>
-                                            @elseif($item->status == 'ditolak')
+                                            @elseif ($item->status == 'ditolak')
                                                 <span class="badge bg-danger d-inline-flex align-items-center">
                                                     <i class="fas fa-times me-1"></i>Ditolak
                                                 </span>
-                                            @elseif($item->status == 'diteruskan')
+                                            @elseif ($item->status == 'diteruskan')
                                                 <span class="badge btn-secondary d-inline-flex align-items-center">
-                                                    <i class="fas fa-times me-1"></i>Diteruskan
+                                                    <i class="fas fa-paper-plane me-1"></i>Diteruskan
+                                                </span>
+                                            @elseif ($item->status == 'magang')
+                                                <span class="badge bg-info d-inline-flex align-items-center">
+                                                    <i class="fas fa-briefcase me-1"></i>Magang
+                                                </span>
+                                            @elseif ($item->status == 'selesai')
+                                                <span class="badge bg-primary d-inline-flex align-items-center">
+                                                    <i class="fas fa-flag-checkered me-1"></i>Selesai
                                                 </span>
                                             @else
                                                 <span class="badge bg-warning d-inline-flex align-items-center">
-                                                    <i class="fas fa-clock me-1"></i>Menunggu
+                                                    <i class="fas fa-clock me-1"></i>Pending
                                                 </span>
                                             @endif
                                         </td>
@@ -230,7 +239,6 @@
                         </div>
                     </div>
                     
-                    <!-- Pagination -->
                     @if ($pengajuan->hasPages())
                     <div class="card-footer bg-transparent border-0 p-4">
                         <div class="d-flex justify-content-between align-items-center">
@@ -309,17 +317,34 @@
 </style>
 
 <script>
-function refreshTable() {
-    window.location.reload();
-}
-
-// Add any additional JavaScript functionality here
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize tooltips if needed
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
+document.addEventListener('DOMContentLoaded', function () {
+    // Inisialisasi tooltip Bootstrap
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipTriggerList.forEach(function (el) {
+        new bootstrap.Tooltip(el);
     });
+
+    // Tambahan: Bisa tambahkan inisialisasi fitur lain di sini kalau ada
 });
+
+// Fungsi untuk refresh elemen tertentu tanpa reload halaman penuh
+function refreshTableById(id) {
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    fetch(window.location.href)
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const newDoc = parser.parseFromString(html, 'text/html');
+            const newContent = newDoc.getElementById(id);
+            if (newContent) {
+                target.innerHTML = newContent.innerHTML;
+            }
+        })
+        .catch(error => {
+            console.error('Gagal me-refresh tabel:', error);
+        });
+}
 </script>
 @endsection
