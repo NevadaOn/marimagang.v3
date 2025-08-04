@@ -100,30 +100,27 @@
 
             @if($pengajuan->anggota->count())
                 @foreach($pengajuan->anggota as $index => $anggota)
-                    @if(optional($anggota->user)->id !== $pengajuan->user->id)
+                    @if(strtolower($anggota->role) !== 'ketua') {{-- Hindari menampilkan ketua --}}
                         <tr>
-                            <td>Nama</td><td>:</td><td>{{ optional($anggota->user)->nama ?? '-' }}</td>
+                            <td>Nama</td><td>:</td><td>{{ $anggota->nama ?? '-' }}</td>
                         </tr>
                         <tr>
-                            <td>NIM</td><td>:</td><td>{{ optional($anggota->user)->nim ?? '-' }}</td>
+                            <td>NIM</td><td>:</td><td>{{ $anggota->nim ?? '-' }}</td>
                         </tr>
                     @endif
                 @endforeach
             @endif
-
             <tr><td>Program Studi</td><td>:</td><td>{{ $pengajuan->user->universitas->prodi ?? '-' }}</td></tr>
             <tr><td>Fakultas / Jurusan</td><td>:</td><td>{{ $pengajuan->user->universitas->fakultas ?? '-' }}</td></tr>
             <tr><td>Asal Universitas</td><td>:</td><td>{{ $pengajuan->user->universitas->nama_universitas ?? '-' }}</td></tr>
         </table>
-
-
         <p style="margin-top: 20px; text-align: justify; text-indent: 2em;">
             Dapat Melaksanakan Kegiatan Praktek Kerja Lapangan nama kegiatan <strong>"{{ $namaKegiatan ?? '[NAMA KEGIATAN]' }}"</strong> pada tanggal {{ isset($pengajuan->tanggal_mulai) ? \Carbon\Carbon::parse($pengajuan->tanggal_mulai)->translatedFormat('d F Y') : '[TANGGAL MULAI]' }}
             sampai dengan {{ isset($pengajuan->tanggal_selesai) ? \Carbon\Carbon::parse($pengajuan->tanggal_selesai)->translatedFormat('d F Y') : '[TANGGAL SELESAI]' }}.di {{ $pengajuan->databidang->nama ?? '-' }} Dinas Komunikasi dan Informatika Kabupaten Malang.
         </p>
         <p style="margin-top: 5px; text-indent: 2em;">Demikian surat ini dibuat untuk digunakan sebagaimana mestinya.</p>
 
-        <div style="width: 100%; margin-top: 20px;">
+        <div style="width: 100%; margin-top: 15px;">
             <div style="width: 40%; float: right; text-align: left;">
                 <p style="margin-bottom: 10px; padding: 0; text-indent: 2em;">Malang, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
                 <p style="margin: 0; padding: 0;">Sekretaris Dinas Komunikasi dan Informatika</p>
