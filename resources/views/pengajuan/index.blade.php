@@ -13,11 +13,16 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h4>Pengajuan Magang Saya</h4>
 
-                @if(!$statusAktif)
+                @if($completionLevel !== 'skills-complete')
+                    <a href="{{ route('profil.edit') }}" class="btn btn-warning">
+                        <i class="fas fa-user-edit me-1"></i> Lengkapi Profil Terlebih Dahulu
+                    </a>
+                @elseif(!$statusAktif)
                     <a href="{{ route('pengajuan.tipe') }}" class="btn btn-primary">
                         <i class="fas fa-plus-circle me-1"></i> Buat Pengajuan Baru
                     </a>
                 @endif
+
             </div>
 
             {{-- Kelengkapan Profil --}}
