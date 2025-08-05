@@ -48,7 +48,7 @@
                                 <div class="profile-image-wrapper mx-auto">
                                     <img src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('style/images/thumbs/setting-profile-img.jpg') }}"
                                          alt="Foto Profil"
-                                         class="profile-image">
+                                         class="profile-image" style="border-radius: 8px; border: 4px solid #ccc;">
                                 </div>
                             </div>
                             <div class="col-md-9">
