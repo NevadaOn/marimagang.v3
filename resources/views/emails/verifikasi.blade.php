@@ -50,7 +50,6 @@
         .logo {
             width: 70px;
             height: 70px;
-            border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.3);
             padding: 5px;
@@ -306,19 +305,11 @@
                             <div class="footer-content">
                                 <div class="company-info">
                                     <p class="company-name">Koordinator Magang - Diskominfo Kabupaten Malang</p>
-                                    <p class="company-tagline">Membangun Masa Depan Karir Anda</p>
+                                    <p class="company-tagline">Atur tujuan kariermu dan belajar dari pengalaman langsung, Bersama Diskominfo Kab.Malang</p>
                                 </div>
                                 
                                 <div class="contact-info">
-                                    <p>Email: support@sistemmagang.com | Telepon: (021) 1234-5678</p>
-                                </div>
-                                
-                                <div class="divider"></div>
-                                
-                                <div class="footer-links">
-                                    <a href="#">Kebijakan Privasi</a> |
-                                    <a href="#">Syarat & Ketentuan</a> |
-                                    <a href="#">Bantuan</a>
+                                    <p>Email: kominfo@malangkab.go.id | Telepon: (0341) 364776</p>
                                 </div>
                             </div>
                         </td>
