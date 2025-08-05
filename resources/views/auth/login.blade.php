@@ -97,7 +97,7 @@
                     </div>
 
                     <div class="form-group">
-                        <a class="color-white link" href="{{ route('password.request') }}">Forgot password?</a>
+                        <a class="color-white link" href="{{ route('password.request') }}">Lupa Password? Klik di Sini</a>
                     </div>
 
                     <div class="form-group">
@@ -105,8 +105,8 @@
                     </div>
 
                     <div class="form-group mb-0">
-                        <span>Don’t have an account?</span>
-                        <a class="color-linear" href="{{ route('register') }}">Sign Up</a>
+                        <span>Belum Punya Akun?</span>
+                        <a class="color-linear" href="{{ route('register') }}">Daftar Sekarang</a>
                     </div>
                 </form>
 

@@ -31,8 +31,8 @@
       <div class="main-header">
         <div class="header-logo">
           <a class="d-flex" href="{{ url('/') }}">
-            <img class="logo-night" alt="Diskominfo" src="{{ asset('img/rb_30831.png') }}" style="border-radius: 5px;" width="70px">
-            <img class="d-none logo-day" alt="Diskominfo" src="{{ asset('img/rb_30831.png') }}" style="border-radius: 5px;" width="70px">
+            <img class="logo-night" alt="Diskominfo" src="{{ asset('img/rb_30832.png') }}" width="70px">
+            <img class="d-none logo-day" alt="Diskominfo" src="{{ asset('img/rb_30832.png') }}" width="70px">
           </a>
         </div>
         <div class="header-nav">
@@ -528,40 +528,26 @@
       <div class="footer-1 bg-gray-850 border-gray-800">
         <div class="row">
           <div class="col-lg-4 mb-30"><a class="wow animate__animated animate__fadeInUp" href="index.html"><img
-                class="logo-night" src="{{ asset('img/rb_30831.png') }}" width="110px" alt="DiskominfoKab.Malang" style="border-radius: 5px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);"><img
-                class="d-none logo-day" alt="DiskominfoKab.Malang" src="{{ asset('img/rb_30831.png') }}"
-                width="110px" style="border-radius: 5px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);"></a>
-            <p class="mb-20 mt-20 text-sm color-gray-500 wow animate__animated animate__fadeInUp">Kementerian Komunikasi
-              dan Informatika, yang merupakan kementerian dalam pemerintahan Indonesia yang bertanggung jawab atas
-              urusan di bidang komunikasi dan informatika. </p>
-            <h6 class="color-white mb-5 wow animate__animated animate__fadeInUp">Address</h6>
+                class="logo-night" src="{{ asset('img/rb_30832.png') }}" width="110px" alt="DiskominfoKab.Malang"><img
+                class="d-none logo-day" alt="DiskominfoKab.Malang" src="{{ asset('img/rb_30832.png') }}"
+                width="110px"></a>
+            <p class="mb-20 mt-20 text-sm color-gray-500 wow animate__animated animate__fadeInUp">Diskominfo Kabupaten Malang bertugas mengelola layanan komunikasi, informatika, persandian, dan statistik untuk mendukung pemerintahan digital dan keterbukaan informasi publik.</p>
+            <h6 class="color-white mb-5 wow animate__animated animate__fadeInUp">Alamat</h6>
             <p class="text-sm color-gray-500 wow animate__animated animate__fadeInUp">2J9M+26M, Jl. Agus Salim,
               Kiduldalem, Kec. Klojen, <br>Kota Malang, Jawa Timur 65143</p>
           </div>
           <div class="col-lg-4 mb-30">
-            <h6 class="text-lg mb-30 color-white wow animate__animated animate__fadeInUp">All Link</h6>
+            <h6 class="text-lg mb-30 color-white wow animate__animated animate__fadeInUp">Informasi Publik</h6>
             <div class="row">
-              <div class="col-6">
+              <div class="col-12">
                 <ul class="menu-footer">
                   <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
-                      href="index.html">Home</a></li>
-                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500" href="#bidangKerja">Alur
-                      Magang</a></li>
+                      href="https://kominfo.malangkab.go.id/content/kominfo-struktur-organisasi-3">Struktur Organisasi</a></li>
+                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500" href="https://kominfo.malangkab.go.id/content/ttugas-pokok-dan-fungsi">Tugas Pokok dan Fungsi</a></li>
                   <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
-                      href="#dokumentasi">Dokumentasi</a></li>
+                      href="https://kominfo.malangkab.go.id/content/kominfo-opd-visi-misi">VISI MISI</a></li>
                   <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
-                      href="page-404.html">404</a></li>
-
-                </ul>
-              </div>
-              <div class="col-6">
-                <ul class="menu-footer">
-                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500" href="#">Contact</a>
-                  </li>
-                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
-                      href="page-login.html">Login</a></li>
-                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
-                      href="page-signup.html">Sign-Up</a></li>
+                      href="https://ppid.malangkab.go.id/home/tugas">Tugas dan Wewenang</a></li>
                 </ul>
               </div>
             </div>
