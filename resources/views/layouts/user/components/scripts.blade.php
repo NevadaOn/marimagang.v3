@@ -11,7 +11,7 @@
 <!-- jQuery UI -->
 <script src="{{ asset('style/js/jquery-ui.js') }}"></script>
 <!-- Calendar logic -->
-<script src="{{ asset('style/js/calendar.js') }}"></script>y
+<script src="{{ asset('style/js/calendar.js') }}"></script>
 <!-- Main js -->
 <script src="{{ asset('style/js/main.js') }}"></script>
 @stack('scripts')
