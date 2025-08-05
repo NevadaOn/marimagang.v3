@@ -32,12 +32,7 @@
                     </select>
                 </div>
 
-                {{-- Deskripsi --}}
-                <div class="mb-4">
-                    <label for="deskripsi" class="form-label fw-semibold">Catatan / Deskripsi (Opsional)</label>
-                    <textarea name="deskripsi" class="form-control" rows="3"
-                        placeholder="Tambahkan catatan jika perlu..."></textarea>
-                </div>
+                
 
                 {{-- Tanggal --}}
                 <div class="row mb-4">
@@ -199,6 +194,13 @@
                         }
                     </script>
                 @endif
+
+                {{-- Deskripsi --}}
+                <div class="mb-4">
+                    <label for="deskripsi" class="form-label fw-semibold">Catatan / Deskripsi (Opsional)</label>
+                    <textarea name="deskripsi" class="form-control" rows="3"
+                        placeholder="Tambahkan catatan jika perlu..."></textarea>
+                </div>
 
                 {{-- Dokumen --}}
                 <hr class="my-4">
