@@ -14,7 +14,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h4 class="fw-bold">Daftar Pengajuan</h4>
             @if($completionLevel !== 'skills-complete')
-                <a href="{{ route('profil.edit') }}" class="btn btn-warning">
+                <a href="{{ route('profile.edit') }}" class="btn btn-warning">
                     <i class="fas fa-user-edit me-1"></i> Lengkapi Profil Terlebih Dahulu
                 </a>
             @elseif(!$statusAktif)
