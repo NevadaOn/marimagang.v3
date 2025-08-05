@@ -23,8 +23,10 @@ class PengajuanController extends Controller
 
     private function hasActivePengajuan($userId)
     {
+        $inactiveStatuses = ['ditolak', 'selesai', 'dibatalkan'];
+
         return Pengajuan::where('user_id', $userId)
-            ->whereNotIn('status', ['ditolak', 'selesai'])
+            ->whereNotIn('status', $inactiveStatuses)
             ->exists();
     }
 
@@ -51,7 +53,7 @@ class PengajuanController extends Controller
             $item->status_lengkap = $item->dokumen_lengkap;
         }
 
-        $pengajuanAktif = $pengajuan->first(fn($p) => !in_array($p->status, ['ditolak', 'selesai']));
+        $pengajuanAktif = $pengajuan->first(fn($p) => !in_array($p->status, ['ditolak', 'selesai', 'dibatalkan']));
         $statusAktif = $pengajuanAktif?->status;
 
         $hasUniversityInfo = $user->universitas_id && $user->telepon && $user->nim;
