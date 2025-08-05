@@ -192,7 +192,7 @@
                                     <td>{{ $pengajuan->user->nama }}</td>
                                     <td>{{ $pengajuan->databidang->nama }}</td>
                                     <td>
-                                        @if($pengajuan->status == 'pending')
+                                        @if($pengajuan->status == 'diproses')
                                             <span class="badge bg-warning">Pending</span>
                                         @elseif($pengajuan->status == 'diterima')
                                             <span class="badge bg-success">Diterima</span>
@@ -511,7 +511,7 @@
         @foreach($pengajuanPerBidang as $bidang)
             bidangLabels.push("{{ $bidang->nama }}");
             totalPengajuanData.push({{ $bidang->total_pengajuan }});
-            pendingData.push({{ $bidang->pending }});
+            pendingData.push({{ $bidang->diproses }});
             diterimaData.push({{ $bidang->diterima }});
             ditolakData.push({{ $bidang->ditolak }});
         @endforeach
@@ -528,7 +528,7 @@
                         data: totalPengajuanData
                     },
                     {
-                        label: "Pending",
+                        label: "diproses",
                         backgroundColor: "rgba(255, 206, 86, 0.6)", // Example color
                         borderColor: "rgba(255, 206, 86, 1)",
                         data: pendingData
