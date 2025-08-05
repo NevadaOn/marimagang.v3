@@ -102,13 +102,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::delete('/skills/{userSkillId}/project', 'destroyProject')->name('profile.projects.destroy');
     });
-
+Route::post('/pengajuan/{id}/batal', [PengajuanController::class, 'batal'])->name('pengajuan.batal');
     Route::controller(PengajuanController::class)->group(function () {
         Route::get('/pengajuan/tipe', 'tipe')->name('pengajuan.tipe');
         Route::post('/pengajuan/tipe', 'selectType')->name('pengajuan.selectType');
         Route::get('/pengajuan/{pengajuan}/manage-anggota', 'editAnggota')->name('pengajuan.anggota.edit');
         Route::post('/pengajuan/{pengajuan}/manage-anggota', 'storeAnggota')->name('pengajuan.anggota.store');
     });
+
 
     Route::controller(NotificationController::class)->prefix('notifications')->group(function () {
         Route::get('/', 'userNotifications')->name('notifications.user');

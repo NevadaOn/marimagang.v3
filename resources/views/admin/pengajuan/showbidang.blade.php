@@ -254,9 +254,9 @@
             {{-- END: Kartu Informasi Umum --}}
 
             {{-- START: Tabel Anggota Kelompok --}}
-            @php
+            {{-- @php
                 $semuaMahasiswa = collect([['user' => $pengajuan->user, 'status' => 'Ketua']])->merge($pengajuan->anggota->map(fn ($anggota) => ['user' => $anggota->user, 'status' => ucfirst($anggota->status)]))->unique(fn($item) => $item['user']->id);
-            @endphp
+            @endphp --}}
             @if($semuaMahasiswa->count())
             <div class="card">
                 <div class="card-header"><h5><i class="fas fa-users"></i>Anggota Kelompok <span class="badge badge-success ms-2">{{ $semuaMahasiswa->count() }} Orang</span></h5></div>
@@ -362,8 +362,8 @@
          @php
             $admin = auth('admin')->user();
             $statusOptions = [];
-            if ($admin->role === 'superadmin') { $statusOptions = ['pending', 'diproses', 'diteruskan', 'diterima', 'ditolak']; } 
-            elseif ($admin->role === 'admin_dinas' && $pengajuan->status === 'pending') { $statusOptions = ['diteruskan', 'ditolak']; } 
+            if ($admin->role === 'superadmin') { $statusOptions = ['diproses', 'diproses', 'diteruskan', 'diterima', 'ditolak']; } 
+            elseif ($admin->role === 'admin_dinas' && $pengajuan->status === 'diproses') { $statusOptions = ['diteruskan', 'ditolak']; } 
             elseif ($admin->role === 'admin_bidang' && $pengajuan->status === 'diteruskan') { $statusOptions = ['diproses', 'diterima', 'ditolak']; }
         @endphp
     {{-- Card Tab Lainnya --}}

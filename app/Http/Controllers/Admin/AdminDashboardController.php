@@ -27,7 +27,7 @@ class AdminDashboardController extends Controller
     private function superAdminDashboard()
     {
         $totalPengajuan = Pengajuan::count();
-        $pengajuanPending = Pengajuan::where('status', 'pending')->count();
+        $pengajuanPending = Pengajuan::where('status', 'diproses')->count();
         $pengajuanDiterima = Pengajuan::where('status', 'diterima')->count();
         $pengajuanDitolak = Pengajuan::where('status', 'ditolak')->count();
         $totalUser = User::count();
@@ -38,7 +38,7 @@ class AdminDashboardController extends Controller
             ->select(
                 'databidang.nama',
                 DB::raw('COUNT(pengajuan.id) as total_pengajuan'),
-                DB::raw('COUNT(CASE WHEN pengajuan.status = "pending" THEN 1 END) as pending'),
+                DB::raw('COUNT(CASE WHEN pengajuan.status = "diproses" THEN 1 END) as diproses'),
                 DB::raw('COUNT(CASE WHEN pengajuan.status = "diterima" THEN 1 END) as diterima'),
                 DB::raw('COUNT(CASE WHEN pengajuan.status = "ditolak" THEN 1 END) as ditolak')
             )
@@ -114,7 +114,7 @@ class AdminDashboardController extends Controller
         }
 
         $totalPengajuan = Pengajuan::where('databidang_id', $bidang->id)->count();
-        $pengajuanPending = Pengajuan::where('databidang_id', $bidang->id)->where('status', 'pending')->count();
+        $pengajuanPending = Pengajuan::where('databidang_id', $bidang->id)->where('status', 'diproses')->count();
         $pengajuanDiterima = Pengajuan::where('databidang_id', $bidang->id)->where('status', 'diterima')->count();
         $pengajuanDitolak = Pengajuan::where('databidang_id', $bidang->id)->where('status', 'ditolak')->count();
 
@@ -191,7 +191,7 @@ class AdminDashboardController extends Controller
     private function adminDinasDashboard()
     {
         $totalPengajuan = Pengajuan::count();
-        $pengajuanPending = Pengajuan::where('status', 'pending')->count();
+        $pengajuanPending = Pengajuan::where('status', 'diproses')->count();
         $pengajuanDiterima = Pengajuan::where('status', 'diterima')->count();
         $pengajuanDitolak = Pengajuan::where('status', 'ditolak')->count();
 

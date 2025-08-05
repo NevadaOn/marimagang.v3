@@ -23,11 +23,12 @@ class PengajuanController extends Controller
 
     private function hasActivePengajuan($userId)
     {
+        $inactiveStatuses = ['ditolak', 'selesai', 'dibatalkan'];
+
         return Pengajuan::where('user_id', $userId)
-            ->whereNotIn('status', ['ditolak', 'selesai'])
+            ->whereNotIn('status', $inactiveStatuses)
             ->exists();
     }
-
 
     public function index()
     {
@@ -37,26 +38,22 @@ class PengajuanController extends Controller
                 'databidang',
                 'documents',
                 'user',
+                'anggota'
             ])
-        ->where(function ($q) use ($user) {
-            $q->where('user_id', $user->id)
-            ->orWhereHas('anggota', function ($query) use ($user) {
-                $query->where('user_id', $user->id);
-            });
-        })
-        ->get()
-        ->unique('id');
+            ->where('user_id', $user->id)
+            ->get()
+            ->unique('id');
+
         foreach ($pengajuan as $item) {
             $requiredDocuments = ['surat_pengantar', 'proposal'];
             $uploadedTypes = $item->documents->pluck('document_type')->toArray();
             $missingDocuments = array_diff($requiredDocuments, $uploadedTypes);
 
             $item->dokumen_lengkap = empty($missingDocuments);
-
             $item->status_lengkap = $item->dokumen_lengkap;
         }
 
-        $pengajuanAktif = $pengajuan->first(fn($p) => !in_array($p->status, ['ditolak', 'selesai']));
+        $pengajuanAktif = $pengajuan->first(fn($p) => !in_array($p->status, ['ditolak', 'selesai', 'dibatalkan']));
         $statusAktif = $pengajuanAktif?->status;
 
         $hasUniversityInfo = $user->universitas_id && $user->telepon && $user->nim;
@@ -73,10 +70,10 @@ class PengajuanController extends Controller
         return view('pengajuan.index', compact(
             'pengajuan',
             'statusAktif',
-            'completionLevel', 'user'
+            'completionLevel',
+            'user'
         ));
     }
-
 
     public function tipe()
     {
@@ -156,7 +153,7 @@ class PengajuanController extends Controller
             'deskripsi' => $request->deskripsi,
             'tanggal_mulai' => $request->tanggal_mulai,
             'tanggal_selesai' => $request->tanggal_selesai,
-            'status' => 'pending'
+            'status' => 'diproses'
         ]);
 
         if ($request->hasFile('dokumen')) {
@@ -252,7 +249,7 @@ class PengajuanController extends Controller
                 'fakultas' => auth()->user()->fakultas,
                 'email' => $anggota['email'] ?? null,
                 'no_hp' => $anggota['no_hp'] ?? null,
-                'status' => 'pending',
+                'status' => 'diproses',
                 'role' => 'anggota',
             ]);
         }
@@ -260,5 +257,67 @@ class PengajuanController extends Controller
         return redirect()->route('pengajuan.show', $pengajuan)
             ->with('success', 'Anggota berhasil ditambahkan.');
     }
+    public function batal($id)
+    {
+        $pengajuan = Pengajuan::findOrFail($id);
+        if ($pengajuan->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $pengajuan->status = 'dibatalkan';
+        $pengajuan->save();
+
+        return redirect()->route('pengajuan.index')->with('success', 'Pengajuan berhasil dibatalkan.');
+    }
+
+    public function edit($kode_pengajuan)
+    {
+        $pengajuan = Pengajuan::where('kode_pengajuan', $kode_pengajuan)
+            ->with(['documents', 'anggota'])
+            ->firstOrFail();
+
+        return view('pengajuan.edit', compact('pengajuan'));
+    }
+
+   public function update(Request $request, $kode_pengajuan)
+    {
+        $pengajuan = Pengajuan::where('kode_pengajuan', $kode_pengajuan)->firstOrFail();
+
+        $request->validate([
+            'deskripsi' => 'nullable|string',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
+            'dokumen.*' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        ]);
+
+        $pengajuan->update([
+            'deskripsi' => $request->deskripsi ?? $pengajuan->deskripsi,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_selesai' => $request->tanggal_selesai,
+        ]);
+
+        if ($request->hasFile('dokumen')) {
+            foreach ($request->file('dokumen') as $type => $file) {
+                $old = $pengajuan->documents()->where('document_type', $type)->first();
+                if ($old) {
+                    Storage::delete($old->file_path);
+                    $old->delete();
+                }
+
+                $path = $file->store('dokumen_pengajuan');
+
+                $pengajuan->documents()->create([
+                    'document_type' => $type,
+                    'file_name' => $file->getClientOriginalName(),
+                    'file_path' => $path,
+                    'file_size' => $file->getSize(),
+                    'uploaded_at' => now(),
+                ]);
+            }
+        }
+
+        return redirect()->route('pengajuan.index')->with('success', 'Pengajuan berhasil diperbarui.');
+    }
+
 
 }

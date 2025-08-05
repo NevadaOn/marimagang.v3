@@ -60,7 +60,7 @@ class AdminPengajuanController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:pending,diproses,diteruskan,diterima,ditolak',
+            'status' => 'required|in:diproses,diteruskan,diterima,ditolak',
         ]);
 
         $pengajuan = Pengajuan::findOrFail($id);
@@ -82,12 +82,12 @@ class AdminPengajuanController extends Controller
         }
 
         if ($admin->role === 'admin_dinas') {
-            if ($statusLama === 'pending' && in_array($statusBaru, ['diteruskan', 'ditolak'])) {
+            if ($statusLama === 'diproses' && in_array($statusBaru, ['diteruskan', 'ditolak'])) {
                 $pengajuan->status = $statusBaru;
                 $pengajuan->save();
                 return back()->with('success', 'Status pengajuan diperbarui oleh admin dinas.');
             } else {
-                return back()->with('error', 'Admin dinas hanya bisa memproses pengajuan dari status pending.');
+                return back()->with('error', 'Admin dinas hanya bisa memproses pengajuan dari status Diproses.');
             }
         }
 
