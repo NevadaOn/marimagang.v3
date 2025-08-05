@@ -126,12 +126,11 @@
                     skillsStatusBadge.className = 'text-13 py-2 px-8 bg-gray-100 text-gray-600 d-inline-flex align-items-center gap-8 rounded-pill';
                     skillsStatusBadge.innerHTML = '<span class="w-6 h-6 bg-gray-600 rounded-circle flex-shrink-0"></span>Not Started';
 
-                    // Complete - Pending
                     completeIconBg.className = 'w-40 h-40 rounded-circle bg-gray-400 flex-center';
                     completeProgress.style.width = '0%';
                     completePercentage.textContent = '0%';
                     completeStatusBadge.className = 'text-13 py-2 px-8 bg-gray-100 text-gray-600 d-inline-flex align-items-center gap-8 rounded-pill';
-                    completeStatusBadge.innerHTML = '<span class="w-6 h-6 bg-gray-600 rounded-circle flex-shrink-0"></span>Pending';
+                    completeStatusBadge.innerHTML = '<span class="w-6 h-6 bg-gray-600 rounded-circle flex-shrink-0"></span>Diproses';
 
                 } else if (data.level === 'profile-complete') {
                     // Personal Info - Complete
@@ -148,12 +147,11 @@
                     skillsStatusBadge.className = 'text-13 py-2 px-8 bg-warning-50 text-warning-600 d-inline-flex align-items-center gap-8 rounded-pill';
                     skillsStatusBadge.innerHTML = '<span class="w-6 h-6 bg-warning-600 rounded-circle flex-shrink-0"></span>In Progress';
 
-                    // Complete - Pending
                     completeIconBg.className = 'w-40 h-40 rounded-circle bg-gray-400 flex-center';
                     completeProgress.style.width = '0%';
                     completePercentage.textContent = '0%';
                     completeStatusBadge.className = 'text-13 py-2 px-8 bg-gray-100 text-gray-600 d-inline-flex align-items-center gap-8 rounded-pill';
-                    completeStatusBadge.innerHTML = '<span class="w-6 h-6 bg-gray-600 rounded-circle flex-shrink-0"></span>Pending';
+                    completeStatusBadge.innerHTML = '<span class="w-6 h-6 bg-gray-600 rounded-circle flex-shrink-0"></span>Diproses';
 
                 } else if (data.level === 'skills-complete') {
                     // Personal Info - Complete

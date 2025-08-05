@@ -28,7 +28,6 @@ class PengajuanController extends Controller
             ->exists();
     }
 
-
     public function index()
     {
         $user = auth()->user();
@@ -37,22 +36,18 @@ class PengajuanController extends Controller
                 'databidang',
                 'documents',
                 'user',
+                'anggota'
             ])
-        ->where(function ($q) use ($user) {
-            $q->where('user_id', $user->id)
-            ->orWhereHas('anggota', function ($query) use ($user) {
-                $query->where('user_id', $user->id);
-            });
-        })
-        ->get()
-        ->unique('id');
+            ->where('user_id', $user->id)
+            ->get()
+            ->unique('id');
+
         foreach ($pengajuan as $item) {
             $requiredDocuments = ['surat_pengantar', 'proposal'];
             $uploadedTypes = $item->documents->pluck('document_type')->toArray();
             $missingDocuments = array_diff($requiredDocuments, $uploadedTypes);
 
             $item->dokumen_lengkap = empty($missingDocuments);
-
             $item->status_lengkap = $item->dokumen_lengkap;
         }
 
@@ -73,10 +68,10 @@ class PengajuanController extends Controller
         return view('pengajuan.index', compact(
             'pengajuan',
             'statusAktif',
-            'completionLevel', 'user'
+            'completionLevel',
+            'user'
         ));
     }
-
 
     public function tipe()
     {
@@ -156,7 +151,7 @@ class PengajuanController extends Controller
             'deskripsi' => $request->deskripsi,
             'tanggal_mulai' => $request->tanggal_mulai,
             'tanggal_selesai' => $request->tanggal_selesai,
-            'status' => 'pending'
+            'status' => 'diproses'
         ]);
 
         if ($request->hasFile('dokumen')) {
@@ -252,7 +247,7 @@ class PengajuanController extends Controller
                 'fakultas' => auth()->user()->fakultas,
                 'email' => $anggota['email'] ?? null,
                 'no_hp' => $anggota['no_hp'] ?? null,
-                'status' => 'pending',
+                'status' => 'diproses',
                 'role' => 'anggota',
             ]);
         }
@@ -260,5 +255,16 @@ class PengajuanController extends Controller
         return redirect()->route('pengajuan.show', $pengajuan)
             ->with('success', 'Anggota berhasil ditambahkan.');
     }
+    public function batal($id)
+    {
+        $pengajuan = Pengajuan::findOrFail($id);
+        if ($pengajuan->user_id !== auth()->id()) {
+            abort(403);
+        }
 
+        $pengajuan->status = 'dibatalkan';
+        $pengajuan->save();
+
+        return redirect()->route('pengajuan.index')->with('success', 'Pengajuan berhasil dibatalkan.');
+    }
 }

@@ -11,7 +11,7 @@
     ])
         <div class="container py-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h4>Pengajuan Magang Saya</h4>
+                
 
                 @if($completionLevel !== 'skills-complete')
                     <a href="{{ route('profil.edit') }}" class="btn btn-warning">
@@ -161,11 +161,39 @@
             @endif
         </div>
     </div>          
-
-            {{-- Daftar Pengajuan --}}
+<h4>Pengajuan Magang Saya</h4>
             @forelse($pengajuan as $item)
                 <div class="card mb-3">
                     <div class="card-header d-flex justify-content-between">
+                    <div class="dropdown">
+    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{ $item->id }}" data-bs-toggle="dropdown" aria-expanded="false">
+        Aksi
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton{{ $item->id }}">
+        <li>
+<a class="dropdown-item" href="{{ route('pengajuan.show', $item->kode_pengajuan) }}#dokumen">
+    <i class="fas fa-file-alt me-2"></i>Lihat Dokumen
+</a>
+
+        </li>
+        <li>
+            <a class="dropdown-item" href="{{ route('pengajuan.edit', $item->id) }}">
+                <i class="fas fa-edit me-2"></i>Edit Pengajuan
+            </a>
+        </li>
+        <li>
+            <form action="{{ route('pengajuan.batal', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin membatalkan pengajuan ini?')">
+                @csrf
+                @method('POST')
+                <button class="dropdown-item text-danger" type="submit">
+                    <i class="fas fa-times-circle me-2"></i>Batalkan Pengajuan
+                </button>
+            </form>
+
+        </li>
+    </ul>
+</div>
+
                         <div>
                             <strong>{{ $item->kode_pengajuan }}</strong>
                             <span class="badge bg-secondary ms-2">{{ ucfirst($item->status) }}</span>
@@ -198,19 +226,32 @@
                             @endif
                         </p>
 
-                        {{-- Status Anggota --}}
-                        @if($item->anggota->count())
+                        <p class="mb-1">
+                            <strong>Ketua:</strong> {{ $item->user->nama }} ({{ $item->user->nim }})
+                        </p>
+
+                        @php
+                            $anggotaFiltered = $item->anggota->filter(function ($anggota) use ($item) {
+                                return $anggota->email !== $item->user->email;
+                            });
+                        @endphp
+
+                        @if($anggotaFiltered->count())
                             <p class="mb-1">
-                                <strong>Anggota:</strong> {{ $item->total_anggota }}
-                                @if($item->anggota_pending > 0)
-                                    <span class="badge bg-warning text-dark ms-2">{{ $item->anggota_pending }} Belum Konfirmasi</span>
-                                @else
-                                    <span class="badge bg-success ms-2">Semua Dikonfirmasi</span>
-                                @endif
+                                <strong>Anggota ({{ $anggotaFiltered->count() }}):</strong>
+                                <ul class="mb-0 ps-3">
+                                    @foreach ($anggotaFiltered as $anggota)
+                                        <li>
+                                            {{ $anggota->nama }} ({{ $anggota->nim }})
+                                            @if($anggota->universitas)
+                                                - {{ $anggota->universitas }}
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </p>
                         @endif
 
-                        {{-- Status Lengkap Keseluruhan --}}
                         <p class="mt-2">
                             <strong>Status Kelengkapan:</strong>
                             @if($item->status_lengkap)

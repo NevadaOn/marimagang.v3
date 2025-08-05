@@ -75,7 +75,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <div class="small">Menunggu</div>
-                                <div class="h4 mb-0">{{ $pengajuan->where('status', 'pending')->count() }}</div>
+                                <div class="h4 mb-0">{{ $pengajuan->where('status', 'Diproses')->count() }}</div>
                             </div>
                             <div class="">
                                 <i class="fas fa-clock fa-2x"></i>
@@ -213,7 +213,7 @@
                                                 </span>
                                             @else
                                                 <span class="badge bg-warning d-inline-flex align-items-center">
-                                                    <i class="fas fa-clock me-1"></i>Pending
+                                                    <i class="fas fa-clock me-1"></i>Diproses
                                                 </span>
                                             @endif
                                         </td>

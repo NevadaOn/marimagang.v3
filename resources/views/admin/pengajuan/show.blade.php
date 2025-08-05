@@ -42,11 +42,6 @@
         color: #721c24;
     }
     
-    .status-pending {
-        background-color: #fff3cd;
-        color: #856404;
-    }
-    
     .status-diproses {
         background-color: #cce5ff;
         color: #004085;
@@ -475,7 +470,7 @@
                                         @case('diteruskan') status-diteruskan @break
                                         @case('magang') status-magang @break
                                         @case('selesai') status-selesai @break
-                                        @default status-pending
+                                        @default diproses
                                     @endswitch">
                                     
                                     @switch($pengajuan->status)
@@ -498,7 +493,7 @@
                                             <i class="fas fa-check-double me-1"></i> Selesai
                                             @break
                                         @default
-                                            <i class="fas fa-clock me-1"></i> Pending
+                                            <i class="fas fa-clock me-1"></i> Diproses
                                     @endswitch
                                 </span>
                             </div>
@@ -684,8 +679,8 @@
                 $statusOptions = [];
 
                 if ($admin->role === 'superadmin') {
-                    $statusOptions = ['pending', 'diproses', 'diteruskan', 'diterima', 'ditolak'];
-                } elseif ($admin->role === 'admin_dinas' && $pengajuan->status === 'pending') {
+                    $statusOptions = ['diproses', 'diteruskan', 'diterima', 'ditolak'];
+                } elseif ($admin->role === 'admin_dinas' && $pengajuan->status === 'diproses') {
                     $statusOptions = ['diteruskan', 'ditolak'];
                 } elseif ($admin->role === 'admin_bidang' && $pengajuan->status === 'diteruskan') {
                     $statusOptions = ['diproses', 'diterima', 'ditolak'];
