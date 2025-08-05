@@ -254,9 +254,9 @@
             {{-- END: Kartu Informasi Umum --}}
 
             {{-- START: Tabel Anggota Kelompok --}}
-            @php
+            {{-- @php
                 $semuaMahasiswa = collect([['user' => $pengajuan->user, 'status' => 'Ketua']])->merge($pengajuan->anggota->map(fn ($anggota) => ['user' => $anggota->user, 'status' => ucfirst($anggota->status)]))->unique(fn($item) => $item['user']->id);
-            @endphp
+            @endphp --}}
             @if($semuaMahasiswa->count())
             <div class="card">
                 <div class="card-header"><h5><i class="fas fa-users"></i>Anggota Kelompok <span class="badge badge-success ms-2">{{ $semuaMahasiswa->count() }} Orang</span></h5></div>

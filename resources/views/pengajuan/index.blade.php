@@ -171,28 +171,24 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton{{ $item->id }}">
         <li>
-<a class="dropdown-item" href="{{ route('pengajuan.show', $item->kode_pengajuan) }}#dokumen">
-    <i class="fas fa-file-alt me-2"></i>Lihat Dokumen
-</a>
+            <a class="dropdown-item" href="{{ route('pengajuan.edit', $item->kode_pengajuan) }}">
 
-        </li>
-        <li>
-            <a class="dropdown-item" href="{{ route('pengajuan.edit', $item->id) }}">
                 <i class="fas fa-edit me-2"></i>Edit Pengajuan
             </a>
         </li>
         <li>
-            <form action="{{ route('pengajuan.batal', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin membatalkan pengajuan ini?')">
-                @csrf
-                @method('POST')
-                <button class="dropdown-item text-danger" type="submit">
-                    <i class="fas fa-times-circle me-2"></i>Batalkan Pengajuan
-                </button>
-            </form>
+<form action="{{ route('pengajuan.batal', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin membatalkan pengajuan ini?')">
+    @csrf
+    <button class="dropdown-item text-danger" type="submit">
+        <i class="fas fa-times-circle me-2"></i>Batalkan Pengajuan
+    </button>
+</form>
+
 
         </li>
     </ul>
 </div>
+
 
                         <div>
                             <strong>{{ $item->kode_pengajuan }}</strong>
@@ -260,6 +256,20 @@
                                 <span class="badge bg-secondary">Belum Lengkap</span>
                             @endif
                         </p>
+                        @foreach($pengajuan as $item)
+    @if ($item->documents->count())
+        <ul>
+            @foreach ($item->documents as $doc)
+                <li>
+                    {{ ucfirst(str_replace('_', ' ', $doc->document_type)) }}:
+                    <a href="{{ asset('storage/' . $doc->file_path) }}" target="_blank">
+                        {{ $doc->file_name }}
+                    </a>
+                </li>
+            @endforeach
+        </ul>
+    @endif
+@endforeach
                     </div>
                 </div>
             @empty

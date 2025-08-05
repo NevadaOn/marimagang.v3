@@ -267,4 +267,55 @@ class PengajuanController extends Controller
 
         return redirect()->route('pengajuan.index')->with('success', 'Pengajuan berhasil dibatalkan.');
     }
+
+    public function edit($kode_pengajuan)
+    {
+        $pengajuan = Pengajuan::where('kode_pengajuan', $kode_pengajuan)
+            ->with(['documents', 'anggota'])
+            ->firstOrFail();
+
+        return view('pengajuan.edit', compact('pengajuan'));
+    }
+
+   public function update(Request $request, $kode_pengajuan)
+    {
+        $pengajuan = Pengajuan::where('kode_pengajuan', $kode_pengajuan)->firstOrFail();
+
+        $request->validate([
+            'deskripsi' => 'nullable|string',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
+            'dokumen.*' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        ]);
+
+        $pengajuan->update([
+            'deskripsi' => $request->deskripsi ?? $pengajuan->deskripsi,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_selesai' => $request->tanggal_selesai,
+        ]);
+
+        if ($request->hasFile('dokumen')) {
+            foreach ($request->file('dokumen') as $type => $file) {
+                $old = $pengajuan->documents()->where('document_type', $type)->first();
+                if ($old) {
+                    Storage::delete($old->file_path);
+                    $old->delete();
+                }
+
+                $path = $file->store('dokumen_pengajuan');
+
+                $pengajuan->documents()->create([
+                    'document_type' => $type,
+                    'file_name' => $file->getClientOriginalName(),
+                    'file_path' => $path,
+                    'file_size' => $file->getSize(),
+                    'uploaded_at' => now(),
+                ]);
+            }
+        }
+
+        return redirect()->route('pengajuan.index')->with('success', 'Pengajuan berhasil diperbarui.');
+    }
+
+
 }
