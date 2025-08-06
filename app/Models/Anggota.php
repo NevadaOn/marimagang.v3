@@ -29,4 +29,8 @@ class Anggota extends Model
     {
         return $this->belongsTo(Pengajuan::class);
     }
+        public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

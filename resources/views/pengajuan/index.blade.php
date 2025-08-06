@@ -301,11 +301,9 @@
                         @foreach ($item->documents as $doc)
                             <li>
                                 {{ ucfirst(str_replace('_', ' ', $doc->document_type)) }}:
-                                <a href="{{ asset('storage/' . $doc->file_path) }}" 
-                                   target="_blank" 
-                                   class="text-decoration-none">
-                                    {{ $doc->file_name }}
-                                </a>
+                                        <a href="{{ route('pengajuan.download', ['id' => $item->id, 'filename' => $doc->file_name]) }}" target="_blank">
+                                            {{ $doc->file_name }}
+                                        </a>
                             </li>
                         @endforeach
                     </ul>
