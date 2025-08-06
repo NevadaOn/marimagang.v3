@@ -1,0 +1,70 @@
+[
+  {
+    "prodi": "Teknik Informatika",
+    "fakultas": "Fakultas Sains dan Teknologi"
+  },
+  {
+    "prodi": "Sistem Informasi",
+    "fakultas": "Fakultas Sains dan Teknologi"
+  },
+  {
+    "prodi": "Statistika",
+    "fakultas": "Fakultas Sains dan Teknologi"
+  },
+  {
+    "prodi": "Teknologi Informasi",
+    "fakultas": "Fakultas Ilmu Komputer"
+  },
+  {
+    "prodi": "Ilmu Komputer",
+    "fakultas": "Fakultas Ilmu Komputer"
+  },
+  {
+    "prodi": "Rekayasa Perangkat Lunak",
+    "fakultas": "Fakultas Teknik"
+  },
+  {
+    "prodi": "Teknik Komputer",
+    "fakultas": "Fakultas Teknik"
+  },
+  {
+    "prodi": "Matematika",
+    "fakultas": "Fakultas Matematika dan Ilmu Pengetahuan Alam"
+  },
+  {
+    "prodi": "Ilmu Komunikasi",
+    "fakultas": "Fakultas Ilmu Komunikasi"
+  },
+  {
+    "prodi": "Jurnalistik",
+    "fakultas": "Fakultas Ilmu Komunikasi"
+  },
+  {
+    "prodi": "Broadcasting",
+    "fakultas": "Fakultas Ilmu Komunikasi"
+  },
+  {
+    "prodi": "Hubungan Masyarakat",
+    "fakultas": "Fakultas Ilmu Komunikasi"
+  },
+  {
+    "prodi": "Komunikasi Digital",
+    "fakultas": "Fakultas Ilmu Komunikasi"
+  },
+  {
+    "prodi": "Ilmu Administrasi Negara",
+    "fakultas": "Fakultas Ilmu Administrasi"
+  },
+  {
+    "prodi": "Tata Kearsipan",
+    "fakultas": "Fakultas Ilmu Administrasi"
+  },
+  {
+    "prodi": "Administrasi Perkantoran",
+    "fakultas": "Fakultas Ilmu Administrasi"
+  },
+  {
+    "prodi": "Manajemen Arsip",
+    "fakultas": "Fakultas Vokasi"
+  }
+]
