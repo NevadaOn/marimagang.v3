@@ -8,15 +8,19 @@
             </div>
 
             <div class="calendar__week week">
-                <div class="calendar__week-text">Su</div>
-                <div class="calendar__week-text">Mo</div>
-                <div class="calendar__week-text">Tu</div>
-                <div class="calendar__week-text">We</div>
-                <div class="calendar__week-text">Th</div>
-                <div class="calendar__week-text">Fr</div>
-                <div class="calendar__week-text">Sa</div>
+                    <div class="calendar__week-text">Min</div>
+                    <div class="calendar__week-text">Sen</div>
+                    <div class="calendar__week-text">Sel</div>
+                    <div class="calendar__week-text">Rab</div>
+                    <div class="calendar__week-text">Kam</div>
+                    <div class="calendar__week-text">Jum</div>
+                    <div class="calendar__week-text">Sab</div>
             </div>
-            <div class="days"></div>
+            <div class="days" id="days"></div>
+            <div class="date-description" id="dateDescription">
+                    <p id="selectedDate">Klik tanggal untuk melihat informasi</p>
+                    <p id="dateInfo"></p>
+            </div>
         </div>
     </div>
 
