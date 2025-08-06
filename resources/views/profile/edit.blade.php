@@ -133,7 +133,7 @@
                             @enderror
                         </div>
                         <div class="col-12">
-                            <label for="imageUpload" class="form-label mb-8 h6">Your Photo</label>
+                            <label for="imageUpload" class="form-label mb-8 h6">Foto</label>
                             <div class="flex-align gap-22">
                                 <div class="avatar-upload flex-shrink-0">
                                     {{-- <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"> --}}
@@ -806,7 +806,6 @@
             </div>
         </div>
     </div>
-    <!-- Notification Tab End -->
 
 </div>
 @endsection
@@ -814,10 +813,9 @@
 @push('scripts')
 
 <script>
-    // ============================= Avatar Upload js ============================= 
     function uploadImageFunction(imageId, previewId) {
         $(imageId).on('change', function () {
-            var input = this; // 'this' is the DOM element here
+            var input = this; 
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
@@ -879,7 +877,6 @@ fetchAndAutocomplete('fakultas', '/fakultas.json');
 fetchAndAutocomplete('prodi', '/prodi.json');
 </script>
 <style>
-/* Tambahkan di file CSS global Anda atau di dalam <style> di blade */
 .autocomplete-parent {
     position: relative;
 }
