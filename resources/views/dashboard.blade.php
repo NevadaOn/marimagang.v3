@@ -82,7 +82,6 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Ambil data dari controller Laravel
             const completionData = @json($completionStatus);
 
             function updateProfileCompletion(data) {
