@@ -154,79 +154,58 @@
       <div class="footer-1 bg-gray-850 border-gray-800">
         <div class="row">
           <div class="col-lg-4 mb-30"><a class="wow animate__animated animate__fadeInUp" href="index.html"><img
-                class="logo-night" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" width="110px" alt="Genz"><img
-                class="d-none logo-day" alt="GenZ" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" width="110px"></a>
-            <p class="mb-20 mt-20 text-sm color-gray-500 wow animate__animated animate__fadeInUp">Kementerian Komunikasi
-              dan Informatika, yang merupakan kementerian dalam pemerintahan Indonesia yang bertanggung jawab atas
-              urusan di bidang komunikasi dan informatika. </p>
-            <h6 class="color-white mb-5 wow animate__animated animate__fadeInUp">Address</h6>
+                class="logo-night" src="{{ asset('img/rb_30832.png') }}" width="110px" alt="DiskominfoKab.Malang"><img
+                class="d-none logo-day" alt="DiskominfoKab.Malang" src="{{ asset('img/rb_30832.png') }}"
+                width="110px"></a>
+            <p class="mb-20 mt-20 text-sm color-gray-500 wow animate__animated animate__fadeInUp">Diskominfo Kabupaten Malang bertugas mengelola layanan komunikasi, informatika, persandian, dan statistik untuk mendukung pemerintahan digital dan keterbukaan informasi publik.</p>
+            <h6 class="color-white mb-5 wow animate__animated animate__fadeInUp">Alamat</h6>
             <p class="text-sm color-gray-500 wow animate__animated animate__fadeInUp">2J9M+26M, Jl. Agus Salim,
               Kiduldalem, Kec. Klojen, <br>Kota Malang, Jawa Timur 65143</p>
           </div>
           <div class="col-lg-4 mb-30">
-            <h6 class="text-lg mb-30 color-white wow animate__animated animate__fadeInUp">All Link</h6>
+            <h6 class="text-lg mb-30 color-white wow animate__animated animate__fadeInUp">Informasi Publik</h6>
             <div class="row">
-              <div class="col-6">
+              <div class="col-12">
                 <ul class="menu-footer">
                   <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
-                      href="index.html">Home</a></li>
-                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500" href="#bidangKerja">Alur
-                      Magang</a></li>
+                      href="https://kominfo.malangkab.go.id/content/kominfo-struktur-organisasi-3">Struktur Organisasi</a></li>
+                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500" href="https://kominfo.malangkab.go.id/content/ttugas-pokok-dan-fungsi">Tugas Pokok dan Fungsi</a></li>
                   <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
-                      href="#dokumentasi">Dokumentasi</a></li>
+                      href="https://kominfo.malangkab.go.id/content/kominfo-opd-visi-misi">VISI MISI</a></li>
                   <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
-                      href="page-404.html">404</a></li>
-
-                </ul>
-              </div>
-              <div class="col-6">
-                <ul class="menu-footer">
-                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500" href="#">Contact</a>
-                  </li>
-                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
-                      href="page-login.html">Login</a></li>
-                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
-                      href="page-signup.html">Sign-Up</a></li>
+                      href="https://ppid.malangkab.go.id/home/tugas">Tugas dan Wewenang</a></li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="col-lg-4 mb-30">
-            <h4 class="text-lg mb-30 color-white wow animate__animated animate__fadeInUp">Newsletter</h4>
-            <p class="text-base color-gray-500 wow animate__animated animate__fadeInUp">Daftar disini, Raih kesempatan
-              magang yang berkualitas.</p>
-            <div class="form-newsletters mt-15 wow animate__animated animate__fadeInUp">
-              <form action="#">
-                <div class="form-group">
-                  <input class="input-name border-gray-500" type="text" placeholder="Your name">
-                </div>
-                <div class="form-group">
-                  <input class="input-email border-gray-500" type="email" placeholder="Emaill address">
-                </div>
-                <div class="form-group mt-20">
-                  <button class="btn btn-linear hover-up">
-                    Daftar
-                    <i class="fi-rr-arrow-small-right"></i>
-                  </button>
-                </div>
-              </form>
+            <h4 class="text-lg mb-30 color-white wow animate__animated animate__fadeInUp">Lokasi Kami</h4>
+            <div class="wow animate__animated animate__fadeInUp">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.159833545226!2d112.6330414!3d-7.9824239000000015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6298e932f9373%3A0xa947325c3d98a709!2sDinas%20Komunikasi%20dan%20Informatika%20Kabupaten%20Malang!5e0!3m2!1sid!2sid!4v1754204241853!5m2!1sid!2sid"
+                width="100%" 
+                height="250" 
+                style="border:0; border-radius: 8px;"
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
             </div>
           </div>
         </div>
         <div class="footer-bottom border-gray-800">
           <div class="row">
             <div class="col-lg-5 text-center text-lg-start">
-              <p class="text-base color-white wow animate__animated animate__fadeIn">© Created by<a class="copyright"
-                  href="#" target="_blank"> PKL Unira Malang</a></p>
+              <p class="text-base color-white wow animate__animated animate__fadeIn">&copy; 2025 <a class="copyright"
+                  href="https://kominfo.malangkab.go.id/" target="_blank">Diskominfo Kab.Malang</a></p>
             </div>
             <div class="col-lg-7 text-center text-lg-end">
               <div class="box-socials">
                 <div class="d-inline-block mr-30 wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a
-                    class="icon-socials icon-twitter color-gray-500" href="https://twitter.com">Twitter</a></div>
+                    class="icon-socials icon-twitter color-gray-500" href="https://x.com/kominfokabmlg">Twitter</a></div>
                 <div class="d-inline-block mr-30 wow animate__animated animate__fadeIn" data-wow-delay=".2s"><a
-                    class="icon-socials icon-linked color-gray-500" href="https://www.linkedin.com">LinkedIn</a></div>
+                    class="icon-socials icon-linked color-gray-500" href="https://www.facebook.com/Diskominfo.Malangkab/">Facebook</a></div>
                 <div class="d-inline-block wow animate__animated animate__fadeIn" data-wow-delay=".4s"><a
-                    class="icon-socials icon-insta color-gray-500" href="https://www.instagram.com">Instagram</a></div>
+                    class="icon-socials icon-insta color-gray-500" href="https://www.instagram.com/kominfokabmlg/">Instagram</a></div>
               </div>
             </div>
           </div>
