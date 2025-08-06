@@ -10,7 +10,7 @@
   <meta name="description" content="Index page">
   <meta name="keywords" content="index, page">
   <meta name="author" content="">
-  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/template/rb_3083.svg') }}">
+  <link rel="icon" type="image/png" href="{{ asset('img/rb_30833.png') }}">
   <link href="{{ asset('assets/css/style.css?v=2.0') }}" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Mari Magang - Diskominfo Kab.Malang</title>

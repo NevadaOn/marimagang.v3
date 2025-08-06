@@ -11,9 +11,7 @@
 <title>@yield('title', 'Dashboard') - MariMagang Diskominfo Kab.Malang</title>
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="{{ asset('style/images/logo/favicon.png') }}">
-
-
+<link rel="icon" type="image/png" href="{{ asset('img/rb_30833.png') }}">
 
 <!-- Muat di seluruh halaman -->
 <link rel="stylesheet" href="{{ asset('style/css/bootstrap.min.css') }}">

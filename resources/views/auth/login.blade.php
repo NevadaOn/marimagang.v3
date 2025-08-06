@@ -10,12 +10,10 @@
     <meta name="keywords" content="index, page">
     <meta name="author" content="">
     <title>Login – Mari-Magang</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/template/favicon.svg') }}">
+    <link rel="icon" type="image/png" href="{{ asset('img/rb_30833.png') }}">
     <link href="{{ asset('assets/css/style.css?v=2.0') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
-
-    <title>Login - Personal Blog  HTML Template</title>
+    <title>Login - Mari-Magang</title>
   </head>
   <body>
     <style>
@@ -66,7 +64,7 @@
           <div class="row">
             <div class="col-xl-10 col-lg-12 m-auto">
               <div class="text-center mt-50 pb-50">
-                <h2 class="color-linear d-inline-block">Welcome back !</h2>
+                <h2 class="color-linear d-inline-block">Selamat Datang Peserta Magang !</h2>
               </div>
               <div class="box-form-login pb-50">
                 <div class="form-login bg-gray-850 border-gray-800 text-start">
@@ -113,7 +111,7 @@
                 </div>
                 <div class="box-line"><span class="bg-gray-900">Or, sign in with your email</span></div>
                 <div class="box-login-gmail bg-gray-850 border-gray-800 hover-up"><a class="btn btn-login-gmail color-gray-500" href="#">Sign in with Google</a></div>
-                <div class="box-line"><span class="bg-gray-900"><a class="color-linear" href="index.html">Back</span> </a></div>
+                <div class="box-line"><span class="bg-gray-900"><a class="color-linear" href="/">Kembali</span> </a></div>
               </div>
             </div>
           </div>

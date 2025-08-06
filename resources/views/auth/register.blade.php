@@ -144,7 +144,7 @@
                                     </div>
 
                                     <div class="form-group mb-0">
-                                        <span>Already have an account?</span>
+                                        <span>Sudah Punya Akun?</span>
                                         <a class="color-linear" href="{{ route('login') }}"> Sign In</a>
                                     </div>
                                 </form>
@@ -156,7 +156,7 @@
                             </div>
                             <div class="box-line">
                                 <span class="bg-gray-900">
-                                    <a class="color-linear" href="{{ url('/') }}">Back</a>
+                                    <a class="color-linear" href="{{ url('/') }}">Kembali</a>
                                 </span>
                             </div>
                         </div>
