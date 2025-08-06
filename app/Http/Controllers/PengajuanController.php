@@ -230,7 +230,7 @@ class PengajuanController extends Controller
 
         session()->forget('pengajuan_tipe');
 
-        return redirect()->route('dashboard')
+        return redirect()->route('pengajuan.index')
             ->with('success', 'Pengajuan berhasil dibuat dengan kode: ' . $kode);
     }
 

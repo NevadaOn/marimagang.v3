@@ -34,15 +34,14 @@
                         @endif
                     </a>
                 </li>
-
-                <li class="sidebar-menu__item" role="none">
+                {{-- <li class="sidebar-menu__item" role="none">
                     <a href="#"
                         class="sidebar-menu__link {{ request()->routeIs('anggota.*') ? 'active' : '' }}"
                         role="menuitem">
                         <span class="icon" aria-hidden="true"><i class="ph ph-users-three"></i></span>
                         <span class="text">Anggota</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="sidebar-menu__item" role="none">
                     <a href="https://sukma.jatimprov.go.id/fe/survey?idUser=1992"
                         class="sidebar-menu__link"
