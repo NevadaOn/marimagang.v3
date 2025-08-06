@@ -35,7 +35,6 @@ class PengajuanController extends Controller
     {
         $user = auth()->user();
 
-        // Query pengajuan aktif (bukan yang dibatalkan)
         $pengajuanAktif = Pengajuan::with([
                 'databidang',
                 'documents',
@@ -43,12 +42,11 @@ class PengajuanController extends Controller
                 'anggota'
             ])
             ->where('user_id', $user->id)
-            ->where('status', '!=', 'dibatalkan') // Semua status kecuali dibatalkan
+            ->where('status', '!=', 'dibatalkan')
             ->orderBy('created_at', 'desc')
             ->get()
             ->unique('id');
 
-        // Query riwayat pengajuan (yang dibatalkan)
         $riwayatPengajuan = Pengajuan::with([
                 'databidang',
                 'documents', 
@@ -56,12 +54,11 @@ class PengajuanController extends Controller
                 'anggota'
             ])
             ->where('user_id', $user->id)
-            ->where('status', 'dibatalkan') // Hanya yang dibatalkan
+            ->where('status', 'dibatalkan') 
             ->orderBy('updated_at', 'desc')
             ->get()
             ->unique('id');
 
-        // Logic untuk dokumen lengkap pada pengajuan aktif
         foreach ($pengajuanAktif as $item) {
             $requiredDocuments = ['surat_pengantar', 'proposal'];
             $uploadedTypes = $item->documents->pluck('document_type')->toArray();
@@ -71,7 +68,6 @@ class PengajuanController extends Controller
             $item->status_lengkap = $item->dokumen_lengkap;
         }
 
-        // Logic untuk dokumen lengkap pada riwayat
         foreach ($riwayatPengajuan as $item) {
             $requiredDocuments = ['surat_pengantar', 'proposal'];
             $uploadedTypes = $item->documents->pluck('document_type')->toArray();
