@@ -44,6 +44,14 @@
                     </a>
                 </li>
                 <li class="sidebar-menu__item" role="none">
+                    <a href="https://sukma.jatimprov.go.id/fe/survey?idUser=1992"
+                        class="sidebar-menu__link"
+                        role="menuitem">
+                        <span class="icon" aria-hidden="true"><i class="ph ph-users-three"></i></span>
+                        <span class="text">Survey</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu__item" role="none">
                     <span
                         class="text-gray-300 text-sm px-20 pt-20 fw-semibold border-top border-gray-100 d-block text-uppercase">Settings</span>
                 </li>

@@ -126,7 +126,6 @@ class ProfileController extends Controller
 
         DB::beginTransaction();
         try {
-            // Buat skill baru dengan data project (sesuai struktur existing Anda)
             $skillData = [
                 'nama' => $request->nama_skill,
                 'deskripsi' => $request->deskripsi_proyek,
@@ -134,14 +133,12 @@ class ProfileController extends Controller
                 'link_project' => $request->link_project,
             ];
 
-            // Handle project file upload
             if ($request->hasFile('file_project')) {
                 $skillData['file_path'] = $request->file('file_project')->store('projects', 'public');
             }
 
             $skill = Skill::create($skillData);
 
-            // Check if user already has this skill name
             $existingUserSkill = UserSkill::whereHas('skill', function($query) use ($request) {
                 $query->where('nama', $request->nama_skill);
             })->where('user_id', $user->id)->first();
@@ -152,22 +149,19 @@ class ProfileController extends Controller
                     ->with('error', 'Anda sudah memiliki skill dengan nama tersebut');
             }
 
-            // Handle certificate upload
             $sertifikatPath = null;
             if ($request->hasFile('sertifikat')) {
                 $sertifikatPath = $request->file('sertifikat')->store('sertifikat', 'public');
             }
 
-            // Create UserSkill record (sesuai dengan struktur existing)
             $userSkill = UserSkill::create([
                 'user_id' => $user->id,
                 'skill_id' => $skill->id,
                 'level' => $request->level,
                 'sertifikat_path' => $sertifikatPath,
-                'pengajuan_id' => null, // Kosongkan dulu, akan diisi saat ada pengajuan
+                'pengajuan_id' => null,
             ]);
 
-            // Send notification
             $this->notificationService->skillAdded($user->id, $skill->nama);
 
             DB::commit();
@@ -206,26 +200,21 @@ class ProfileController extends Controller
 
         DB::beginTransaction();
         try {
-            // Handle certificate update
             $sertifikatPath = $userSkill->sertifikat_path;
             if ($request->hasFile('sertifikat')) {
-                // Delete old certificate
                 if ($sertifikatPath && Storage::disk('public')->exists($sertifikatPath)) {
                     Storage::disk('public')->delete($sertifikatPath);
                 }
                 $sertifikatPath = $request->file('sertifikat')->store('sertifikat', 'public');
             }
 
-            // Update UserSkill level dan sertifikat
             $userSkill->update([
                 'level' => $request->level,
                 'sertifikat_path' => $sertifikatPath,
             ]);
 
-            // Update Skill project data (ini yang unik dari struktur Anda)
             $skill = $userSkill->skill;
             
-            // Handle project file update
             $projectFilePath = $skill->file_path;
             if ($request->hasFile('file_project')) {
                 // Delete old project file
@@ -273,20 +262,16 @@ class ProfileController extends Controller
             $skill = $userSkill->skill;
             $skillName = $skill->nama;
 
-            // Delete certificate file
             if ($userSkill->sertifikat_path && Storage::disk('public')->exists($userSkill->sertifikat_path)) {
                 Storage::disk('public')->delete($userSkill->sertifikat_path);
             }
 
-            // Cek apakah ada user lain yang menggunakan skill ini
             $otherUsers = UserSkill::where('skill_id', $skill->id)
                 ->where('id', '!=', $userSkill->id)
                 ->count();
 
-            // Delete the user skill record
             $userSkill->delete();
 
-            // Jika tidak ada user lain yang pakai skill ini, hapus skill dan file projectnya
             if ($otherUsers == 0) {
                 // Delete project file
                 if ($skill->file_path && Storage::disk('public')->exists($skill->file_path)) {
@@ -294,7 +279,6 @@ class ProfileController extends Controller
                 }
                 $skill->delete();
             } else {
-                // Jika masih ada user lain, reset project data saja
                 $skill->update([
                     'judul_proyek' => null,
                     'deskripsi' => null,

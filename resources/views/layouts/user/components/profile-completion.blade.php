@@ -7,7 +7,6 @@
         </div>
     </div>
     <div class="card-body">
-        <!-- Overall Progress -->
         <div class="mb-24">
             <div class="flex-between mb-8">
                 <span class="text-15 fw-medium text-gray-900">Overall Progress</span>
@@ -18,8 +17,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Profile Steps Table -->
     <div class="card-body p-0 overflow-x-auto scroll-sm scroll-sm-horizontal">
         <table class="table style-two mb-0">
             <thead>

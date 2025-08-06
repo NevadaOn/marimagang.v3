@@ -74,9 +74,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        
-
                     @endif
                 </div>
             </div>
@@ -96,7 +93,11 @@
                             @endif
                         </div>
                         <div class="dropdown">
-                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{ $item->id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{ $item->id }}" data-bs-toggle="dropdown" aria-expanded="false"style="
+            background-color: #f8f9fa !important;
+            color: #212529 !important;
+            border: 1px solid #ced4da !important;
+            z-index: 1050 !important;">
                                 Aksi
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton{{ $item->id }}">
