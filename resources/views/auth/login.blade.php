@@ -53,11 +53,7 @@
         </div>
       </div>
     </header>
-    @if ($errors->any())
-    <div>
-        <strong>Error:</strong> {{ $errors->first() }}
-    </div>
-@endif
+
     <main class="main">
       <div class="cover-home3">
         <div class="container">
@@ -107,6 +103,16 @@
                         <a class="color-linear" href="{{ route('register') }}">Daftar Sekarang</a>
                     </div>
                 </form>
+                
+                @if ($errors->any())
+    <div class="mt-4">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center animate-fade-in-down" role="alert">
+            <strong class="font-bold">Oops!</strong>
+            <span class="block sm:inline">{{ $errors->first() }}</span>
+        </div>
+    </div>
+@endif
+
 
                 </div>
                 <div class="box-line"><span class="bg-gray-900">Or, sign in with your email</span></div>
