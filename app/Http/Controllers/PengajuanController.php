@@ -11,6 +11,7 @@ use App\Models\PengajuanDocument;
 use App\Models\Anggota;
 use App\Models\User;
 use App\Services\NotificationService;
+use Illuminate\Support\Facades\Storage;
 
 class PengajuanController extends Controller
 {
@@ -318,6 +319,22 @@ class PengajuanController extends Controller
 
         return redirect()->route('pengajuan.index')->with('success', 'Pengajuan berhasil diperbarui.');
     }
+
+public function downloadDocumentUser($id, $filename)
+{
+    // Pastikan hanya user yang sesuai yang bisa akses
+    $pengajuan = Pengajuan::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
+
+    $document = $pengajuan->documents()
+        ->where('file_name', $filename)
+        ->firstOrFail();
+
+    if (!Storage::exists($document->file_path)) {
+        abort(404, 'File tidak ditemukan');
+    }
+
+    return Storage::download($document->file_path);
+}
 
 
 }
