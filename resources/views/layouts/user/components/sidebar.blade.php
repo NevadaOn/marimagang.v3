@@ -53,7 +53,7 @@
                 </li>
                 <li class="sidebar-menu__item" role="none">
                     <span
-                        class="text-gray-300 text-sm px-20 pt-20 fw-semibold border-top border-gray-100 d-block text-uppercase">Settings</span>
+                        class="text-gray-300 text-sm px-20 pt-20 fw-semibold border-top border-gray-100 d-block text-uppercase">Pengaturan</span>
                 </li>
                 <li class="sidebar-menu__item" role="none">
                     <a href="{{ route('profile.edit') }}" class="sidebar-menu__link {{ request()->routeIs('profile.edit') ? 'activePage' : '' }}">

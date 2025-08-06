@@ -3,6 +3,7 @@
 <head>
     @include('layouts.user.components.head')
     <title>@yield('title', 'MariMagang - Dashboard')</title>
+    
 </head>
 <body>
 

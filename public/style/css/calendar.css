@@ -72,4 +72,64 @@
     background-color: var(--main-800) !important;
     color: #fff !important;
 }
-  
+
+/* Style untuk hari libur */
+.holiday {
+    background-color: #dc2626 !important;
+    color: #fff !important;
+}
+
+.holiday:hover {
+    background-color: #b91c1c !important;
+    color: #fff !important;
+}
+
+/* Jika hari ini sekaligus hari libur */
+.current-date.holiday {
+    background-color: #dc2626 !important;
+}
+
+.current-date.holiday:hover {
+    background-color: #b91c1c !important;
+}
+
+/* Area deskripsi tanggal */
+.date-description {
+margin-top: 20px;
+padding: 15px;
+            background-color: var(--main-50);
+            border-radius: 8px;
+            border: 1px solid var(--main-100);
+            text-align: center;
+            min-height: 80px;
+        }
+        
+        #selectedDate {
+            margin: 0 0 8px 0;
+            font-weight: 600;
+            color: var(--main-600);
+            font-size: 14px;
+        }
+        
+        #dateInfo {
+            margin: 0;
+            color: var(--gray-900);
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        
+        .date-description.holiday-info {
+            background-color: #fee2e2;
+            border-color: #fca5a5;
+        }
+        
+        .date-description.holiday-info #selectedDate {
+            color: #dc2626;
+        }
+        
+        .date-description.today-info {
+            background-color: var(--main-100);
+            border-color: var(--main-200);
+        }
+
+        

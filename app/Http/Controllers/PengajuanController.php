@@ -34,17 +34,34 @@ class PengajuanController extends Controller
     {
         $user = auth()->user();
 
-        $pengajuan = Pengajuan::with([
+        // Query pengajuan aktif (bukan yang dibatalkan)
+        $pengajuanAktif = Pengajuan::with([
                 'databidang',
                 'documents',
                 'user',
                 'anggota'
             ])
             ->where('user_id', $user->id)
+            ->where('status', '!=', 'dibatalkan') // Semua status kecuali dibatalkan
+            ->orderBy('created_at', 'desc')
             ->get()
             ->unique('id');
 
-        foreach ($pengajuan as $item) {
+        // Query riwayat pengajuan (yang dibatalkan)
+        $riwayatPengajuan = Pengajuan::with([
+                'databidang',
+                'documents', 
+                'user',
+                'anggota'
+            ])
+            ->where('user_id', $user->id)
+            ->where('status', 'dibatalkan') // Hanya yang dibatalkan
+            ->orderBy('updated_at', 'desc')
+            ->get()
+            ->unique('id');
+
+        // Logic untuk dokumen lengkap pada pengajuan aktif
+        foreach ($pengajuanAktif as $item) {
             $requiredDocuments = ['surat_pengantar', 'proposal'];
             $uploadedTypes = $item->documents->pluck('document_type')->toArray();
             $missingDocuments = array_diff($requiredDocuments, $uploadedTypes);
@@ -53,8 +70,18 @@ class PengajuanController extends Controller
             $item->status_lengkap = $item->dokumen_lengkap;
         }
 
-        $pengajuanAktif = $pengajuan->first(fn($p) => !in_array($p->status, ['ditolak', 'selesai', 'dibatalkan']));
-        $statusAktif = $pengajuanAktif?->status;
+        // Logic untuk dokumen lengkap pada riwayat
+        foreach ($riwayatPengajuan as $item) {
+            $requiredDocuments = ['surat_pengantar', 'proposal'];
+            $uploadedTypes = $item->documents->pluck('document_type')->toArray();
+            $missingDocuments = array_diff($requiredDocuments, $uploadedTypes);
+
+            $item->dokumen_lengkap = empty($missingDocuments);
+            $item->status_lengkap = $item->dokumen_lengkap;
+        }
+
+        $pengajuanAktifFirst = $pengajuanAktif->first(fn($p) => !in_array($p->status, ['ditolak', 'selesai', 'dibatalkan']));
+        $statusAktif = $pengajuanAktifFirst?->status;
 
         $hasUniversityInfo = $user->universitas_id && $user->telepon && $user->nim;
         $hasValidSkills = $user->userSkills->isNotEmpty() &&
@@ -68,7 +95,8 @@ class PengajuanController extends Controller
         }
 
         return view('pengajuan.index', compact(
-            'pengajuan',
+            'pengajuanAktif',
+            'riwayatPengajuan', 
             'statusAktif',
             'completionLevel',
             'user'

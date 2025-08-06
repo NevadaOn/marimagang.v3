@@ -1,7 +1,7 @@
 <div class="card mt-24 overflow-hidden">
     <div class="card-header">
         <div class="mb-0 flex-between flex-wrap gap-8">
-            <h4 class="mb-0">Profile Completion</h4>
+            <h4 class="mb-0">Penyelesaian Profil</h4>
             <a href="{{ route('profile.edit') }}"
                 class="text-13 fw-medium text-main-600 hover-text-decoration-underline">Lihat/Edit Profile</a>
         </div>
@@ -9,7 +9,7 @@
     <div class="card-body">
         <div class="mb-24">
             <div class="flex-between mb-8">
-                <span class="text-15 fw-medium text-gray-900">Overall Progress</span>
+                <span class="text-15 fw-medium text-gray-900">Kelengkapan Profil</span>
                 <span class="text-15 fw-medium text-main-600" id="overall-percentage">33%</span>
             </div>
             <div class="progress bg-main-100 rounded-pill h-8" role="progressbar">
@@ -21,8 +21,8 @@
         <table class="table style-two mb-0">
             <thead>
                 <tr>
-                    <th>Profile Section</th>
-                    <th>Progress</th>
+                    <th>Bagian Profil</th>
+                    <th>Kelengkapan</th>
                     <th class="text-center">Status</th>
                 </tr>
             </thead>
@@ -36,10 +36,10 @@
                                 <i class="ph ph-user text-white"></i>
                             </div>
                             <div class="">
-                                <h6 class="mb-0">Personal Information</h6>
+                                <h6 class="mb-0">Informasi Pribadi</h6>
                                 <div class="table-list">
-                                    <span class="text-13 text-gray-600">University & Contact</span>
-                                    <span class="text-13 text-gray-600">Required</span>
+                                    <span class="text-13 text-gray-600">Universitas & Kontak</span>
+                                    <span class="text-13 text-gray-600">Diperlukan</span>
                                 </div>
                             </div>
                         </div>
@@ -74,10 +74,10 @@
                                 <i class="ph ph-gear text-white"></i>
                             </div>
                             <div class="">
-                                <h6 class="mb-0">Skills & Expertise</h6>
+                                <h6 class="mb-0">Keterampilan & Keahlian</h6>
                                 <div class="table-list">
-                                    <span class="text-13 text-gray-600">Technical Skills</span>
-                                    <span class="text-13 text-gray-600">Required</span>
+                                    <span class="text-13 text-gray-600">Keterampilan Teknis</span>
+                                    <span class="text-13 text-gray-600">Diperlukan</span>
                                 </div>
                             </div>
                         </div>
@@ -111,10 +111,10 @@
                                 <i class="ph ph-check-circle text-white"></i>
                             </div>
                             <div class="">
-                                <h6 class="mb-0">Profile Complete</h6>
+                                <h6 class="mb-0">Profil Lengkap</h6>
                                 <div class="table-list">
-                                    <span class="text-13 text-gray-600">Ready for Internship</span>
-                                    <span class="text-13 text-gray-600">Final Step</span>
+                                    <span class="text-13 text-gray-600">Siap Magang</span>
+                                    <span class="text-13 text-gray-600">Langkah Terakhir</span>
                                 </div>
                             </div>
                         </div>
@@ -135,7 +135,7 @@
                                 class="text-13 py-2 px-8 bg-gray-100 text-gray-600 d-inline-flex align-items-center gap-8 rounded-pill"
                                 id="complete-status-badge">
                                 <span class="w-6 h-6 bg-gray-600 rounded-circle flex-shrink-0"></span>
-                                Pending
+                                Tertunda
                             </span>
                         </div>
                     </td>
@@ -147,7 +147,7 @@
     <!-- Action Button -->
     <div class="card-body pt-0">
         <button class="btn btn-main-600 btn-sm w-100" id="completion-action">
-            Complete Personal Information
+            Informasi Pribadi Lengkap
         </button>
     </div>
 </div>

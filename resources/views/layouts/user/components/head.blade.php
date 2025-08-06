@@ -35,6 +35,8 @@
 
 
 
+
+
 <!-- Main CSS (Digunakan di hampir semua halaman) -->
 <link rel="stylesheet" href="{{ asset('style/css/main.css') }}">
 
