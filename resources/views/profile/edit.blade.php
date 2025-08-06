@@ -170,39 +170,34 @@
                             <label for="nim" class="form-label mb-8 h6">Nim</label>
                             <input type="text" class="form-control py-11" name="nim" id="nim"
                                 value="{{ old('nim', $user->nim ?: 'Masukkan Nim') }}">
-                            {{-- <input type="text" name="nim" class="form-control"
-                                value="{{ old('nim', $user->nim) }}"> --}}
                             @error('nim')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-sm-6 col-xs-6">
+                        <div class="col-sm-6 col-xs-6 autocomplete-parent">
+                            <label for="universitas" class="form-label mb-8 h6">Universitas</label>
+                            <input type="text" class="form-control py-11" name="nama_universitas" id="universitas"
+                                autocomplete="off"
+                                value="{{ old('nama_universitas', $user->universitas->nama_universitas ?? '') }}">
+                            @error('nama_universitas')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-6 col-xs-6 autocomplete-parent">
                             <label for="fakultas" class="form-label mb-8 h6">Fakultas</label>
                             <input type="text" class="form-control py-11" name="fakultas" id="fakultas"
+                                autocomplete="off"
                                 value="{{ old('fakultas', $user->universitas->fakultas ?? '') }}">
-                            {{-- <input type="text" name="fakultas" class="form-control"
-                                value="{{ old('fakultas', $user->universitas->fakultas ?? '') }}"> --}}
                             @error('fakultas')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-sm-6 col-xs-6">
+                        <div class="col-sm-6 col-xs-6 autocomplete-parent">
                             <label for="prodi" class="form-label mb-8 h6">Program Studi (Prodi)</label>
                             <input type="text" class="form-control py-11" name="prodi" id="prodi"
+                                autocomplete="off"
                                 value="{{ old('prodi', $user->universitas->prodi ?? '') }}">
-                            {{-- <input type="text" name="prodi" class="form-control"
-                                value="{{ old('prodi', $user->universitas->prodi ?? '') }}"> --}}
                             @error('prodi')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-sm-6 col-xs-6">
-                            <label for="universitas" class="form-label mb-8 h6">Universitas</label>
-                            <input type="text" class="form-control py-11" name="nama_universitas" id="universitas"
-                                value="{{ old('nama_universitas', $user->universitas->nama_universitas ?? '') }}">
-                            {{-- <input type="text" name="nama_universitas" class="form-control"
-                                value="{{ old('nama_universitas', $user->universitas->nama_universitas ?? '') }}"> --}}
-                            @error('nama_universitas')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
@@ -839,4 +834,67 @@
 
 </script>
 
+<script>
+function fetchAndAutocomplete(inputId, jsonUrl) {
+    fetch(jsonUrl)
+        .then(response => response.json())
+        .then(data => {
+            const input = document.getElementById(inputId);
+            const parent = input.closest('.autocomplete-parent');
+            input.addEventListener('input', function() {
+                const val = this.value.toLowerCase();
+                closeAllLists();
+                if (!val) return false;
+                const list = document.createElement('div');
+                list.setAttribute('class', 'autocomplete-items list-group');
+                list.setAttribute('id', inputId + '-autocomplete-list');
+                parent.appendChild(list);
+                let count = 0;
+                data.forEach(item => {
+                    if (item.toLowerCase().includes(val) && count < 10) {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.innerHTML = "<strong>" + item.substr(0, val.length) + "</strong>" + item.substr(val.length);
+                        itemDiv.classList.add('list-group-item', 'list-group-item-action');
+                        itemDiv.style.cursor = 'pointer';
+                        itemDiv.addEventListener('mousedown', function(e) {
+                            e.preventDefault();
+                            input.value = item;
+                            closeAllLists();
+                        });
+                        list.appendChild(itemDiv);
+                        count++;
+                    }
+                });
+            });
+            function closeAllLists() {
+                parent.querySelectorAll('.autocomplete-items').forEach(el => el.remove());
+            }
+            document.addEventListener('click', function (e) {
+                if (!parent.contains(e.target)) closeAllLists();
+            });
+        });
+}
+fetchAndAutocomplete('universitas', '/universitas.json');
+fetchAndAutocomplete('fakultas', '/fakultas.json');
+fetchAndAutocomplete('prodi', '/prodi.json');
+</script>
+<style>
+/* Tambahkan di file CSS global Anda atau di dalam <style> di blade */
+.autocomplete-parent {
+    position: relative;
+}
+.autocomplete-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: #fff;
+    border: 1px solid #e3f2fd;
+    border-radius: 0 0 8px 8px;
+    max-height: 220px;
+    overflow-y: auto;
+    box-shadow: 0 4px 16px rgba(33,150,243,0.08);
+}
+</style>
 @endpush
