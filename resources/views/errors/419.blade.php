@@ -34,7 +34,7 @@
                                 <div class="box-404 row">
                                     <div class="col-lg-6">
                                         <div class="image-404">
-                                            <img src="{{ asset('assets/imgs/page/419/419.png') }}" alt="Sesi Kedaluwarsa">
+                                            <img src="{{ asset('assets/imgs/page/404/sesi.png') }}" alt="Sesi Kedaluwarsa">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -47,7 +47,7 @@
                                             </p>
                                             <div class="mt-25 d-flex gap-3 flex-wrap">
                                                 <a class="btn btn-linear hover-up" href="{{ url('/') }}">Beranda</a>
-                                                <a class="btn btn-outline-secondary hover-up" href="javascript:location.reload()">Muat Ulang</a>
+                                                <a class="btn btn-linear hover-up" href="{{ url('/login') }}">Muat ulang</a>
                                             </div>
                                             <div class="mt-30 text-muted small" id="countdown-text">
                                                 Mengalihkan ke halaman login dalam 10 detik...
