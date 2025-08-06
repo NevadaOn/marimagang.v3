@@ -11,19 +11,7 @@
         <h1 class="text-3xl font-bold mb-6 m-3 text-white" >Daftar Pengajuan</h1>
 
         <div class="mb-5">
-  <div class="relative">
-    <input
-      type="text"
-      placeholder="Search..."
-      class="w-full px-4 py-2 pr-10 rounded-md backdrop-blur-xl bg-white/10 text-sm placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-    />
-    <button
-      type="submit"
-      class="absolute right-1 top-1 bottom-1 px-4  bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white rounded-md text-sm"
-    >
-      <i class="fas fa-search"></i>
-    </button>
-  </div>
+
 </div>
 </div>
         @if (session('success'))
