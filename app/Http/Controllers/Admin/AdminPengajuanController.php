@@ -73,7 +73,6 @@ class AdminPengajuanController extends Controller
             $pengajuan->status = $statusBaru;
             $pengajuan->save();
 
-            // Notifikasi & Email jika diterima
             if ($statusBaru === 'diterima') {
                 $this->sendDiterimaNotifAndEmail($pengajuan, $statusLama, $request->catatan_admin);
             }
@@ -96,7 +95,6 @@ class AdminPengajuanController extends Controller
                 $pengajuan->status = $statusBaru;
                 $pengajuan->save();
 
-                // Notifikasi & Email jika diterima
                 if ($statusBaru === 'diterima') {
                     $this->sendDiterimaNotifAndEmail($pengajuan, $statusLama, $request->catatan_admin);
                 }
@@ -110,44 +108,15 @@ class AdminPengajuanController extends Controller
         return back()->with('error', 'Anda tidak memiliki izin untuk mengubah status ini.');
     }
 
-    private function sendDiterimaNotifAndEmail($pengajuan, $statusLama, $catatanAdmin = null)
+    private function sendDiterimaNotifAndEmail(Pengajuan $pengajuan, $statusLama, $catatanAdmin = null)
     {
-        $userUtama = $pengajuan->user;
+        $anggotaList = $pengajuan->anggota;
 
-        Notification::create([
-            'user_id' => $userUtama->id,
-            'title' => 'Pengajuan Diterima',
-            'message' => 'Selamat! Pengajuan magang Anda telah diterima. Silakan cek detail pengajuan.',
-            'type' => 'success',
-            'data' => [
-                'pengajuan_id' => $pengajuan->id,
-                'kode_pengajuan' => $pengajuan->kode_pengajuan,
-                'url' => route('pengajuan.show', $pengajuan->kode_pengajuan),
-            ],
-            'is_read' => false
-        ]);
-
-        foreach ($pengajuan->anggota as $anggota) {
-            Notification::create([
-                'user_id' => $anggota->user->id,
-                'title' => 'Pengajuan Diterima',
-                'message' => 'Pengajuan magang Anda sebagai anggota telah diterima.',
-                'type' => 'success',
-                'data' => [
-                    'pengajuan_id' => $pengajuan->id,
-                    'kode_pengajuan' => $pengajuan->kode_pengajuan,
-                    'url' => route('pengajuan.show', $pengajuan->kode_pengajuan),
-                ],
-                'is_read' => false
-            ]);
+        foreach ($anggotaList as $anggota) {
+            if ($anggota->email) {
+                Mail::to($anggota->email)->send(new PengajuanDiterimaMail($anggota, $pengajuan, $catatanAdmin));
+            }
         }
-
-        $semuaUser = collect([$userUtama])->merge($pengajuan->anggota->pluck('user'));
-
-    foreach ($semuaUser as $user) {
-        Mail::to($user->email)->send(new PengajuanDiterimaMail($user, $pengajuan, $catatanAdmin));
-    }
-
     }
 
     public function updateTanggal(Request $request, $id)

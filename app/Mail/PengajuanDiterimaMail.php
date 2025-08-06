@@ -17,9 +17,9 @@ class PengajuanDiterimaMail extends Mailable
     public $pengajuan;
     public $catatan;
 
-    public function __construct(User $user, Pengajuan $pengajuan, $catatan = null)
+    public function __construct($user, Pengajuan $pengajuan, $catatan = null)
     {
-        $this->user = $user;
+        $this->user = $user; // bisa User atau Anggota
         $this->pengajuan = $pengajuan;
         $this->catatan = $catatan;
     }
