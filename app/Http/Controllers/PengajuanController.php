@@ -320,21 +320,18 @@ class PengajuanController extends Controller
         return redirect()->route('pengajuan.index')->with('success', 'Pengajuan berhasil diperbarui.');
     }
 
-public function downloadDocumentUser($id, $filename)
-{
-    // Pastikan hanya user yang sesuai yang bisa akses
-    $pengajuan = Pengajuan::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
+    public function downloadDocumentUser($id, $filename)
+    {
+        $pengajuan = Pengajuan::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
 
-    $document = $pengajuan->documents()
-        ->where('file_name', $filename)
-        ->firstOrFail();
+        $document = $pengajuan->documents()
+            ->where('file_name', $filename)
+            ->firstOrFail();
 
-    if (!Storage::exists($document->file_path)) {
-        abort(404, 'File tidak ditemukan');
+        if (!Storage::exists($document->file_path)) {
+            abort(404, 'File tidak ditemukan');
+        }
+
+        return Storage::download($document->file_path);
     }
-
-    return Storage::download($document->file_path);
-}
-
-
 }
