@@ -146,11 +146,16 @@
                             id="dropdownMenuButton{{ $item->id }}" 
                             data-bs-toggle="dropdown" 
                             aria-expanded="false"
-                            style="background-color: #f8f9fa !important; color: #212529 !important; border: 1px solid #ced4da !important; z-index: 1050 !important;">
+                            style="background-color: #f8f9fa !important; color: #212529 !important; border: 1px solid #ced4da !important; z-index: 5 !important;">
                         Aksi
                     </button>
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton{{ $item->id }}">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('pengajuan.show', $item->kode_pengajuan) }}">
+                                <i class="fas fa-eye me-2"></i>Lihat Detail
+                            </a>
+                        </li>
                         @if($item->user_id === auth()->id() && in_array($item->status, ['diproses', 'menunggu']))
                             <li>
                                 <a class="dropdown-item" href="{{ route('pengajuan.edit', $item->kode_pengajuan) }}">
@@ -171,12 +176,6 @@
                                 </form>
                             </li>
                         @endif
-
-                        <li>
-                            <a class="dropdown-item" href="{{ route('pengajuan.show', $item->kode_pengajuan) }}">
-                                <i class="fas fa-eye me-2"></i>Lihat Detail
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -204,9 +203,7 @@
                         @foreach ($item->documents as $doc)
                             <li>
                                 {{ ucfirst(str_replace('_', ' ', $doc->document_type)) }}:
-                                <a href="{{ asset('storage/' . $doc->file_path) }}" 
-                                   target="_blank" 
-                                   class="text-decoration-none">
+                                <a href="{{ route('pengajuan.download', ['id' => $item->id, 'filename' => $doc->file_name]) }}" target="_blank">
                                     {{ $doc->file_name }}
                                 </a>
                             </li>

@@ -148,9 +148,14 @@
                                         </td>
                                         <td class="py-4 px-4">
                                             <div class="d-flex align-items-center">
-                                                <div class="avatar-circle me-3">
-                                                    {{ substr($item->user->nama, 0, 2) }}
-                                                </div>
+<div class="avatar-circle me-3">
+    @if ($item->user->foto)
+        <img src="{{ asset('storage/' . $item->user->foto) }}" alt="Foto Profil"
+            class="h-32 w-32 rounded-circle" style="width: 40px; height: 40px;">
+    @else
+        {{ substr($item->user->nama, 0, 2) }}
+    @endif
+</div>
                                                 <div>
                                                     <div class="fw-semibold">{{ $item->user->nama }}</div>
                                                     {{-- <small class="text-muted">Mahasiswa</small> --}}
@@ -276,13 +281,7 @@
     width: 60px;
     height: 40px;
     border-radius: 50%;
-    background: linear-gradient(45deg, #94c8ffff, #638abdff);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
+
 }
 
 .card {

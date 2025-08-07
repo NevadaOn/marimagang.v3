@@ -287,7 +287,6 @@
     .row {
         display: flex;
         flex-wrap: wrap;
-        margin-right: -15px;
         margin-left: -15px;
     }
     
@@ -376,156 +375,140 @@
 @section('content')
 <div class="container-fluid p-0">
     <div class="row">
-        <div class="col-12">
-            <!-- Page Title -->
-            <div class="mb-4" style="text-align: end; padding: 20px 50px 10px 0px;">
-                <h1 class="h3 mb-3">Detail Pengajuan</h1>
-                <p class="text-muted">Informasi lengkap pengajuan magang mahasiswa</p>
+        <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0">
+            <i class="fas fa-info-circle me-2"></i>
+            Informasi Umum
+        </h5>
+        <div class="dropdown">
+            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Opsi
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalKelolaSurat">Kelola Surat Kesbangpol</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#updateTanggalModal">Ubah Tanggal</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalBidang">Ubah Bidang</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalForm">Form Kesediaan Magang</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalKomentar">Komentar ke Admin/User</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="row align-items-start">
+            <!-- Foto Profil -->
+            <div class="col-md-3 text-center mb-3">
+                <img src="{{ asset('storage/' . ($pengajuan->user->foto ?? 'default.png')) }}" 
+                     alt="Foto Profil" 
+                     class="img-thumbnail" 
+                     style="width: 150px; height: 150px; object-fit: cover;">
+                {{-- <p class="mt-2 fw-semibold">{{ $pengajuan->user->nama ?? '-' }}</p> --}}
             </div>
 
-            <!-- Informasi Umum -->
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-info-circle me-2"></i>
-                        Informasi Umum
-                    </h5>
-
-                    <!-- Dropdown Button -->
-                    <div class="dropdown">
-                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Opsi
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                            <li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalKelolaSurat">
-                                    Kelola Surat Bangkespol
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#updateTanggalModal">
-                                    Ubah Tanggal
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalBidang">
-                                    Ubah Bidang
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalForm">
-                                    Form Kesediaan Magang
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalKomentar">
-                                    Komentar ke Admin/User
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="info-row">
-                                <span class="fw-bold">Kode Pengajuan:</span>
-                                <span class="font-monospace">{{ $pengajuan->kode_pengajuan }}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="fw-bold">Nama Mahasiswa:</span>
-                                <span>{{ $pengajuan->user->nama ?? '-' }}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="fw-bold">NIM:</span>
-                                <span class="font-monospace">{{ $pengajuan->user->nim ?? '-' }}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="fw-bold">Universitas:</span>
-                                <span>{{ $pengajuan->user->universitas->nama_universitas ?? '-' }}</span>
-                            </div>
+            <!-- Informasi Lain -->
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="info-row">
+                            <span class="fw-bold">Kode Pengajuan:</span>
+                            <span class="font-monospace">{{ $pengajuan->kode_pengajuan }}</span>
                         </div>
-                        <div class="col-md-6">
-                            <div class="info-row">
-                                <span class="fw-bold">Bidang:</span>
-                                <span>{{ $pengajuan->databidang->nama ?? '-' }}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="fw-bold">Tanggal Mulai:</span>
-                                <span>{{ $pengajuan->tanggal_mulai->format('d M Y') }}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="fw-bold">Tanggal Selesai:</span>
-                                <span>{{ $pengajuan->tanggal_selesai->format('d M Y') }}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="fw-bold">Status:</span>
-                                <span class="status-badge
-                                    @switch($pengajuan->status)
-                                        @case('diterima') status-diterima @break
-                                        @case('ditolak') status-ditolak @break
-                                        @case('diproses') status-diproses @break
-                                        @case('diteruskan') status-diteruskan @break
-                                        @case('magang') status-magang @break
-                                        @case('selesai') status-selesai @break
-                                        @default diproses
-                                    @endswitch">
-                                    
-                                    @switch($pengajuan->status)
-                                        @case('diterima')
-                                            <i class="fas fa-check-circle me-1"></i> Diterima
-                                            @break
-                                        @case('ditolak')
-                                            <i class="fas fa-times-circle me-1"></i> Ditolak
-                                            @break
-                                        @case('diproses')
-                                            <i class="fas fa-spinner me-1"></i> Diproses
-                                            @break
-                                        @case('diteruskan')
-                                            <i class="fas fa-paper-plane me-1"></i> Diteruskan
-                                            @break
-                                        @case('magang')
-                                            <i class="fas fa-user-tie me-1"></i> Magang
-                                            @break
-                                        @case('selesai')
-                                            <i class="fas fa-check-double me-1"></i> Selesai
-                                            @break
-                                        @default
-                                            <i class="fas fa-clock me-1"></i> Diproses
-                                    @endswitch
-                                </span>
-                            </div>
+                        <div class="info-row">
+                            <span class="fw-bold">Nama Mahasiswa:</span>
+                            <span>{{ $pengajuan->user->nama ?? '-' }}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="fw-bold">NIM:</span>
+                            <span class="font-monospace">{{ $pengajuan->user->nim ?? '-' }}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="fw-bold">Universitas:</span>
+                            <span>{{ $pengajuan->user->universitas->nama_universitas ?? '-' }}</span>
                         </div>
                     </div>
-                    @if($pengajuan->komentar_admin)
-                    <div class="mt-4 p-3" style="background-color: #f8f9fa; border-radius: 0.25rem;">
-                        <h6 class="fw-bold mb-2">catatan Admin Dinas untuk Admin Bidang</h6>
-                        <p class="mb-0">{{ $pengajuan->komentar_admin }}</p>
+                    <div class="col-md-6">
+                        <div class="info-row">
+                            <span class="fw-bold">Bidang:</span>
+                            <span>{{ $pengajuan->databidang->nama ?? '-' }}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="fw-bold">Tanggal Mulai:</span>
+                            <span>{{ $pengajuan->tanggal_mulai->format('d M Y') }}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="fw-bold">Tanggal Selesai:</span>
+                            <span>{{ $pengajuan->tanggal_selesai->format('d M Y') }}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="fw-bold">Status:</span>
+                            <span class="status-badge
+                                @switch($pengajuan->status)
+                                    @case('diterima') status-diterima @break
+                                    @case('ditolak') status-ditolak @break
+                                    @case('diproses') status-diproses @break
+                                    @case('diteruskan') status-diteruskan @break
+                                    @case('magang') status-magang @break
+                                    @case('selesai') status-selesai @break
+                                    @default diproses
+                                @endswitch">
+                                
+                                @switch($pengajuan->status)
+                                    @case('diterima')
+                                        <i class="fas fa-check-circle me-1"></i> Diterima
+                                        @break
+                                    @case('ditolak')
+                                        <i class="fas fa-times-circle me-1"></i> Ditolak
+                                        @break
+                                    @case('diproses')
+                                        <i class="fas fa-spinner me-1"></i> Diproses
+                                        @break
+                                    @case('diteruskan')
+                                        <i class="fas fa-paper-plane me-1"></i> Diteruskan
+                                        @break
+                                    @case('magang')
+                                        <i class="fas fa-user-tie me-1"></i> Magang
+                                        @break
+                                    @case('selesai')
+                                        <i class="fas fa-check-double me-1"></i> Selesai
+                                        @break
+                                    @default
+                                        <i class="fas fa-clock me-1"></i> Diproses
+                                @endswitch
+                            </span>
+                        </div>
                     </div>
-                    @endif
                 </div>
-<p class="fw-semibold mb-2" style="text-align: center;">Lampiran surat dari Dinas:</p>
-<div class="d-flex justify-content-between align-items-center flex-wrap gap-2" style="margin: 15px;">
-    @if($pengajuan->form_kesediaan_magang)
-        <a href="{{ asset('storage/' . $pengajuan->form_kesediaan_magang) }}" class="btn btn-success" target="_blank">
-            Lihat Form Kesediaan Magang
-        </a>
-    @endif
+            </div>
+        </div>
 
-    @if ($pengajuan->surat_pdf)
-        <button onclick="showPreview('{{ asset('storage/' . $pengajuan->surat_pdf) }}', '{{ basename($pengajuan->surat_pdf) }}')"
-                class="btn btn-primary btn-sm">
-            <i class="fas fa-eye me-1"></i>
-            Lihat Surat Bangkespol
-        </button>
-    @endif
+        @if($pengajuan->komentar_admin)
+        <div class="mt-4 p-3" style="background-color: #f8f9fa; border-radius: 0.25rem;">
+            <h6 class="fw-bold mb-2">Catatan Admin Dinas untuk Admin Bidang</h6>
+            <p class="mb-0">{{ $pengajuan->komentar_admin }}</p>
+        </div>
+        @endif
+    </div>
+
+    <p class="fw-semibold mb-2 text-center">Lampiran surat dari Dinas:</p>
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2" style="margin: 15px;">
+        @if($pengajuan->form_kesediaan_magang)
+            <a href="{{ asset('storage/' . $pengajuan->form_kesediaan_magang) }}" class="btn btn-success" target="_blank">
+                Lihat Form Kesediaan Magang
+            </a>
+        @endif
+
+        @if ($pengajuan->surat_pdf)
+            <button onclick="showPreview('{{ asset('storage/' . $pengajuan->surat_pdf) }}', '{{ basename($pengajuan->surat_pdf) }}')"
+                    class="btn btn-primary btn-sm">
+                <i class="fas fa-eye me-1"></i>
+                Lihat Surat Bangkespol
+            </button>
+        @endif
+    </div>
 </div>
 
-            </div>
 
-           <!-- Anggota Kelompok (termasuk Ketua) -->
 @php
     $ketuaUser = $pengajuan->user;
 

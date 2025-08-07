@@ -10,7 +10,7 @@
     <meta name="keywords"              content="register, auth">
     <title>Register – Mari-Magang</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/template/favicon.svg') }}">
+    <link rel="icon" type="image/png" href="{{ asset('img/rb_30833.png') }}">
     <link href="{{ asset('assets/css/style.css?v=2.0') }}" rel="stylesheet">
 </head>
 <body>

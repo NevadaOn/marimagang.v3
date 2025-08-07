@@ -117,6 +117,10 @@ class AdminPengajuanController extends Controller
                 Mail::to($anggota->email)->send(new PengajuanDiterimaMail($anggota, $pengajuan, $catatanAdmin));
             }
         }
+
+        if ($pengajuan->user && $pengajuan->user->email) {
+            Mail::to($pengajuan->user->email)->send(new PengajuanDiterimaMail($pengajuan->user, $pengajuan, $catatanAdmin));
+        }
     }
 
     public function updateTanggal(Request $request, $id)
