@@ -21,7 +21,6 @@ class DashboardController extends Controller
         $this->notificationService = $notificationService;
     }
 
-    // Update method index() untuk mengirim data completion yang lebih detail
     public function index()
     {
         try {
@@ -29,12 +28,11 @@ class DashboardController extends Controller
             $user->load(['universitas', 'userSkills.skill', 'pengajuanMagang.databidang']);
 
             $pengajuanAktif = $user->pengajuanMagang()
-                ->where('status', '!=', 'ditolak')
+                ->where('status', '!=', 'dibatalkan')
                 ->with(['databidang', 'user'])
                 ->latest()
                 ->first();
 
-            // Get detailed completion status
             $completionStatus = $this->getProfileCompletionStatus($user);
 
             $notifications = [];

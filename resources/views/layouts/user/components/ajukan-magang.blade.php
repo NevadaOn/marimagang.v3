@@ -17,7 +17,7 @@
     @if($displayPengajuan && $displayPengajuan->komentar_admin)
         <div class="mt-24 mb-24">
             <div class="flex-align mb-8 gap-16">
-                <span class="text-sm text-gray-300 flex-shrink-0">Today</span>
+                <span class="text-sm text-gray-300 flex-shrink-0">Hari ini</span>
                 <span class="border border-gray-50 border-dashed flex-grow-1"></span>
             </div>
             <div class="event-item bg-gray-50 rounded-8 p-16">

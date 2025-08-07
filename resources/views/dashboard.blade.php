@@ -7,7 +7,7 @@
         <div class="col-lg-9">
             @include('layouts.user.components.greeting-box ')
              @include('layouts.user.components.ajukan-magang')
-            <div class="row gy-4 mb-26 mt-10">
+            {{-- <div class="row gy-4 mb-26 mt-10">
                 <div class="col-xxl-3 col-sm-6">
                     <div class="card">
                         <div class="card-body">
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
            
             @include('layouts.user.components.profile-completion')
         </div>
