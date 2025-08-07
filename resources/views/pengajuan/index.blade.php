@@ -175,6 +175,11 @@
                     </button>
 
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton{{ $item->id }}">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('pengajuan.show', $item->kode_pengajuan) }}">
+                                    <i class="ph ph-eye me-2"></i>Lihat Detail
+                                </a>
+                            </li>
                             @if($item->user_id === auth()->id() && in_array($item->status, ['diproses', 'menunggu']))
                                 <li>
                                     <a class="dropdown-item" href="{{ route('pengajuan.edit', $item->kode_pengajuan) }}">
@@ -196,11 +201,7 @@
                                 </li>
                             @endif
 
-                            <li>
-                                <a class="dropdown-item" href="{{ route('pengajuan.show', $item->kode_pengajuan) }}">
-                                    <i class="ph ph-eye me-2"></i>Lihat Detail
-                                </a>
-                            </li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -237,18 +238,26 @@
                     @endif
 
                 @if ($item->documents->count())
-                    <p class="mb-1"><strong>Dokumen:</strong></p>
-                    <ul class="ps-3">
-                        @foreach ($item->documents as $doc)
-                            <li>
-                                {{ ucfirst(str_replace('_', ' ', $doc->document_type)) }}:
-                                <a href="{{ route('pengajuan.download', ['id' => $item->id, 'filename' => $doc->file_name]) }}" target="_blank">
-                                    {{ $doc->file_name }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endif
+                        <div class="row mb-3">
+                            <div class="col-3 col-md-2">
+                                <span class="text-muted fw-medium">Dokumen</span>
+                            </div>
+                            <div class="col-9 col-md-10 d-flex align-items-start">
+                                <span class="text-dark me-2">:</span>
+                                <ul class="list-unstyled mb-0">
+                                    @foreach ($item->documents as $doc)
+                                        <li class="mb-1">
+                                            <i class="ph ph-file-text me-2 text-muted"></i>
+                                             {{ ucfirst(str_replace('_', ' ', $doc->document_type)) }}:
+                                            <a href="{{ route('pengajuan.download', ['id' => $item->id, 'filename' => $doc->file_name]) }}" target="_blank">
+                                                {{ $doc->file_name }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
 
 
                     <div class="row mb-3">
