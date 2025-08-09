@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 09, 2025 at 09:17 AM
+-- Generation Time: Aug 09, 2025 at 02:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -196,17 +196,11 @@ CREATE TABLE `documentation_images` (
 
 CREATE TABLE `logbooks` (
   `id` int(10) UNSIGNED NOT NULL,
-  `pengajuan_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
   `tanggal` date NOT NULL,
-  `waktu_mulai` time NOT NULL,
-  `waktu_selesai` time NOT NULL,
   `kegiatan` text NOT NULL,
-  `progress` text DEFAULT NULL,
-  `is_approved` tinyint(1) NOT NULL DEFAULT 0,
-  `approved_by` int(10) UNSIGNED DEFAULT NULL,
-  `approved_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -396,8 +390,12 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('48Elnxe2JTzs9Mk6CWZDlMlD2X4B26IfL1x0NUfk', 1, '172.16.1.4', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiUVh2WmNRWDI4TUJLTDNWOEFIVlJ0SGE3anJNWFhTZVpPZW03SjdiMyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDQ6Imh0dHA6Ly8xNzIuMTYuMS40OjgwMDAvYWRtaW4vY2hhdD91c2VyX2lkPTIzIjt9czo1MjoibG9naW5fYWRtaW5fNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6Mzg6Imh0dHA6Ly8xNzIuMTYuMS40OjgwMDAvY2hhdD91c2VyX2lkPTIyIjt9fQ==', 1754723738),
-('e2ZIz36WEdJtlJS28TWYbZdmdfkLXrcLzNPISFSD', 22, '172.16.1.14', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicGFETE1hd2t0NkdEMWd1V0dhb0NWa0F3WjFxOEJzMTFseUMxYnBzbCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xNzIuMTYuMS40OjgwMDAvY2hhdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjIyO30=', 1754723732);
+('Abd1cPZrENFTMcl2I9ALDHw2B9Qn6smwdO1cQIDe', NULL, '172.16.1.14', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSzhJMkl3WTFjcmV2VlhaanNsNWFZSTBSaGV1SVB5TU5WY1Rmb2NhcSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly8xNzIuMTYuMS40OjgwMDAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1754737828),
+('e2ZIz36WEdJtlJS28TWYbZdmdfkLXrcLzNPISFSD', 22, '172.16.1.14', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicGFETE1hd2t0NkdEMWd1V0dhb0NWa0F3WjFxOEJzMTFseUMxYnBzbCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xNzIuMTYuMS40OjgwMDAvbG9nYm9vayI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjIyO30=', 1754740462),
+('hTj4d2xIGDsIVmBXBGYmDKoZl7TQmq0pCYU8Ihdz', 22, '172.16.1.4', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibVFoYUpPa295RXhwV1liSExFOVlabWpDSXkxa0tWMjhHM015TXpZZSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly8xNzIuMTYuMS40OjgwMDAvZGFzaGJvYXJkIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjI7fQ==', 1754741099),
+('WNxZyOEMtzETqD5bjWGXfuXdfxN4OQUEyV6ENP5N', NULL, '172.16.1.14', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWDlGb0hjaXU1WTB0YkxQRVY1QlBCaTlUY29oUEpTWmVMeVFvdzBLOCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly8xNzIuMTYuMS40OjgwMDAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1754738103),
+('X3nzvou1QoIeVjan9xwxKom413whulOuJ4giRKw5', NULL, '172.16.1.14', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiRFJ1cEtFY2xwTUFMbm1TTFg5NmhUaW94V2JrZVQyUVlWTFhIOFhXUiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozMDoiaHR0cDovLzE3Mi4xNi4xLjQ6ODAwMC9sb2dib29rIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xNzIuMTYuMS40OjgwMDAvbG9nYm9vayI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1754737828),
+('XWH3amALzEox2oGrodgdWPt91hNh3Ub4VuGqUrml', NULL, '172.16.1.14', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoick44bnFzVGI1ejA4dGpFN0RvcnZybjByeFBlblFmVnpCMjk0Ylh6cCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozMDoiaHR0cDovLzE3Mi4xNi4xLjQ6ODAwMC9sb2dib29rIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xNzIuMTYuMS40OjgwMDAvbG9nYm9vayI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1754738103);
 
 -- --------------------------------------------------------
 
@@ -572,11 +570,7 @@ ALTER TABLE `documentation_images`
 --
 ALTER TABLE `logbooks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_pengajuan_id` (`pengajuan_id`),
-  ADD KEY `idx_tanggal` (`tanggal`),
-  ADD KEY `idx_approved` (`is_approved`),
-  ADD KEY `idx_approved_by` (`approved_by`),
-  ADD KEY `idx_logbooks_composite` (`pengajuan_id`,`tanggal`,`is_approved`);
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `migrations`
@@ -723,7 +717,7 @@ ALTER TABLE `documentation_images`
 -- AUTO_INCREMENT for table `logbooks`
 --
 ALTER TABLE `logbooks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -805,8 +799,7 @@ ALTER TABLE `documentation_images`
 -- Constraints for table `logbooks`
 --
 ALTER TABLE `logbooks`
-  ADD CONSTRAINT `fk_logbooks_admin` FOREIGN KEY (`approved_by`) REFERENCES `admins` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_logbooks_pengajuan` FOREIGN KEY (`pengajuan_id`) REFERENCES `pengajuan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `logbooks_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `notifications`
