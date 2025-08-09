@@ -12,11 +12,7 @@
       </div>
 
       <div class="mb-5">
-        <input
-          type="text"
-          placeholder="Search..."
-          class="w-full px-4 py-2 rounded-lg bg-gray-700 text-sm placeholder-gray-400 focus:outline-none"
-        />
+        
       </div>
 
      <!-- Sidebar Menu -->
