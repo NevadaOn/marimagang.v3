@@ -208,9 +208,9 @@
                                                 <span class="badge btn-secondary d-inline-flex align-items-center">
                                                     <i class="fas fa-paper-plane me-1"></i>Diteruskan
                                                 </span>
-                                            @elseif ($item->status == 'magang')
+                                            @elseif ($item->status == 'dibatalkan')
                                                 <span class="badge bg-info d-inline-flex align-items-center">
-                                                    <i class="fas fa-briefcase me-1"></i>Magang
+                                                    <i class="fas fa-briefcase me-1"></i>dibatalkan
                                                 </span>
                                             @elseif ($item->status == 'selesai')
                                                 <span class="badge bg-primary d-inline-flex align-items-center">
