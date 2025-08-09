@@ -16,7 +16,7 @@ class ReportController extends Controller
     {
         $totalPengguna = User::count();
         $totalPengajuan = Pengajuan::count();
-        $pengajuanDisetujui = Pengajuan::where('status', 'disetujui')->count();
+        $pengajuanDisetujui = Pengajuan::where('status', 'diterima')->count();
         $pengajuanDitolak = Pengajuan::where('status', 'ditolak')->count();
 
         return view('admin.reports.statistik', compact(

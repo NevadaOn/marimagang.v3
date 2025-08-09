@@ -112,7 +112,7 @@
                 </div>
                 <div class="col-lg-6 text-center">
                   <div class="banner-img position-relative wow animate__animated animate__fadeIn"><img
-                      src="{{asset('img/illustration1.png')}}" alt="DiskominfoKab.Malang" height="500px">
+                      src="{{asset('img/aarr1.png')}}" alt="DiskominfoKab.Malang">
                     <div class="pattern-1"><img src="assets/imgs/template/pattern-1.svg" alt="DiskominfoKab.Malang"></div>
                     <div class="pattern-2"><img src="assets/imgs/template/pattern-2.svg" alt="DiskominfoKab.Malang"></div>
                     <div class="pattern-3"><img src="assets/imgs/template/pattern-3.svg" alt="DiskominfoKab.Malang"></div>
