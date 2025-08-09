@@ -35,4 +35,15 @@ class Admin extends Authenticatable
     {
         return $this->hasMany(PengajuanStatusHistory::class);
     }
+
+    public function sentChats()
+    {
+        return $this->morphMany(Chat::class, 'sender');
+    }
+
+    public function receivedChats()
+    {
+        return $this->morphMany(Chat::class, 'receiver');
+    }
+
 }

@@ -12,6 +12,7 @@ use App\Http\Controllers\{
     ProfileController,
     SkillController,
     NotificationController,
+    ChatController,
     Auth\ForgotPasswordController,
     Auth\ResetPasswordController,
     Admin\AdminDashboardController,
@@ -22,7 +23,8 @@ use App\Http\Controllers\{
     Admin\ReportController,
     BidangController,
     LandingDocumentationController,
-    Admin\DocumentationController
+    Admin\DocumentationController,
+    Admin\AdminChatController
 };
 
 Route::prefix('dokumentasi')->name('landing.documentation.')->group(function () {
@@ -89,7 +91,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/notifikasi/{id}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
     Route::post('/notifikasi/read-all', [NotificationController::class, 'markAllAsRead'])->name('notifications.readAll');
     
-
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+    Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
 
     Route::controller(ProfileController::class)->prefix('profile')->group(function () {
 
@@ -110,7 +113,6 @@ Route::post('/pengajuan/{id}/batal', [PengajuanController::class, 'batal'])->nam
         Route::post('/pengajuan/{pengajuan}/manage-anggota', 'storeAnggota')->name('pengajuan.anggota.store');
     });
 Route::get('/pengajuan/{id}/download/{filename}', [PengajuanController::class, 'downloadDocumentUser'])->name('pengajuan.download');
-
 
     Route::controller(NotificationController::class)->prefix('notifications')->group(function () {
         Route::get('/', 'userNotifications')->name('notifications.user');
@@ -136,6 +138,8 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('documentation', DocumentationController::class);
+    Route::get('/chat', [AdminChatController::class, 'index'])->name('chat.index');
+    Route::post('/chat/send', [AdminChatController::class, 'send'])->name('chat.send');
 
     Route::controller(AdminPengajuanController::class)->prefix('pengajuan')->name('pengajuan.')->group(function () {
         Route::get('/', 'index')->name('index');
