@@ -35,10 +35,10 @@
                     </a>
                 </li>
                 <li class="sidebar-menu__item" role="none">
-                    <a href="#"
-                        class="sidebar-menu__link {{ request()->routeIs('anggota.*') ? 'active' : '' }}"
+                    <a href="{{ route('logbook.index') }}"
+                        class="sidebar-menu__link {{ request()->routeIs('logbook.*') ? 'active' : '' }}"
                         role="menuitem">
-                        <span class="icon" aria-hidden="true"><i class="ph ph-users-three"></i></span>
+                        <span class="icon" aria-hidden="true"><i class="ph ph-book"></i></span>
                         <span class="text">Logbook</span>
                     </a>
                 </li>

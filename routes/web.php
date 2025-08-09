@@ -24,7 +24,8 @@ use App\Http\Controllers\{
     BidangController,
     LandingDocumentationController,
     Admin\DocumentationController,
-    Admin\AdminChatController
+    Admin\AdminChatController,
+    LogbookExportController
 };
 
 Route::prefix('dokumentasi')->name('landing.documentation.')->group(function () {
@@ -131,7 +132,16 @@ Route::get('/pengajuan/{id}/download/{filename}', [PengajuanController::class, '
     Route::post('/notification/{notificationId}/read', [DashboardController::class, 'markNotificationRead'])->name('notification.read');
 
     Route::resource('pengajuan', PengajuanController::class);
-    Route::resource('logbook', LogbookController::class);
+
+    Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook.index');
+    Route::post('/logbook/store', [LogbookController::class, 'store'])->name('logbook.store');
+
+    Route::get('/logbook/{id}/edit', [LogbookController::class, 'editPage'])->name('logbook.editPage');
+    Route::get('/logbook/export-doc', [LogbookExportController::class, 'exportDoc'])->name('logbook.exportDoc');
+
+    Route::post('/logbook/update/{id}', [LogbookController::class, 'update'])->name('logbook.update');
+    
+    Route::delete('/logbook/delete/{id}', [LogbookController::class, 'destroy'])->name('logbook.delete');
 });
 
 Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
