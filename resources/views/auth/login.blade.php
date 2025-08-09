@@ -89,6 +89,9 @@
                             <i class="fas fa-eye-slash d-none" id="eye-closed"></i>
                         </button>
                     </div>
+                    <div class="form-group">
+                      <div class="g-recaptcha" data-sitekey="6Lec6p8rAAAAAFJ61he1vIBjO3SNrl3BK4ivj21V"></div>
+                    </div>
 
                     <div class="form-group">
                         <a class="color-white link" href="{{ route('password.request') }}">Lupa Password? Klik di Sini</a>
@@ -152,6 +155,6 @@
           }
       });
     </script>
-
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </body>
 </html>

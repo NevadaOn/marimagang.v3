@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -22,9 +23,22 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email'    => 'required|email',
-            'password' => 'required',
+            'email'             => 'required|email',
+            'password'          => 'required',
+            'g-recaptcha-response' => 'required',
         ]);
+
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret'   => env('RECAPTCHA_SECRET_KEY'),
+            'response' => $request->input('g-recaptcha-response'),
+            'remoteip' => $request->ip(),
+        ]);
+
+        $result = $response->json();
+
+        if (!isset($result['success']) || $result['success'] !== true) {
+            return back()->withErrors(['captcha' => 'Verifikasi CAPTCHA gagal. Silakan coba lagi.'])->withInput();
+        }
 
         $credentials = $request->only('email', 'password');
 
@@ -53,6 +67,7 @@ class AuthController extends Controller
 
         return back()->withErrors(['email' => 'Email atau password salah']);
     }
+
 
     public function logout(Request $request)
     {
