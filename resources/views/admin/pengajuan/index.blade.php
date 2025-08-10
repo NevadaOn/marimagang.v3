@@ -14,11 +14,23 @@
                         </h1>
                         <p class="text-muted mb-0">Kelola dan monitor semua pengajuan mahasiswa</p>
                     </div>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-primary btn-sm" onclick="refreshTableById('tabelPengajuan')">
-                            Refresh
-                        </button>
-
+                                <!-- Filter Section -->
+                    <div class="row mb-4">
+                        <div class="col-12 d-flex justify-content-end">
+                            <form method="GET" action="{{ route('admin.pengajuan.index') }}" class="d-flex align-items-center gap-2">
+                                <label for="status" class="me-2 mb-0">Filter Status:</label>
+                                <select name="status" id="status" class="form-select form-select-sm" onchange="this.form.submit()">
+                                    <option value="">Semua</option>
+                                    <option value="Diproses" {{ request('status') == 'Diproses' ? 'selected' : '' }}>Diproses</option>
+                                    <option value="diteruskan" {{ request('status') == 'diteruskan' ? 'selected' : '' }}>Diteruskan</option>
+                                    <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
+                                    <option value="diterima" {{ request('status') == 'diterima' ? 'selected' : '' }}>Diterima</option>
+                                    <option value="dibatalkan" {{ request('status') == 'dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>
+                                    <option value="magang" {{ request('status') == 'magang' ? 'selected' : '' }}>Magang</option>
+                                    <option value="selesai" {{ request('status') == 'selesai' ? 'selected' : '' }}>Selesai</option>
+                                </select>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -212,6 +224,10 @@
                                                 <span class="badge bg-info d-inline-flex align-items-center">
                                                     <i class="fas fa-briefcase me-1"></i>dibatalkan
                                                 </span>
+                                            @elseif ($item->status == 'magang')
+                                                <span class="badge bg-dark d-inline-flex align-items-center">
+                                                    <i class="fas fa-user-tie me-1"></i>Magang
+                                                </span>
                                             @elseif ($item->status == 'selesai')
                                                 <span class="badge bg-primary d-inline-flex align-items-center">
                                                     <i class="fas fa-flag-checkered me-1"></i>Selesai
@@ -314,36 +330,4 @@
     }
 }
 </style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Inisialisasi tooltip Bootstrap
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    tooltipTriggerList.forEach(function (el) {
-        new bootstrap.Tooltip(el);
-    });
-
-    // Tambahan: Bisa tambahkan inisialisasi fitur lain di sini kalau ada
-});
-
-// Fungsi untuk refresh elemen tertentu tanpa reload halaman penuh
-function refreshTableById(id) {
-    const target = document.getElementById(id);
-    if (!target) return;
-
-    fetch(window.location.href)
-        .then(response => response.text())
-        .then(html => {
-            const parser = new DOMParser();
-            const newDoc = parser.parseFromString(html, 'text/html');
-            const newContent = newDoc.getElementById(id);
-            if (newContent) {
-                target.innerHTML = newContent.innerHTML;
-            }
-        })
-        .catch(error => {
-            console.error('Gagal me-refresh tabel:', error);
-        });
-}
-</script>
 @endsection

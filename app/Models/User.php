@@ -42,6 +42,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Pengajuan::class);
     }
+    
+    public function pengajuanLatest()
+    {
+        return $this->hasOne(Pengajuan::class)->latestOfMany();
+    }
 
     public function notifications()
     {

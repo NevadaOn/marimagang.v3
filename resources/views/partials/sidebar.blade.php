@@ -68,12 +68,12 @@
                     <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Status History</span>
                 </a>
             </li> --}}
-
-            <li class="sidebar-item {{ Request::routeIs('admin.notifications') ? 'active' : '' }}"> {{-- Misal ada rute admin.notifications --}}
-                <a class="sidebar-link" href="ui-typography.html"> {{-- Ganti dengan route('admin.notifications') jika ada --}}
-                    <i class="align-middle" data-feather="align-left"></i> <span class="align-middle">Notifikasi</span>
-                </a>
-            </li>
+<li class="sidebar-item {{ Request::routeIs('admin.logbook.index') ? 'active' : '' }}">
+    <a class="sidebar-link" href="{{ route('admin.logbook.index') }}">
+        <i class="align-middle" data-feather="user-check"></i>
+        <span class="align-middle">LogBook Mahasiswa</span>
+    </a>
+</li>
 
             {{-- <li class="sidebar-item">
                 <a class="sidebar-link" href="icons-feather.html">

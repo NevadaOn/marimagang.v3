@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 use App\Http\Controllers\{
     AuthController,
@@ -25,6 +26,7 @@ use App\Http\Controllers\{
     LandingDocumentationController,
     Admin\DocumentationController,
     Admin\AdminChatController,
+    Admin\AdminLogbookController,
     LogbookExportController
 };
 
@@ -150,6 +152,9 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
     Route::resource('documentation', DocumentationController::class);
     Route::get('/chat', [AdminChatController::class, 'index'])->name('chat.index');
     Route::post('/chat/send', [AdminChatController::class, 'send'])->name('chat.send');
+    Route::get('/logbook', [AdminLogbookController::class, 'index'])->name('logbook.index');
+    Route::get('/logbook/{user}', [AdminLogbookController::class, 'show'])->name('logbook.show');
+    Route::get('logbook/{user}/print', [AdminLogbookController::class, 'print'])->name('logbook.print');
 
     Route::controller(AdminPengajuanController::class)->prefix('pengajuan')->name('pengajuan.')->group(function () {
         Route::get('/', 'index')->name('index');

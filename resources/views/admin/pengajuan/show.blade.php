@@ -460,8 +460,8 @@
                                     @case('ditolak')
                                         <i class="fas fa-times-circle me-1"></i> Ditolak
                                         @break
-                                    @case('diproses')
-                                        <i class="fas fa-spinner me-1"></i> Diproses
+                                    @case('dibatalkan')
+                                        <i class="fas fa-spinner me-1"></i> Dibatalakan
                                         @break
                                     @case('diteruskan')
                                         <i class="fas fa-paper-plane me-1"></i> Diteruskan
