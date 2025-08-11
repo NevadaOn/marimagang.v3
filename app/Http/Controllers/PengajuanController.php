@@ -238,7 +238,7 @@ class PengajuanController extends Controller
     {
         $this->authorize('view', $pengajuan);
 
-        $pengajuan->load(['databidang', 'anggota.user', 'userSkills.skill', 'documents', 'logbooks']);
+        $pengajuan->load(['databidang', 'anggota.user', 'userSkills.skill', 'documents']);
 
         return view('pengajuan.show', compact('pengajuan'));
     }

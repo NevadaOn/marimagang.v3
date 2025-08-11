@@ -69,7 +69,7 @@
                                     @endif
                                 </td>
                                 <td class="py-2 px-2 text-center">
-                                    <a href="{{ route('admin.pengajuan.showbidang', $item->id) }}"
+                                    <a href="{{ route('admin.pengajuan.showdinas', $item->id) }}"
                                         class="inline-block px-4 py-1 text-sm font-semibold text-indigo-200 hover:text-white bg-indigo-500/10 hover:bg-indigo-500/20 rounded-md transition">
                                         Detail
                                     </a>

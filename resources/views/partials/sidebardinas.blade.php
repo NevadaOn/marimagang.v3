@@ -43,10 +43,10 @@
   
     <span>Dokumentasi</span>
 </a>
- <a href="{{ route('admin.logbook.index') }}"
+ <a href="{{ route('admin.logbook.indexdinas') }}"
    class="flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-150
           text-sm no-underline hover:no-underline focus:no-underline active:no-underline
-          {{ Request::routeIs('admin.logbook.index') ? 'bg-gray-700 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
+          {{ Request::routeIs('admin.logbook.indexdinas') ? 'bg-gray-700 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
     <i class="fas fa-book"></i>
 
     <span>Log Book</span>

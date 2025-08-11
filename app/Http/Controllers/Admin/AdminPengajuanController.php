@@ -52,6 +52,19 @@ class AdminPengajuanController extends Controller
 
         return view('admin.pengajuan.showbidang', compact('pengajuan', 'listBidang'));
     }
+    public function showdinas($id)
+    {
+        $pengajuan = Pengajuan::with([
+            'user.userSkills.skill',
+            'anggota',
+            'documents',
+            'databidang'
+        ])->findOrFail($id);
+
+        $listBidang = \App\Models\Databidang::all();
+
+        return view('admin.pengajuan.showdinas', compact('pengajuan', 'listBidang'));
+    }
     public function show($id)
     {
         $pengajuan = Pengajuan::with([

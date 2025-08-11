@@ -307,16 +307,16 @@
                                     </div>
                                     <div class="text-right">
                                         <div class="text-white/60 text-sm">{{ \Carbon\Carbon::parse($activity->tanggal_pengajuan)->diffForHumans() }}</div>
-                                        @if($activity->status == 'pending')
-                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-yellow-400 to-orange-500 text-white mt-1">
-                                                Pending
+                                        @if($activity->status == 'diproses')
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-yellow-500 text-white mt-1">
+                                                Diproses
                                             </span>
                                         @elseif($activity->status == 'diterima')
-                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-green-400 to-emerald-500 text-white mt-1">
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-emerald-500 text-white mt-1">
                                                 Diterima
                                             </span>
                                         @else
-                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-red-400 to-blue-500 text-white mt-1">
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-red-500 text-white mt-1">
                                                 Ditolak
                                             </span>
                                         @endif
@@ -399,16 +399,16 @@
                             <td class="px-3 py-4 text-white/80">{{ $user->email }}</td>
                             <td class="px-3 py-4 text-white/80">{{ $user->nama_universitas }}</td>
                             <td class="px-3 py-4">
-                                @if($user->status == 'pending')
-                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-yellow-400 to-orange-500 text-white">
+                                @if($user->status == 'diproses')
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-yellow-500 text-white">
                                         <i class="fas fa-clock mr-1"></i>{{ ucfirst($user->status) }}
                                     </span>
                                 @elseif($user->status == 'diterima')
-                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-green-400 to-emerald-500 text-white">
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-emerald-500 text-white">
                                         <i class="fas fa-check mr-1"></i>{{ ucfirst($user->status) }}
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-red-400 to-blue-500 text-white">
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-red-500 text-white">
                                         <i class="fas fa-times mr-1"></i>{{ ucfirst($user->status) }}
                                     </span>
                                 @endif
@@ -416,13 +416,13 @@
                             <td class="px-3 py-4 text-white/80">{{ \Carbon\Carbon::parse($user->tanggal_pengajuan)->format('d/m/Y') }}</td>
                             <td class="px-3 py-4">
                                 <div class="flex space-x-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
-                                    <button onclick="showUserDetails({{ $user->pengajuan_id }})" 
+                                    <!-- <button onclick="showUserDetails({{ $user->pengajuan_id }})" 
                                             class="px-3 py-1 text-sm glass-morphism hover:bg-white/20 border border-white/20 rounded-lg text-white font-semibold transition-all duration-200 hover:scale-105">
                                         <i class="fas fa-eye mr-1"></i>Detail
-                                    </button>
+                                    </button> -->
                                     <a href="{{ route('admin.pengajuan.showbidang', $user->pengajuan_id) }}" 
                                        class="px-3 py-1 text-sm bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 rounded-lg text-white font-semibold transition-all duration-200 hover:scale-105">
-                                        <i class="fas fa-edit mr-1"></i>Edit
+                                        <i class="fas fa-eye mr-1"></i>Detail
                                     </a>
                                 </div>
                             </td>
