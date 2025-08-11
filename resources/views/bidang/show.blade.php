@@ -30,24 +30,17 @@
       <div class="main-header">
         <div class="header-logo">
           <a class="d-flex" href="{{ url('/') }}">
-            <img class="logo-night" alt="Diskominfo" src="{{ asset('img/rb_3083.png') }}" width="90px">
-            <img class="d-none logo-day" alt="Diskominfo" src="{{ asset('img/rb_3083.png') }}" width="90px">
+            <img class="logo-night" alt="Diskominfo" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" width="90px">
+            <img class="d-none logo-day" alt="Diskominfo" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" width="90px">
           </a>
         </div>
         <div class="header-nav">
           <nav class="nav-main-menu d-none d-xl-block">
             <ul class="main-menu">
-              <li><a class="active" href="">Home</a></li>
-
-              </li>
-              <li><a class="color-gray-500" href="#bidangKerja">Alur Magang</a>
-
-              </li>
-              <li><a class="color-gray-500" href="#dokumentasi">Dokumentasi</a>
-
-              </li>
-
-              <li><a class="color-gray-500" href="page-contact.html">Contact</a></li>
+              <li><a href="{{ url('/') }}#home" data-section="home" class="color-gray-500">Home</a></li>
+              <li><a href="{{ url('/') }}#alurmagang" data-section="alurmagang" class="color-gray-500">Alur Magang</a></li>
+              <li><a href="{{ url('/') }}#dokumentasi" data-section="dokumentasi" class="color-gray-500">Dokumentasi</a></li>
+              <li><a class="{{ Request::is('kontak') ? 'active' : 'color-gray-500' }}" href="{{ route('kontak') }}">Kontak</a></li>
             </ul>
           </nav>
           <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span
@@ -171,84 +164,47 @@
       </div>
     </div>
   </main>
+  
+     
   <footer class="footer">
     <div class="container">
       <div class="footer-1 bg-gray-850 border-gray-800">
         <div class="row">
-          <div class="col-lg-4 mb-30"><a class="wow animate__animated animate__fadeInUp" href="index.html"><img
-                class="logo-night" src="{{ asset('img/rb_3083.png') }}" width="110px" alt="Genz"><img
-                class="d-none logo-day" alt="GenZ" src="{{ asset('img/rb_3083.png') }}" width="110px"></a>
-            <p class="mb-20 mt-20 text-sm color-gray-500 wow animate__animated animate__fadeInUp">Kementerian Komunikasi
-              dan Informatika, yang merupakan kementerian dalam pemerintahan Indonesia yang bertanggung jawab atas
-              urusan di bidang komunikasi dan informatika. </p>
-            <h6 class="color-white mb-5 wow animate__animated animate__fadeInUp">Address</h6>
-            <p class="text-sm color-gray-500 wow animate__animated animate__fadeInUp">2J9M+26M, Jl. Agus Salim,
-              Kiduldalem, Kec. Klojen, <br>Kota Malang, Jawa Timur 65143</p>
+          <div class="col-lg-4 mb-30">
+            <a href="{{ url('/') }}">
+              <img class="logo-night" src="{{ asset('img/rb_30832.png') }}" width="110px" alt="DiskominfoKab.Malang">
+              <img class="d-none logo-day" src="{{ asset('img/rb_30832.png') }}" width="110px" alt="DiskominfoKab.Malang">
+            </a>
+            <p class="mt-20 text-sm color-gray-500">
+              Diskominfo Kabupaten Malang bertugas mengelola layanan komunikasi, informatika, persandian, dan statistik untuk mendukung pemerintahan digital dan keterbukaan informasi publik.
+            </p>
+            <h6 class="color-white mb-5">Alamat</h6>
+            <p class="text-sm color-gray-500">2J9M+26M, Jl. Agus Salim, Kiduldalem, Kec. Klojen, Kota Malang, Jawa Timur 65143</p>
           </div>
           <div class="col-lg-4 mb-30">
-            <h6 class="text-lg mb-30 color-white wow animate__animated animate__fadeInUp">All Link</h6>
-            <div class="row">
-              <div class="col-6">
-                <ul class="menu-footer">
-                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
-                      href="index.html">Home</a></li>
-                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500" href="#bidangKerja">Alur
-                      Magang</a></li>
-                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
-                      href="#dokumentasi">Dokumentasi</a></li>
-                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
-                      href="page-404.html">404</a></li>
-
-                </ul>
-              </div>
-              <div class="col-6">
-                <ul class="menu-footer">
-                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500" href="#">Contact</a>
-                  </li>
-                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
-                      href="page-login.html">Login</a></li>
-                  <li class="wow animate__animated animate__fadeInUp"><a class="color-gray-500"
-                      href="page-signup.html">Sign-Up</a></li>
-                </ul>
-              </div>
-            </div>
+            <h6 class="text-lg mb-30 color-white">Informasi Publik</h6>
+            <ul class="menu-footer">
+              <li><a class="color-gray-500" href="https://kominfo.malangkab.go.id/content/kominfo-struktur-organisasi-3">Struktur Organisasi</a></li>
+              <li><a class="color-gray-500" href="https://kominfo.malangkab.go.id/content/ttugas-pokok-dan-fungsi">Tugas Pokok dan Fungsi</a></li>
+              <li><a class="color-gray-500" href="https://kominfo.malangkab.go.id/content/kominfo-opd-visi-misi">Visi Misi</a></li>
+              <li><a class="color-gray-500" href="https://ppid.malangkab.go.id/home/tugas">Tugas dan Wewenang</a></li>
+            </ul>
           </div>
           <div class="col-lg-4 mb-30">
-            <h4 class="text-lg mb-30 color-white wow animate__animated animate__fadeInUp">Newsletter</h4>
-            <p class="text-base color-gray-500 wow animate__animated animate__fadeInUp">Daftar disini, Raih kesempatan
-              magang yang berkualitas.</p>
-            <div class="form-newsletters mt-15 wow animate__animated animate__fadeInUp">
-              <form action="#">
-                <div class="form-group">
-                  <input class="input-name border-gray-500" type="text" placeholder="Your name">
-                </div>
-                <div class="form-group">
-                  <input class="input-email border-gray-500" type="email" placeholder="Emaill address">
-                </div>
-                <div class="form-group mt-20">
-                  <button class="btn btn-linear hover-up">
-                    Daftar
-                    <i class="fi-rr-arrow-small-right"></i>
-                  </button>
-                </div>
-              </form>
-            </div>
+            <h4 class="text-lg mb-30 color-white">Lokasi Kami</h4>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="100%" height="250" style="border:0;border-radius:8px;" allowfullscreen loading="lazy"></iframe>
           </div>
         </div>
         <div class="footer-bottom border-gray-800">
           <div class="row">
             <div class="col-lg-5 text-center text-lg-start">
-              <p class="text-base color-white wow animate__animated animate__fadeIn">© Created by<a class="copyright"
-                  href="#" target="_blank"> PKL Unira Malang</a></p>
+              <p class="text-base color-white">&copy; 2025 <a href="https://kominfo.malangkab.go.id/" target="_blank">Diskominfo Kab.Malang</a></p>
             </div>
             <div class="col-lg-7 text-center text-lg-end">
               <div class="box-socials">
-                <div class="d-inline-block mr-30 wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a
-                    class="icon-socials icon-twitter color-gray-500" href="https://twitter.com">Twitter</a></div>
-                <div class="d-inline-block mr-30 wow animate__animated animate__fadeIn" data-wow-delay=".2s"><a
-                    class="icon-socials icon-linked color-gray-500" href="https://www.linkedin.com">LinkedIn</a></div>
-                <div class="d-inline-block wow animate__animated animate__fadeIn" data-wow-delay=".4s"><a
-                    class="icon-socials icon-insta color-gray-500" href="https://www.instagram.com">Instagram</a></div>
+                <a class="icon-socials icon-twitter color-gray-500" href="https://x.com/kominfokabmlg">Twitter</a>
+                <a class="icon-socials icon-linked color-gray-500" href="https://www.facebook.com/Diskominfo.Malangkab/">Facebook</a>
+                <a class="icon-socials icon-insta color-gray-500" href="https://www.instagram.com/kominfokabmlg/">Instagram</a>
               </div>
             </div>
           </div>
@@ -256,23 +212,17 @@
       </div>
     </div>
   </footer>
-  <div class="progressCounter progressScroll hover-up hover-neon-2">
-    <div class="progressScroll-border">
-      <div class="progressScroll-circle"><span class="progressScroll-text"><i class="fi-rr-arrow-small-up"></i></span>
-      </div>
-    </div>
-  </div>
+
+  {{-- Scripts --}}
   <script src="{{ asset('assets/js/vendors/modernizr-3.6.0.min.js') }}"></script>
   <script src="{{ asset('assets/js/vendors/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('assets/js/vendors/jquery-migrate-3.3.0.min.js') }}"></script>
   <script src="{{ asset('assets/js/vendors/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('assets/js/vendors/waypoints.js') }}"></script>
   <script src="{{ asset('assets/js/vendors/wow.js') }}"></script>
-  <script src="{{ asset('assets/js/vendors/text-type.js') }}"></script>
   <script src="{{ asset('assets/js/vendors/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('assets/js/vendors/jquery.progressScroll.min.js') }}"></script>
   <script src="{{ asset('assets/js/main.js?v=2.0') }}"></script>
 
 </body>
-
 </html>
