@@ -54,6 +54,18 @@
         .fw-bold { font-weight: bold; }
         .underline { text-decoration: underline; }
         .signature-space { height: 70px; }
+        body::after {
+            content: "marimagang.malangkab.go.id";
+            position: fixed;
+            bottom: 0cm;
+            left: 1cm;
+            font-size: 20pt;
+            color: rgba(0, 0, 0, 0.08);
+            /* transform: rotate(-30deg); */
+            z-index: -1;
+            white-space: nowrap;
+        }
+
     </style>
 </head>
 <body>
@@ -131,7 +143,6 @@
                 <p style="margin: 0; padding: 0;">NIP. {{ $penanggungJawab['nip'] ?? '[NIP]' }}</p>
             </div>
         </div>
-
     </main>
 </body>
 </html>

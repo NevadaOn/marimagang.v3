@@ -10,6 +10,10 @@
 
         ]
     ])
+    @php
+    $item = $pengajuan;
+@endphp
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -127,7 +131,7 @@
                             <div class="card-body">
                                 @if($pengajuan->documents->count() > 0)
                                     <div class="row">
-                                        @foreach($pengajuan->documents as $doc)
+                                        @foreach($item->documents as $doc)
                                             <div class="col-md-6 mb-3">
                                                 <div class="border rounded p-12 h-100">
                                                     <div class="d-flex align-items-center mb-12">
@@ -139,7 +143,7 @@
                                                         <i class="ph ph-scales me-1"></i>{{ number_format($doc->file_size / 1024, 2) }} KB<br>
                                                         <i class="ph ph-clock me-1"></i>{{ \Carbon\Carbon::parse($doc->uploaded_at)->translatedFormat('d M Y H:i') }}
                                                     </p>
-                                                    <a href="{{ asset('storage/' . $doc->file_path) }}" 
+                                                    <a href="{{ route('pengajuan.download', ['id' => $item->id, 'filename' => $doc->file_name]) }}" 
                                                        target="_blank" 
                                                        class=" btn btn-sm  {{ $badgeClass }}">
                                                         <i class="ph ph-arrow-square-out me-1"></i>Lihat Dokumen
