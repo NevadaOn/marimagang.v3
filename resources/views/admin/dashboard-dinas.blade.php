@@ -599,7 +599,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.textContent = target;
                 clearInterval(timer);
             }
-        }, 20);
+        }, 10);
     }
 
     const totalPengajuan = document.getElementById('totalPengajuan');
