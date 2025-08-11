@@ -46,8 +46,8 @@
                             @if($chat->sender_id === auth()->id())
                                 <div class="small text-end mt-1" style="color: {{ $chat->read_at ? '#0d6efd' : '#6c757d' }};">
                                     {!! $chat->read_at 
-                                        ? '&#10003;&#10003; Dibaca'  {{-- double checkmark --}}
-                                        : '&#10003; Terkirim'         {{-- single checkmark --}}
+                                        ? '&#10003;&#10003; Dibaca' 
+                                        : '&#10003; Terkirim'        
                                     !!}
                                 </div>
                             @endif

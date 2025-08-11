@@ -27,7 +27,8 @@ use App\Http\Controllers\{
     Admin\DocumentationController,
     Admin\AdminChatController,
     Admin\AdminLogbookController,
-    LogbookExportController
+    LogbookExportController,
+    PasswordController
 };
 
 Route::prefix('dokumentasi')->name('landing.documentation.')->group(function () {
@@ -85,6 +86,10 @@ Route::controller(ForgotPasswordController::class)->group(function () {
 Route::controller(ResetPasswordController::class)->group(function () {
     Route::get('reset-password/{token}', 'showResetForm')->name('password.reset');
     Route::post('reset-password', 'reset')->name('password.update');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::put('/user/password', [PasswordController::class, 'update'])->name('user-password.update');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
