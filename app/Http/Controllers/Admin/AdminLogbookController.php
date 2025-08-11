@@ -144,4 +144,70 @@ public function index(Request $request)
         }, "logbook_user_{$userId}_" . now()->format('Ymd_His') . ".xlsx");
     }
 
+
+    //admin dinas
+
+    public function indexdinas(Request $request)
+{
+    $bidangs = Databidang::orderBy('nama')->get();
+
+    $lastLogbooks = Logbook::select('user_id', DB::raw('MAX(tanggal) as tanggal_terakhir'))
+        ->groupBy('user_id');
+
+    $pengajuanSub = DB::table('pengajuan')
+        ->select('user_id', 'databidang_id')
+        ->whereIn('status', ['diterima', 'magang']);
+
+    if ($request->filled('bidang')) {
+        $pengajuanSub->where('databidang_id', $request->bidang);
+    }
+
+    $pengajuanSub = $pengajuanSub->groupBy('user_id', 'databidang_id');
+
+    $logbooks = DB::table('logbooks')
+        ->joinSub($lastLogbooks, 'last_logbook', function ($join) {
+            $join->on('logbooks.user_id', '=', 'last_logbook.user_id')
+                 ->on('logbooks.tanggal', '=', 'last_logbook.tanggal_terakhir');
+        })
+        ->joinSub($pengajuanSub, 'pengajuan_filtered', function ($join) {
+            $join->on('logbooks.user_id', '=', 'pengajuan_filtered.user_id');
+        })
+        ->join('databidang', 'databidang.id', '=', 'pengajuan_filtered.databidang_id')
+        ->join('users', 'users.id', '=', 'logbooks.user_id')  // join ke users
+        ->select(
+            'logbooks.user_id',
+            'users.nama as user_name',         // ambil nama user
+            'databidang.nama as nama_bidang',
+            'logbooks.tanggal as tanggal_terakhir',
+        )
+        ->groupBy('logbooks.user_id', 'users.nama', 'databidang.nama', 'logbooks.tanggal')
+        ->orderBy('logbooks.tanggal', 'desc')
+        ->paginate(20)
+        ->appends($request->only('bidang'));
+
+    return view('admin.logbook.indexdinas', compact('logbooks', 'bidangs'));
+}
+ public function showdinas($userId, Request $request)
+    {
+        $user = User::findOrFail($userId);
+
+        $filter = $request->input('filter', 'all');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $query = Logbook::where('user_id', $userId);
+
+        if ($filter === 'weekly') {
+            $query->whereBetween('tanggal', [now()->startOfWeek(), now()->endOfWeek()]);
+        } elseif ($filter === 'monthly') {
+            $query->whereMonth('tanggal', now()->month)
+                ->whereYear('tanggal', now()->year);
+        } elseif ($filter === 'custom' && $startDate && $endDate) {
+            $query->whereBetween('tanggal', [$startDate, $endDate]);
+        }
+
+        $logbooks = $query->orderBy('tanggal', 'desc')->get();
+
+        return view('admin.logbook.showdinas', compact('user', 'logbooks', 'filter', 'startDate', 'endDate'));
+    }
 }

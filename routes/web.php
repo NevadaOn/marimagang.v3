@@ -160,7 +160,9 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
     Route::get('/chat', [AdminChatController::class, 'index'])->name('chat.index');
     Route::post('/chat/send', [AdminChatController::class, 'send'])->name('chat.send');
     Route::get('/logbook', [AdminLogbookController::class, 'index'])->name('logbook.index');
+    Route::get('/logbookdinas', [AdminLogbookController::class, 'indexdinas'])->name('logbook.indexdinas');
     Route::get('/logbook/{user}', [AdminLogbookController::class, 'show'])->name('logbook.show');
+    Route::get('/logbookdinas/{user}', [AdminLogbookController::class, 'showdinas'])->name('logbook.showdinas');
     Route::get('logbook/{user}/print', [AdminLogbookController::class, 'print'])->name('logbook.print');
 
     Route::controller(AdminPengajuanController::class)->prefix('pengajuan')->name('pengajuan.')->group(function () {
@@ -170,6 +172,7 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
         Route::put('/{id}/status', 'updateStatus')->name('updateStatus');
         Route::get('/{id}', 'show')->name('show');
         Route::get('bidang/{id}', 'showbidang')->name('showbidang');
+        Route::get('dinas/{id}', 'showdinas')->name('showdinas');
         Route::post('/{id}/catatan', 'kirimCatatan')->name('kirimCatatan');
         Route::patch('/{id}/update-bidang', 'updateBidang')->name('updateBidang');
         Route::post('/{id}/approve', 'approve')->name('approve');

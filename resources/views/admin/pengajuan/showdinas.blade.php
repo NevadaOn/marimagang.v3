@@ -1,4 +1,4 @@
-@extends('layouts.adminbidang')
+@extends('layouts.admindinas')
 
 @section('title', 'Detail Pengajuan')
 
@@ -152,10 +152,8 @@
         transition: all 0.3s ease;
     }
     
-    .close:hover {
-        background: rgba(255, 255, 255, 0.1);
-        transform: scale(1.1);
-    }
+
+    
     
     .preview-container {
         width: 100%;
@@ -212,7 +210,6 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
         <div class="lg:col-span-2 space-y-8">
 
             {{-- START: Kartu Informasi Umum --}}
@@ -273,7 +270,7 @@
         <tbody class="divide-y divide-white/10 ">
             @foreach($semuaMahasiswa->values() as $i => $entry)
                 @php $user = $entry['user']; @endphp
-                <tr class="hover:bg-white/10 transition duration-150">
+                <tr class="bg-white/10 transition duration-150">
                     <td class="px-4 py-3 text-center">{{ $i + 1 }}</td>
                     <td class="px-4 py-3">{{ $user->nama }}</td>
                     <td class="px-4 py-3 font-mono">{{ $user->nim }}</td>
@@ -290,7 +287,7 @@
                                         {{ $userSkill->skill->nama ?? 'Skill tidak ditemukan' }}
                                         ({{ ucfirst($userSkill->level) }})
                                         @if ($userSkill->sertifikat_path)
-                                            <button onclick="showPreview('{{ asset('storage/' . $userSkill->sertifikat_path) }}', '{{ basename($userSkill->sertifikat_path) }}')" class="ml-2 inline-flex items-center gap-1 px-2 py-1 bg-blue-500 hover:bg-blue-600 text-white text-xs rounded shadow">
+                                            <button onclick="showPreview('{{ asset('storage/' . $userSkill->sertifikat_path) }}', '{{ basename($userSkill->sertifikat_path) }}')" class="ml-2 inline-flex items-center gap-1 px-2 py-1 bg-blue-500 bg-blue-600 text-white text-xs rounded shadow">
                                                 <i class="fas fa-eye"></i> Sertifikat
                                             </button>
                                         @endif
@@ -369,7 +366,7 @@
         <div class="card p-3">
             <form action="{{ route('admin.pengajuan.updateBidang', $pengajuan->id) }}" method="POST">
                 @csrf @method('PATCH')
-                <label for="databidang_id" class="form-label">Pilih Bidang</label>
+                <label for="databidang_id" class="form-label">Ubah Bidang</label>
                 <select name="databidang_id" class="form-select" required>
                     @foreach ($listBidang as $bidang)
                         <option value="{{ $bidang->id }}" {{ $pengajuan->databidang_id == $bidang->id ? 'selected' : '' }}>{{ $bidang->nama }}</option>
@@ -809,6 +806,40 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
+document.querySelectorAll('form button[type="submit"]').forEach(button => {
+    button.addEventListener('click', function (e) {
+        const form = this.closest('form');
+        if (form.checkValidity()) {
+            e.preventDefault(); 
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memproses...';
+            this.disabled = true;
+
+            setTimeout(() => {
+                this.innerHTML = originalText;
+                this.disabled = false;
+            }, 5000);
+
+            form.submit();
+        }
+    });
+});
+
+// Close modal when clicking outside
+document.getElementById('previewModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closePreview();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.getElementById('previewModal').classList.contains('show')) {
+        closePreview();
+    }
+});
+
+// Submit button loading state
 document.querySelectorAll('form button[type="submit"]').forEach(button => {
     button.addEventListener('click', function (e) {
         const form = this.closest('form');

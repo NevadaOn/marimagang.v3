@@ -563,19 +563,19 @@
             </h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-                <div class="text-center p-4 bg-black bg-opacity-20 rounded-xl border border-white border-opacity-10">
+                <div class="text-center p-4 bg-black/10 bg-opacity-20 rounded-xl border border-white border-opacity-10">
                     <i class="fas fa-users text-3xl text-blue-400 mb-3"></i>
                     <div class="text-2xl font-bold text-white">{{ $userPerUniversitas->sum('total_user') }}</div>
                     <div class="text-sm text-gray-400">Total Pengguna Aktif</div>
                 </div>
                 
-                <div class="text-center p-4 bg-black bg-opacity-20 rounded-xl border border-white border-opacity-10">
+                <div class="text-center p-4 bg-black/10 bg-opacity-20 rounded-xl border border-white border-opacity-10">
                     <i class="fas fa-building text-3xl text-green-400 mb-3"></i>
                     <div class="text-2xl font-bold text-white">{{ $userPerUniversitas->count() }}</div>
                     <div class="text-sm text-gray-400">Universitas Terdaftar</div>
                 </div>
                 
-                <div class="text-center p-4 bg-black bg-opacity-20 rounded-xl border border-white border-opacity-10">
+                <div class="text-center p-4 bg-black/10 bg-opacity-20 rounded-xl border border-white border-opacity-10">
                     <i class="fas fa-calendar-check text-3xl text-purple-400 mb-3"></i>
                     <div class="text-2xl font-bold text-white">{{ $totalPengajuan }}</div>
                     <div class="text-sm text-gray-400">Total Pengajuan</div>
