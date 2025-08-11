@@ -25,7 +25,13 @@ class AdminPengajuanController extends Controller
         $pengajuan = $query->latest()->paginate(10);
         return view('admin.pengajuan.index', compact('pengajuan'));
     }
-    
+    public function dinas()
+    {
+        $pengajuan = Pengajuan::with(['user','anggota', 'databidang'])
+        ->latest()
+        ->paginate(10);
+        return view('admin.pengajuan.dinas', compact('pengajuan'));
+    }
     public function bidang()
     {
         $pengajuan = Pengajuan::with(['user','anggota', 'databidang'])

@@ -150,6 +150,8 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('documentation', DocumentationController::class);
+    Route::get('/indexdinas', [DocumentationController::class,'indexdinas'])->name('documentation.indexdinas');
+    Route::get('/createdinas', [DocumentationController::class,'createdinas'])->name('documentation.createdinas');
     Route::get('/chat', [AdminChatController::class, 'index'])->name('chat.index');
     Route::post('/chat/send', [AdminChatController::class, 'send'])->name('chat.send');
     Route::get('/logbook', [AdminLogbookController::class, 'index'])->name('logbook.index');
@@ -159,6 +161,7 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
     Route::controller(AdminPengajuanController::class)->prefix('pengajuan')->name('pengajuan.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/bidang', 'bidang')->name('bidang');
+        Route::get('/dinas', 'dinas')->name('dinas');
         Route::put('/{id}/status', 'updateStatus')->name('updateStatus');
         Route::get('/{id}', 'show')->name('show');
         Route::get('bidang/{id}', 'showbidang')->name('showbidang');
