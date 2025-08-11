@@ -34,14 +34,16 @@
                         @endif
                     </a>
                 </li>
+
                 <li class="sidebar-menu__item" role="none">
                     <a href="{{ route('logbook.index') }}"
-                        class="sidebar-menu__link {{ request()->routeIs('logbook.*') ? 'active' : '' }}"
+                        class="sidebar-menu__link {{ request()->routeIs('logbook.*') ? 'activePage' : '' }}"
                         role="menuitem">
                         <span class="icon" aria-hidden="true"><i class="ph ph-book"></i></span>
                         <span class="text">Logbook</span>
                     </a>
                 </li>
+
                 <li class="sidebar-menu__item" role="none">
                     <a href="https://sukma.jatimprov.go.id/fe/survey?idUser=1992"
                         class="sidebar-menu__link"
@@ -50,20 +52,32 @@
                         <span class="text">Survey</span>
                     </a>
                 </li>
+
                 <li class="sidebar-menu__item" role="none">
                     <span
                         class="text-gray-300 text-sm px-20 pt-20 fw-semibold border-top border-gray-100 d-block text-uppercase">Pengaturan</span>
                 </li>
+
                 <li class="sidebar-menu__item" role="none">
-                <a href="{{ route('chat.index') }}" class="sidebar-menu__link {{ request()->routeIs('profile.edit') ? 'activePage' : '' }}">
+                <a href="{{ route('chat.index') }}" class="sidebar-menu__link {{ request()->routeIs('chat.index') ? 'activePage' : '' }}">
                         <span class="icon"><i class="ph ph-user"></i></span>
                         <span class="text">Chat Admin</span>
                     </a>
-                    <a href="{{ route('profile.edit') }}" class="sidebar-menu__link {{ request()->routeIs('profile.edit') ? 'activePage' : '' }}">
+                    
+                </li>
+
+                <li class="sidebar-menu__item" role="none">
+                 <a href="{{ route('profile.edit') }}" class="sidebar-menu__link {{ request()->routeIs('profile.edit') ? 'activePage' : '' }}">
                         <span class="icon"><i class="ph ph-user"></i></span>
                         <span class="text">Akun</span>
                     </a>
+                    
                 </li>
+
+
+
+               
+
             </ul>
         </div>
     </div>
