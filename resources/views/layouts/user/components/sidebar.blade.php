@@ -34,14 +34,14 @@
                         @endif
                     </a>
                 </li>
-                {{-- <li class="sidebar-menu__item" role="none">
-                    <a href="#"
-                        class="sidebar-menu__link {{ request()->routeIs('anggota.*') ? 'active' : '' }}"
+                <li class="sidebar-menu__item" role="none">
+                    <a href="{{ route('logbook.index') }}"
+                        class="sidebar-menu__link {{ request()->routeIs('logbook.*') ? 'active' : '' }}"
                         role="menuitem">
-                        <span class="icon" aria-hidden="true"><i class="ph ph-users-three"></i></span>
-                        <span class="text">Anggota</span>
+                        <span class="icon" aria-hidden="true"><i class="ph ph-book"></i></span>
+                        <span class="text">Logbook</span>
                     </a>
-                </li> --}}
+                </li>
                 <li class="sidebar-menu__item" role="none">
                     <a href="https://sukma.jatimprov.go.id/fe/survey?idUser=1992"
                         class="sidebar-menu__link"
@@ -55,6 +55,10 @@
                         class="text-gray-300 text-sm px-20 pt-20 fw-semibold border-top border-gray-100 d-block text-uppercase">Pengaturan</span>
                 </li>
                 <li class="sidebar-menu__item" role="none">
+                <a href="{{ route('chat.index') }}" class="sidebar-menu__link {{ request()->routeIs('profile.edit') ? 'activePage' : '' }}">
+                        <span class="icon"><i class="ph ph-user"></i></span>
+                        <span class="text">Chat Admin</span>
+                    </a>
                     <a href="{{ route('profile.edit') }}" class="sidebar-menu__link {{ request()->routeIs('profile.edit') ? 'activePage' : '' }}">
                         <span class="icon"><i class="ph ph-user"></i></span>
                         <span class="text">Akun</span>

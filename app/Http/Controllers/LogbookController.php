@@ -1,64 +1,81 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Logbook;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class LogbookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+        $logbooks = Logbook::where('user_id', $user->id)
+                    ->orderBy('tanggal', 'asc')
+                    ->get();
+
+        return view('logbook.index', compact('logbooks'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tanggal' => 'required|date',
+            'kegiatan' => 'required|string',
+        ]);
+
+        $user = Auth::user();
+
+        Logbook::create([
+            'user_id' => $user->id,
+            'tanggal' => $request->tanggal,
+            'kegiatan' => $request->kegiatan,
+        ]);
+
+        return redirect()->route('logbook.index')->with('success', 'Logbook berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function editPage($id)
     {
-        //
+        $user = Auth::user();
+
+        $logbook = Logbook::where('user_id', $user->id)->findOrFail($id);
+
+        // Pastikan tanggal jadi Carbon instance
+        $logbook->tanggal = Carbon::parse($logbook->tanggal);
+
+        return view('logbook.edit', compact('logbook'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'tanggal' => 'required|date',
+            'kegiatan' => 'required|string',
+        ]);
+
+        $user = Auth::user();
+
+        $logbook = Logbook::where('user_id', $user->id)->findOrFail($id);
+
+        $logbook->update([
+            'tanggal' => $request->tanggal,
+            'kegiatan' => $request->kegiatan,
+        ]);
+
+        return redirect()->route('logbook.index')->with('success', 'Logbook berhasil diperbarui');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
+        $user = Auth::user();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $logbook = Logbook::where('user_id', $user->id)->findOrFail($id);
+
+        $logbook->delete();
+
+        return redirect()->route('logbook.index')->with('success', 'Logbook berhasil dihapus');
     }
 }

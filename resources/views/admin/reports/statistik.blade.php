@@ -27,7 +27,7 @@
             <div class="card border-0 shadow-sm stat-card" data-aos="fade-up" data-aos-delay="300">
                 <div class="card-body text-center">
                     <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
-                    <h6 class="card-title mb-1">Disetujui</h6>
+                    <h6 class="card-title mb-1">Diterima</h6>
                     <p class="h5 mb-0 counter" data-target="{{ $pengajuanDisetujui }}">0</p>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <label class="form-label">Pengajuan Disetujui</label>
+                            <label class="form-label">Pengajuan Diterima</label>
                             <div class="progress mb-3" style="height: 20px;">
                                 <div class="progress-bar bg-success progress-animated" 
                                      role="progressbar" 
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const statusChart = new Chart(statusCtx, {
         type: 'doughnut',
         data: {
-            labels: ['Disetujui', 'Ditolak', 'Pending'],
+            labels: ['Diterima', 'Ditolak', 'Diproses'],
             datasets: [{
                 data: [
                     pengajuanDisetujui, 
@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const summaryChart = new Chart(summaryCtx, {
         type: 'bar',
         data: {
-            labels: ['Total Pengguna', 'Total Pengajuan', 'Disetujui', 'Ditolak'],
+            labels: ['Total Pengguna', 'Total Pengajuan', 'Diterima', 'Ditolak'],
             datasets: [{
                 label: 'Jumlah',
                 data: [totalPengguna, totalPengajuan, pengajuanDisetujui, pengajuanDitolak],

@@ -74,6 +74,9 @@
                             id="email" 
                             placeholder="User name" 
                             required>
+                        @error('email')
+                            <div class="text-danger mt-1" style="font-size: 0.95em;">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group position-relative">
@@ -83,11 +86,16 @@
                             id="password"
                             placeholder="Password"
                             required>
-                        
                         <button type="button" class="viewpass" aria-label="Toggle password visibility">
                             <i class="fas fa-eye" id="eye-open"></i>
                             <i class="fas fa-eye-slash d-none" id="eye-closed"></i>
                         </button>
+                        @error('password')
+                            <div class="text-danger mt-1" style="font-size: 0.95em;">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                      <div class="g-recaptcha" data-sitekey="6Lec6p8rAAAAAFJ61he1vIBjO3SNrl3BK4ivj21V"></div>
                     </div>
 
                     <div class="form-group">
@@ -152,6 +160,6 @@
           }
       });
     </script>
-
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </body>
 </html>

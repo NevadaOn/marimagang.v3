@@ -59,9 +59,9 @@ class AdminDashboardController extends Controller
         $userPerUniversitas = DB::table('users')
             ->join('universitas', 'users.universitas_id', '=', 'universitas.id')
             ->select('universitas.nama_universitas', DB::raw('COUNT(users.id) as total_user'))
-            ->groupBy('universitas.id', 'universitas.nama_universitas')
+            ->groupBy('universitas.nama_universitas')
             ->orderByDesc('total_user')
-            ->take(10)
+            ->take(5)
             ->get();
 
         $statistikBulanan = Pengajuan::select(

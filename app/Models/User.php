@@ -18,7 +18,6 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->notify(new CustomResetPassword($token));
     }
 
-
     protected $fillable = [
         'nama', 'universitas_id', 'nim', 'telepon', 'email', 'password', 'foto', 'status','bio', 'alamat',
     ];
@@ -42,6 +41,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function pengajuanMagang()
     {
         return $this->hasMany(Pengajuan::class);
+    }
+    
+    public function pengajuanLatest()
+    {
+        return $this->hasOne(Pengajuan::class)->latestOfMany();
     }
 
     public function notifications()
@@ -68,4 +72,16 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new CustomVerifyEmail());
     }
+
+    public function sentChats()
+    {
+        return $this->morphMany(Chat::class, 'sender');
+    }
+
+    public function receivedChats()
+    {
+        return $this->morphMany(Chat::class, 'receiver');
+    }
+
+
 }

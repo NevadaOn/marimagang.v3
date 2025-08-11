@@ -28,12 +28,28 @@
 
 
     <!-- Pengajuan -->
-    <a href="{{ route('admin.pengajuan.bidang') }}"
+    <a href="{{ route('admin.pengajuan.dinas') }}"
    class="flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-150
           text-sm no-underline hover:no-underline focus:no-underline active:no-underline
-          {{ Request::routeIs('admin.pengajuan.bidang') ? 'bg-gray-700 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
+          {{ Request::routeIs('admin.pengajuan.dinas') ? 'bg-gray-700 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
     <i class="fas fa-chart-line w-5"></i>
     <span>Pengajuan</span>
+</a>
+ <a href="{{ route('admin.documentation.indexdinas') }}"
+   class="flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-150
+          text-sm no-underline hover:no-underline focus:no-underline active:no-underline
+          {{ Request::routeIs('dmin.documentation.indexdinas') ? 'bg-gray-700 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
+    <i class="fas fa-camera"></i>
+  
+    <span>Dokumentasi</span>
+</a>
+ <a href="{{ route('admin.logbook.index') }}"
+   class="flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-150
+          text-sm no-underline hover:no-underline focus:no-underline active:no-underline
+          {{ Request::routeIs('admin.logbook.index') ? 'bg-gray-700 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
+    <i class="fas fa-book"></i>
+
+    <span>Log Book</span>
 </a>
 
 </nav>

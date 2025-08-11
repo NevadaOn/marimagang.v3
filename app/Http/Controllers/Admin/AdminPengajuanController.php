@@ -17,12 +17,21 @@ class AdminPengajuanController extends Controller
 {
     public function index()
     {
-        $pengajuan = Pengajuan::with(['user', 'anggota', 'databidang'])
-            ->latest()
-            ->paginate(10);
+        $status = request('status');
+        $query = Pengajuan::query();
+        if ($status) {
+            $query->where('status', $status);
+        }
+        $pengajuan = $query->latest()->paginate(10);
         return view('admin.pengajuan.index', compact('pengajuan'));
     }
-    
+    public function dinas()
+    {
+        $pengajuan = Pengajuan::with(['user','anggota', 'databidang'])
+        ->latest()
+        ->paginate(10);
+        return view('admin.pengajuan.dinas', compact('pengajuan'));
+    }
     public function bidang()
     {
         $pengajuan = Pengajuan::with(['user','anggota', 'databidang'])

@@ -74,68 +74,43 @@
 							<a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
 								<div class="position-relative">
 									<i class="align-middle" data-feather="message-square"></i>
+									@if($latestChats->count() > 0)
+										<span class="indicator">{{ $latestChats->count() }}</span>
+									@endif
 								</div>
 							</a>
+
 							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="messagesDropdown">
 								<div class="dropdown-menu-header">
 									<div class="position-relative">
-										4 New Messages
+										{{ $latestChats->count() }} Pesan Terbaru
 									</div>
 								</div>
 								<div class="list-group">
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<img src="img/avatars/avatar-5.jpg" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
+									@forelse($latestChats as $chat)
+										<a href="{{ $chat->sender ? route('admin.chat.index', ['user_id' => $chat->sender->id]) : '#' }}" class="list-group-item">
+											<div class="row g-0 align-items-center">
+												<div class="col-2">
+													<img src="{{ $chat->sender?->profile_photo_url ?? asset('img/default-avatar.png') }}"
+														class="avatar img-fluid rounded-circle"
+														alt="{{ $chat->sender?->nama ?? 'Pengirim tidak ditemukan' }}">
+												</div>
+												<div class="col-10 ps-2">
+													<div class="text-dark">{{ $chat->sender?->nama ?? 'Pengirim tidak ditemukan' }}</div>
+													<div class="text-muted small mt-1">{{ \Illuminate\Support\Str::limit($chat->message, 30) }}</div>
+													<div class="text-muted small mt-1">{{ $chat->created_at->diffForHumans() }}</div>
+												</div>
 											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">Vanessa Tucker</div>
-												<div class="text-muted small mt-1">Nam pretium turpis et arcu. Duis arcu tortor.</div>
-												<div class="text-muted small mt-1">15m ago</div>
-											</div>
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<img src="img/avatars/avatar-2.jpg" class="avatar img-fluid rounded-circle" alt="William Harris">
-											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">William Harris</div>
-												<div class="text-muted small mt-1">Curabitur ligula sapien euismod vitae.</div>
-												<div class="text-muted small mt-1">2h ago</div>
-											</div>
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<img src="img/avatars/avatar-4.jpg" class="avatar img-fluid rounded-circle" alt="Christina Mason">
-											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">Christina Mason</div>
-												<div class="text-muted small mt-1">Pellentesque auctor neque nec urna.</div>
-												<div class="text-muted small mt-1">4h ago</div>
-											</div>
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<img src="img/avatars/avatar-3.jpg" class="avatar img-fluid rounded-circle" alt="Sharon Lessman">
-											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">Sharon Lessman</div>
-												<div class="text-muted small mt-1">Aenean tellus metus, bibendum sed, posuere ac, mattis non.</div>
-												<div class="text-muted small mt-1">5h ago</div>
-											</div>
-										</div>
-									</a>
+										</a>
+									@empty
+										<div class="list-group-item text-muted">Belum ada Pesan Terbaru</div>
+									@endforelse
 								</div>
 								<div class="dropdown-menu-footer">
-									<a href="#" class="text-muted">Show all messages</a>
+									<a href="{{ route('admin.chat.index') }}" class="text-muted">Lihat Semua Pesan</a>
 								</div>
 							</div>
+
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">

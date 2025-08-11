@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 use App\Http\Controllers\{
     AuthController,
@@ -12,6 +13,7 @@ use App\Http\Controllers\{
     ProfileController,
     SkillController,
     NotificationController,
+    ChatController,
     Auth\ForgotPasswordController,
     Auth\ResetPasswordController,
     Admin\AdminDashboardController,
@@ -22,7 +24,10 @@ use App\Http\Controllers\{
     Admin\ReportController,
     BidangController,
     LandingDocumentationController,
-    Admin\DocumentationController
+    Admin\DocumentationController,
+    Admin\AdminChatController,
+    Admin\AdminLogbookController,
+    LogbookExportController
 };
 
 Route::prefix('dokumentasi')->name('landing.documentation.')->group(function () {
@@ -89,7 +94,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/notifikasi/{id}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
     Route::post('/notifikasi/read-all', [NotificationController::class, 'markAllAsRead'])->name('notifications.readAll');
     
-
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+    Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
 
     Route::controller(ProfileController::class)->prefix('profile')->group(function () {
 
@@ -111,7 +117,6 @@ Route::post('/pengajuan/{id}/batal', [PengajuanController::class, 'batal'])->nam
     });
 Route::get('/pengajuan/{id}/download/{filename}', [PengajuanController::class, 'downloadDocumentUser'])->name('pengajuan.download');
 
-
     Route::controller(NotificationController::class)->prefix('notifications')->group(function () {
         Route::get('/', 'userNotifications')->name('notifications.user');
         Route::get('/json', 'index')->name('notifications.json');
@@ -129,17 +134,34 @@ Route::get('/pengajuan/{id}/download/{filename}', [PengajuanController::class, '
     Route::post('/notification/{notificationId}/read', [DashboardController::class, 'markNotificationRead'])->name('notification.read');
 
     Route::resource('pengajuan', PengajuanController::class);
-    Route::resource('logbook', LogbookController::class);
+
+    Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook.index');
+    Route::post('/logbook/store', [LogbookController::class, 'store'])->name('logbook.store');
+
+    Route::get('/logbook/{id}/edit', [LogbookController::class, 'editPage'])->name('logbook.editPage');
+    Route::get('/logbook/export-doc', [LogbookExportController::class, 'exportDoc'])->name('logbook.exportDoc');
+
+    Route::post('/logbook/update/{id}', [LogbookController::class, 'update'])->name('logbook.update');
+    
+    Route::delete('/logbook/delete/{id}', [LogbookController::class, 'destroy'])->name('logbook.delete');
 });
 
 Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('documentation', DocumentationController::class);
+    Route::get('/indexdinas', [DocumentationController::class,'indexdinas'])->name('documentation.indexdinas');
+    Route::get('/createdinas', [DocumentationController::class,'createdinas'])->name('documentation.createdinas');
+    Route::get('/chat', [AdminChatController::class, 'index'])->name('chat.index');
+    Route::post('/chat/send', [AdminChatController::class, 'send'])->name('chat.send');
+    Route::get('/logbook', [AdminLogbookController::class, 'index'])->name('logbook.index');
+    Route::get('/logbook/{user}', [AdminLogbookController::class, 'show'])->name('logbook.show');
+    Route::get('logbook/{user}/print', [AdminLogbookController::class, 'print'])->name('logbook.print');
 
     Route::controller(AdminPengajuanController::class)->prefix('pengajuan')->name('pengajuan.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/bidang', 'bidang')->name('bidang');
+        Route::get('/dinas', 'dinas')->name('dinas');
         Route::put('/{id}/status', 'updateStatus')->name('updateStatus');
         Route::get('/{id}', 'show')->name('show');
         Route::get('bidang/{id}', 'showbidang')->name('showbidang');

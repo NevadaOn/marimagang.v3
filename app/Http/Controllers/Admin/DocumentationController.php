@@ -15,12 +15,20 @@ class DocumentationController extends Controller
         $documentations = Documentation::with('images')->latest()->get();
         return view('admin.documentation.index', compact('documentations'));
     }
+public function indexdinas()
+    {
+        $documentations = Documentation::with('images')->latest()->get();
+        return view('admin.documentation.indexdinas', compact('documentations'));
+    }
 
     public function create()
     {
         return view('admin.documentation.create');
     }
-
+public function createdinas()
+    {
+        return view('admin.documentation.createdinas');
+    }
     public function store(Request $request)
     {
         $request->validate([
