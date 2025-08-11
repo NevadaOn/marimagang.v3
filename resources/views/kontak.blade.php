@@ -37,17 +37,10 @@
         <div class="header-nav">
           <nav class="nav-main-menu d-none d-xl-block">
             <ul class="main-menu">
-              <li><a class="color-gray-500" href="{{ route('welcome') }}">Home</a></li>
-
-              </li>
-              <li><a class="color-gray-500" href="#bidangKerja">Alur Magang</a>
-
-              </li>
-              <li><a class="color-gray-500" href="#dokumentasi">Dokumentasi</a>
-
-              </li>
-
-              <li><a class="active" href="page-contact.html">Contact</a></li>
+              <li><a href="{{ url('/') }}#home" data-section="home" class="color-gray-500">Home</a></li>
+              <li><a href="{{ url('/') }}#alurmagang" data-section="alurmagang" class="color-gray-500">Alur Magang</a></li>
+              <li><a href="{{ url('/') }}#dokumentasi" data-section="dokumentasi" class="color-gray-500">Dokumentasi</a></li>
+              <li><a class="{{ Request::is('kontak') ? 'active' : 'color-gray-500' }}" href="{{ route('kontak') }}">Kontak</a></li>
             </ul>
           </nav>
           <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span
@@ -82,78 +75,51 @@
         <div class="row">
           <div class="col-xl-10 col-lg-12 m-auto">
             <div class="text-center mt-70">
-              <h1 class="color-linear d-inline-block mb-30">Contact Us</h1>
-              <p class="text-xl color-gray-500">Diskominfo Kabupaten Malang<br class="d-none d-lg-block">Kominfo
-                (Kementerian Komunikasi dan Informatika) adalah lembaga pemerintah yang <br
-                  class="d-none d-lg-block">bertugas mengatur dan mengawasi bidang komunikasi, informatika, serta media
-                digital di Indonesia.<br
-                  class="d-none d-lg-block"> Kominfo juga mendorong transformasi digital dan perlindungan data masyarakat.</p>
-            </div>
-            <div class="text-center mt-30">
-              <div class="d-inline-block support text-start">087927364529<br>+6237564738475</div>
-              <div class="d-inline-block location text-start">contact@kominfo.com<br>pkl@unira_malang.com</div>
-              <div class="d-inline-block plane text-start">pklUnira<br>unira_malang</div>
-            </div>
+              <h1 class="color-linear d-inline-block mb-30">Hubungi Kami</h1>
+              <p class="text-xl color-gray-500">Dinas Komunikasi dan Informatika Kabupaten Malang<br
+               class="d-none d-lg-block">Hubungi kami untuk informasi lebih lanjut atau pertanyaan seputar layanan kami. </p>
+                  
+              
+<div class="text-center mt-30">
+  <div class="d-inline-block  text-start me-3">
+    <a href="tel:+62341364776" class="color-gray-500">
+      <i class="fas fa-phone-alt me-1"></i> (0341) 364776
+    </a>
+  </div>
+
+  <div class="d-inline-block  text-start me-3">
+    <a href="mailto:kominfo@malangkab.go.id" class="color-gray-500">
+      <i class="fas fa-envelope me-1"></i> kominfo@malangkab.go.id
+    </a>
+  </div>
+
+  <div class="d-inline-block social-media text-start me-2">
+    <a href="https://instagram.com/kominfokabmlg" class="color-gray-500" target="_blank">
+      <i class="fab fa-instagram me-1"></i> @kominfokabmlg
+    </a>
+  </div>
+
+  <div class="d-inline-block social-media text-start">
+    <a href="https://x.com/kominfokabmlg" class="color-gray-500" target="_blank">
+      <i class="fab fa-x-twitter me-1"></i> @kominfokabmlg
+    </a>
+  </div>
+</div>
+          </div>
             <div class="box-map mt-70 mb-50">
               <iframe class="google-map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.159833545226!2d112.6330414!3d-7.9824239000000015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6298e932f9373%3A0xa947325c3d98a709!2sDinas%20Komunikasi%20dan%20Informatika%20Kabupaten%20Malang!5e0!3m2!1sid!2sid!4v1753553607424!5m2!1sid!2sid"
                 style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-            <div class="form-contact">
-              <div class="text-center">
-                <h3 class="color-linear d-inline-block mb-10">Hubungi Kami</h3>
-                <p class="text-xs color-gray-500">Isi semua kolom dibawah ini*</p>
-              </div>
-              <div class="row mt-50">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <input class="form-control bg-gray-850 border-gray-800 color-gray-500" type="text"
-                      placeholder="Your name *">
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <input class="form-control bg-gray-850 border-gray-800 color-gray-500" type="text"
-                      placeholder="Email *">
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <input class="form-control bg-gray-850 border-gray-800 color-gray-500" type="text"
-                      placeholder="Phone number *">
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <input class="form-control bg-gray-850 border-gray-800 color-gray-500" type="text"
-                      placeholder="Subject *">
-                  </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <textarea class="form-control bg-gray-850 border-gray-800 color-gray-500" rows="5"
-                      placeholder="Message *"></textarea>
-                  </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="text-center mb-50"><a class="btn btn-linear btn-load-more btn-radius-8 hover-up">
-                      Send Message
-                      <i class="fi-rr-arrow-small-right"></i></a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+           
   </main>
 
   <footer class="footer">
     <div class="container">
       <div class="footer-1 bg-gray-850 border-gray-800">
         <div class="row">
-          <div class="col-lg-4 mb-30"><a class="wow animate__animated animate__fadeInUp" href="index.html"><img
+          <div class="col-lg-4 mb-30"><a class="wow animate__animated animate__fadeInUp" href="{{ url('/') }}"><img
                 class="logo-night" src="{{ asset('img/rb_30832.png') }}" width="110px" alt="DiskominfoKab.Malang"><img
                 class="d-none logo-day" alt="DiskominfoKab.Malang" src="{{ asset('img/rb_30832.png') }}"
                 width="110px"></a>
@@ -219,6 +185,7 @@
       </div>
     </div>
   </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <script src="{{ asset('assets/js/vendors/modernizr-3.6.0.min.js') }}"></script>
   <script src="{{ asset('assets/js/vendors/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('assets/js/vendors/jquery-migrate-3.3.0.min.js') }}"></script>
