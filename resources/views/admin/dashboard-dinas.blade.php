@@ -434,6 +434,7 @@
 
     <!-- Main Content Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    
         <!-- Pengajuan Terbaru -->
         <div class="glass-card animate-delay-300">
             <div class="p-6">
@@ -448,43 +449,48 @@
                 </h2>
                 
                 @if($pengajuanTerbaru->count() > 0)
-                    <ul class="glass-list">
-                        @foreach ($pengajuanTerbaru as $index => $item)
-                            <li class="glass-list-item interactive-element animate-delay-{{ 300 + ($index * 100) }}">
-                                <div class="flex justify-between items-start">
-                                    <div class="flex-1">
-                                        <div class="flex items-center space-x-3 mb-2">
-                                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
-                                                {{ substr($item->user->nama, 0, 1) }}
-                                            </div>
-                                            <div>
-                                                <div class="font-semibold text-white">{{ $item->user->nama }}</div>
-                                                <div class="text-sm text-gray-400">{{ $item->user->nim }}</div>
-                                            </div>
-                                        </div>
-                                        <div class="text-sm text-gray-300 ml-13">
-                                            Mengajukan ke <span class="text-blue-400 font-medium">{{ $item->databidang->nama }}</span>
-                                        </div>
-                                        <div class="flex items-center space-x-4 mt-3">
-                                            <span class="status-badge badge-info">
-                                                <i class="fas fa-calendar mr-1"></i>
-                                                {{ $item->created_at->format('d M Y') }}
-                                            </span>
-                                            <span class="status-badge" style="background: var(--gradient-{{ $item->status === 'pending' ? 'warning' : ($item->status === 'diterima' ? 'success' : 'info') }});">
-                                                <i class="fas fa-{{ $item->status === 'pending' ? 'clock' : ($item->status === 'diterima' ? 'check' : 'info-circle') }} mr-1"></i>
-                                                {{ ucfirst($item->status) }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="text-right">
-                                        <button class="text-blue-400 hover:text-blue-300 transition-colors">
-                                            <i class="fas fa-arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
+                  <ul id="pengajuan-list" class="glass-list">
+    @foreach ($pengajuanTerbaru as $index => $item)
+        <li class="glass-list-item interactive-element animate-delay-{{ 300 + ($index * 100) }}">
+            <div class="flex justify-between items-start">
+                <div class="flex-1">
+                    <div class="flex items-center space-x-3 mb-2">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
+                            {{ substr($item->user->nama, 0, 1) }}
+                        </div>
+                        <div>
+                            <div class="font-semibold text-white">{{ $item->user->nama }}</div>
+                            <div class="text-sm text-gray-400">{{ $item->user->nim }}</div>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-300 ml-13">
+                        Mengajukan ke <span class="text-blue-400 font-medium">{{ $item->databidang->nama }}</span>
+                    </div>
+                    <div class="flex items-center space-x-4 mt-3">
+                        <span class="status-badge badge-info">
+                            <i class="fas fa-calendar mr-1"></i>
+                            {{ $item->created_at->format('d M Y') }}
+                        </span>
+                        <span class="status-badge" style="background: var(--gradient-{{ $item->status === 'pending' ? 'warning' : ($item->status === 'diterima' ? 'success' : 'info') }});">
+                            <i class="fas fa-{{ $item->status === 'pending' ? 'clock' : ($item->status === 'diterima' ? 'check' : 'info-circle') }} mr-1"></i>
+                            {{ ucfirst($item->status) }}
+                        </span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <button class="text-blue-400 hover:text-blue-300 transition-colors">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </li>
+    @endforeach
+</ul>
+                    <!-- Tombol Navigasi -->
+<div class="flex justify-between mt-4">
+    <button id="prevBtn" class="px-4 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 text-white">&laquo; Sebelumnya</button>
+    <button id="nextBtn" class="px-4 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 text-white">Selanjutnya &raquo;</button>
+</div>
                 @else
                     <div class="text-center py-12">
                         <i class="fas fa-inbox text-gray-500 text-4xl mb-4"></i>
@@ -581,7 +587,8 @@
 
 @push('scripts')
 <script>
-    // Counter animation
+document.addEventListener('DOMContentLoaded', function() {
+    // ==== Counter Animation ====
     function animateCounter(element, target) {
         let current = 0;
         const increment = target / 100;
@@ -595,33 +602,66 @@
         }, 20);
     }
 
-    // Initialize animations when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-        // Animate counters
-        const totalPengajuan = document.getElementById('totalPengajuan');
-        if (totalPengajuan) {
-            animateCounter(totalPengajuan, {{ $totalPengajuan }});
-        }
+    const totalPengajuan = document.getElementById('totalPengajuan');
+    if (totalPengajuan) {
+        animateCounter(totalPengajuan, {{ $totalPengajuan }});
+    }
 
-        // Add stagger animation to list items
-        const listItems = document.querySelectorAll('.glass-list-item');
-        listItems.forEach((item, index) => {
-            item.style.animationDelay = `${index * 0.1}s`;
-            item.classList.add('animate-delay-' + (index * 100));
+    // ==== List Animation Delay ====
+    const listItems = document.querySelectorAll('.glass-list-item');
+    listItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.1}s`;
+        item.classList.add('animate-delay-' + (index * 100));
+    });
+
+    // ==== Smooth Scroll ====
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    // ==== Pagination ====
+    const itemsPerPage = 3;
+    const items = document.querySelectorAll("#pengajuan-list li");
+    let currentPage = 1;
+    const totalPages = Math.ceil(items.length / itemsPerPage);
+
+    function showPage(page) {
+        items.forEach((item, index) => {
+            item.style.display =
+                (index >= (page - 1) * itemsPerPage && index < page * itemsPerPage)
+                ? "block"
+                : "none";
         });
+    }
 
-        // Add smooth scroll behavior
-        document.documentElement.style.scrollBehavior = 'smooth';
-    });
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
 
-    // Add parallax effect to background
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const bg = document.querySelector('body::before');
-        if (bg) {
-            bg.style.transform = `translateY(${scrolled * 0.5}px)`;
+    prevBtn.addEventListener("click", function () {
+        if (currentPage > 1) {
+            currentPage--;
+            showPage(currentPage);
         }
     });
+
+    nextBtn.addEventListener("click", function () {
+        if (currentPage < totalPages) {
+            currentPage++;
+            showPage(currentPage);
+        }
+    });
+
+    // Tampilkan halaman awal
+    showPage(currentPage);
+});
+
+// ==== Parallax Background (gunakan elemen biasa, bukan pseudo-element) ====
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const bg = document.querySelector('.parallax-bg');
+    if (bg) {
+        bg.style.transform = `translateY(${scrolled * 0.5}px)`;
+    }
+});
 </script>
+
 @endpush
 @endsection
