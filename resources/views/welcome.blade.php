@@ -41,7 +41,7 @@
             <ul class="main-menu">
               <li><a href="#home" data-section="home" class="color-gray-500">Home</a></li>
               <li><a href="#alurmagang" data-section="alurmagang" class="color-gray-500">Alur Magang</a></li>
-              <li><a href="#dokumentasi" data-section="dokumentasi" class="color-gray-500">Dokumentasi</a></li>
+              <li><a href="{{ route('landing.documentation.index') }}" class="color-gray-500">Dokumentasi</a></li>
               <li><a class="{{ Request::is('kontak') ? 'active' : 'color-gray-500' }}" href="{{ route('kontak') }}">Kontak</a></li>
             </ul>
           </nav>
@@ -465,10 +465,10 @@
           @endforeach
                   </div>
 
-                  {{-- <div class="mt-20 text-center">
+                  <div class="mt-20 text-center">
                     <a class="btn btn-primary" href="{{ route('landing.documentation.index') }}">Lihat Semua
                       Dokumentasi</a>
-                  </div> --}}
+                  </div>
                 </div>
               </div>
 
