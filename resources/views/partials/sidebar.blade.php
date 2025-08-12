@@ -48,7 +48,7 @@
             </li>
 
             <li class="sidebar-header">
-                Dokumentasi & Notifikasi
+                Dokumentasi & LogBook
             </li>
 
             <li class="sidebar-item {{ Request::routeIs('admin.documentation.index') ? 'active' : '' }}"> {{-- Asumsi ada rute untuk daftar universitas --}}

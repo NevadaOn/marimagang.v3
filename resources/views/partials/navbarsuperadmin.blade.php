@@ -9,67 +9,53 @@
 							<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
 								<div class="position-relative">
 									<i class="align-middle" data-feather="bell"></i>
-									<span class="indicator">4</span>
+									@if($notifikasiPengajuan->count() > 0)
+										<span class="indicator">{{ $notifikasiPengajuan->count() }}</span>
+									@endif
 								</div>
 							</a>
 							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
 								<div class="dropdown-menu-header">
-									4 New Notifications
+									{{ $notifikasiPengajuan->count() }} Notifikasi Pengajuan
 								</div>
 								<div class="list-group">
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="text-danger" data-feather="alert-circle"></i>
+									@forelse($notifikasiPengajuan as $notif)
+										<a href="{{ route('admin.pengajuan.show', $notif->id) }}" class="list-group-item">
+											<div class="row g-0 align-items-center">
+												<div class="col-2">
+													@if($notif->status === 'di proses')
+														<i class="text-warning" data-feather="clock"></i>
+													@elseif($notif->status === 'diteruskan')
+														<i class="text-info" data-feather="share"></i>
+													@else
+														<i class="text-primary" data-feather="plus-circle"></i>
+													@endif
+												</div>
+												<div class="col-10">
+													<div class="text-dark">
+														Pengajuan #{{ $notif->id }} - {{ ucfirst($notif->status) }}
+													</div>
+													<div class="text-muted small mt-1">
+														{{ $notif->user->nama ?? 'Pengaju Tidak Diketahui' }}
+													</div>
+													<div class="text-muted small mt-1">
+														{{ $notif->created_at->diffForHumans() }}
+													</div>
+												</div>
 											</div>
-											<div class="col-10">
-												<div class="text-dark">Update completed</div>
-												<div class="text-muted small mt-1">Restart server 12 to complete the update.</div>
-												<div class="text-muted small mt-1">30m ago</div>
-											</div>
+										</a>
+									@empty
+										<div class="list-group-item text-center text-muted">
+											Tidak ada notifikasi baru
 										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="text-warning" data-feather="bell"></i>
-											</div>
-											<div class="col-10">
-												<div class="text-dark">Lorem ipsum</div>
-												<div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate hendrerit et.</div>
-												<div class="text-muted small mt-1">2h ago</div>
-											</div>
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="text-primary" data-feather="home"></i>
-											</div>
-											<div class="col-10">
-												<div class="text-dark">Login from 192.186.1.8</div>
-												<div class="text-muted small mt-1">5h ago</div>
-											</div>
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="text-success" data-feather="user-plus"></i>
-											</div>
-											<div class="col-10">
-												<div class="text-dark">New connection</div>
-												<div class="text-muted small mt-1">Christina accepted your request.</div>
-												<div class="text-muted small mt-1">14h ago</div>
-											</div>
-										</div>
-									</a>
+									@endforelse
 								</div>
 								<div class="dropdown-menu-footer">
-									<a href="#" class="text-muted">Show all notifications</a>
+									<a href="{{ route('admin.pengajuan.index') }}" class="text-muted">Lihat semua pengajuan</a>
 								</div>
 							</div>
 						</li>
+
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
 								<div class="position-relative">
