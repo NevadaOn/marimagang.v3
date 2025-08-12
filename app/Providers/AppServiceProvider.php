@@ -45,11 +45,16 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::composer('layouts.superadmin', function ($view) {
-            $notifikasiPengajuan = Pengajuan::whereIn('status', ['diproses', 'diteruskan'])
-                ->orWhereDate('created_at', Carbon::today())
-                ->orderBy('created_at', 'desc')
-                ->take(10)
-                ->get();
+        $notifikasiPengajuan = Pengajuan::where(function ($query) {
+                $query->whereIn('status', ['diproses', 'diteruskan']);
+            })
+            ->orWhere(function ($query) {
+                $query->whereIn('status', ['diterima', 'ditolak'])
+                    ->whereNull('admin_read_at'); 
+            })
+            ->orderBy('created_at', 'desc')
+            ->take(10)
+            ->get();
 
             $view->with('notifikasiPengajuan', $notifikasiPengajuan);
         });

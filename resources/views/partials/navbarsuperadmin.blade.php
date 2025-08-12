@@ -15,8 +15,21 @@
 								</div>
 							</a>
 							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
-								<div class="dropdown-menu-header">
-									{{ $notifikasiPengajuan->count() }} Notifikasi Pengajuan
+								<div class="dropdown-menu-header d-flex justify-content-between align-items-center px-3 py-2">
+									<span>{{ $notifikasiPengajuan->count() }} Notifikasi Pengajuan</span>
+
+									@php
+										$finalCount = $notifikasiPengajuan->whereIn('status', ['diterima', 'ditolak'])->count();
+									@endphp
+
+									@if($finalCount > 0)
+										<form action="{{ route('admin.pengajuan.markFinalAsRead') }}" method="POST" style="margin: 0;">
+											@csrf
+											<button type="submit" class="btn btn-sm btn-link text-decoration-none p-0">
+												Tandai pengajuan sudah dibaca
+											</button>
+										</form>
+									@endif
 								</div>
 								<div class="list-group">
 									@forelse($notifikasiPengajuan as $notif)
@@ -55,7 +68,6 @@
 								</div>
 							</div>
 						</li>
-
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
 								<div class="position-relative">

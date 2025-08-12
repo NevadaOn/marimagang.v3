@@ -362,4 +362,13 @@ class AdminPengajuanController extends Controller
 
         return back()->with('success', 'Form kesediaan berhasil dibuat dan disimpan.');
     }
+    public function markFinalAsRead()
+{
+    Pengajuan::whereIn('status', ['diterima', 'ditolak'])
+        ->whereNull('admin_read_at')
+        ->update(['admin_read_at' => now()]);
+
+    return back()->with('success', 'Notifikasi pengajuan final telah ditandai sudah dibaca.');
+}
+
 }
