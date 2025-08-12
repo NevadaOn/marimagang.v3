@@ -291,128 +291,103 @@
               </div>
             </div>
             <div class="row mt-70">
-              <h2 class="color-linear d-inline-block mb-10">Statistik Lamaran Magang</h2>
-              <p class="text-lg color-gray-500">Lihat total dan presentase lamaran yang masuk dari berbagai universitas,
-                termasuk universitasmu!</p>
+              <h2 class="color-linear d-inline-block mb-10">Statistik Mahasiswa Magang</h2>
+              <p class="text-lg color-gray-500">
+                Lihat total dan distribusi mahasiswa magang aktif berdasarkan bidang dan universitas.
+              </p>
 
-              <section class="container my-5 ">
+              <section class="container my-5">
                 <div class="row text-center">
                   @php
-          $cards = [
-            ['label' => 'Total Pengguna', 'value' => $totalUsers],
-            ['label' => 'Total Lamaran', 'value' => $totalPengajuan],
-            ['label' => 'Jumlah Bidang', 'value' => $totalBidang],
-            ['label' => 'Total Universitas', 'value' => $totalUniversitas],
-          ];
+          // Total mahasiswa magang dari tabel anggota
+          $totalMahasiswaMagang = \App\Models\Anggota::count();
+          $totalMagangAktif = \App\Models\Pengajuan::where('status', 'magang')->count();
+          // Jumlah bidang
+          $totalBidang = $totalBidang;
+
+          // Jumlah universitas
+          $totalUniversitas = $totalUniversitas;
         @endphp
 
-                  @foreach ($cards as $card)
-            <div class="col-md-3 mb-4">
-            <div class="p-3 rounded-xl border bg-gray-850 border-gray-800 shadow-sm text-center">
-              <h6 class="text-muted mb-1">{{ $card['label'] }}</h6>
-              <h4 class="color-white">{{ $card['value'] }}</h4>
-            </div>
-            </div>
-          @endforeach
+                  <div class="col-md-3 mb-4">
+                    <div class="p-3 rounded-xl border bg-gray-850 border-gray-800 shadow-sm text-center">
+                      <h6 class="text-muted mb-1">Total Pengajuan Magang</h6>
+                      <h4 class="color-white">{{ $totalMahasiswaMagang }}</h4>
+                    </div>
+                  </div>
+                  <div class="col-md-3 mb-4">
+                    <div class="p-3 rounded-xl border bg-gray-850 border-gray-800 shadow-sm text-center">
+                      <h6 class="text-muted mb-1">Mahasiswa Magang Aktif</h6>
+                      <h4 class="color-white">{{ $totalMagangAktif }}</h4>
+                    </div>
+                  </div>
+                  <div class="col-md-3 mb-4">
+                    <div class="p-3 rounded-xl border bg-gray-850 border-gray-800 shadow-sm text-center">
+                      <h6 class="text-muted mb-1">Jumlah Bidang</h6>
+                      <h4 class="color-white">{{ $totalBidang }}</h4>
+                    </div>
+                  </div>
+                  <div class="col-md-3 mb-4">
+                    <div class="p-3 rounded-xl border bg-gray-850 border-gray-800 shadow-sm text-center">
+                      <h6 class="text-muted mb-1">Total Universitas</h6>
+                      <h4 class="color-white">{{ $totalUniversitas }}</h4>
+                    </div>
+                  </div>
                 </div>
 
-                @if($universitasTerbanyak->count())
-          <div class="row mt-4">
-            <div class="col-md-6 mb-4 d-flex">
-            <div
-              class="flex-fill d-flex flex-column p-3 rounded-xl border bg-gray-850 border-gray-800 shadow-sm w-100">
-              <h6 class="text-center text-muted mb-3">Statistik Pengguna Berdasarkan Universitas</h6>
-              <div class="flex-grow-1 position-relative" style="min-height: 300px;">
-              <canvas id="pieChart" class="w-100 h-100"></canvas>
-              </div>
-            </div>
-            </div>
-
-            <div class="col-md-6 mb-4 d-flex">
-            <div
-              class="flex-fill d-flex flex-column p-3 rounded-xl border bg-gray-850 border-gray-800 shadow-sm w-100">
-              <h6 class="text-center text-muted mb-3">Pengajuan Terbanyak Berdasarkan Bidang</h6>
-              <div class="flex-grow-1 position-relative" style="min-height: 300px;">
-              <canvas id="barChart" class="w-100 h-100"></canvas>
-              </div>
-            </div>
-            </div>
-          </div>
-        @endif
+                <div class="row mt-4">
+                  <div class="col-12 mb-4 d-flex">
+                    <div class="flex-fill d-flex flex-column p-3 rounded-xl border bg-gray-850 border-gray-800 shadow-sm w-100">
+                      <h6 class="text-center text-muted mb-3">Distribusi Mahasiswa Magang Aktif Berdasarkan Bidang</h6>
+                      <div class="flex-grow-1 position-relative" style="min-height: 300px;">
+                        <canvas id="barChart" class="w-100 h-100"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </section>
 
               <script>
                 document.addEventListener('DOMContentLoaded', function () {
-                  const textColor = getComputedStyle(document.body).color;
+                    const textColor = getComputedStyle(document.body).color;
 
-                  const pieCtx = document.getElementById('pieChart').getContext('2d');
-                  new Chart(pieCtx, {
-                    type: 'doughnut',
-                    data: {
-                      labels: {!! json_encode($universitasTerbanyak->pluck('nama_universitas')) !!},
-                      datasets: [{
-                        data: {!! json_encode($universitasTerbanyak->pluck('users_count')) !!},
-                        backgroundColor: [
-                          'rgba(13,110,253,1)',
-                          'rgba(13,110,253,0.8)',
-                          'rgba(13,110,253,0.6)',
-                          'rgba(13,110,253,0.4)',
-                          'rgba(13,110,253,0.2)'
-                        ],
-                        borderWidth: 0
-                      }]
-                    },
-                    options: {
-                      cutout: '75%',
-                      maintainAspectRatio: false,
-                      plugins: {
-                        legend: {
-                          position: 'bottom',
-                          labels: {
-                            color: textColor
-                          }
-                        }
-                      }
-                    }
-                  });
+                    const barCanvas = document.getElementById('barChart');
+                    const barCtx = barCanvas.getContext('2d');
 
-                  const barCanvas = document.getElementById('barChart');
-                  const barCtx = barCanvas.getContext('2d');
+                    const gradient = barCtx.createLinearGradient(0, 0, 0, barCanvas.height);
+                    gradient.addColorStop(0, 'rgba(13,110,253,0.9)');
+                    gradient.addColorStop(1, 'rgba(13,110,253,0.3)');
 
-                  const gradient = barCtx.createLinearGradient(0, 0, 0, barCanvas.height);
-                  gradient.addColorStop(0, 'rgba(13,110,253,0.9)');
-                  gradient.addColorStop(1, 'rgba(13,110,253,0.3)');
-
-                  new Chart(barCtx, {
-                    type: 'bar',
-                    data: {
-                      labels: {!! json_encode($pengajuanPerBidang->pluck('databidang.nama')) !!},
-                      datasets: [{
-                        label: 'Total Pengajuan',
-                        data: {!! json_encode($pengajuanPerBidang->pluck('total')) !!},
-                        backgroundColor: gradient,
-                        borderRadius: 8,
-                        barPercentage: 0.6
-                      }]
-                    },
-                    options: {
-                      maintainAspectRatio: false,
-                      scales: {
-                        y: {
-                          beginAtZero: true,
-                          ticks: { color: textColor },
-                          grid: { color: 'rgba(255,255,255,0.1)' }
+                    new Chart(barCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: {!! json_encode($pengajuanPerBidang->pluck('databidang.nama')) !!},
+                            datasets: [{
+                                label: 'Mahasiswa Magang Aktif',
+                                data: {!! json_encode($pengajuanPerBidang->pluck('total')) !!},
+                                backgroundColor: gradient,
+                                borderRadius: 8,
+                                barPercentage: 0.6
+                            }]
                         },
-                        x: {
-                          ticks: { color: textColor },
-                          grid: { display: false }
+                        options: {
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: { color: textColor },
+                                    grid: { color: 'rgba(255,255,255,0.1)' }
+                                },
+                                x: {
+                                    ticks: { color: textColor },
+                                    grid: { display: false }
+                                }
+                            },
+                            plugins: {
+                                legend: { display: false }
+                            }
                         }
-                      },
-                      plugins: {
-                        legend: { display: false }
-                      }
-                    }
-                  });
+                    });
                 });
               </script>
             </div>

@@ -15,21 +15,27 @@ class BidangController extends Controller
         $totalUsers = User::count();
         $totalPengajuan = Pengajuan::count();
         $totalBidang = Databidang::count();
-        $totalUniversitas = Universitas::count();
+        $totalUniversitas = \App\Models\Universitas::selectRaw('TRIM(LOWER(nama_universitas)) as nama_unik')
+            ->groupBy('nama_unik')
+            ->get()
+            ->count();
 
         // Top 5 Universitas
-        $universitasTerbanyak = Universitas::withCount('users')
-            ->orderByDesc('users_count')
-            ->take(5)
-            ->get();
+        // $universitasTerbanyak = Universitas::withCount('users')
+        //     ->orderByDesc('users_count')
+        //     ->take(5)
+        //     ->get();
 
-        // Bar Chart: Jumlah pengajuan per bidang
-        $pengajuanPerBidang = Pengajuan::selectRaw('COUNT(*) as total, databidang_id')
-            ->groupBy('databidang_id')
-            ->orderByDesc('total')
-            ->with('databidang:id,nama')
-            ->take(5)
-            ->get();
+        $pengajuanPerBidang = Pengajuan::where('status', 'magang')
+            ->with('databidang')
+            ->get()
+            ->groupBy('databidang.nama')
+            ->map(function($items, $nama) {
+                return [
+                    'databidang' => (object)['nama' => $nama],
+                    'total' => $items->count()
+                ];
+            })->values();
 
         return view('welcome', compact(
             'bidangs',
@@ -37,7 +43,7 @@ class BidangController extends Controller
             'totalPengajuan',
             'totalBidang',
             'totalUniversitas',
-            'universitasTerbanyak',
+            // 'universitasTerbanyak',
             'pengajuanPerBidang'
         ));
     }

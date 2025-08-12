@@ -31,6 +31,7 @@
             <label for="role" class="form-label">Role</label>
             <select name="role" id="role" class="form-select" required>
                 <option value="admin_bidang">Admin Bidang</option>
+                <option value="admin_dinas">Admin Dinas</option>
                 <option value="superadmin">Super Admin</option>
                 <option value="admin_dinas">Admin Dinas</option>
             </select>
