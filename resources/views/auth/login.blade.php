@@ -123,8 +123,6 @@
 
 
                 </div>
-                <div class="box-line"><span class="bg-gray-900">Or, sign in with your email</span></div>
-                <div class="box-login-gmail bg-gray-850 border-gray-800 hover-up"><a class="btn btn-login-gmail color-gray-500" href="#">Sign in with Google</a></div>
                 <div class="box-line"><span class="bg-gray-900"><a class="color-linear" href="/">Kembali</span> </a></div>
               </div>
             </div>
