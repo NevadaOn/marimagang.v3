@@ -54,6 +54,24 @@
         .fw-bold { font-weight: bold; }
         .underline { text-decoration: underline; }
         .signature-space { height: 70px; }
+        footer {
+    position: fixed;
+    bottom: 0.3cm;
+    left: 20;
+    width: 100%;
+    font-size: 10pt;
+    text-align: left;
+    white-space: nowrap;
+}
+
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 2cm;
+    right: 2cm;
+}
+
     </style>
 </head>
 <body>
@@ -165,12 +183,19 @@
             </tr>
         </table>
 
-        <p style="margin-top: 5px; text-indent: 2em;">Demikian surat ini dibuat untuk digunakan sebagaimana mestinya.</p>
+        {{-- <p style="margin-top: 5px; text-indent: 2em;">Demikian surat ini dibuat untuk digunakan sebagaimana mestinya.</p> --}}
 
         <div style="width: 100%; margin-top: 20px;">
-            <div style="width: 40%; float: right; text-align: left;">
+            <div style="width: 40%; float: left; text-align: center; margin-top: 74px;">
+                <p style="margin: 0; padding: 0;">Koordinator</p>
+                                {{-- <p style="margin: 0; padding: 0; text-indent: 2em;">Sekretaris</p> --}}
+                <div style="padding: 10px;" class="signature-space"></div>
+                <p class="underline" style="margin: 0; padding: 0; text-align:center;">{{ $koordinator }}</p>
+            </div>
+            <div style="width: 40%; float: right; text-align: center;">
                 <p style="margin-bottom: 10px; padding: 0; text-indent: 2em;">Malang, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
-                <p style="margin: 0; padding: 0;">Mengetahui Pembimbing Lapangan</p>
+                <p style="margin: 0; padding: 0;">Mengetahui, </p>
+                <p style="margin: 0; padding: 0;">Pembimbing Lapangan</p>
                 {{-- <p style="margin: 0; padding: 0; text-indent: 2em;">Sekretaris</p> --}}
                 <div style="padding: 10px;" class="signature-space"></div>
                 <p class="underline" style="margin: 0; padding: 0; text-align:center;">{{ $penanggung_jawab }}</p>
@@ -180,5 +205,9 @@
         </div>
 
     </main>
+<footer>
+    Dicetak dari marimagang.malangkab.go.id | Pada: {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
+</footer>
+
 </body>
 </html>

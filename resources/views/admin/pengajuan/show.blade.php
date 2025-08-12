@@ -386,9 +386,9 @@
                 Opsi
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalKelolaSurat">Kelola Surat Kesbangpol</a></li>
                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#updateTanggalModal">Ubah Tanggal</a></li>
                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalBidang">Ubah Bidang</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalKelolaSurat">Kelola Surat Kesbangpol</a></li>
                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalForm">Form Kesediaan Magang</a></li>
                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalKomentar">Komentar ke Admin/User</a></li>
             </ul>
@@ -721,9 +721,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Tempatkan form surat di sini seperti sebelumnya -->
+                    
                     @include('partials.ubah_bidang') 
-                    {{-- Atau langsung tempel kode form jika tidak menggunakan partial --}}
+                    
                 </div>
                 </div>
             </div>

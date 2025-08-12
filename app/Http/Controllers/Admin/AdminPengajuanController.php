@@ -52,7 +52,7 @@ class AdminPengajuanController extends Controller
 
         return view('admin.pengajuan.showbidang', compact('pengajuan', 'listBidang'));
     }
-    
+
     public function showdinas($id)
     {
         $pengajuan = Pengajuan::with([
@@ -330,6 +330,7 @@ class AdminPengajuanController extends Controller
         $request->validate([
             'penanggung_jawab' => 'required|string|max:255',
             'nama_project' => 'required|string|max:255', 
+            'koordinator' => 'required|string|max:255',
         ]);
 
         $pengajuan = Pengajuan::with(['databidang', 'user'])->findOrFail($id);
@@ -346,6 +347,7 @@ class AdminPengajuanController extends Controller
             'pengajuan' => $pengajuan,
             'project' => $request->nama_project,
             'penanggung_jawab' => $request->penanggung_jawab,
+            'koordinator' => $request->koordinator,
             'tanggal' => now()->format('d F Y'),
             'admin' => $admin,
         ]);

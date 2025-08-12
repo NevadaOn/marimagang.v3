@@ -1,4 +1,4 @@
-<form action="{{ route('admin.pengajuan.kirimCatatan', $pengajuan->id) }}" method="POST">
+<form action="{{ route('admin.pengajuan.kirimCatatan', $pengajuan->id) }}" method="POST" style="padding: 5px;">
     @csrf
 
     <div class="mb-3">
