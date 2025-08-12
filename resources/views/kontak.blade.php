@@ -19,7 +19,8 @@
   <div id="preloader-active">
     <div class="preloader d-flex align-items-center justify-content-center">
       <div class="preloader-inner position-relative">
-        <div class="text-center"><img class="mb-10" src="{{ asset('assets/imgs/template/favicon.svg') }}" alt="GenZ">
+        <div class="text-center"><img class="mb-10" src="{{ asset('assets/imgs/template/favicon.svg') }}"
+            alt="DiskominfoKab.Malang">
           <div class="preloader-dots"></div>
         </div>
       </div>
@@ -30,8 +31,8 @@
       <div class="main-header">
         <div class="header-logo">
           <a class="d-flex" href="{{ url('/') }}">
-            <img class="logo-night" alt="Diskominfo" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" width="90px">
-            <img class="d-none logo-day" alt="Diskominfo" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" width="90px">
+            <img class="logo-night" alt="Diskominfo" src="{{ asset('img/rb_30832.png') }}" width="70px">
+            <img class="d-none logo-day" alt="Diskominfo" src="{{ asset('img/rb_30832.png') }}" width="70px">
           </a>
         </div>
         <div class="header-nav">
