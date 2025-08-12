@@ -193,7 +193,7 @@
                                     <td>{{ $pengajuan->databidang->nama }}</td>
                                     <td>
                                         @if($pengajuan->status == 'diproses')
-                                            <span class="badge bg-warning">Pending</span>
+                                            <span class="badge bg-warning">Diproses</span>
                                         @elseif($pengajuan->status == 'diterima')
                                             <span class="badge bg-success">Diterima</span>
                                         @elseif($pengajuan->status == 'diproses')
