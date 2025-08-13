@@ -206,7 +206,7 @@
 @section('content')
 <div class="p-4 sm:p-6 lg:p-8">
 
-    <div class="mb-4 card p-4 rounded-3xl mb-4 bg-gradient-to-r from-blue-500/20 via-blue-500/20 to-cyan-500/20 p-3 border-b border-white/10" style="text-align: left; padding: 20px 50px 10px 0px;">
+    <div class="mb-4 card p-4 rounded-3xl bg-gradient-to-r from-blue-500/20 via-blue-500/20 to-cyan-500/20 border-b border-white/10" style="text-align: left; padding: 20px 50px 10px 0px;">
         <h1 class="h3 mb-3 fw-bold fs-1 " style="color: white; background: var(--gradient-1); text;background-clip: text;">Detail Pengajuan</h1>
         <p class="text-muted">Informasi lengkap pengajuan magang mahasiswa</p>
     </div>

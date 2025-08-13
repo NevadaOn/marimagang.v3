@@ -566,25 +566,6 @@ function showUserDetails(pengajuanId) {
     }, 1000);
 }
 
-// <div class="glass-morphism rounded-2xl p-4 border border-white/10">
-//                 <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
-//                     <i class="fas fa-paperclip mr-2 text-cyan-400"></i>
-//                     Dokumen Terlampir
-//                 </h4>
-//                 <div class="grid md:grid-cols-2 gap-4">
-//                     <div class="flex items-center p-3 glass-morphism rounded-xl border border-white/10">
-//                         <i class="fas fa-file-pdf text-red-400 text-xl mr-3"></i>
-//                         <div>
-//                             <div class="text-white font-semibold">Surat Pengantar</div>
-//                             <div class="text-white/60 text-sm">PDF • 2.5 MB</div>
-//                         </div>
-//                     </div>
-//                     <div class="flex items-center p-3 glass-morphism rounded-xl border border-white/10">
-//                         <i class="fas fa-file-word text-blue-400 text-xl mr-3"></i>
-//                         <div>
-//                             <div class="text-white font-semibold">Proposal</div>
-//                             <div class="text-white/60 text-sm">DOC • 1.8 MB</div>
-//                         </div>
 
 // Fungsi untuk menutup modal
 function closeUserDetails() {
