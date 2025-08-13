@@ -561,7 +561,7 @@
 </div>
 
 <!-- Enhanced Modal -->
-<div id="imageModal" class="modal">
+<div id="imageModal" class="modal fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">
             <i class="fas fa-times"></i>

@@ -157,6 +157,7 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
     Route::resource('documentation', DocumentationController::class);
     Route::get('/indexdinas', [DocumentationController::class,'indexdinas'])->name('documentation.indexdinas');
     Route::get('/createdinas', [DocumentationController::class,'createdinas'])->name('documentation.createdinas');
+     Route::post('/storedinas', [DocumentationController::class,'storedinas'])->name('documentation.storedinas');
     Route::get('/chat', [AdminChatController::class, 'index'])->name('chat.index');
     Route::post('/chat/send', [AdminChatController::class, 'send'])->name('chat.send');
     Route::get('/logbook', [AdminLogbookController::class, 'index'])->name('logbook.index');

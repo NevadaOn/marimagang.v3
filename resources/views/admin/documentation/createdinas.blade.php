@@ -37,7 +37,7 @@
         <!-- Main Form with glassmorphism -->
         <div class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl overflow-hidden">
             <div class="p-8">
-                <form action="{{ route('admin.documentation.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
+                <form action="{{ route('admin.documentation.storedinas') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
                     @csrf
 
                     <!-- Judul Kegiatan -->

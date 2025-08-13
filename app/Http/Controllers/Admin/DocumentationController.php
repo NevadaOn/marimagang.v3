@@ -55,6 +55,32 @@ public function createdinas()
         return redirect()->route('admin.documentation.index')->with('success', 'Dokumentasi berhasil disimpan.');
     }
 
+      public function storedinas(Request $request)
+    {
+        $request->validate([
+            'judul_kegiatan' => 'nullable|string|max:255',
+            'judul_project' => 'nullable|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'images.*' => 'required|image|max:2048',
+            'captions.*' => 'nullable|string|max:255',
+        ]);
+
+        $documentation = Documentation::create($request->only('judul_kegiatan', 'judul_project', 'deskripsi'));
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $index => $image) {
+                $path = $image->store('dokumentasi', 'public');
+                DocumentationImage::create([
+                    'documentation_id' => $documentation->id,
+                    'image_path' => $path,
+                    'caption' => $request->captions[$index] ?? null,
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.documentation.indexdinas')->with('success', 'Dokumentasi berhasil disimpan.');
+    }
+
     public function show($id)
     {
         $documentation = Documentation::with('images')->findOrFail($id);

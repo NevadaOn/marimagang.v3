@@ -7,7 +7,7 @@
         <h2 class="text-2xl font-bold text-white mb-6">Daftar Logbook User</h2>
 
         {{-- Filter Bidang Magang --}}
-        <form method="GET" action="{{ route('admin.logbook.index') }}" class="mb-3">
+        <form method="GET" action="{{ route('admin.logbook.indexdinas') }}" class="mb-3">
             <div class="grid grid-cols-1 md:grid-cols-6 gap-3">
                 <div class="md:col-span-4">
                     <select name="bidang" class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500">
