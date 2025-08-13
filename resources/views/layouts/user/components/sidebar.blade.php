@@ -60,7 +60,7 @@
 
                 <li class="sidebar-menu__item" role="none">
                 <a href="{{ route('chat.index') }}" class="sidebar-menu__link {{ request()->routeIs('chat.index') ? 'activePage' : '' }}">
-                        <span class="icon"><i class="ph ph-user"></i></span>
+                        <span class="icon"><i class="far fa-comment"></i></span>
                         <span class="text">Chat Admin</span>
                     </a>
                     

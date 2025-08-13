@@ -42,7 +42,8 @@ class PengajuanController extends Controller
                 'anggota'
             ])
             ->where('user_id', $user->id)
-            ->where('status', '!=', 'dibatalkan')
+            ->whereNotIn('status', ['ditolak', 'selesai', 'dibatalkan'])
+
             ->orderBy('created_at', 'desc')
             ->get()
             ->unique('id');
@@ -54,7 +55,9 @@ class PengajuanController extends Controller
                 'anggota'
             ])
             ->where('user_id', $user->id)
-            ->where('status', 'dibatalkan') 
+            ->whereIn('status', ['dibatalkan', 'ditolak', 'selesai'])
+
+
             ->orderBy('updated_at', 'desc')
             ->get()
             ->unique('id');
