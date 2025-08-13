@@ -33,7 +33,6 @@
                 <option value="admin_bidang">Admin Bidang</option>
                 <option value="admin_dinas">Admin Dinas</option>
                 <option value="superadmin">Super Admin</option>
-                <option value="admin_dinas">Admin Dinas</option>
             </select>
         </div>
 
