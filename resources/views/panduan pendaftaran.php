@@ -71,207 +71,158 @@
 
   <main class="main">
   <div class="container mt-70 mb-50">
-    <div class="text-center mb-50">
+    <div class="text-center mb-50 wow animate__animated animate__fadeInUp">
       <h1 class="color-linear mb-20">Panduan Magang di Diskominfo Kabupaten Malang</h1>
-      <p class="text-lg color-gray-500">
-        Ikuti panduan lengkap berikut beserta gambar setiap tahapannya.
+      <p class="text-lg color-gray-300 max-w-[700px] mx-auto">
+        Panduan ini menjelaskan langkah-langkah yang harus dilalui oleh peserta magang, mulai dari pendaftaran hingga selesainya kegiatan.
       </p>
     </div>
 
-    {{-- Step 1 --}}
+    <!-- STEP 1 -->
     <div class="mb-50">
-      <h2 class="color-white mb-30 text-center">1. Pembuatan Akun</h2>
+      <h2 class="color-white mb-30 text-center wow animate__animated animate__fadeInUp">1. Pembuatan Akun</h2>
 
-      {{-- Sub-step: Akses Halaman Masuk --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp">
-        <img src="{{ asset('assets/imgs/panduan/step1-akses.png') }}" alt="Akses Halaman Masuk" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Akses Halaman Masuk</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Buka halaman masuk untuk memulai proses pendaftaran.
-        </p>
-      </div>
+      @php
+        $step1 = [
+          ['step1-akses.webp','Akses Halaman Masuk','Buka halaman masuk untuk memulai proses pendaftaran.'],
+          ['step1-buat.webp','Buat Akun','Pilih opsi <em>Daftar Sekarang</em> untuk mendaftar.'],
+          ['step1-registrasi.webp','Lengkapi Registrasi','Isi formulir pendaftaran dengan nama lengkap, email, nomor telepon, dan buat kata sandi.'],
+          [['step1-verifikasi.webp','step1-verifikasi (3).webp','step1-verifikasi (2).webp'],'Verifikasi Akun','Lakukan verifikasi email dengan mengklik tautan yang dikirimkan ke alamat email Anda. Tautan verifikasi biasanya akan masuk ke folder spam.'],
+          ['step1-login.webp','Login','Setelah akun terverifikasi, Anda bisa login menggunakan username dan password yang telah didaftarkan.']
+        ];
+      @endphp
 
-      {{-- Sub-step: Buat Akun --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
-        <img src="{{ asset('assets/imgs/panduan/step1-buat.png') }}" alt="Buat Akun" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Buat Akun</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Pilih opsi <em>Daftar Sekarang</em> untuk membuat akun baru.
-        </p>
-      </div>
+      @foreach($step1 as $i => $item)
+  <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".{{ $i }}s">
+    <h4 class="color-white">{!! $item[1] !!}</h4>
+    <p class="color-gray-400 max-w-[600px] mx-auto mb-20">{!! $item[2] !!}</p>
 
-      {{-- Sub-step: Lengkapi Registrasi --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
-        <img src="{{ asset('assets/imgs/panduan/step1-registrasi.png') }}" alt="Lengkapi Registrasi" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Lengkapi Registrasi</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Isi formulir pendaftaran dengan nama lengkap, email, nomor telepon, dan kata sandi.
-        </p>
+    {{-- Kalau ada banyak gambar --}}
+    @if(is_array($item[0]))
+      <div class="flex flex-wrap justify-center gap-4">
+        @foreach($item[0] as $img)
+          <img src="{{ asset('assets/imgs/panduan/'.$img) }}" 
+               alt="{{ $item[1] }}" 
+               class="rounded-lg shadow-lg w-full max-w-[300px]">
+        @endforeach
       </div>
-
-      {{-- Sub-step: Verifikasi Akun --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
-        <img src="{{ asset('assets/imgs/panduan/step1-verifikasi.png') }}" alt="Verifikasi Akun" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Verifikasi Akun</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Klik tautan verifikasi yang dikirim ke email Anda (cek folder spam jika tidak ditemukan).
-        </p>
-      </div>
-
-      {{-- Sub-step: Login --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
-        <img src="{{ asset('assets/imgs/panduan/step1-login.png') }}" alt="Login" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Login</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Masuk menggunakan username dan password yang telah didaftarkan.
-        </p>
-      </div>
-    </div>
-    {{-- Step 2 --}}
-    <div class="mb-50">
-      <h2 class="color-white mb-30 text-center">2. Pengisian Formulir Pendaftaran</h2>            
-{{-- Sub-step: Isi Data Diri --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
-        <img src="{{ asset('assets/imgs/panduan/step2-isi-data.png') }}" alt="Isi Data Diri" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Isi Data Diri</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Isi formulir dengan data diri lengkap seperti nama, alamat, nomor telepon, dan email.
-        </p>
-      </div>
-      {{-- Sub-step: Akses Formulir --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp">
-        <img src="{{ asset('assets/imgs/panduan/step2-formulir.png') }}" alt="Akses Formulir" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Akses Formulir Pendaftaran</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Setelah login, klik menu <em>Formulir Pendaftaran</em> untuk mengisi data diri.
-        </p>
-      </div>  
-
-      {{-- Sub-step: Pilih JTipe Magang --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
-        <img src="{{ asset('assets/imgs/panduan/step2-Tipe-magang.png') }}" alt="Pilih Tipe Magang" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Pilih Tipe Magang</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Pilih Tipe magang yang ingin diikuti, seperti magang mandiri, atau magang kelompok.
-        </p>
-      </div> 
-      {{-- Sub-step: Pilih Program Magang --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
-        <img src="{{ asset('assets/imgs/panduan/step2-pilih-program.png') }}" alt="Pilih Program Magang" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Pilih Program Magang</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Pilih program magang yang sesuai dengan minat dan latar belakang pendidikan Anda.
-        </p>
-      </div>  
-
-      {{-- Sub-step: Unggah Dokumen Pendukung --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
-        <img src="{{ asset('assets/imgs/panduan/step2-upload-dokumen.png') }}" alt="Unggah Dokumen Pendukung" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Unggah Dokumen Pendukung</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Unggah dokumen seperti CV, transkrip nilai, dan surat rekomendasi jika diperlukan.
-        </p>
-      </div>  
-
-      {{-- Sub-step: Tinjau dan Kirim --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
-        <img src="{{ asset('assets/imgs/panduan/step2-tinjau-kirim.png') }}" alt="Tinjau dan Kirim" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Tinjau dan Kirim</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Periksa kembali data yang telah diisi, pastikan semua informasi benar, lalu klik tombol <em>Kirim Pendaftaran</em>.
-        </p>
-      </div>
-    </div>
-    {{-- Step 3 --}}
-    <div class="mb-50">
-      <h2 class="color-white mb-30 text-center">3. Proses Seleksi</h2>         
-
-      {{-- Sub-step: Tunggu Konfirmasi --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp">
-        <img src="{{ asset('assets/imgs/panduan/step3-tunggu-konfirmasi.png') }}" alt="Tunggu Konfirmasi" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Tunggu Konfirmasi</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Setelah mengirim pendaftaran, tunggu konfirmasi melalui email atau notifikasi di akun Anda.
-        </p>
-      </div>  
-      
-      {{-- Sub-step: Ikuti Tes Seleksi --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
-        <img src="{{ asset('assets/imgs/panduan/step3-tes-seleksi.png') }}" alt="Ikuti Tes Seleksi" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Ikuti Tes Seleksi</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Jika lolos tahap awal, Anda akan diundang untuk mengikuti tes seleksi sesuai jadwal yang ditentukan.
-        </p>
-      </div>
-      {{-- Sub-step: Wawancara --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
-        <img src="{{ asset('assets/imgs/panduan/step3-wawancara.png') }}" alt="Wawancara" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Wawancara</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Jika lolos tes, Anda akan diundang untuk wawancara dengan tim seleksi.
-        </p>
-      </div>
-      {{-- Sub-step: Pengumuman Hasil --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
-        <img src="{{ asset('assets/imgs/panduan/step3-pengumuman.png') }}" alt="Pengumuman Hasil" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Pengumuman Hasil</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Hasil seleksi akan diumumkan melalui email dan akun Anda. Jika diterima, Anda akan mendapatkan informasi lebih lanjut mengenai jadwal dan persiapan magang.
-        </p>
-      </div>
-    </div>
-    {{-- Step 4 --}}
-    <div class="mb-50">
-      <h2 class="color-white mb-30 text-center">4. Persiapan Magang</h2>
-
-      {{-- Sub-step: Persiapkan Dokumen --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp">
-        <img src="{{ asset('assets/imgs/panduan/step4-persiapkan-dokumen.png') }}" alt="Persiapkan Dokumen" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Persiapkan Dokumen</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Siapkan dokumen yang diperlukan seperti KTP, surat izin orang tua, dan dokumen lain yang diminta.
-        </p>
-      </div>
-
-      {{-- Sub-step: Ikuti Orientasi --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
-        <img src="{{ asset('assets/imgs/panduan/step4-orientasi.png') }}" alt="Ikuti Orientasi" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Ikuti Orientasi</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Hadiri sesi orientasi yang akan memberikan informasi penting mengenai program magang, aturan, dan
-          tanggung jawab selama magang.
-        </p>
-      </div>
-      
-      {{-- Sub-step: Mulai Magang --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
-        <img src="{{ asset('assets/imgs/panduan/step4-mulai-magang.png') }}" alt="Mulai Magang" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Mulai Magang</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Setelah orientasi, Anda akan mulai menjalani program magang sesuai jadwal yang telah ditentukan.
-        </p>
-      </div>  
-
-      {{-- Sub-step: Laporan Magang --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
-        <img src="{{ asset('assets/imgs/panduan/step4-laporan.png') }}" alt="Laporan Magang" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Laporan Magang</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Selama magang, Anda diharapkan membuat laporan berkala mengenai kegiatan dan pembelajaran yang didapatkan.
-        </p>
-      </div>  
-
-      {{-- Sub-step: Evaluasi Akhir --}}
-      <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
-        <img src="{{ asset('assets/imgs/panduan/step4-evaluasi.png') }}" alt="Evaluasi Akhir" class="rounded-lg shadow-lg mb-20" style="max-width: 500px; width: 100%;">
-        <h4 class="color-white">Evaluasi Akhir</h4>
-        <p class="color-gray-500 max-w-[600px] mx-auto">
-          Di akhir program magang, akan ada evaluasi untuk menilai kinerja dan kontribusi Anda selama magang.
-        </p>
-      </div>
-    </div>
+    @else
+      {{-- Kalau hanya 1 gambar --}}
+      <img src="{{ asset('assets/imgs/panduan/'.$item[0]) }}" 
+           alt="{{ $item[1] }}" 
+           class="rounded-lg shadow-lg w-full max-w-[500px] mx-auto">
+    @endif
   </div>
-</main>
+@endforeach
+
+
+
+    <!-- STEP 2 -->
+    <div class="mb-50">
+      <h2 class="color-white mb-30 text-center wow animate__animated animate__fadeInUp">2. Melengkapi Profil dan Pengajuan</h2>
+
+      @php
+        $step2 = [
+          [['step2-isi-profil.webp','step2-isi-profil (2).webp','step2-isi-profil (3).webp'],'Lengkapi Profil','Setelah login, Anda akan diminta untuk melengkapi profil dan keahlian Anda. Bagian ini mencakup informasi pribadi, data diri, dan keahlian.'],
+          ['step2-pengajuan.webp','Buat Pengajuan','Setelah profil lengkap, Anda dapat membuat pengajuan magang baru.'],
+          [['step2-tipe.webp','step2-tipe (2).webp'],'Pilih Tipe Pengajuan','Pilih apakah Anda akan mengajukan magang secara mandiri atau berkelompok. Jika berkelompok, Anda harus menambahkan data diri anggota lain.']
+        ];
+      @endphp
+
+      @foreach($step2 as $i => $item)
+  <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".{{ $i }}s">
+    <h4 class="color-white">{!! $item[1] !!}</h4>
+    <p class="color-gray-400 max-w-[600px] mx-auto mb-20">{!! $item[2] !!}</p>
+
+    {{-- Kalau ada banyak gambar --}}
+    @if(is_array($item[0]))
+      <div class="flex flex-wrap justify-center gap-4">
+        @foreach($item[0] as $img)
+          <img src="{{ asset('assets/imgs/panduan/'.$img) }}" 
+               alt="{{ $item[1] }}" 
+               class="rounded-lg shadow-lg w-full max-w-[300px]">
+        @endforeach
+      </div>
+    @else
+      {{-- Kalau hanya 1 gambar --}}
+      <img src="{{ asset('assets/imgs/panduan/'.$item[0]) }}" 
+           alt="{{ $item[1] }}" 
+           class="rounded-lg shadow-lg w-full max-w-[500px] mx-auto">
+    @endif
+  </div>
+@endforeach
+
+
+    <!-- STEP 3 -->
+    <div class="mb-50">
+      <h2 class="color-white mb-30 text-center wow animate__animated animate__fadeInUp">3. Proses Pengajuan dan Verifikasi</h2>
+
+      @php
+        $step3 = [
+          [['step3-pantau.webp','step3-pantau (2).webp'],'Pantau Status Pengajuan','Pengajuan Anda akan diproses. Anda perlu memantaunya secara berkala, biasanya prosesnya memakan waktu kurang lebih dua minggu.'],
+          [['step3-diterima.webp','step3-diterima (2).webp'],'Pengajuan Diterima','Setelah status pengajuan berubah menjadi "Diterima", Anda akan menerima email notifikasi berisi dokumen yang perlu dicetak.'],
+          ['step3-serah-terima.webp','Serah Terima Dokumen','Serahkan surat yang telah dicetak ke Kesbangpol daerah Anda. Kemudian, bawa surat balasan dari Kesbangpol ke kantor Diskominfo untuk serah terima secara langsung.']
+        ];
+      @endphp
+
+      @foreach($step3 as $i => $item)
+  <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".{{ $i }}s">
+    <h4 class="color-white">{!! $item[1] !!}</h4>
+    <p class="color-gray-400 max-w-[600px] mx-auto mb-20">{!! $item[2] !!}</p>
+
+    {{-- Kalau ada banyak gambar --}}
+    @if(is_array($item[0]))
+      <div class="flex flex-wrap justify-center gap-4">
+        @foreach($item[0] as $img)
+          <img src="{{ asset('assets/imgs/panduan/'.$img) }}" 
+               alt="{{ $item[1] }}" 
+               class="rounded-lg shadow-lg w-full max-w-[300px]">
+        @endforeach
+      </div>
+    @else
+      {{-- Kalau hanya 1 gambar --}}
+      <img src="{{ asset('assets/imgs/panduan/'.$item[0]) }}" 
+           alt="{{ $item[1] }}" 
+           class="rounded-lg shadow-lg w-full max-w-[500px] mx-auto">
+    @endif
+  </div>
+@endforeach
+
+    <!-- STEP 4 -->
+    <div class="mb-50">
+      <h2 class="color-white mb-30 text-center wow animate__animated animate__fadeInUp">4. Kegiatan Selama dan Setelah Magang</h2>
+
+      @php
+        $step4 = [
+          ['step4-logbook.webp','Isi Logbook','Selama masa magang, Anda wajib mengisi logbook kegiatan untuk laporan.'],
+          ['step4-sertifikat.webp','Pengambilan Sertifikat','Setelah magang selesai dan sudah di evaluasi, sertifikat dapat diambil langsung di kantor Diskominfo.'],
+          ['step4-survei.webp','Isi Survei','Jangan lupa untuk mengisi survei kepuasan yang disediakan.']
+        ];
+      @endphp
+
+      @foreach($step4 as $i => $item)
+  <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".{{ $i }}s">
+    <h4 class="color-white">{!! $item[1] !!}</h4>
+    <p class="color-gray-400 max-w-[600px] mx-auto mb-20">{!! $item[2] !!}</p>
+
+    {{-- Kalau ada banyak gambar --}}
+    @if(is_array($item[0]))
+      <div class="flex flex-wrap justify-center gap-4">
+        @foreach($item[0] as $img)
+          <img src="{{ asset('assets/imgs/panduan/'.$img) }}" 
+               alt="{{ $item[1] }}" 
+               class="rounded-lg shadow-lg w-full max-w-[300px]">
+        @endforeach
+      </div>
+    @else
+      {{-- Kalau hanya 1 gambar --}}
+      <img src="{{ asset('assets/imgs/panduan/'.$item[0]) }}" 
+           alt="{{ $item[1] }}" 
+           class="rounded-lg shadow-lg w-full max-w-[500px] mx-auto">
+    @endif
+  </div>
+@endforeach
+
 
   <footer class="footer">
     <div class="container">
