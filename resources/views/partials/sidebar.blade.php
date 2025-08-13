@@ -48,7 +48,7 @@
             </li>
 
             <li class="sidebar-header">
-                Dokumentasi & Notifikasi
+                Dokumentasi & LogBook
             </li>
 
             <li class="sidebar-item {{ Request::routeIs('admin.documentation.index') ? 'active' : '' }}"> {{-- Asumsi ada rute untuk daftar universitas --}}
@@ -68,12 +68,12 @@
                     <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Status History</span>
                 </a>
             </li> --}}
-<li class="sidebar-item {{ Request::routeIs('admin.logbook.index') ? 'active' : '' }}">
-    <a class="sidebar-link" href="{{ route('admin.logbook.index') }}">
-        <i class="align-middle" data-feather="user-check"></i>
-        <span class="align-middle">LogBook Mahasiswa</span>
-    </a>
-</li>
+            <li class="sidebar-item {{ Request::routeIs('admin.logbook.index') ? 'active' : '' }}">
+                <a class="sidebar-link" href="{{ route('admin.logbook.index') }}">
+                    <i class="align-middle" data-feather="user-check"></i>
+                    <span class="align-middle">LogBook Mahasiswa</span>
+                </a>
+            </li>
 
             {{-- <li class="sidebar-item">
                 <a class="sidebar-link" href="icons-feather.html">

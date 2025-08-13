@@ -75,7 +75,7 @@
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Pending</h5>
+														<h5 class="card-title">Diproses</h5>
 													</div>
 
 													{{-- <div class="col-auto">
@@ -193,7 +193,7 @@
                                     <td>{{ $pengajuan->databidang->nama }}</td>
                                     <td>
                                         @if($pengajuan->status == 'diproses')
-                                            <span class="badge bg-warning">Pending</span>
+                                            <span class="badge bg-warning">Diproses</span>
                                         @elseif($pengajuan->status == 'diterima')
                                             <span class="badge bg-success">Diterima</span>
                                         @elseif($pengajuan->status == 'diproses')

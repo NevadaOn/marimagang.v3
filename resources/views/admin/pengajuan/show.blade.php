@@ -386,9 +386,9 @@
                 Opsi
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalKelolaSurat">Kelola Surat Kesbangpol</a></li>
                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#updateTanggalModal">Ubah Tanggal</a></li>
                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalBidang">Ubah Bidang</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalKelolaSurat">Kelola Surat Kesbangpol</a></li>
                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalForm">Form Kesediaan Magang</a></li>
                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalKomentar">Komentar ke Admin/User</a></li>
             </ul>
@@ -491,21 +491,48 @@
     </div>
 
     <p class="fw-semibold mb-2 text-center">Lampiran surat dari Dinas:</p>
-    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2" style="margin: 15px;">
-        @if($pengajuan->form_kesediaan_magang)
-            <a href="{{ asset('storage/' . $pengajuan->form_kesediaan_magang) }}" class="btn btn-success" target="_blank">
-                Lihat Form Kesediaan Magang
-            </a>
-        @endif
 
-        @if ($pengajuan->surat_pdf)
-            <button onclick="showPreview('{{ asset('storage/' . $pengajuan->surat_pdf) }}', '{{ basename($pengajuan->surat_pdf) }}')"
-                    class="btn btn-primary btn-sm">
-                <i class="fas fa-eye me-1"></i>
-                Lihat Surat Bangkespol
-            </button>
-        @endif
-    </div>
+<table class="table table-bordered" style="margin: 15px; width: auto;">
+    <thead class="table-light">
+        <tr>
+            <th style="width: 50px;">No</th>
+            <th>Surat</th>
+            <th style="width: 200px;">Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Surat Bangkesbangpol</td>
+            <td>
+                @if($pengajuan->surat_pdf)
+                    <button class="btn btn-success btn-sm"
+                        onclick="showPreview('{{ asset('storage/' . $pengajuan->surat_pdf) }}', '{{ basename($pengajuan->surat_pdf) }}')">
+                        <i class="fas fa-check-circle me-1"></i> Lihat
+                    </button>
+                @else
+                    <span class="badge bg-secondary"><i class="fas fa-times-circle me-1"></i> Belum ada</span>
+                @endif
+            </td>
+        </tr>
+
+        <tr>
+            <td>2</td>
+            <td>Form Kesediaan Magang</td>
+            <td>
+                @if($pengajuan->form_kesediaan_magang)
+                    <a href="{{ asset('storage/' . $pengajuan->form_kesediaan_magang) }}" 
+                       target="_blank" class="btn btn-primary btn-sm">
+                        <i class="fas fa-check-circle me-1"></i> Lihat
+                    </a>
+                @else
+                    <span class="badge bg-secondary"><i class="fas fa-times-circle me-1"></i> Belum ada</span>
+                @endif
+            </td>
+        </tr>
+    </tbody>
+</table>
+
 </div>
 
 
@@ -526,7 +553,7 @@
                 ];
             })->toArray(),
         ]
-    ])->merge(
+        ])->merge(
         $pengajuan->anggota
             ->filter(fn($a) => strtolower($a->role) !== 'ketua')
             ->map(function ($anggota) {
@@ -694,9 +721,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Tempatkan form surat di sini seperti sebelumnya -->
+                    
                     @include('partials.ubah_bidang') 
-                    {{-- Atau langsung tempel kode form jika tidak menggunakan partial --}}
+                    
                 </div>
                 </div>
             </div>
@@ -765,7 +792,7 @@
                         <div>
                             <p class="mb-0">Silakan pilih tindakan yang ingin dilakukan terhadap pengajuan ini</p>
                         </div>
-                        <form action="{{ route('admin.pengajuan.updateStatus', $pengajuan->id) }}" method="POST" class="d-flex align-items-center">
+                        <form id="formStatusPengajuan" action="{{ route('admin.pengajuan.updateStatus', $pengajuan->id) }}" method="POST" class="d-flex align-items-center">
                             @csrf
                             @method('PUT')
                             <label for="status" class="form-label me-3 mb-0">Ubah Status:</label>
@@ -776,7 +803,7 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin mengubah status?')" class="btn btn-primary">
+                            <button type="button" id="btnSimpanStatus" class="btn btn-primary">
                                 <i class="fas fa-save me-1"></i>
                                 Simpan
                             </button>
@@ -785,109 +812,6 @@
                 </div>
             </div>
             @endif
-
-{{-- <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateTanggalModal">
-    Ubah Tanggal Magang
-</button> --}}
-{{-- <div class="modal fade" id="updateTanggalModal" tabindex="-1" aria-labelledby="updateTanggalModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0;">
-    <div class="modal-content">
-      <form action="{{ route('admin.pengajuan.updateTanggal', $pengajuan->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-
-        <div class="modal-header">
-          <h5 class="modal-title" id="updateTanggalModalLabel">Ubah Tanggal Magang</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-        </div>
-
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="tanggal_mulai" class="form-label">Tanggal Mulai</label>
-            <input type="date" name="tanggal_mulai" id="tanggal_mulai" class="form-control" value="{{ $pengajuan->tanggal_mulai }}">
-          </div>
-
-          <div class="mb-3">
-            <label for="tanggal_selesai" class="form-label">Tanggal Selesai</label>
-            <input type="date" name="tanggal_selesai" id="tanggal_selesai" class="form-control" value="{{ $pengajuan->tanggal_selesai }}">
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary">Simpan</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div> --}}
-{{-- @if (in_array(auth()->guard('admin')->user()->role, ['superadmin', 'admin_dinas']))
-    <form action="{{ route('admin.pengajuan.updateBidang', $pengajuan->id) }}" method="POST" class="mb-3">
-        @csrf
-        @method('PATCH')
-
-        <label for="databidang_id" class="form-label">Pilih Bidang</label>
-        <select name="databidang_id" id="databidang_id" class="form-select" required>
-            @foreach ($listBidang as $bidang)
-                <option value="{{ $bidang->id }}" {{ $pengajuan->databidang_id == $bidang->id ? 'selected' : '' }}>
-                    {{ $bidang->nama }}
-                </option>
-            @endforeach
-        </select>
-
-        <button type="submit" class="btn btn-primary mt-2">Simpan Bidang</button>
-    </form>
-@endif --}}
-
-{{-- <form action="{{ route('admin.pengajuan.kirimCatatan', $pengajuan->id) }}" method="POST">
-    @csrf
-
-    <div class="mb-3">
-        <label for="tujuan" class="form-label">Tujuan Komentar</label>
-        <select name="tujuan" id="tujuan" class="form-select" required>
-            <option value="user">User</option>
-            <option value="admin_bidang">Admin Bidang</option>
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label for="komentar_admin" class="form-label">Isi Komentar</label>
-        <textarea name="komentar_admin" class="form-control" rows="4" required>{{ old('komentar_admin') }}</textarea>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Kirim</button>
-</form> --}}
-
-{{-- @if(auth('admin')->check() && (
-    (auth('admin')->user()->role === 'admin_bidang' && auth('admin')->user()->id === $pengajuan->databidang->admin_id) ||
-    auth('admin')->user()->role === 'superadmin'
-))
-    <form action="{{ route('admin.pengajuan.kesediaan.generate', $pengajuan->id) }}" method="POST">
-        @csrf
-        <h5 class="font-bold mb-3">Buat Form Kesediaan Magang</h5>
-
-        <div class="mb-2">
-            <label>Penanggung Jawab</label>
-            <input type="text" name="penanggung_jawab" class="form-control" required>
-        </div>
-
-        <div class="mb-2">
-            <label>Nama Project</label>
-            <textarea name="nama_project" class="form-control" rows="3" placeholder="Masukkan judul/deskripsi project" required></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary mt-2">Generate Form</button>
-    </form>
-
-    @if($pengajuan->form_kesediaan_magang)
-        <a href="{{ asset('storage/' . $pengajuan->form_kesediaan_magang) }}" class="btn btn-success mt-2" target="_blank">
-            Lihat Form Kesediaan Magang
-        </a>
-    @endif
-@endif
- --}}
-
-<!-- Preview Modal -->
 <div id="previewModal" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -926,6 +850,61 @@
             </div>
         </div>
     </div>
+</div>
+<!-- Modal Konfirmasi Diterima -->
+<div class="modal fade" id="modalKonfirmasiDiterima" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog" style="position:relative !important; top:auto !important; left:auto !important; transform:none !important; margin:auto; display:flex; align-items:center; min-height:calc(100% - 1rem);">
+    <div class="modal-content" style="width: 80vh;">
+      <form method="POST" action="{{ route('admin.pengajuan.updateStatus', $pengajuan->id) }}">
+        @csrf
+        @method('PUT')
+        <input type="hidden" name="status" value="diterima">
+        
+        <div class="modal-header">
+          <h5 class="modal-title">Konfirmasi Pengajuan Diterima</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        
+        <div class="modal-body" style="margin: 5px;">
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" name="kirim_email" id="kirim_email" value="1" checked>
+            <label class="form-check-label" for="kirim_email">Kirim email ke user</label>
+          </div>
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" name="lampirkan_surat_pdf" id="lampirkan_surat_pdf" value="1" {{ $pengajuan->surat_pdf ? '' : 'disabled' }}>
+            <label class="form-check-label" for="lampirkan_surat_pdf">Lampirkan Surat Kesbangpol</label>
+          </div>
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" name="lampirkan_form_kesediaan" id="lampirkan_form_kesediaan" value="1" {{ $pengajuan->form_kesediaan_magang ? '' : 'disabled' }}>
+            <label class="form-check-label" for="lampirkan_form_kesediaan">Lampirkan Form Kesediaan Magang</label>
+          </div>
+
+          <div class="mb-3">
+            <label for="catatan_admin" class="form-label">Catatan tambahan untuk user</label>
+            <textarea name="catatan_admin" id="catatan_admin" class="form-control" rows="3"></textarea>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="kirim_notifikasi" id="kirim_notifikasi" value="1">
+            <label class="form-check-label" for="kirim_notifikasi">Kirim catatan ke notifikasi sistem user</label>
+          </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">
+            <i class="fas fa-check me-1"></i>
+            Konfirmasi & Simpan
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-1"></i>
+            Batal
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 @endsection
 
@@ -969,7 +948,6 @@ function isRouteUrl(url) {
 }
 
 function handleRoutePreview(url, fileExtension) {
-    // Fetch file melalui route dan convert ke blob
     fetch(url, {
         method: 'GET',
         headers: {
@@ -994,7 +972,6 @@ function handleRoutePreview(url, fileExtension) {
 }
 
 function handleDirectPreview(url, fileExtension) {
-    // Langsung load dengan delay seperti biasa
     setTimeout(() => {
         loadPreviewFrame(url, fileExtension);
     }, 500);
@@ -1007,10 +984,8 @@ function loadPreviewFrame(url, fileExtension) {
     
     try {
         if (fileExtension === 'pdf') {
-            // Untuk PDF, load langsung
             frame.src = url + '#toolbar=1&navpanes=1&scrollbar=1&view=FitH';
         } else if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].includes(fileExtension)) {
-            // Untuk gambar, buat img element di dalam iframe
             const imgHtml = `
                 <html>
                 <head>
@@ -1035,11 +1010,9 @@ function loadPreviewFrame(url, fileExtension) {
             loading.style.display = 'none';
             content.style.display = 'block';
         };
-        
-        // Fallback jika iframe tidak load dalam 10 detik
+
         setTimeout(() => {
             if (loading.style.display !== 'none') {
-                // Jika Google Docs Viewer gagal, coba direct link
                 if (frame.src.includes('docs.google.com')) {
                     frame.src = url;
                 } else {
@@ -1132,8 +1105,7 @@ function closePreview() {
     
     modal.classList.remove('show');
     frame.src = '';
-    
-    // Clean up blob URLs to prevent memory leaks
+
     if (currentFileUrl && currentFileUrl.startsWith('blob:')) {
         URL.revokeObjectURL(currentFileUrl);
     }
@@ -1144,7 +1116,6 @@ function closePreview() {
 
 function downloadFile() {
     if (currentFileUrl) {
-        // Jika blob URL, trigger download dengan nama file
         if (currentFileUrl.startsWith('blob:')) {
             const link = document.createElement('a');
             link.href = currentFileUrl;
@@ -1153,44 +1124,181 @@ function downloadFile() {
             link.click();
             document.body.removeChild(link);
         } else {
-            // Jika URL biasa, buka di tab baru
             window.open(currentFileUrl, '_blank');
         }
     }
 }
 
-// Close modal when clicking outside
 document.getElementById('previewModal').addEventListener('click', function(e) {
     if (e.target === this) {
         closePreview();
     }
 });
 
-// Close modal with Escape key
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && document.getElementById('previewModal').classList.contains('show')) {
         closePreview();
     }
 });
 
-// Submit button loading state
-document.querySelectorAll('form button[type="submit"]').forEach(button => {
-    button.addEventListener('click', function (e) {
-        const form = this.closest('form');
-        if (form.checkValidity()) {
-            e.preventDefault(); 
-            const originalText = this.innerHTML;
-            this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memproses...';
-            this.disabled = true;
-
-            setTimeout(() => {
-                this.innerHTML = originalText;
-                this.disabled = false;
-            }, 5000);
-
-            form.submit();
+document.addEventListener('DOMContentLoaded', function() {
+    var statusForm = document.getElementById('formStatusPengajuan');
+    if (statusForm) {
+        var submitBtn = statusForm.querySelector('button[type="submit"], button[type="button"]');
+        if (submitBtn) {
+            submitBtn.addEventListener('click', function(e) {
+                const status = document.getElementById('status').value;
+                if (status !== 'diterima') {
+                   
+                    submitBtn.disabled = true;
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memproses...';
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 5000);
+                    statusForm.submit();
+                }
+            });
         }
-    });
+    }
+
+    var modalForm = document.querySelector('#modalKonfirmasiDiterima form');
+    if (modalForm) {
+        var modalSubmitBtn = modalForm.querySelector('button[type="submit"]');
+        if (modalSubmitBtn) {
+            modalForm.addEventListener('submit', function(e) {
+                modalSubmitBtn.disabled = true;
+                const originalText = modalSubmitBtn.innerHTML;
+                modalSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memproses...';
+                setTimeout(() => {
+                    modalSubmitBtn.innerHTML = originalText;
+                    modalSubmitBtn.disabled = false;
+                }, 5000);
+                
+            });
+        }
+    }
+});
+
+document.getElementById('btnSimpanStatus').addEventListener('click', function(e) {
+    const status = document.getElementById('status').value;
+    if (status === 'diterima') {
+        var modal = new bootstrap.Modal(document.getElementById('modalKonfirmasiDiterima'));
+        modal.show();
+    } else {
+        document.getElementById('formStatusPengajuan').submit();
+    }
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const btnSimpanStatus = document.getElementById('btnSimpanStatus');
+    if (btnSimpanStatus) {
+        btnSimpanStatus.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const status = document.getElementById('status').value;
+            console.log('Status yang dipilih:', status);
+            
+            if (status === 'diterima') {
+                const modalElement = document.getElementById('modalKonfirmasiDiterima');
+                if (modalElement) {
+                    let modal;
+                    if (typeof bootstrap !== 'undefined') {
+                        modal = new bootstrap.Modal(modalElement);
+                    } else if (typeof $ !== 'undefined') {
+                        modal = $('#modalKonfirmasiDiterima');
+                        modal.modal('show');
+                        return;
+                    } else {
+                        modalElement.style.display = 'block';
+                        modalElement.classList.add('show');
+                        return;
+                    }
+                    modal.show();
+                } else {
+                    console.error('Modal konfirmasi tidak ditemukan');
+                    submitFormStatus(btnSimpanStatus);
+                }
+            } else {
+                submitFormStatus(btnSimpanStatus);
+            }
+        });
+    }
+    
+    const modalForm = document.querySelector('#modalKonfirmasiDiterima form');
+    if (modalForm) {
+        modalForm.addEventListener('submit', function(e) {
+            console.log('Form modal akan disubmit'); // Debug
+            
+            const modalSubmitBtn = modalForm.querySelector('button[type="submit"]');
+            if (modalSubmitBtn) {
+                modalSubmitBtn.disabled = true;
+                const originalText = modalSubmitBtn.innerHTML;
+                modalSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memproses...';
+                
+                setTimeout(() => {
+                    modalSubmitBtn.innerHTML = originalText;
+                    modalSubmitBtn.disabled = false;
+                }, 10000);
+            }
+            
+        });
+    }
+});
+
+function submitFormStatus(button) {
+    const form = document.getElementById('formStatusPengajuan');
+    if (form && button) {
+        button.disabled = true;
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memproses...';
+        
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.disabled = false;
+        }, 10000);
+        
+        form.submit();
+    }
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const modal = document.getElementById('modalKonfirmasiDiterima');
+        if (modal && (modal.classList.contains('show') || modal.style.display === 'block')) {
+            closeModal(modal);
+        }
+    }
+});
+
+function closeModal(modalElement) {
+    if (typeof bootstrap !== 'undefined') {
+        const modal = bootstrap.Modal.getInstance(modalElement);
+        if (modal) {
+            modal.hide();
+        }
+    } else if (typeof $ !== 'undefined') {
+        $(modalElement).modal('hide');
+    } else {
+        modalElement.style.display = 'none';
+        modalElement.classList.remove('show');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const modalForm = document.querySelector('#modalKonfirmasiDiterima form');
+    if (modalForm) {
+        modalForm.addEventListener('submit', function(e) {
+            console.log('Form action:', modalForm.action);
+            console.log('Form method:', modalForm.method);
+            
+            const formData = new FormData(modalForm);
+            console.log('Form data yang akan dikirim:');
+            for (let [key, value] of formData.entries()) {
+                console.log(`${key}: ${value}`);
+            }
+        });
+    }
 });
 </script>
 @endpush

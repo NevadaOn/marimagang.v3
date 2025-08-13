@@ -19,8 +19,7 @@
   <div id="preloader-active">
     <div class="preloader d-flex align-items-center justify-content-center">
       <div class="preloader-inner position-relative">
-        <div class="text-center"><img class="mb-10" src="{{ asset('assets/imgs/template/favicon.svg') }}"
-            alt="DiskominfoKab.Malang">
+        <div class="text-center"><img class="mb-10" src="{{ asset('assets/imgs/template/favicon.svg') }}" alt="GenZ">
           <div class="preloader-dots"></div>
         </div>
       </div>
@@ -31,8 +30,8 @@
       <div class="main-header">
         <div class="header-logo">
           <a class="d-flex" href="{{ url('/') }}">
-            <img class="logo-night" alt="Diskominfo" src="{{ asset('img/rb_30832.png') }}" width="70px">
-            <img class="d-none logo-day" alt="Diskominfo" src="{{ asset('img/rb_30832.png') }}" width="70px">
+            <img class="logo-night" alt="Diskominfo" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" width="90px">
+            <img class="d-none logo-day" alt="Diskominfo" src="{{ asset('assets/imgs/template/rb_3083.svg') }}" width="90px">
           </a>
         </div>
         <div class="header-nav">
@@ -71,50 +70,159 @@
   </header>
 
   <main class="main">
-    <div class="cover-home3">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-10 col-lg-12 m-auto">
-            <div class="text-center mt-70">
-              <h1 class="color-linear d-inline-block mb-30">Hubungi Kami</h1>
-              <p class="text-xl color-gray-500">Dinas Komunikasi dan Informatika Kabupaten Malang<br
-               class="d-none d-lg-block">Hubungi kami untuk informasi lebih lanjut atau pertanyaan seputar layanan kami. </p>
-                  
-              
-<div class="text-center mt-30">
-  <div class="d-inline-block  text-start me-3">
-    <a href="tel:+62341364776" class="color-gray-500">
-      <i class="fas fa-phone-alt me-1"></i> (0341) 364776
-    </a>
-  </div>
+  <div class="container mt-70 mb-50">
+    <div class="text-center mb-50 wow animate__animated animate__fadeInUp">
+      <h1 class="color-linear mb-20">Panduan Magang di Diskominfo Kabupaten Malang</h1>
+      <p class="text-lg color-gray-300 max-w-[700px] mx-auto">
+        Panduan ini menjelaskan langkah-langkah yang harus dilalui oleh peserta magang, mulai dari pendaftaran hingga selesainya kegiatan.
+      </p>
+    </div>
 
-  <div class="d-inline-block  text-start me-3">
-    <a href="mailto:kominfo@malangkab.go.id" class="color-gray-500">
-      <i class="fas fa-envelope me-1"></i> kominfo@malangkab.go.id
-    </a>
-  </div>
+    <!-- STEP 1 -->
+    <div class="mb-50">
+      <h2 class="color-white mb-30 text-center wow animate__animated animate__fadeInUp">1. Pembuatan Akun</h2>
 
-  <div class="d-inline-block social-media text-start me-2">
-    <a href="https://instagram.com/kominfokabmlg" class="color-gray-500" target="_blank">
-      <i class="fab fa-instagram me-1"></i> @kominfokabmlg
-    </a>
-  </div>
+      @php
+        $step1 = [
+          ['step1-akses.webp','Akses Halaman Masuk','Buka halaman masuk untuk memulai proses pendaftaran.'],
+          ['step1-buat.webp','Buat Akun','Pilih opsi <em>Daftar Sekarang</em> untuk mendaftar.'],
+          ['step1-registrasi.webp','Lengkapi Registrasi','Isi formulir pendaftaran dengan nama lengkap, email, nomor telepon, dan buat kata sandi.'],
+          [['step1-verifikasi.webp','step1-verifikasi (3).webp','step1-verifikasi (2).webp'],'Verifikasi Akun','Lakukan verifikasi email dengan mengklik tautan yang dikirimkan ke alamat email Anda. Tautan verifikasi biasanya akan masuk ke folder spam.'],
+          ['step1-login.webp','Login','Setelah akun terverifikasi, Anda bisa login menggunakan username dan password yang telah didaftarkan.']
+        ];
+      @endphp
 
-  <div class="d-inline-block social-media text-start">
-    <a href="https://x.com/kominfokabmlg" class="color-gray-500" target="_blank">
-      <i class="fab fa-x-twitter me-1"></i> @kominfokabmlg
-    </a>
+      @foreach($step1 as $i => $item)
+  <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".{{ $i }}s">
+    <h4 class="color-white">{!! $item[1] !!}</h4>
+    <p class="color-gray-400 max-w-[600px] mx-auto mb-20">{!! $item[2] !!}</p>
+
+    {{-- Kalau ada banyak gambar --}}
+    @if(is_array($item[0]))
+      <div class="flex flex-wrap justify-center gap-4">
+        @foreach($item[0] as $img)
+          <img src="{{ asset('assets/imgs/panduan/'.$img) }}" 
+               alt="{{ $item[1] }}" 
+               class="rounded-lg shadow-lg w-full max-w-[300px]">
+        @endforeach
+      </div>
+    @else
+      {{-- Kalau hanya 1 gambar --}}
+      <img src="{{ asset('assets/imgs/panduan/'.$item[0]) }}" 
+           alt="{{ $item[1] }}" 
+           class="rounded-lg shadow-lg w-full max-w-[500px] mx-auto">
+    @endif
   </div>
-</div>
-          </div>
-            <div class="box-map mt-70 mb-50">
-              <iframe class="google-map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.159833545226!2d112.6330414!3d-7.9824239000000015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6298e932f9373%3A0xa947325c3d98a709!2sDinas%20Komunikasi%20dan%20Informatika%20Kabupaten%20Malang!5e0!3m2!1sid!2sid!4v1753553607424!5m2!1sid!2sid"
-                style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-           
-  </main>
+@endforeach
+
+
+
+    <!-- STEP 2 -->
+    <div class="mb-50">
+      <h2 class="color-white mb-30 text-center wow animate__animated animate__fadeInUp">2. Melengkapi Profil dan Pengajuan</h2>
+
+      @php
+        $step2 = [
+          [['step2-isi-profil.webp','step2-isi-profil (2).webp','step2-isi-profil (3).webp'],'Lengkapi Profil','Setelah login, Anda akan diminta untuk melengkapi profil dan keahlian Anda. Bagian ini mencakup informasi pribadi, data diri, dan keahlian.'],
+          ['step2-pengajuan.webp','Buat Pengajuan','Setelah profil lengkap, Anda dapat membuat pengajuan magang baru.'],
+          [['step2-tipe.webp','step2-tipe (2).webp'],'Pilih Tipe Pengajuan','Pilih apakah Anda akan mengajukan magang secara mandiri atau berkelompok. Jika berkelompok, Anda harus menambahkan data diri anggota lain.']
+        ];
+      @endphp
+
+      @foreach($step2 as $i => $item)
+  <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".{{ $i }}s">
+    <h4 class="color-white">{!! $item[1] !!}</h4>
+    <p class="color-gray-400 max-w-[600px] mx-auto mb-20">{!! $item[2] !!}</p>
+
+    {{-- Kalau ada banyak gambar --}}
+    @if(is_array($item[0]))
+      <div class="flex flex-wrap justify-center gap-4">
+        @foreach($item[0] as $img)
+          <img src="{{ asset('assets/imgs/panduan/'.$img) }}" 
+               alt="{{ $item[1] }}" 
+               class="rounded-lg shadow-lg w-full max-w-[300px]">
+        @endforeach
+      </div>
+    @else
+      {{-- Kalau hanya 1 gambar --}}
+      <img src="{{ asset('assets/imgs/panduan/'.$item[0]) }}" 
+           alt="{{ $item[1] }}" 
+           class="rounded-lg shadow-lg w-full max-w-[500px] mx-auto">
+    @endif
+  </div>
+@endforeach
+
+
+    <!-- STEP 3 -->
+    <div class="mb-50">
+      <h2 class="color-white mb-30 text-center wow animate__animated animate__fadeInUp">3. Proses Pengajuan dan Verifikasi</h2>
+
+      @php
+        $step3 = [
+          [['step3-pantau.webp','step3-pantau (2).webp'],'Pantau Status Pengajuan','Pengajuan Anda akan diproses. Anda perlu memantaunya secara berkala, biasanya prosesnya memakan waktu kurang lebih dua minggu.'],
+          [['step3-diterima.webp','step3-diterima (2).webp'],'Pengajuan Diterima','Setelah status pengajuan berubah menjadi "Diterima", Anda akan menerima email notifikasi berisi dokumen yang perlu dicetak.'],
+          ['step3-serah-terima.webp','Serah Terima Dokumen','Serahkan surat yang telah dicetak ke Kesbangpol daerah Anda. Kemudian, bawa surat balasan dari Kesbangpol ke kantor Diskominfo untuk serah terima secara langsung.']
+        ];
+      @endphp
+
+      @foreach($step3 as $i => $item)
+  <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".{{ $i }}s">
+    <h4 class="color-white">{!! $item[1] !!}</h4>
+    <p class="color-gray-400 max-w-[600px] mx-auto mb-20">{!! $item[2] !!}</p>
+
+    {{-- Kalau ada banyak gambar --}}
+    @if(is_array($item[0]))
+      <div class="flex flex-wrap justify-center gap-4">
+        @foreach($item[0] as $img)
+          <img src="{{ asset('assets/imgs/panduan/'.$img) }}" 
+               alt="{{ $item[1] }}" 
+               class="rounded-lg shadow-lg w-full max-w-[300px]">
+        @endforeach
+      </div>
+    @else
+      {{-- Kalau hanya 1 gambar --}}
+      <img src="{{ asset('assets/imgs/panduan/'.$item[0]) }}" 
+           alt="{{ $item[1] }}" 
+           class="rounded-lg shadow-lg w-full max-w-[500px] mx-auto">
+    @endif
+  </div>
+@endforeach
+
+    <!-- STEP 4 -->
+    <div class="mb-50">
+      <h2 class="color-white mb-30 text-center wow animate__animated animate__fadeInUp">4. Kegiatan Selama dan Setelah Magang</h2>
+
+      @php
+        $step4 = [
+          ['step4-logbook.webp','Isi Logbook','Selama masa magang, Anda wajib mengisi logbook kegiatan untuk laporan.'],
+          ['step4-sertifikat.webp','Pengambilan Sertifikat','Setelah magang selesai dan sudah di evaluasi, sertifikat dapat diambil langsung di kantor Diskominfo.'],
+          ['step4-survei.webp','Isi Survei','Jangan lupa untuk mengisi survei kepuasan yang disediakan.']
+        ];
+      @endphp
+
+      @foreach($step4 as $i => $item)
+  <div class="text-center mb-40 wow animate__animated animate__fadeInUp" data-wow-delay=".{{ $i }}s">
+    <h4 class="color-white">{!! $item[1] !!}</h4>
+    <p class="color-gray-400 max-w-[600px] mx-auto mb-20">{!! $item[2] !!}</p>
+
+    {{-- Kalau ada banyak gambar --}}
+    @if(is_array($item[0]))
+      <div class="flex flex-wrap justify-center gap-4">
+        @foreach($item[0] as $img)
+          <img src="{{ asset('assets/imgs/panduan/'.$img) }}" 
+               alt="{{ $item[1] }}" 
+               class="rounded-lg shadow-lg w-full max-w-[300px]">
+        @endforeach
+      </div>
+    @else
+      {{-- Kalau hanya 1 gambar --}}
+      <img src="{{ asset('assets/imgs/panduan/'.$item[0]) }}" 
+           alt="{{ $item[1] }}" 
+           class="rounded-lg shadow-lg w-full max-w-[500px] mx-auto">
+    @endif
+  </div>
+@endforeach
+
 
   <footer class="footer">
     <div class="container">

@@ -319,7 +319,51 @@
                                 </div>
                             </div>
                         @endif
-
+                        @if(in_array($pengajuan->status, ['diterima', 'magang']))
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header bg-primary">
+                                    <h5 class="mb-0 text-white">
+                                        <i class="ph ph-file-text me-2"></i> Surat & Form Kesediaan Magang
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        @if($pengajuan->surat_pdf)
+                                            <div class="col-md-6 mb-3">
+                                                <div class="border rounded p-3 h-100">
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <i class="ph ph-file-pdf text-danger me-2"></i>
+                                                        <strong>Surat Kesbangpol</strong>
+                                                    </div>
+                                                    <a href="{{ asset('storage/' . $pengajuan->surat_pdf) }}" target="_blank" class="btn btn-sm btn-primary">
+                                                        <i class="ph ph-arrow-square-out me-1"></i>Lihat Surat
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if($pengajuan->form_kesediaan_magang)
+                                            <div class="col-md-6 mb-3">
+                                                <div class="border rounded p-3 h-100">
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <i class="ph ph-file-pdf text-success me-2"></i>
+                                                        <strong>Form Kesediaan Magang</strong>
+                                                    </div>
+                                                    <a href="{{ asset('storage/' . $pengajuan->form_kesediaan_magang) }}" target="_blank" class="btn btn-sm btn-success">
+                                                        <i class="ph ph-arrow-square-out me-1"></i>Lihat Form
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if(!$pengajuan->surat_pdf && !$pengajuan->form_kesediaan_magang)
+                                            <div class="col-12 text-center text-muted py-4">
+                                                <i class="ph ph-file-text fa-3x mb-3 opacity-50"></i>
+                                                <p>Belum ada surat atau form kesediaan magang yang diunggah.</p>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
 
                     </div>
                 </div>

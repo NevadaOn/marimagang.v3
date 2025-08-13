@@ -52,6 +52,7 @@ class AdminPengajuanController extends Controller
 
         return view('admin.pengajuan.showbidang', compact('pengajuan', 'listBidang'));
     }
+
     public function showdinas($id)
     {
         $pengajuan = Pengajuan::with([
@@ -65,6 +66,7 @@ class AdminPengajuanController extends Controller
 
         return view('admin.pengajuan.showdinas', compact('pengajuan', 'listBidang'));
     }
+
     public function show($id)
     {
         $pengajuan = Pengajuan::with([
@@ -79,10 +81,16 @@ class AdminPengajuanController extends Controller
         return view('admin.pengajuan.show', compact('pengajuan', 'listBidang'));
     }
 
+
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
             'status' => 'required|in:diproses,diteruskan,diterima,ditolak',
+            'catatan_admin' => 'nullable|string',
+            'kirim_email' => 'nullable|boolean',
+            'lampirkan_surat_pdf' => 'nullable|boolean',
+            'lampirkan_form_kesediaan' => 'nullable|boolean',
+            'kirim_notifikasi' => 'nullable|boolean',
         ]);
 
         $pengajuan = Pengajuan::findOrFail($id);
@@ -91,43 +99,42 @@ class AdminPengajuanController extends Controller
         $statusLama = $pengajuan->status;
         $statusBaru = $request->status;
 
-        if ($admin->role === 'superadmin') {
-            $pengajuan->status = $statusBaru;
-            $pengajuan->save();
+        $pengajuan->status = $statusBaru;
+        $pengajuan->save();
 
-            if ($statusBaru === 'diterima') {
-                $this->sendDiterimaNotifAndEmail($pengajuan, $statusLama, $request->catatan_admin);
+        if ($statusBaru === 'diterima' && $request->kirim_email) {
+            $attachments = [];
+            if ($request->lampirkan_surat_pdf && $pengajuan->surat_pdf) {
+                $attachments[] = storage_path('app/public/' . $pengajuan->surat_pdf);
             }
-
-            return back()->with('success', 'Status pengajuan diperbarui oleh superadmin.');
-        }
-
-        if ($admin->role === 'admin_dinas') {
-            if ($statusLama === 'diproses' && in_array($statusBaru, ['diteruskan', 'ditolak'])) {
-                $pengajuan->status = $statusBaru;
-                $pengajuan->save();
-                return back()->with('success', 'Status pengajuan diperbarui oleh admin dinas.');
-            } else {
-                return back()->with('error', 'Admin dinas hanya bisa memproses pengajuan dari status Diproses.');
+            if ($request->lampirkan_form_kesediaan && $pengajuan->form_kesediaan_magang) {
+                $attachments[] = storage_path('app/public/' . $pengajuan->form_kesediaan_magang);
             }
-        }
-
-        if ($admin->role === 'admin_bidang') {
-            if ($statusLama === 'diteruskan' && in_array($statusBaru, ['diproses', 'diterima', 'ditolak'])) {
-                $pengajuan->status = $statusBaru;
-                $pengajuan->save();
-
-                if ($statusBaru === 'diterima') {
-                    $this->sendDiterimaNotifAndEmail($pengajuan, $statusLama, $request->catatan_admin);
+            foreach ($pengajuan->anggota as $anggota) {
+                if ($anggota->email) {
+                    Mail::to($anggota->email)->send(new PengajuanDiterimaMail($anggota, $pengajuan, $request->catatan_admin, $attachments));
                 }
-
-                return back()->with('success', 'Status pengajuan diperbarui oleh admin bidang.');
-            } else {
-                return back()->with('error', 'Admin bidang hanya bisa memproses pengajuan dari status diteruskan.');
+            }
+            if ($pengajuan->user && $pengajuan->user->email) {
+                Mail::to($pengajuan->user->email)->send(new PengajuanDiterimaMail($pengajuan->user, $pengajuan, $request->catatan_admin, $attachments));
             }
         }
 
-        return back()->with('error', 'Anda tidak memiliki izin untuk mengubah status ini.');
+        if ($statusBaru === 'diterima' && $request->kirim_notifikasi) {
+            Notification::create([
+                'user_id' => $pengajuan->user_id,
+                'title' => 'Pengajuan Diterima',
+                'message' => $request->catatan_admin,
+                'type' => 'catatan_pengajuan',
+                'data' => json_encode([
+                    'pengajuan_id' => $pengajuan->id,
+                    'dari_admin' => $admin->name ?? 'Admin'
+                ]),
+                'is_read' => 0,
+            ]);
+        }
+
+        return back()->with('success', 'Status pengajuan diperbarui.');
     }
 
     private function sendDiterimaNotifAndEmail(Pengajuan $pengajuan, $statusLama, $catatanAdmin = null)
@@ -323,6 +330,7 @@ class AdminPengajuanController extends Controller
         $request->validate([
             'penanggung_jawab' => 'required|string|max:255',
             'nama_project' => 'required|string|max:255', 
+            'koordinator' => 'required|string|max:255',
         ]);
 
         $pengajuan = Pengajuan::with(['databidang', 'user'])->findOrFail($id);
@@ -339,6 +347,7 @@ class AdminPengajuanController extends Controller
             'pengajuan' => $pengajuan,
             'project' => $request->nama_project,
             'penanggung_jawab' => $request->penanggung_jawab,
+            'koordinator' => $request->koordinator,
             'tanggal' => now()->format('d F Y'),
             'admin' => $admin,
         ]);
@@ -353,4 +362,13 @@ class AdminPengajuanController extends Controller
 
         return back()->with('success', 'Form kesediaan berhasil dibuat dan disimpan.');
     }
+    public function markFinalAsRead()
+{
+    Pengajuan::whereIn('status', ['diterima', 'ditolak'])
+        ->whereNull('admin_read_at')
+        ->update(['admin_read_at' => now()]);
+
+    return back()->with('success', 'Notifikasi pengajuan final telah ditandai sudah dibaca.');
+}
+
 }

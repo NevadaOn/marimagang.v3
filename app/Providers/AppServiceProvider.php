@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use App\Models\Chat;
+use App\Models\Pengajuan; // ✅ tambahkan
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,21 +28,35 @@ class AppServiceProvider extends ServiceProvider
             $view->with('notifications', Notification::latest()->take(10)->get());
         });
 
-    View::composer('layouts.superadmin', function ($view) {
-        $adminId = auth()->id();
+        View::composer('layouts.superadmin', function ($view) {
+            $adminId = auth()->id();
 
-        if ($adminId) {
-            $latestChats = Chat::select('chats.*')
-                ->join(DB::raw('(SELECT MAX(id) as id FROM chats WHERE receiver_id = '.$adminId.' AND read_at IS NULL GROUP BY sender_id) latest'), 'chats.id', '=', 'latest.id')
-                ->with('sender')
-                ->orderBy('chats.created_at', 'desc')
-                ->get();
+            if ($adminId) {
+                $latestChats = Chat::select('chats.*')
+                    ->join(DB::raw('(SELECT MAX(id) as id FROM chats WHERE receiver_id = '.$adminId.' AND read_at IS NULL GROUP BY sender_id) latest'), 'chats.id', '=', 'latest.id')
+                    ->with('sender')
+                    ->orderBy('chats.created_at', 'desc')
+                    ->get();
 
-            $view->with('latestChats', $latestChats);
-        } else {
-            $view->with('latestChats', collect());
-        }
-    });
+                $view->with('latestChats', $latestChats);
+            } else {
+                $view->with('latestChats', collect());
+            }
+        });
 
+        View::composer('layouts.superadmin', function ($view) {
+        $notifikasiPengajuan = Pengajuan::where(function ($query) {
+                $query->whereIn('status', ['diproses', 'diteruskan']);
+            })
+            ->orWhere(function ($query) {
+                $query->whereIn('status', ['diterima', 'ditolak'])
+                    ->whereNull('admin_read_at'); 
+            })
+            ->orderBy('created_at', 'desc')
+            ->take(10)
+            ->get();
+
+            $view->with('notifikasiPengajuan', $notifikasiPengajuan);
+        });
     }
 }

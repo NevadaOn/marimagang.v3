@@ -182,6 +182,7 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
         Route::post('/{id}/upload-surat', 'uploadSurat')->name('uploadSurat');
         Route::post('/{id}/generate-surat', 'generateSurat')->name('generateSurat');
         Route::post('/{id}/generate-kesediaan', 'generateSuratKesediaan')->name('kesediaan.generate');
+        Route::post('/mark-final-read', 'markFinalAsRead')->name('markFinalAsRead');
     });
 
     Route::get('/user-details/{pengajuanId}', [AdminDashboardController::class, 'getUserDetails'])

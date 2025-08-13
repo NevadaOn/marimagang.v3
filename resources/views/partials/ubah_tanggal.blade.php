@@ -1,4 +1,4 @@
-      <form action="{{ route('admin.pengajuan.updateTanggal', $pengajuan->id) }}" method="POST">
+      <form action="{{ route('admin.pengajuan.updateTanggal', $pengajuan->id) }}" method="POST" style="padding: 5px;">
         @csrf
         @method('PUT')
 

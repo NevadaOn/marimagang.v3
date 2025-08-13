@@ -39,42 +39,55 @@ class AdminBidangController extends Controller
         return view('admin.bidang.create', compact('admins'));
     }
 
-    public function store(Request $request)
-    {
-        $rules = [
-            'nama' => 'required|string|max:255',
-            'slug' => 'required|string|unique:databidang,slug',
-            'kuota' => 'required|integer|min:1',
-            'thumbnail' => 'nullable|string',
-            'photo' => 'nullable|string',
-            'deskripsi' => 'nullable|string',
-            'status' => 'nullable|in:buka,tutup',
-        ];
+   public function store(Request $request)
+{
+    $rules = [
+        'nama' => 'required|string|max:255',
+        'slug' => 'required|string|unique:databidang,slug',
+        'kuota' => 'required|integer|min:1',
+        'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        'photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        'deskripsi' => 'nullable|string',
+        'status' => 'nullable|in:buka,tutup',
+    ];
 
-        if ($this->admin->role === 'superadmin') {
-            $rules['admin_id'] = 'required|exists:admins,id';
-        }
-
-        $validated = $request->validate($rules);
-
-        $adminId = $this->admin->role === 'superadmin'
-            ? $validated['admin_id']
-            : $this->admin->id;
-
-        Databidang::create([
-            'admin_id' => $adminId,
-            'nama' => $validated['nama'],
-            'slug' => $validated['slug'],
-            'thumbnail' => $request->thumbnail ?? null,
-            'photo' => $request->photo ?? null,
-            'deskripsi' => $request->deskripsi ?? '',
-            'status' => $validated['status'] ?? 'buka',
-            'kuota' => $validated['kuota'],
-            'kuota_terisi' => 0,
-        ]);
-
-        return redirect()->route('admin.bidang.index')->with('success', 'Bidang berhasil ditambahkan.');
+    if ($this->admin->role === 'superadmin') {
+        $rules['admin_id'] = 'required|exists:admins,id';
     }
+
+    $validated = $request->validate($rules);
+
+    // Upload thumbnail jika ada
+    $thumbnailPath = null;
+    if ($request->hasFile('thumbnail')) {
+        $thumbnailPath = $request->file('thumbnail')->store('thumbnails', 'public');
+    }
+
+    // Upload photo jika ada
+    $photoPath = null;
+    if ($request->hasFile('photo')) {
+        $photoPath = $request->file('photo')->store('photos', 'public');
+    }
+
+    $adminId = $this->admin->role === 'superadmin'
+        ? $validated['admin_id']
+        : $this->admin->id;
+
+    Databidang::create([
+        'admin_id' => $adminId,
+        'nama' => $validated['nama'],
+        'slug' => $validated['slug'],
+        'thumbnail' => $thumbnailPath,
+        'photo' => $photoPath,
+        'deskripsi' => $validated['deskripsi'] ?? '',
+        'status' => $validated['status'] ?? 'buka',
+        'kuota' => $validated['kuota'],
+        'kuota_terisi' => 0,
+    ]);
+
+    return redirect()->route('admin.bidang.index')->with('success', 'Bidang berhasil ditambahkan.');
+}
+
 
     public function show($id)
     {

@@ -1,5 +1,5 @@
 @if (in_array(auth()->guard('admin')->user()->role, ['superadmin', 'admin_dinas']))
-    <form action="{{ route('admin.pengajuan.updateBidang', $pengajuan->id) }}" method="POST" class="mb-3">
+    <form action="{{ route('admin.pengajuan.updateBidang', $pengajuan->id) }}" method="POST" class="mb-3" style="padding: 5px;">
         @csrf
         @method('PATCH')
 
