@@ -79,37 +79,28 @@
                                 </a>
                             </li>
 
-                            
-                            <li class="sidebar-item {{ request()->routeIs('admin.pengajuan*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.pengajuan.bidang') }}" class="sidebar-link">
-                                    <i class="bi bi-stack"></i>
-                                    <span>Pengajuan</span>
-                                </a>
-                            </li>
-
-                            
-                            @if(auth('admin')->check() && in_array(auth('admin')->user()->role, ['admin_dinas', 'superadmin']))
-
-                                
-                            <li class="sidebar-item">
-                                <a href="{{ route('admin.documentation.indexdinas') }}" class='sidebar-link'>
-                                    <i class="bi bi-camera-fill"></i>
-                                    <span>Dokumentasi</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item active">
-                                <a href="{{ route('admin.logbook.indexdinas') }}" class='sidebar-link'>
-                                    <i class="bi bi-stickies-fill"></i>
-                                    <span>Catatan</span>
-                                </a>
-                            </li>
-
-                            @endif
-                            
-                        </ul>
-                    </div>
+                        <li class="sidebar-item">
+                            <a href="{{ route('admin.pengajuan.bidang') }}" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Pengajuan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ route('admin.documentation.indexdinas') }}" class='sidebar-link'>
+                                <i class="bi bi-camera-fill"></i>
+                                <span>Dokumentasi</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item active">
+                            <a href="{{ route('admin.logbook.indexdinas') }}" class='sidebar-link'>
+                                <i class="bi bi-book-half"></i>
+                                <span>Catatan</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+        </div>
         <div id="main">
             <header class="mb-3">
                 <div class="d-flex justify-content-between align-items-center mb-3">

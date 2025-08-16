@@ -89,26 +89,18 @@
                                 <span>Pengajuan</span>
                             </a>
                         </li>
-
-                       
-                        @if(auth('admin')->check() && in_array(auth('admin')->user()->role, ['admin_dinas', 'superadmin']))
-
-                            
                         <li class="sidebar-item">
                             <a href="{{ route('admin.documentation.indexdinas') }}" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
+                                <i class="bi bi-camera-fill"></i>
                                 <span>Dokumentasi</span>
                             </a>
                         </li>
-                        <li class="sidebar-item ">
+                        <li class="sidebar-item">
                             <a href="{{ route('admin.logbook.indexdinas') }}" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
+                                <i class="bi bi-book-half"></i>
                                 <span>Catatan</span>
                             </a>
                         </li>
-
-                        @endif
-                        
                     </ul>
                 </div>
             </div>
