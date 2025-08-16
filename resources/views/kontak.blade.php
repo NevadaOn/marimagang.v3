@@ -40,7 +40,8 @@
             <ul class="main-menu">
               <li><a href="{{ url('/') }}#home" data-section="home" class="color-gray-500">Home</a></li>
               <li><a href="{{ url('/') }}#alurmagang" data-section="alurmagang" class="color-gray-500">Alur Magang</a></li>
-              <li><a href="{{ url('/') }}#dokumentasi" data-section="dokumentasi" class="color-gray-500">Dokumentasi</a></li>
+              
+              <li><a class="{{ Request::is('landing.documentation.index') ? 'active' : 'color-gray-500' }}" href="{{ route('landing.documentation.index') }}">Dokumentasi</a></li>
               <li><a class="{{ Request::is('kontak') ? 'active' : 'color-gray-500' }}" href="{{ route('kontak') }}">Kontak</a></li>
             </ul>
           </nav>

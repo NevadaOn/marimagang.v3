@@ -31,10 +31,10 @@
             <div class="main-header">
                 <div class="header-logo">
                     <a class="d-flex" href="{{ url('/') }}">
-                        <img class="logo-night" alt="Diskominfo" src="{{ asset('assets/imgs/template/rb_3083.svg') }}"
-                            width="90px">
-                        <img class="d-none logo-day" alt="Diskominfo" src="{{ asset('assets/imgs/template/rb_3083.svg') }}"
-                            width="90px">
+                        <a class="d-flex" href="{{ url('/') }}">
+                            <img class="logo-night" alt="Diskominfo" src="{{ asset('img/rb_30832.png') }}" width="70px">
+                            <img class="d-none logo-day" alt="Diskominfo" src="{{ asset('img/rb_30832.png') }}" width="70px">
+                        </a>
                     </a>
                 </div>
                 <div class="header-nav">
@@ -44,8 +44,10 @@
                             </li>
                             <li><a href="{{ url('/') }}#alurmagang" data-section="alurmagang"
                                     class="color-gray-500">Alur Magang</a></li>
-                            <li><a href="{{ route('landing.documentation.index') }}"
-                                    class="color-gray-500">Dokumentasi</a></li>
+                            <li> <a class="{{ Request::routeIs('landing.documentation.*') ? 'active' : 'color-gray-500' }}"
+                                    href="{{ route('landing.documentation.index') }}">
+                                    Dokumentasi
+                                </a></li>
                             <li><a class="{{ Request::is('kontak') ? 'active' : 'color-gray-500' }}"
                                     href="{{ route('kontak') }}">Kontak</a></li>
                         </ul>
@@ -61,17 +63,17 @@
                         </div>
                     </div>
                     @if (Route::has('login'))
-                        @auth
-                            <a href="{{ url('/dashboard') }}"
-                                class="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow">
-                                Dashboard
-                            </a>
-                        @else
-                            <a href="{{ route('login') }}"
-                                class="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow">
-                                Masuk
-                            </a>
-                        @endauth
+                    @auth
+                    <a href="{{ url('/dashboard') }}"
+                        class="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow">
+                        Dashboard
+                    </a>
+                    @else
+                    <a href="{{ route('login') }}"
+                        class="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow">
+                        Masuk
+                    </a>
+                    @endauth
                     @endif
                 </div>
             </div>
