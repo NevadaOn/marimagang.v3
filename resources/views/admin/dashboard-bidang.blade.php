@@ -16,13 +16,18 @@
     <div id="app">
         <div id="sidebar">
             <div class="sidebar-wrapper active">
+                {{-- Sidebar Header --}}
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
-                            <a href="index.html"><img src="{{ asset('img/rb_30832.png') }}"
-                                    alt="Logo Diskominfo Kabupaten Malang" loading="lazy" srcset=""></a>
+                            <a href="index.html">
+                                <img src="{{ asset('img/rb_30832.png') }}" alt="Logo Diskominfo Kabupaten Malang"
+                                    loading="lazy">
+                            </a>
                         </div>
-                        <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
+
+                        {{-- Theme Toggle --}}
+                        <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20"
                                 height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
@@ -40,7 +45,7 @@
                                 </g>
                             </svg>
                             <div class="form-check form-switch fs-6">
-                                <input class="form-check-input  me-0" type="checkbox" id="toggle-dark"
+                                <input class="form-check-input me-0" type="checkbox" id="toggle-dark"
                                     style="cursor: pointer">
                                 <label class="form-check-label"></label>
                             </div>
@@ -52,29 +57,41 @@
                                 </path>
                             </svg>
                         </div>
-                        <div class="sidebar-toggler  x">
-                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+
+                        <div class="sidebar-toggler x">
+                            <a href="#" class="sidebar-hide d-xl-none d-block">
+                                <i class="bi bi-x bi-middle"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
+
+                
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item active ">
-                            <a href="{{ route('admin.dashboard') }}" class='sidebar-link'>
+                        
+                        <li class="sidebar-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                            <a href="{{ route('admin.dashboard') }}" class="sidebar-link">
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item ">
-                            <a href="{{ route('admin.pengajuan.bidang') }}" class='sidebar-link'>
+                        
+                        <li class="sidebar-item {{ request()->routeIs('admin.pengajuan*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.pengajuan.bidang') }}" class="sidebar-link">
                                 <i class="bi bi-stack"></i>
                                 <span>Pengajuan</span>
                             </a>
                         </li>
-                       <li class="sidebar-item">
+
+                        
+                        @if(auth('admin')->check() && in_array(auth('admin')->user()->role, ['admin_dinas', 'superadmin']))
+
+                            
+                        <li class="sidebar-item">
                             <a href="{{ route('admin.documentation.indexdinas') }}" class='sidebar-link'>
                                 <i class="bi bi-camera"></i>
                                 <span>Dokumentasi</span>
@@ -86,6 +103,9 @@
                                 <span>Catatan</span>
                             </a>
                         </li>
+
+                        @endif
+                        
                     </ul>
                 </div>
             </div>
@@ -93,9 +113,20 @@
         <div id="main">
             <header class="mb-3">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <!-- Judul -->
                     <div class="page-heading mb-0">
-                        <h3 class="mb-0">Admin Bidang</h3>
+                        <h3 class="mb-0">
+                            @if(auth()->user()->role == 'admin_bidang')
+                                Admin Bidang
+                            @elseif(auth()->user()->role == 'admin_dinas')
+                                Admin Dinas
+                            @elseif(auth()->user()->role == 'super_admin')
+                                Super Admin
+                            @elseif(auth()->user()->role == 'user')
+                                Dashboard User
+                            @else
+                                Dashboard
+                            @endif
+                        </h3>
                     </div>
 
                     <!-- User Profile and Logout Section -->

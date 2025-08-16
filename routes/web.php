@@ -72,11 +72,11 @@ Route::prefix('email')->group(function () {
     })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 });
 
-Route::get('/user/check-verification', function () {
-    return response()->json([
-        'verified' => auth()->user()->hasVerifiedEmail(),
-    ]);
-})->middleware('auth')->name('user.check-verification');
+// Route::get('/user/check-verification', function () {
+//     return response()->json([
+//         'verified' => auth()->user()->hasVerifiedEmail(),
+//     ]);
+// })->middleware('auth')->name('user.check-verification');
 
 Route::controller(ForgotPasswordController::class)->group(function () {
     Route::get('forgot-password', 'showLinkRequestForm')->name('password.request');

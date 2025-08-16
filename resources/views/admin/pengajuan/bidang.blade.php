@@ -16,13 +16,18 @@
     <div id="app">
         <div id="sidebar">
             <div class="sidebar-wrapper active">
+                {{-- Sidebar Header --}}
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
-                            <a href="index.html"><img src="{{ asset('img/rb_30832.png') }}" alt="Logo Diskominfo Kabupaten Malang" loading="lazy"
-                                    srcset=""></a>
+                            <a href="index.html">
+                                <img src="{{ asset('img/rb_30832.png') }}" alt="Logo Diskominfo Kabupaten Malang"
+                                    loading="lazy">
+                            </a>
                         </div>
-                        <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
+
+                        {{-- Theme Toggle --}}
+                        <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20"
                                 height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
@@ -40,7 +45,7 @@
                                 </g>
                             </svg>
                             <div class="form-check form-switch fs-6">
-                                <input class="form-check-input  me-0" type="checkbox" id="toggle-dark"
+                                <input class="form-check-input me-0" type="checkbox" id="toggle-dark"
                                     style="cursor: pointer">
                                 <label class="form-check-label"></label>
                             </div>
@@ -52,29 +57,41 @@
                                 </path>
                             </svg>
                         </div>
-                        <div class="sidebar-toggler  x">
-                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+
+                        <div class="sidebar-toggler x">
+                            <a href="#" class="sidebar-hide d-xl-none d-block">
+                                <i class="bi bi-x bi-middle"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
+
+               
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item">
-                            <a href="{{ route('admin.dashboard') }}" class='sidebar-link'>
+                       
+                        <li class="sidebar-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                            <a href="{{ route('admin.dashboard') }}" class="sidebar-link">
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item active">
-                            <a href="{{ route('admin.pengajuan.bidang') }}" class='sidebar-link'>
+                       
+                        <li class="sidebar-item {{ request()->routeIs('admin.pengajuan*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.pengajuan.bidang') }}" class="sidebar-link">
                                 <i class="bi bi-stack"></i>
                                 <span>Pengajuan</span>
                             </a>
                         </li>
-                         <li class="sidebar-item">
+
+                        
+                        @if(auth('admin')->check() && in_array(auth('admin')->user()->role, ['admin_dinas', 'superadmin']))
+
+                            
+                        <li class="sidebar-item">
                             <a href="{{ route('admin.documentation.indexdinas') }}" class='sidebar-link'>
                                 <i class="bi bi-camera"></i>
                                 <span>Dokumentasi</span>
@@ -86,20 +103,102 @@
                                 <span>Catatan</span>
                             </a>
                         </li>
+
+                        @endif
+                        
                     </ul>
                 </div>
             </div>
         </div>
         <div id="main">
             <header class="mb-3">
-                <a href="#" class="burger-btn d-block d-xl-none">
-                    <i class="bi bi-justify fs-3"></i>
-                </a>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="page-heading mb-0">
+                        <h3 class="mb-0">
+                            @if(auth()->user()->role == 'admin_bidang')
+                                Admin Bidang
+                            @elseif(auth()->user()->role == 'admin_dinas')
+                                Admin Dinas
+                            @elseif(auth()->user()->role == 'super_admin')
+                                Super Admin
+                            @elseif(auth()->user()->role == 'user')
+                                Dashboard User
+                            @else
+                                Dashboard
+                            @endif
+                        </h3>
+                    </div>
+
+                    <!-- User Profile and Logout Section -->
+                    <div class="dropdown">
+                        <button class="btn btn-link dropdown-toggle d-flex align-items-center text-decoration-none"
+                            type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="avatar avatar-sm me-2">
+                                <div class="avatar-content bg-primary text-white d-flex align-items-center justify-content-center rounded-circle "
+                                    style="width: 35px; height: 35px; font-weight: bold; font-size: 14px;">
+                                    {{ strtoupper(substr(auth()->user()->nama ?? 'A', 0, 1)) }}{{ strtoupper(substr(explode(' ', auth()->user()->nama ?? 'Admin')[1] ?? '', 0, 1)) }}
+                                </div>
+                            </div>
+                            <div class="text-start d-none d-md-block">
+                                <div class="fw-semibold card-header">{{ auth()->user()->nama ?? 'Admin Bidang' }}</div>
+                                <div class="small text-muted">{{ auth()->user()->email ?? 'admin@diskominfo.com' }}
+                                </div>
+                            </div>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+                            <li>
+                                <h6 class="dropdown-header">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-sm me-2">
+                                            <div class="avatar-content bg-primary text-white d-flex align-items-center justify-content-center rounded-circle"
+                                                style="width: 30px; height: 30px; font-weight: bold; font-size: 12px;">
+                                                {{ strtoupper(substr(auth()->user()->nama ?? 'A', 0, 1)) }}{{ strtoupper(substr(explode(' ', auth()->user()->nama ?? 'Admin')[1] ?? '', 0, 1)) }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="fw-semibold">{{ auth()->user()->nama ?? 'Admin Bidang' }}</div>
+                                            <div class="small text-muted">{{ auth()->user()->email ??
+                                                'admin@diskominfo.com' }}</div>
+                                        </div>
+                                    </div>
+                                </h6>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <i class="bi bi-person me-2"></i>
+                                    Profile Saya
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <i class="bi bi-gear me-2"></i>
+                                    Pengaturan
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item d-flex align-items-center text-danger"
+                                        onclick="return confirm('Apakah Anda yakin ingin keluar?')">
+                                        <i class="bi bi-box-arrow-right me-2"></i>
+                                        Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
             </header>
 
-            <div class="page-heading">
-                <h3>Daftar Pengajuan</h3>
-            </div>
+
             
             <div class="page-content">
                 @if (session('success'))
