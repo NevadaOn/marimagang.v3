@@ -74,15 +74,15 @@
                                 <span>Pengajuan</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                         <li class="sidebar-item">
                             <a href="{{ route('admin.documentation.indexdinas') }}" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
+                                <i class="bi bi-camera"></i>
                                 <span>Dokumentasi</span>
                             </a>
                         </li>
-                        <li class="sidebar-item ">
+                        <li class="sidebar-item">
                             <a href="{{ route('admin.logbook.indexdinas') }}" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
+                                <i class="bi bi-book"></i>
                                 <span>Catatan</span>
                             </a>
                         </li>
