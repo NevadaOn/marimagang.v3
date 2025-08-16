@@ -76,13 +76,13 @@
                         </li>
                          <li class="sidebar-item active">
                             <a href="{{ route('admin.documentation.indexdinas') }}" class='sidebar-link'>
-                                <i class="bi bi-camera"></i>
+                                <i class="bi bi-camera-fill"></i>
                                 <span>Dokumentasi</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a href="{{ route('admin.logbook.indexdinas') }}" class='sidebar-link'>
-                                <i class="bi bi-book"></i>
+                                <i class="bi bi-stickies-fill"></i>
                                 <span>Catatan</span>
                             </a>
                         </li>
