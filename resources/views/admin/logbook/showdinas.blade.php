@@ -190,7 +190,7 @@
                 <!-- Filter Form -->
                 <div class="card mb-4">
                     <div class="card-body">
-                        <form method="GET" action="{{ route('admin.logbook.show', $user->id) }}">
+                        <form method="GET" action="{{ route('admin.logbook.showdinas', $user->id) }}">
                             <div class="row g-3 align-items-end">
                                 <div class="col-md-3">
                                     <label for="filter" class="form-label fw-semibold">
