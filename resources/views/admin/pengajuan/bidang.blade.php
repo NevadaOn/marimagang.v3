@@ -424,7 +424,7 @@
                         <p>2023 &copy; Diskominfo Kab. Malang</p>
                     </div>
                     <div class="float-end">
-                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
+                        <p>Crafted with
                             by <a href="https://kominfo.malangkab.go.id/">Diskominfo</a></p>
                     </div>
                 </div>
