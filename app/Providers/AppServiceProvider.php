@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use App\Models\Chat;
-use App\Models\Pengajuan; // ✅ tambahkan
+use App\Models\Pengajuan;
 use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider

@@ -30,7 +30,7 @@
                     <th class="text-center">Slug</th>
                     <th class="text-center">Penanggung Jawab</th>
                     <th class="text-center">Kuota</th>
-                    <th class="text-center">Terisi</th>
+                    {{-- <th class="text-center">Terisi</th> --}}
                     <th class="text-center">Total Pengajuan</th>
                     <th class="text-center">Status</th>
                     <th class="text-center">Aksi</th>
@@ -43,7 +43,7 @@
                     <td class="text-center">{{ $item->slug }}</td>
                     <td class="text-center">{{ $item->admin->nama ?? 'Admin tidak ditemukan' }}</td>
                     <td class="text-center">{{ $item->kuota }}</td>
-                    <td class="text-center">{{ $item->kuota_terisi }}</td>
+                    {{-- <td class="text-center">{{ $item->kuota_terisi }}</td> --}}
                     <td class="text-center">{{ $item->pengajuan_count ?? 0 }}</td>
                     <td class="text-center">
                         @if($item->status === 'buka')

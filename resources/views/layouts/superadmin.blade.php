@@ -17,7 +17,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-    {{-- Anda bisa menambahkan CSS atau script tambahan khusus untuk head di sini --}}
     @stack('styles')
 </head>
 <body>
