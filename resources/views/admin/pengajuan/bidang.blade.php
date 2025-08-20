@@ -213,80 +213,272 @@
                     <!-- Statistics Cards -->
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card">
-                                    <div class="card-body px-4 py-4-5">
-                                        <div class="row">
-                                            <div
-                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                                <div class="stats-icon purple mb-2" style="background-color: #C997CF;">
-
-
-                                                    <h6 class="font-extrabold mb-0">{{ $pengajuan->total() ?? 0 }}</h6>
-                                                </div>
+                            <!-- Card 1: Total Pengajuan -->
+                            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                                <div class="card border-0 shadow-sm h-100 position-relative overflow-hidden" 
+                                    style="border-radius: 15px; transition: all 0.3s ease; cursor: pointer;"
+                                    onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.15)'"
+                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 10px rgba(0,0,0,0.1)'">
+                                    
+                                    
+                                    
+                                    <div class="card-body p-4 position-relative">
+                                        <div class="d-flex align-items-center my-3">
+                                            <div class="rounded-circle d-flex align-items-center justify-content-center me-3" 
+                                                style="width: 50px; height: 50px; background: linear-gradient(135deg, #C997CF, #B87FCB);">
+                                                <i class="bi bi-stack text-white fs-4"></i>
                                             </div>
-                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                <h6 class="text-muted font-semibold">Total Pengajuan</h6>
-
+                                            <div class="flex-grow-1">
+                                                <div class="text-muted small mb-1">Total Seluruh</div>
+                                                <h4 class="mb-0 fw-bold" style="color: #C997CF;">{{ $pengajuan->total() ?? 0 }}</h4>
                                             </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <h6 class="text-muted mb-0 small">Pengajuan Magang</h6>
+                                            @php
+                                                $bulanLalu = $pengajuan->where('created_at', '>=', now()->subMonth())->where('created_at', '<', now()->startOfMonth())->count();
+                                                $bulanIni = $pengajuan->where('created_at', '>=', now()->startOfMonth())->count();
+                                                $persentase = $bulanLalu > 0 ? round((($bulanIni - $bulanLalu) / $bulanLalu) * 100) : ($bulanIni > 0 ? 100 : 0);
+                                            @endphp
+                                            <span class="badge rounded-pill d-inline-flex align-items-center gap-1" 
+                                                style="background: rgba(201, 151, 207, 0.1); color: #C997CF;">
+                                                @if($persentase >= 0)
+                                                    <i class="bi bi-arrow-up"></i> 
+                                                    <span>+{{ $persentase }}%</span>
+                                                @else
+                                                    <i class="bi bi-arrow-down"></i> 
+                                                    <span>{{ $persentase }}%</span>
+                                                @endif
+                                            </span>
+
+                                        </div>
+                                        <div class="progress mt-2" style="height: 4px;">
+                                            <div class="progress-bar" style="background: linear-gradient(90deg, #C997CF, #B87FCB); width: 100%;"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card">
-                                    <div class="card-body px-4 py-4-5">
-                                        <div class="row">
-                                            <div
-                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                                <div class="stats-icon blue mb-2" style="background-color: #70BDB8;">
-                                                    <h6 class="font-extrabold mb-0">{{ $pengajuan->where('status', 'pending')->count() ?? 0 }}</h6>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                <h6 class="text-muted font-semibold">Status Menunggu</h6>
 
+                            <!-- Card 2: Status Menunggu -->
+                            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                                <div class="card border-0 shadow-sm h-100 position-relative overflow-hidden" 
+                                    style="border-radius: 15px; transition: all 0.3s ease; cursor: pointer;"
+                                    onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.15)'"
+                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 10px rgba(0,0,0,0.1)'">
+                                    
+                                    
+                                    
+                                    <div class="card-body p-4 position-relative">
+                                        <div class="d-flex align-items-center my-3">
+                                            <div class="rounded-circle d-flex align-items-center justify-content-center me-3 position-relative" 
+                                                style="width: 50px; height: 50px; background: linear-gradient(135deg, #70BDB8, #5AB3AD);">
+                                                <i class="bi bi-clock-history text-white fs-4"></i>
+                                                @if($pengajuan->where('status', 'pending')->count() > 0)
+                                                <!-- Animated pulse ring -->
+                                                <div class="position-absolute rounded-circle" 
+                                                    style="width: 60px; height: 60px; border: 2px solid rgba(112, 189, 184, 0.3); animation: pulse 2s infinite;"></div>
+                                                @endif
                                             </div>
+                                            <div class="flex-grow-1">
+                                                <div class="text-muted small mb-1">Status Menunggu</div>
+                                                <h4 class="mb-0 fw-bold" style="color: #70BDB8;">{{ $pengajuan->where('status', 'pending')->count() ?? 0 }}</h4>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <h6 class="text-muted mb-0 small">Perlu Ditindaklanjuti</h6>
+                                            @if($pengajuan->where('status', 'pending')->count() > 0)
+                                                <span class="badge rounded-pill d-inline-flex align-items-center gap-1 bg-warning bg-opacity-75" style="animation: blink 2s infinite;">
+                                                    <i class="bi bi-exclamation-circle"></i>
+                                                    <span>Urgent</span>
+                                                </span>
+                                            @else
+                                                <span class="badge rounded-pill d-inline-flex align-items-center gap-1 bg-success bg-opacity-75">
+                                                    <i class="bi bi-check-circle"></i>
+                                                    <span>Clear</span>
+                                                </span>
+                                            @endif
+                                        </div>
+
+                                        <div class="progress mt-2" style="height: 4px;">
+                                            @php
+                                                $totalPengajuan = $pengajuan->total();
+                                                $pendingCount = $pengajuan->where('status', 'pending')->count();
+                                                $pendingPercentage = $totalPengajuan > 0 ? ($pendingCount / $totalPengajuan) * 100 : 0;
+                                            @endphp
+                                            <div class="progress-bar bg-warning" style="width: {{ $pendingPercentage }}%;"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card">
-                                    <div class="card-body px-4 py-4-5">
-                                        <div class="row">
-                                            <div
-                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                                <div class="stats-icon green mb-2" style="background-color: #9C97CF;">
-                                                    <h6 class="font-extrabold mb-0">{{ $pengajuan->where('status', 'disetujui')->count() ?? 0 }}</h6>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                <h6 class="text-muted font-semibold">Status Disetujui</h6>
 
+                            <!-- Card 3: Status Disetujui -->
+                            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                                <div class="card border-0 shadow-sm h-100 position-relative overflow-hidden" 
+                                    style="border-radius: 15px; transition: all 0.3s ease; cursor: pointer;"
+                                    onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.15)'"
+                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 10px rgba(0,0,0,0.1)'">
+                                    
+                                    
+                                    
+                                    <div class="card-body p-4 position-relative">
+                                        <div class="d-flex align-items-center my-3">
+                                            <div class="rounded-circle d-flex align-items-center justify-content-center me-3" 
+                                                style="width: 50px; height: 50px; background: linear-gradient(135deg, #9C97CF, #8A8BCB);">
+                                                <i class="bi bi-check-circle-fill text-white fs-4"></i>
                                             </div>
+                                            <div class="flex-grow-1">
+                                                <div class="text-muted small mb-1">Disetujui</div>
+                                                <h4 class="mb-0 fw-bold" style="color: #9C97CF;">{{ $pengajuan->where('status', 'disetujui')->count() ?? 0 }}</h4>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            @php
+                                                $disetujui = $pengajuan->where('status', 'disetujui');
+                                                $magangAktif = $disetujui->filter(function($item) {
+                                                    return $item->tanggal_mulai && $item->tanggal_selesai && 
+                                                        $item->tanggal_mulai <= now() && $item->tanggal_selesai >= now();
+                                                })->count();
+                                            @endphp
+
+                                            <h6 class="text-muted mb-0 small">
+                                                @if($magangAktif > 0)
+                                                    {{ $magangAktif }} Magang Aktif
+                                                @else
+                                                    Magang Disetujui
+                                                @endif
+                                            </h6>
+
+                                            @if($pengajuan->where('status', 'disetujui')->count() > 0)
+                                                <span class="badge rounded-pill d-inline-flex align-items-center gap-1 bg-success bg-opacity-75">
+                                                    <i class="bi bi-trending-up"></i>
+                                                    <span>Good</span>
+                                                </span>
+                                            @else
+                                                <span class="badge rounded-pill d-inline-flex align-items-center gap-1 bg-secondary bg-opacity-75">
+                                                    <i class="bi bi-dash-circle"></i>
+                                                    <span>None</span>
+                                                </span>
+                                            @endif
+                                        </div>
+
+                                        <div class="progress mt-2" style="height: 4px;">
+                                            @php
+                                                $totalPengajuan = $pengajuan->total();
+                                                $disetujuiCount = $pengajuan->where('status', 'disetujui')->count();
+                                                $disetujuiPercentage = $totalPengajuan > 0 ? ($disetujuiCount / $totalPengajuan) * 100 : 0;
+                                            @endphp
+                                            <div class="progress-bar bg-success" style="width: {{ $disetujuiPercentage }}%;"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card">
-                                    <div class="card-body px-4 py-4-5">
-                                        <div class="row">
-                                            <div
-                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                                <div class="stats-icon red mb-2">
-                                                    <h6 class="font-extrabold mb-0">{{ $pengajuan->where('status', 'ditolak')->count() ?? 0 }}</h6>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                <h6 class="text-muted font-semibold">Status Ditolak</h6>
 
+                            <!-- Card 4: Status Ditolak -->
+                            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                                <div class="card border-0 shadow-sm h-100 position-relative overflow-hidden" 
+                                    style="border-radius: 15px; transition: all 0.3s ease; cursor: pointer;"
+                                    onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.15)'"
+                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 10px rgba(0,0,0,0.1)'">
+                                    
+                                   
+                                    
+                                    <div class="card-body p-4 position-relative">
+                                        <div class="d-flex align-items-center my-3">
+                                            <div class="rounded-circle d-flex align-items-center justify-content-center me-3" 
+                                                style="width: 50px; height: 50px; background: linear-gradient(135deg, #dc3545, #c02d3a);">
+                                                <i class="bi bi-x-circle-fill text-white fs-4"></i>
                                             </div>
+                                            <div class="flex-grow-1">
+                                                <div class="text-muted small mb-1">Ditolak</div>
+                                                <h4 class="mb-0 fw-bold text-danger">{{ $pengajuan->where('status', 'ditolak')->count() ?? 0 }}</h4>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between ">
+                                            <h6 class="text-muted mb-0 small">
+                                                @if($pengajuan->where('status', 'ditolak')->count() > 0)
+                                                    Perlu Follow Up
+                                                @else
+                                                    Tidak Ada Penolakan
+                                                @endif
+                                            </h6>
+
+                                            @php
+                                                $ditolakBulanIni = $pengajuan->where('status', 'ditolak')
+                                                    ->where('created_at', '>=', now()->startOfMonth())
+                                                    ->count();
+
+                                                $ditolakBulanLalu = $pengajuan->where('status', 'ditolak')
+                                                    ->where('created_at', '>=', now()->subMonth()->startOfMonth())
+                                                    ->where('created_at', '<', now()->startOfMonth())
+                                                    ->count();
+
+                                                $perubahanDitolak = $ditolakBulanLalu > 0 
+                                                    ? round((($ditolakBulanIni - $ditolakBulanLalu) / $ditolakBulanLalu) * 100) 
+                                                    : ($ditolakBulanIni > 0 ? 100 : 0);
+                                            @endphp
+
+                                            @if($pengajuan->where('status', 'ditolak')->count() > 0)
+                                                <span class="badge rounded-pill d-inline-flex align-items-center gap-1 bg-danger bg-opacity-75">
+                                                    @if($perubahanDitolak <= 0)
+                                                        <i class="bi bi-arrow-down"></i>
+                                                        <span>{{ abs($perubahanDitolak) }}%</span>
+                                                    @else
+                                                        <i class="bi bi-arrow-up"></i>
+                                                        <span>+{{ $perubahanDitolak }}%</span>
+                                                    @endif
+                                                </span>
+                                            @else
+                                                <span class="badge rounded-pill d-inline-flex align-items-center gap-1 bg-success bg-opacity-75">
+                                                    <i class="bi bi-check-circle"></i>
+                                                    <span>Good</span>
+                                                </span>
+                                            @endif
+                                        </div>
+
+                                        <div class="progress mt-2" style="height: 4px;">
+                                            @php
+                                                $totalPengajuan = $pengajuan->total();
+                                                $ditolakCount = $pengajuan->where('status', 'ditolak')->count();
+                                                $ditolakPercentage = $totalPengajuan > 0 ? ($ditolakCount / $totalPengajuan) * 100 : 0;
+                                            @endphp
+                                            <div class="progress-bar bg-danger" style="width: {{ max($ditolakPercentage, 5) }}%;"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- CSS untuk animasi -->
+                            <style>
+                            @keyframes pulse {
+                                0% {
+                                    transform: scale(1);
+                                    opacity: 1;
+                                }
+                                50% {
+                                    transform: scale(1.05);
+                                    opacity: 0.7;
+                                }
+                                100% {
+                                    transform: scale(1);
+                                    opacity: 1;
+                                }
+                            }
+
+                            @keyframes blink {
+                                0%, 50% {
+                                    opacity: 1;
+                                }
+                                51%, 100% {
+                                    opacity: 0.6;
+                                }
+                            }
+
+                            i.bi {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            }
+                            </style>
                             
                         </div>
                     </div>

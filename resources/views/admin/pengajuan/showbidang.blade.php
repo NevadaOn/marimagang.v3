@@ -74,7 +74,7 @@
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
-                       
+                        
                         <li class="sidebar-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                             <a href="{{ route('admin.dashboard') }}" class="sidebar-link">
                                 <i class="bi bi-grid-fill"></i>
@@ -89,9 +89,15 @@
                                 <span>Pengajuan</span>
                             </a>
                         </li>
+
+                        
+                        @if(auth('admin')->check() && in_array(auth('admin')->user()->role, ['admin_dinas', 'superadmin']))
+
+                            
                         <li class="sidebar-item">
                             <a href="{{ route('admin.documentation.indexdinas') }}" class='sidebar-link'>
                                 <i class="bi bi-camera-fill"></i>
+                                
                                 <span>Dokumentasi</span>
                             </a>
                         </li>
@@ -101,6 +107,9 @@
                                 <span>Catatan</span>
                             </a>
                         </li>
+
+                        @endif
+                        
                     </ul>
                 </div>
             </div>
