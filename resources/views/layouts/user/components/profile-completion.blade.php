@@ -1,195 +1,396 @@
-<div class="card mt-24 overflow-hidden">
-    <div class="card-header">
-        <div class="mb-0 flex-between flex-wrap gap-8">
-            <h4 class="mb-0">bar Progres</h4>
-            <a href="{{ route('profile.edit') }}"
-                class="text-13 fw-medium text-main-600 hover-text-decoration-underline">Lihat/Edit Profile</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Progress Bar</title>
+    <style>
+        /* * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        } */
+
+        /* body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            padding: 20px;
+        } */
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .card-header {
+            padding: 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .card-header h4 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #111827;
+            margin: 0;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        /* Modern Progress Bar Styles */
+        .modern-progress-container {
+            position: relative;
+            margin: 24px 0;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .progress-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .progress-percentage {
+            font-size: 18px;
+            font-weight: 600;
+            color: #3b82f6;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .progress-track {
+            position: relative;
+            height: 12px;
+            background: #f1f5f9;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8, #6366f1);
+            border-radius: 20px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .progress-stages {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 0 8px;
+        }
+
+        .stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            flex: 1;
+        }
+
+        .stage-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 3px solid #e5e7eb;
+            background: white;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stage-dot.active {
+            border-color: #3b82f6;
+            background: #3b82f6;
+            transform: scale(1.2);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+        }
+
+        .stage-dot.completed {
+            border-color: #10b981;
+            background: #10b981;
+        }
+
+        .stage-dot.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .stage-label {
+            font-size: 12px;
+            color: #6b7280;
+            text-align: center;
+            margin-top: 8px;
+            font-weight: 500;
+            max-width: 80px;
+            line-height: 1.3;
+        }
+
+        .stage-label.active {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .stage-label.completed {
+            color: #10b981;
+        }
+
+        .stage-percentage {
+            font-size: 10px;
+            color: #9ca3af;
+            margin-top: 2px;
+        }
+
+        /* Connecting line between stages */
+        .stage:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: calc(50% + 8px);
+            width: calc(100% - 16px);
+            height: 2px;
+            background: #e5e7eb;
+            z-index: 1;
+        }
+
+        .stage.completed:not(:last-child)::after {
+            background: #10b981;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .progress-stages {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+            
+            .stage {
+                min-width: 80px;
+            }
+            
+            .stage:not(:last-child)::after {
+                display: none;
+            }
+        }
+
+        /* Demo controls */
+        .demo-controls {
+            margin-top: 32px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .demo-controls h5 {
+            margin-bottom: 16px;
+            color: #374151;
+            font-size: 16px;
+        }
+
+        .demo-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .demo-btn {
+            padding: 8px 16px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .demo-btn:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h4>Progress Bar Magang - 7 Tahap</h4>
+        </div>
+        <div class="card-body">
+            <div class="modern-progress-container">
+                <div class="progress-header">
+                    <span class="progress-title">Kelengkapan Profile dan Status Pengajuan</span>
+                    <span class="progress-percentage" id="overall-percentage">10%</span>
+                </div>
+                
+                <div class="progress-track">
+                    <div class="progress-fill" id="overall-progress" style="width: 10%"></div>
+                </div>
+
+                <div class="progress-stages" id="progress-stages">
+                    <div class="stage completed" data-stage="1">
+                        <div class="stage-dot completed"></div>
+                        <div class="stage-label completed">
+                            Profil & Skill
+                            <div class="stage-percentage">10%</div>
+                        </div>
+                    </div>
+                    <div class="stage active" data-stage="2">
+                        <div class="stage-dot active"></div>
+                        <div class="stage-label active">
+                            Pengajuan
+                            <div class="stage-percentage">25%</div>
+                        </div>
+                    </div>
+                    <div class="stage" data-stage="3">
+                        <div class="stage-dot"></div>
+                        <div class="stage-label">
+                            Diteruskan
+                            <div class="stage-percentage">40%</div>
+                        </div>
+                    </div>
+                    <div class="stage" data-stage="4">
+                        <div class="stage-dot"></div>
+                        <div class="stage-label">
+                            Diterima
+                            <div class="stage-percentage">55%</div>
+                        </div>
+                    </div>
+                    <div class="stage" data-stage="5">
+                        <div class="stage-dot"></div>
+                        <div class="stage-label">
+                            Magang
+                            <div class="stage-percentage">70%</div>
+                        </div>
+                    </div>
+                    <div class="stage" data-stage="6">
+                        <div class="stage-dot"></div>
+                        <div class="stage-label">
+                            Laporan
+                            <div class="stage-percentage">85%</div>
+                        </div>
+                    </div>
+                    <div class="stage" data-stage="7">
+                        <div class="stage-dot"></div>
+                        <div class="stage-label">
+                            Selesai
+                            <div class="stage-percentage">100%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demo Controls -->
+            {{-- <div class="demo-controls">
+                <h5>Demo - Klik untuk melihat tahap:</h5>
+                <div class="demo-buttons">
+                    <button class="demo-btn" onclick="setProgress(5, 'Profil Saja')">Profil (5%)</button>
+                    <button class="demo-btn" onclick="setProgress(10, 'Profil + Skill')">Profil + Skill (10%)</button>
+                    <button class="demo-btn" onclick="setProgress(25, 'Pengajuan Diproses')">Pengajuan (25%)</button>
+                    <button class="demo-btn" onclick="setProgress(40, 'Diteruskan')">Diteruskan (40%)</button>
+                    <button class="demo-btn" onclick="setProgress(55, 'Diterima')">Diterima (55%)</button>
+                    <button class="demo-btn" onclick="setProgress(70, 'Sedang Magang')">Magang (70%)</button>
+                    <button class="demo-btn" onclick="setProgress(85, 'Laporan Submitted')">Laporan (85%)</button>
+                    <button class="demo-btn" onclick="setProgress(100, 'Selesai')">Selesai (100%)</button>
+                </div>
+            </div> --}}
         </div>
     </div>
-<div class="card-body">
-  <div class="mb-24 position-relative">
-    <!-- Popup info muncul di atas progress bar -->
-    <div id="profile-popup" class="popup-info" style="display:none; position:absolute; top:-30px; left:0; right:0; text-align:center; font-size:14px; color:#2f855a; font-weight:600;">
-      Profil lengkap, silahkan melakukan pengajuan untuk menaikkan status bar
-    </div>
 
-    <div class="flex-between mb-8">
-      <span class="text-15 fw-medium text-gray-900">Kelengkapan Profile dan status Pengajuan</span>
-      <span class="text-15 fw-medium text-main-600" id="overall-percentage">33%</span>
-    </div>
-
-    <div class="progress bg-main-100 rounded-pill h-8" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="33">
-      <div id="overall-progress" class="progress-bar bg-main-600 rounded-pill" style="width: 33%"></div>
-      <!-- Bar penolakan merah -->
-      <div id="overall-progress-reject" class="progress-bar bg-danger-600 rounded-pill" style="width: 0; position: absolute; top: 0; left: 50%; height: 100%; transition: width 0.3s;"></div>
-    </div>
-  </div>
-</div>
-
-    <div class="card-body p-0 overflow-x-auto scroll-sm scroll-sm-horizontal">
-        <table class="table style-two mb-0">
-            <thead>
-                <tr>
-                    <th>Bagian Profil</th>
-                    <th>Kelengkapan</th>
-                    <th class="text-center">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Personal Information Row -->
-                <tr>
-                    <td>
-                        <div class="flex-align gap-8">
-                            <div class="w-40 h-40 rounded-circle bg-main-600 flex-center flex-shrink-0"
-                                id="personal-icon-bg">
-                                <i class="ph ph-user text-white"></i>
-                            </div>
-                            <div class="">
-                                <h6 class="mb-0">Informasi Pribadi</h6>
-                                <div class="table-list">
-                                    <span class="text-13 text-gray-600">Universitas & Kontak</span>
-                                    <span class="text-13 text-gray-600">Diperlukan</span>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="flex-align gap-8 mt-12">
-                            <div class="progress w-100px bg-main-100 rounded-pill h-4" role="progressbar">
-                                <div class="progress-bar bg-main-600 rounded-pill" style="width: 0%"
-                                    id="personal-progress"></div>
-                            </div>
-                            <span class="text-main-600 flex-shrink-0 text-13 fw-medium"
-                                id="personal-percentage">0%</span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="flex-align justify-content-center gap-16">
-                            <span
-                                class="text-13 py-2 px-8 bg-danger-50 text-danger-600 d-inline-flex align-items-center gap-8 rounded-pill"
-                                id="personal-status-badge">
-                                <span class="w-6 h-6 bg-danger-600 rounded-circle flex-shrink-0"></span>
-                                Incomplete
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Skills & Expertise Row -->
-                <tr>
-                    <td>
-                        <div class="flex-align gap-8">
-                            <div class="w-40 h-40 rounded-circle bg-purple-600 flex-center" id="skills-icon-bg">
-                                <i class="ph ph-gear text-white"></i>
-                            </div>
-                            <div class="">
-                                <h6 class="mb-0">Keterampilan & Keahlian</h6>
-                                <div class="table-list">
-                                    <span class="text-13 text-gray-600">Keterampilan Teknis</span>
-                                    <span class="text-13 text-gray-600">Diperlukan</span>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="flex-align gap-8 mt-12">
-                            <div class="progress w-100px bg-main-100 rounded-pill h-4" role="progressbar">
-                                <div class="progress-bar bg-main-600 rounded-pill" style="width: 0%"
-                                    id="skills-progress"></div>
-                            </div>
-                            <span class="text-main-600 flex-shrink-0 text-13 fw-medium" id="skills-percentage">0%</span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="flex-align justify-content-center gap-16">
-                            <span
-                                class="text-13 py-2 px-8 bg-gray-100 text-gray-600 d-inline-flex align-items-center gap-8 rounded-pill"
-                                id="skills-status-badge">
-                                <span class="w-6 h-6 bg-gray-600 rounded-circle flex-shrink-0"></span>
-                                Not Started
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Profile Complete Row -->
-                <tr>
-                    <td>
-                        <div class="flex-align gap-8">
-                            <div class="w-40 h-40 rounded-circle bg-warning-600 flex-center" id="complete-icon-bg">
-                                <i class="ph ph-check-circle text-white"></i>
-                            </div>
-                            <div class="">
-                                <h6 class="mb-0">Profil Lengkap</h6>
-                                <div class="table-list">
-                                    <span class="text-13 text-gray-600">Siap Magang</span>
-                                    <span class="text-13 text-gray-600">Langkah Terakhir</span>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="flex-align gap-8 mt-12">
-                            <div class="progress w-100px bg-main-100 rounded-pill h-4" role="progressbar">
-                                <div class="progress-bar bg-main-600 rounded-pill" style="width: 0%"
-                                    id="complete-progress"></div>
-                            </div>
-                            <span class="text-main-600 flex-shrink-0 text-13 fw-medium"
-                                id="complete-percentage">0%</span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="flex-align justify-content-center gap-16">
-                            <span
-                                class="text-13 py-2 px-8 bg-gray-100 text-gray-600 d-inline-flex align-items-center gap-8 rounded-pill"
-                                id="complete-status-badge">
-                                <span class="w-6 h-6 bg-gray-600 rounded-circle flex-shrink-0"></span>
-                                Tertunda
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-  <td>
-    <div class="flex-align gap-8">
-      <div class="w-40 h-40 rounded-circle bg-info-600 flex-center flex-shrink-0" id="submission-icon-bg">
-        <i class="ph ph-file-text text-white"></i>
-      </div>
-      <div>
-        <h6 class="mb-0">Status Pengajuan</h6>
-        <div class="table-list">
-          <span class="text-13 text-gray-600">Pengajuan Magang</span>
-          <span class="text-13 text-gray-600">Proses</span>
-        </div>
-      </div>
-    </div>
-  </td>
-  <td>
-    <div class="flex-align gap-8 mt-12">
-      <div class="progress w-100px bg-main-100 rounded-pill h-4" role="progressbar">
-        <div class="progress-bar bg-info-600 rounded-pill" style="width: 0%" id="submission-progress"></div>
-      </div>
-      <span class="text-info-600 flex-shrink-0 text-13 fw-medium" id="submission-percentage">0%</span>
-    </div>
-  </td>
-  <td>
-    <div class="flex-align justify-content-center gap-16">
-      <span class="text-13 py-2 px-8 bg-info-100 text-info-600 d-inline-flex align-items-center gap-8 rounded-pill" id="submission-status-badge">
-        <span class="w-6 h-6 bg-info-600 rounded-circle flex-shrink-0"></span>
-        Belum Ajukan
-      </span>
-    </div>
-  </td>
-</tr>
-
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Action Button -->
-    <div class="card-body pt-0">
-        <button class="btn btn-main-600 btn-sm w-100" id="completion-action">
-            Informasi Pribadi Lengkap
-        </button>
-    </div>
-</div>
+    {{-- <script>
+        function updateModernProgress(percentage, statusText = '') {
+            const progressBar = document.getElementById('overall-progress');
+            const percentageText = document.getElementById('overall-percentage');
+            const stages = document.querySelectorAll('.stage');
+            
+            // Update progress bar
+            progressBar.style.width = percentage + '%';
+            percentageText.textContent = percentage + '%';
+            
+            // Define stage thresholds
+            const stageThresholds = [
+                { min: 0, max: 10, stage: 1, label: 'Profil & Skill' },
+                { min: 11, max: 25, stage: 2, label: 'Pengajuan' },
+                { min: 26, max: 40, stage: 3, label: 'Diteruskan' },
+                { min: 41, max: 55, stage: 4, label: 'Diterima' },
+                { min: 56, max: 70, stage: 5, label: 'Magang' },
+                { min: 71, max: 85, stage: 6, label: 'Laporan' },
+                { min: 86, max: 100, stage: 7, label: 'Selesai' }
+            ];
+            
+            // Reset all stages
+            stages.forEach((stage, index) => {
+                const dot = stage.querySelector('.stage-dot');
+                const label = stage.querySelector('.stage-label');
+                
+                dot.classList.remove('completed', 'active');
+                label.classList.remove('completed', 'active');
+                
+                const stageNum = index + 1;
+                const stagePercentage = [10, 25, 40, 55, 70, 85, 100][index];
+                
+                if (percentage >= stagePercentage) {
+                    // Completed stage
+                    dot.classList.add('completed');
+                    label.classList.add('completed');
+                } else {
+                    // Find current active stage
+                    const currentStage = stageThresholds.find(s => 
+                        percentage >= s.min && percentage <= s.max
+                    );
+                    
+                    if (currentStage && currentStage.stage === stageNum) {
+                        dot.classList.add('active');
+                        label.classList.add('active');
+                    }
+                }
+            });
+        }
+        
+        function setProgress(percentage, statusText) {
+            updateModernProgress(percentage, statusText);
+        }
+        
+        // Initialize with default progress
+        document.addEventListener('DOMContentLoaded', function() {
+            updateModernProgress(10, 'Profil + Skill Lengkap');
+        });
+    </script> --}}
+    

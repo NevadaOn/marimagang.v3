@@ -121,6 +121,7 @@ Route::post('/pengajuan/{id}/batal', [PengajuanController::class, 'batal'])->nam
         Route::post('/pengajuan/{pengajuan}/manage-anggota', 'storeAnggota')->name('pengajuan.anggota.store');
     });
 Route::get('/pengajuan/{id}/download/{filename}', [PengajuanController::class, 'downloadDocumentUser'])->name('pengajuan.download');
+Route::get('/sertifikat/{userSkill}', [SkillController::class, 'downloadSertifikat'])->name('sertifikat.download');
 
     Route::controller(NotificationController::class)->prefix('notifications')->group(function () {
         Route::get('/', 'userNotifications')->name('notifications.user');
