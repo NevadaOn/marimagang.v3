@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Bidang</title>
+     <title>
+    @if(auth()->guard('admin')->check())
+        {{ ucfirst(auth()->guard('admin')->user()->role) }}
+    @else
+        Dashboard
+    @endif
+  </title>
     <link rel="shortcut icon" href="{{ asset('bidang/compiled/svg/favicon.svg') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('bidang/compiled/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('bidang/compiled/css/app-dark.css') }}">

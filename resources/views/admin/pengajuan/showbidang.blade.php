@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Pengajuan - Admin Bidang</title>
+     <title>
+    @if(auth()->guard('admin')->check())
+        {{ ucfirst(auth()->guard('admin')->user()->role) }}
+    @else
+        Dashboard
+    @endif
+  </title>
     <link rel="shortcut icon" href="{{ asset('bidang/compiled/svg/favicon.svg') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('bidang/compiled/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('bidang/compiled/css/app-dark.css') }}">
@@ -174,8 +180,13 @@
 
                     // Prepare team members data
                     $semuaMahasiswa = collect([['user' => $pengajuan->user, 'status' => 'Ketua']])
-                        ->merge($pengajuan->anggota->map(fn($anggota) => ['user' => $anggota->user, 'status' => ucfirst($anggota->status)]))
-                        ->unique(fn($item) => $item['user']->id);
+                    ->merge($pengajuan->anggota->map(fn($anggota) => [
+                    'user' => $anggota->user,
+                    'status' => ucfirst($anggota->status)
+                     ]))
+                    ->filter(fn($item) => !is_null($item['user'])) // buang kalau user null (superadmin case)
+                    ->unique(fn($item) => $item['user']->id ?? null);
+
                 @endphp
 
                 <div class="row">
