@@ -164,7 +164,7 @@
                     if ($admin->role === 'superadmin') {
                         $statusOptions = ['diproses', 'diteruskan', 'diterima', 'ditolak'];
                     } elseif ($admin->role === 'admin_dinas' && $pengajuan->status === 'diproses') {
-                        $statusOptions = ['diteruskan', 'ditolak'];
+                        $statusOptions = ['diteruskan', 'ditolak', 'diterima'];
                     } elseif ($admin->role === 'admin_bidang' && $pengajuan->status === 'diteruskan') {
                         $statusOptions = ['diproses', 'diterima', 'ditolak'];
                     }
@@ -259,9 +259,17 @@
                                                     <span class="badge bg-info status-badge">
                                                         <i class="fas fa-cog me-1"></i>Diproses
                                                     </span>
+                                                @elseif($status == 'magang')
+                                                    <span class="badge bg-info status-badge">
+                                                        <i class="fas fa-cog me-1"></i>Magang
+                                                    </span>
                                                 @elseif($status == 'diteruskan')
                                                     <span class="badge bg-primary status-badge">
                                                         <i class="fas fa-paper-plane me-1"></i>Diteruskan
+                                                    </span>
+                                                @elseif($status == 'diterima')
+                                                    <span class="badge bg-primary status-badge">
+                                                        <i class="fas fa-paper-plane me-1"></i>Diterima
                                                     </span>
                                                 @else
                                                     <span class="badge bg-warning status-badge">
