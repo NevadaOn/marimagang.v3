@@ -77,6 +77,26 @@
     </div>
   </header>
 
+<div class="mobile-menu bg-gray-900" id="mobileMenu">
+  <nav>
+    <ul class="mobile-main-menu">
+      <li><a href="#home" data-section="home">Home</a></li>
+      <li><a href="#alurmagang" data-section="alurmagang">Alur Magang</a></li>
+      <li><a href="#dokumentasi" data-section="dokumentasi">Dokumentasi</a></li>
+      <li><a href="{{ route('kontak') }}">Kontak</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-login mt-4 text-center">
+    @if (Route::has('login'))
+      @auth
+        <a href="{{ url('/dashboard') }}" class="btn btn-linear w-75 mb-2">Dashboard</a>
+      @else
+        <a href="{{ route('login') }}" class="btn btn-linear w-75 mb-2">Masuk</a>
+      @endauth
+    @endif
+  </div>
+</div>
+
   <!-- Main Content -->
   <main class="main">
     <div class="cover-home1">
@@ -565,6 +585,23 @@
         if (targetId) setActiveMenu(targetId);
       });
     }
+    
+document.addEventListener('DOMContentLoaded', function() {
+  const burger = document.querySelector('.burger-icon');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  burger.addEventListener('click', function() {
+    burger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+  });
+
+  document.querySelectorAll('.mobile-main-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+    });
+  });
+});
   </script>
 
 </body>

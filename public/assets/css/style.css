@@ -7786,3 +7786,57 @@ iframe.google-map {
     width: 100%;
   }
 }
+
+.mobile-menu {
+  position: fixed;
+  top: 50px;
+  right: 0;
+  width: 80%;
+  max-width: 320px;
+  height: 30%;
+  background: #111;
+  padding: 20px;
+  z-index: 9999;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  text-align: center;
+  border-radius: 16px;
+}
+
+.mobile-menu.active {
+  transform: translateX(0);
+}
+
+.mobile-main-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.mobile-main-menu li {
+  margin-bottom: 20px;
+}
+.mobile-main-menu a {
+  color: var(--mobile-link-color);
+  font-size: 18px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.mobile-main-menu a:hover {
+  color: #0d6efd; 
+}
+
+.mobile-login .btn {
+  display: inline-block;
+}
+
+.burger-icon.active .burger-icon-top {
+  transform: rotate(45deg) translateY(8px);
+}
+.burger-icon.active .burger-icon-mid {
+  opacity: 0;
+}
+.burger-icon.active .burger-icon-bottom {
+  transform: rotate(-45deg) translateY(-8px);
+}
