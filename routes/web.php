@@ -28,7 +28,8 @@ use App\Http\Controllers\{
     Admin\AdminChatController,
     Admin\AdminLogbookController,
     LogbookExportController,
-    PasswordController
+    PasswordController,
+    
 };
 
 Route::prefix('dokumentasi')->name('landing.documentation.')->group(function () {
@@ -70,7 +71,14 @@ Route::prefix('email')->group(function () {
         $request->user()->sendEmailVerificationNotification();
         return back()->with('message', 'Link verifikasi telah dikirim ulang!');
     })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+    Route::get('/check-verification', function () {
+        return response()->json([
+            'verified' => auth()->user()->hasVerifiedEmail(),
+        ]);
+    })->name('user.check-verification');
 });
+
 
 // Route::get('/user/check-verification', function () {
 //     return response()->json([
@@ -98,14 +106,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/notifikasi/{id}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
     Route::post('/notifikasi/read-all', [NotificationController::class, 'markAllAsRead'])->name('notifications.readAll');
-    
+
     Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
     Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
 
     Route::controller(ProfileController::class)->prefix('profile')->group(function () {
 
         Route::get('/edit', 'edit')->name('profile.edit');
-        Route::put('/update', 'updateProfile')->name('profile.update'); 
+        Route::put('/update', 'updateProfile')->name('profile.update');
 
         Route::post('/skills', 'storeSkill')->name('profile.skills.store');
         Route::put('/skills/{userSkillId}', 'updateSkill')->name('profile.skills.update');
@@ -113,15 +121,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::delete('/skills/{userSkillId}/project', 'destroyProject')->name('profile.projects.destroy');
     });
-Route::post('/pengajuan/{id}/batal', [PengajuanController::class, 'batal'])->name('pengajuan.batal');
+    Route::post('/pengajuan/{id}/batal', [PengajuanController::class, 'batal'])->name('pengajuan.batal');
     Route::controller(PengajuanController::class)->group(function () {
         Route::get('/pengajuan/tipe', 'tipe')->name('pengajuan.tipe');
         Route::post('/pengajuan/tipe', 'selectType')->name('pengajuan.selectType');
         Route::get('/pengajuan/{pengajuan}/manage-anggota', 'editAnggota')->name('pengajuan.anggota.edit');
         Route::post('/pengajuan/{pengajuan}/manage-anggota', 'storeAnggota')->name('pengajuan.anggota.store');
     });
-Route::get('/pengajuan/{id}/download/{filename}', [PengajuanController::class, 'downloadDocumentUser'])->name('pengajuan.download');
-Route::get('/sertifikat/{userSkill}', [SkillController::class, 'downloadSertifikat'])->name('sertifikat.download');
+    Route::get('/pengajuan/{id}/download/{filename}', [PengajuanController::class, 'downloadDocumentUser'])->name('pengajuan.download');
+    Route::get('/sertifikat/{userSkill}', [SkillController::class, 'downloadSertifikat'])->name('sertifikat.download');
 
     Route::controller(NotificationController::class)->prefix('notifications')->group(function () {
         Route::get('/', 'userNotifications')->name('notifications.user');
@@ -148,7 +156,7 @@ Route::get('/sertifikat/{userSkill}', [SkillController::class, 'downloadSertifik
     Route::get('/logbook/export-doc', [LogbookExportController::class, 'exportDoc'])->name('logbook.exportDoc');
 
     Route::post('/logbook/update/{id}', [LogbookController::class, 'update'])->name('logbook.update');
-    
+
     Route::delete('/logbook/delete/{id}', [LogbookController::class, 'destroy'])->name('logbook.delete');
 });
 
@@ -156,9 +164,9 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('documentation', DocumentationController::class);
-    Route::get('/indexdinas', [DocumentationController::class,'indexdinas'])->name('documentation.indexdinas');
-    Route::get('/createdinas', [DocumentationController::class,'createdinas'])->name('documentation.createdinas');
-     Route::post('/storedinas', [DocumentationController::class,'storedinas'])->name('documentation.storedinas');
+    Route::get('/indexdinas', [DocumentationController::class, 'indexdinas'])->name('documentation.indexdinas');
+    Route::get('/createdinas', [DocumentationController::class, 'createdinas'])->name('documentation.createdinas');
+    Route::post('/storedinas', [DocumentationController::class, 'storedinas'])->name('documentation.storedinas');
     Route::get('/chat', [AdminChatController::class, 'index'])->name('chat.index');
     Route::post('/chat/send', [AdminChatController::class, 'send'])->name('chat.send');
     Route::get('/logbook', [AdminLogbookController::class, 'index'])->name('logbook.index');
