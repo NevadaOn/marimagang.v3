@@ -90,7 +90,7 @@
           @enderror
                   </div>
                   <div class="form-group">
-                    <div class="g-recaptcha" data-sitekey="6Lec6p8rAAAAAFJ61he1vIBjO3SNrl3BK4ivj21V"></div>
+                    <div class="g-recaptcha" data-sitekey="6Lc5EfUrAAAAAIg6Q32GNe4NtzCa8pGxA5ZG9uYj"></div>
                   </div>
 
                   <div class="form-group">

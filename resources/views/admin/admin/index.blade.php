@@ -1,6 +1,45 @@
 @extends('layouts.superadmin')
 
 @section('content')
+<style>
+.alert {
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-size: 15px;
+  margin-bottom: 16px;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.alert-success {
+  background-color: #d1f7d6;
+  border: 1px solid #42ba96;
+  color: #256f54;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border: 1px solid #dc3545;
+  color: #842029;
+}
+
+.alert button.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+  color: inherit;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+
 <div class="container py-4">
     <h1 class="h4 fw-bold mb-4">Manajemen Admin</h1>
 

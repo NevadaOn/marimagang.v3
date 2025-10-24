@@ -43,7 +43,7 @@
 
         <!-- Navigation -->
         <div class="header-nav">
-          <nav class="nav-main-menu d-none d-xl-block">
+          <nav class="nav-main-menu">
             <ul class="main-menu">
               <li><a href="#home" data-section="home" class="color-gray-500">Home</a></li>
               <li><a href="#alurmagang" data-section="alurmagang" class="color-gray-500">Alur Magang</a></li>
@@ -65,37 +65,19 @@
               <input class="form-check-input" id="flexSwitchCheckChecked" type="checkbox" role="switch" checked>
             </div>
           </div>
-          @if (Route::has('login'))
-            @auth
-              <a href="{{ url('/dashboard') }}" class="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow">Dashboard</a>
-            @else
-              <a href="{{ route('login') }}" class="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow">Masuk</a>
-            @endauth
-          @endif
+            @if (Route::has('login'))
+              @if (Auth::guard('admin')->check())
+                <a href="{{ url('/admin/dashboard') }}" class="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow">Dashboard Admin</a>
+              @elseif (Auth::check())
+                <a href="{{ url('/dashboard') }}" class="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow">Dashboard</a>
+              @else
+                <a href="{{ route('login') }}" class="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow">Masuk</a>
+              @endif
+            @endif
         </div>
       </div>
     </div>
   </header>
-
-<div class="mobile-menu bg-gray-900" id="mobileMenu">
-  <nav>
-    <ul class="mobile-main-menu">
-      <li><a href="#home" data-section="home">Home</a></li>
-      <li><a href="#alurmagang" data-section="alurmagang">Alur Magang</a></li>
-      <li><a href="#dokumentasi" data-section="dokumentasi">Dokumentasi</a></li>
-      <li><a href="{{ route('kontak') }}">Kontak</a></li>
-    </ul>
-  </nav>
-  <div class="mobile-login mt-4 text-center">
-    @if (Route::has('login'))
-      @auth
-        <a href="{{ url('/dashboard') }}" class="btn btn-linear w-75 mb-2">Dashboard</a>
-      @else
-        <a href="{{ route('login') }}" class="btn btn-linear w-75 mb-2">Masuk</a>
-      @endauth
-    @endif
-  </div>
-</div>
 
   <!-- Main Content -->
   <main class="main">
@@ -449,12 +431,261 @@
 
   <!-- Custom Scripts -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      initializeChart();
-      initializeMasonry();
-      initializeNavigation();
+document.addEventListener('DOMContentLoaded', function() {
+    initializeChart();
+    initializeMasonry();
+    initializeNavigation();
+    initializeBurgerMenu(); // TAMBAHKAN INI
+});
+function initializeBurgerMenu() {
+    const burgerIcon = document.querySelector('.burger-icon');
+    const headerNav = document.querySelector('.header-nav');
+    const navMainMenu = document.querySelector('.nav-main-menu');
+    const headerRight = document.querySelector('.header-right');
+    
+    if (!burgerIcon || !headerNav || !navMainMenu) {
+        console.log('Element tidak ditemukan');
+        return;
+    }
+    
+    // Fungsi untuk setup mobile menu
+    function setupMobileMenu() {
+        if (window.innerWidth < 1200) {
+            // Setup container menu
+            navMainMenu.style.display = 'block';
+            navMainMenu.style.position = 'fixed';
+            navMainMenu.style.top = '0';
+            navMainMenu.style.right = '-100%';
+            navMainMenu.style.width = '280px';
+            navMainMenu.style.height = '100vh';
+            navMainMenu.style.background = '#1a1a1a';
+            navMainMenu.style.transition = 'right 0.3s ease';
+            navMainMenu.style.zIndex = '99999';
+            navMainMenu.style.overflowY = 'auto';
+            navMainMenu.style.padding = '100px 30px 30px';
+            navMainMenu.style.boxShadow = '-5px 0 15px rgba(0,0,0,0.3)';
+            
+            // Clone header-right dan tambahkan ke mobile menu jika belum ada
+            let mobileHeaderRight = navMainMenu.querySelector('.mobile-header-right');
+            if (!mobileHeaderRight && headerRight) {
+                mobileHeaderRight = document.createElement('div');
+                mobileHeaderRight.className = 'mobile-header-right';
+                mobileHeaderRight.style.marginBottom = '30px';
+                mobileHeaderRight.style.paddingBottom = '20px';
+                mobileHeaderRight.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
+                
+                // Clone switch button
+                const switchButton = headerRight.querySelector('.switch-button');
+                if (switchButton) {
+                    const clonedSwitch = switchButton.cloneNode(true);
+                    clonedSwitch.style.display = 'flex';
+                    clonedSwitch.style.justifyContent = 'center';
+                    clonedSwitch.style.marginBottom = '15px';
+                    mobileHeaderRight.appendChild(clonedSwitch);
+                    
+                    // Sync dengan original switch
+                    const originalCheckbox = switchButton.querySelector('input[type="checkbox"]');
+                    const clonedCheckbox = clonedSwitch.querySelector('input[type="checkbox"]');
+                    
+                    if (originalCheckbox && clonedCheckbox) {
+                        clonedCheckbox.checked = originalCheckbox.checked;
+                        
+                        clonedCheckbox.addEventListener('change', function() {
+                            originalCheckbox.checked = this.checked;
+                            originalCheckbox.dispatchEvent(new Event('change'));
+                        });
+                    }
+                }
+                
+                // Clone button login/dashboard
+                const loginBtn = headerRight.querySelector('.btn');
+                if (loginBtn) {
+                    const clonedBtn = loginBtn.cloneNode(true);
+                    clonedBtn.classList.remove('d-none', 'd-sm-inline-block');
+                    clonedBtn.style.display = 'block';
+                    clonedBtn.style.width = '100%';
+                    clonedBtn.style.textAlign = 'center';
+                    clonedBtn.style.padding = '12px 20px';
+                    mobileHeaderRight.appendChild(clonedBtn);
+                }
+                
+                // Insert di awal menu
+                navMainMenu.insertBefore(mobileHeaderRight, navMainMenu.firstChild);
+            }
+            
+            // Style UL menu
+            const mainMenu = navMainMenu.querySelector('.main-menu');
+            if (mainMenu) {
+                mainMenu.style.display = 'flex';
+                mainMenu.style.flexDirection = 'column';
+                mainMenu.style.gap = '0';
+                mainMenu.style.listStyle = 'none';
+                mainMenu.style.margin = '0';
+                mainMenu.style.padding = '0';
+                
+                // Style setiap LI
+                const menuItems = mainMenu.querySelectorAll('li');
+                menuItems.forEach((li, index) => {
+                    li.style.display = 'block';
+                    li.style.width = '100%';
+                    li.style.margin = '0';
+                    li.style.padding = '0';
+                    li.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
+                    
+                    // Hapus border di item terakhir
+                    if (index === menuItems.length - 1) {
+                        li.style.borderBottom = 'none';
+                    }
+                    
+                    // Style link
+                    const link = li.querySelector('a');
+                    if (link) {
+                        link.style.display = 'block';
+                        link.style.width = '100%';
+                        link.style.padding = '18px 15px';
+                        link.style.fontSize = '16px';
+                        link.style.fontWeight = '500';
+                        link.style.color = '#94A9C9';
+                        link.style.textDecoration = 'none';
+                        link.style.transition = 'all 0.3s ease';
+                        link.style.textAlign = 'left';
+                        
+                        // Hover effect
+                        link.addEventListener('mouseenter', function() {
+                            this.style.background = 'rgba(255,255,255,0.05)';
+                            this.style.paddingLeft = '20px';
+                            this.style.color = '#fff';
+                        });
+                        
+                        link.addEventListener('mouseleave', function() {
+                            this.style.background = 'transparent';
+                            this.style.paddingLeft = '15px';
+                            if (!this.classList.contains('active')) {
+                                this.style.color = '#94A9C9';
+                            }
+                        });
+                        
+                        // Active state
+                        if (link.classList.contains('active')) {
+                            link.style.color = '#fff';
+                            link.style.background = 'rgba(255,255,255,0.05)';
+                        }
+                    }
+                });
+            }
+        }
+    }
+    
+    // Setup saat load
+    setupMobileMenu();
+    
+    // Toggle menu saat burger diklik
+    burgerIcon.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isOpen = navMainMenu.style.right === '0px';
+        
+        if (isOpen) {
+            // TUTUP menu
+            navMainMenu.style.right = '-100%';
+            this.classList.remove('burger-close');
+            document.body.style.overflow = '';
+            
+            // Hapus backdrop
+            const backdrop = document.querySelector('.mobile-backdrop');
+            if (backdrop) backdrop.remove();
+        } else {
+            // BUKA menu
+            navMainMenu.style.right = '0';
+            this.classList.add('burger-close');
+            document.body.style.overflow = 'hidden';
+            
+            // Tambah backdrop
+            const backdrop = document.createElement('div');
+            backdrop.className = 'mobile-backdrop';
+            backdrop.style.position = 'fixed';
+            backdrop.style.top = '0';
+            backdrop.style.left = '0';
+            backdrop.style.width = '100%';
+            backdrop.style.height = '100%';
+            backdrop.style.background = 'rgba(0,0,0,0.7)';
+            backdrop.style.zIndex = '9998';
+            backdrop.style.transition = 'opacity 0.3s ease';
+            backdrop.style.opacity = '0';
+            document.body.appendChild(backdrop);
+            
+            // Fade in backdrop
+            setTimeout(() => {
+                backdrop.style.opacity = '1';
+            }, 10);
+            
+            // Klik backdrop = tutup menu
+            backdrop.addEventListener('click', function() {
+                navMainMenu.style.right = '-100%';
+                burgerIcon.classList.remove('burger-close');
+                document.body.style.overflow = '';
+                this.style.opacity = '0';
+                setTimeout(() => {
+                    this.remove();
+                }, 300);
+            });
+        }
     });
-
+    
+    // Tutup menu saat klik menu item
+    const menuLinks = navMainMenu.querySelectorAll('.main-menu a');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navMainMenu.style.right = '-100%';
+            burgerIcon.classList.remove('burger-close');
+            document.body.style.overflow = '';
+            
+            const backdrop = document.querySelector('.mobile-backdrop');
+            if (backdrop) {
+                backdrop.style.opacity = '0';
+                setTimeout(() => {
+                    backdrop.remove();
+                }, 300);
+            }
+        });
+    });
+    
+    // Handle resize window
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 1200) {
+            // Reset ke desktop mode
+            navMainMenu.style.position = '';
+            navMainMenu.style.right = '';
+            navMainMenu.style.width = '';
+            navMainMenu.style.height = '';
+            navMainMenu.style.display = '';
+            navMainMenu.style.padding = '';
+            navMainMenu.style.background = '';
+            burgerIcon.classList.remove('burger-close');
+            document.body.style.overflow = '';
+            
+            // Hapus mobile header right
+            const mobileHeaderRight = navMainMenu.querySelector('.mobile-header-right');
+            if (mobileHeaderRight) {
+                mobileHeaderRight.remove();
+            }
+            
+            const backdrop = document.querySelector('.mobile-backdrop');
+            if (backdrop) backdrop.remove();
+            
+            // Reset menu styles
+            const mainMenu = navMainMenu.querySelector('.main-menu');
+            if (mainMenu) {
+                mainMenu.style.display = '';
+                mainMenu.style.flexDirection = '';
+                mainMenu.style.gap = '';
+            }
+        } else {
+            setupMobileMenu();
+        }
+    });
+}
     function initializeChart() {
       const textColor = getComputedStyle(document.body).color;
       const barCanvas = document.getElementById('barChart');
@@ -585,23 +816,6 @@
         if (targetId) setActiveMenu(targetId);
       });
     }
-    
-document.addEventListener('DOMContentLoaded', function() {
-  const burger = document.querySelector('.burger-icon');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  burger.addEventListener('click', function() {
-    burger.classList.toggle('active');
-    mobileMenu.classList.toggle('active');
-  });
-
-  document.querySelectorAll('.mobile-main-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-      burger.classList.remove('active');
-      mobileMenu.classList.remove('active');
-    });
-  });
-});
   </script>
 
 </body>

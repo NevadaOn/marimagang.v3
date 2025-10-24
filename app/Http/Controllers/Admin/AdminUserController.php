@@ -35,10 +35,24 @@ class AdminUserController extends Controller
 
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
 
-        $user->delete();
+            return redirect()->route('admin.users.index')
+                ->with('success', 'Pengguna berhasil dihapus.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() == '23000') {
+                // Error karena user masih punya relasi di tabel lain
+                return redirect()->route('admin.users.index')
+                    ->with('error', 'Pengguna tidak dapat dihapus karena masih memiliki data terkait, seperti pengajuan magang. 
+                    Hapus pengajuan terlebih dahulu sebelum menghapus pengguna.');
+            }
 
-        return redirect()->route('admin.users.index')->with('success', 'Pengguna dihapus.');
+            // Error umum lainnya
+            return redirect()->route('admin.users.index')
+                ->with('error', 'Terjadi kesalahan saat menghapus pengguna.');
+        }
     }
+
 }

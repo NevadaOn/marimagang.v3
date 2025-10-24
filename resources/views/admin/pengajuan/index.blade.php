@@ -268,7 +268,7 @@
                                 dari {{ $pengajuan->total() }} hasil
                             </div>
                             <div>
-                                {{ $pengajuan->links() }}
+                                {{ $pengajuan->links('vendor.pagination.custom') }}
                             </div>
                         </div>
                     </div>
@@ -280,6 +280,42 @@
 </div>
 
 <style>
+    .pagination-custom {
+  display: flex;
+  list-style: none;
+  gap: 6px;
+  justify-content: center;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.pagination-custom li {
+  border: 1px solid #ddd;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
+
+.pagination-custom li a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.pagination-custom li.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.pagination-custom li.disabled {
+  color: #999;
+  cursor: not-allowed;
+}
+
+.pagination-custom li:hover:not(.active):not(.disabled) {
+  background-color: #e9ecef;
+}
+
 .bg-gradient-primary {
     background: linear-gradient(45deg, #007bff, #0056b3);
 }
