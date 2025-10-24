@@ -1,6 +1,13 @@
 @extends('layouts.superadmin')
 
 @section('content')
+<div class="st">
+    <style>
+        .st{
+            margin: 20px;
+        }
+    </style>
+
 <h1 class="text-xl font-bold mb-4">Detail Pengguna</h1>
 
 <div class="bg-white shadow rounded p-4 mb-6">
@@ -50,5 +57,6 @@
     @else
         <p class="text-gray-500">Belum ada pengajuan.</p>
     @endif
+</div>
 </div>
 @endsection
