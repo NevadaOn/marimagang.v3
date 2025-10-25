@@ -1,0 +1,98 @@
+
+   INFO  Server running on [http://0.0.0.0:8000].  
+
+  Press Ctrl+C to stop the server
+
+  2025-10-24 08:21:13 / ............................................... ~ 1dt
+  2025-10-24 08:21:14 /assets/css/style.css?v=2.0 .................. ~ 0.46ms
+  2025-10-24 08:21:14 /assets/js/vendors/modernizr-3.6.0.min.js .... ~ 0.32ms
+  2025-10-24 08:21:14 /assets/js/vendors/waypoints.js .............. ~ 0.27ms
+  2025-10-24 08:21:14 /assets/js/vendors/text-type.js .............. ~ 1.66ms
+  2025-10-24 08:21:14 /assets/js/vendors/wow.js .................... ~ 3.07ms
+  2025-10-24 08:21:14 /assets/js/vendors/swiper-bundle.min.js ...... ~ 3.97ms
+  2025-10-24 08:21:14 /assets/js/vendors/jquery-3.6.0.min.js ....... ~ 0.67ms
+  2025-10-24 08:21:14 /assets/js/vendors/bootstrap.bundle.min.js ... ~ 2.67ms
+  2025-10-24 08:21:14 /assets/js/vendors/jquery-migrate-3.3.0.min.js  ~ 3.73ms
+  2025-10-24 08:21:14 /storage/thumbnails/bkIwQ7wU0FBWVrqUT699YBq2s0t5gxLGIS7gBSAD.png  ~ 0.13ms
+  2025-10-24 08:21:14 /storage/thumbnails/r4bEyW2mqpuqzQrxZZmeEAAJOUAEPwvAZ2wtgvnv.png  ~ 0.36ms
+  2025-10-24 08:21:14 /assets/imgs/page/homepage1/default.svg ...... ~ 1.17ms
+  2025-10-24 08:21:14 /assets/imgs/template/favicon.svg ............ ~ 1.56ms
+  2025-10-24 08:21:14 /assets/js/vendors/jquery.progressScroll.min.js  ~ 1.65ms
+  2025-10-24 08:21:14 /storage/bidang/thumbnails/komunikasi.jpg .... ~ 0.62ms
+  2025-10-24 08:21:14 /storage/dokumentasi/aAV7cYFWBRUwJX98H9qDb8y9CGX4UOzQ9i7949v1.jpg  ~ 505.21ms
+  2025-10-24 08:21:14 /assets/js/main.js?v=2.0 ................... ~ 505.63ms
+  2025-10-24 08:21:14 /assets/imgs/template/pattern-2.svg ........ ~ 506.91ms
+  2025-10-24 08:21:14 /assets/imgs/template/pattern-3.svg ........ ~ 505.97ms
+  2025-10-24 08:21:14 /img/rb_30832.png .......................... ~ 513.33ms
+  2025-10-24 08:21:14 /storage/thumbnails/RXt7jqVqupf5ViZ7OX7XKnIg8mUJ18nkOsXr31Af.jpg  ~ 2.57ms
+  2025-10-24 08:21:14 /assets/imgs/template/pattern-1.svg .......... ~ 3.93ms
+  2025-10-24 08:21:14 /assets/imgs/template/pattern-4.svg .......... ~ 4.00ms
+  2025-10-24 08:21:15 /assets/css/plugins/swiper-bundle.min.css .... ~ 0.19ms
+  2025-10-24 08:21:15 /assets/css/vendors/normalize.css ............ ~ 0.22ms
+  2025-10-24 08:21:15 /assets/css/vendors/bootstrap.min.css ........ ~ 1.04ms
+  2025-10-24 08:21:15 /assets/css/plugins/animate.min.css .......... ~ 0.20ms
+  2025-10-24 08:21:15 /assets/imgs/template/icons/mode.svg ......... ~ 0.20ms
+  2025-10-24 08:21:15 /assets/imgs/template/shadow-3.svg ........... ~ 0.11ms
+  2025-10-24 08:21:15 /assets/imgs/template/shadow-2.svg ........... ~ 0.18ms
+  2025-10-24 08:21:15 /assets/imgs/page/about/motion.svg ........... ~ 0.10ms
+  2025-10-24 08:21:15 /assets/imgs/page/homepage1/bg-trans.png ..... ~ 0.25ms
+  2025-10-24 08:21:15 /assets/imgs/slider/swiper/next.svg .......... ~ 0.42ms
+  2025-10-24 08:21:15 /assets/imgs/slider/swiper/prev.svg .......... ~ 2.08ms
+  2025-10-24 08:21:15 /assets/imgs/page/about/branding.svg ......... ~ 0.53ms
+  2025-10-24 08:21:15 /assets/imgs/page/about/ui.svg ............... ~ 0.10ms
+  2025-10-24 08:21:16 /assets/imgs/template/icons/tw.svg ........... ~ 0.11ms
+  2025-10-24 08:21:16 /assets/imgs/template/icons/linked.svg ....... ~ 1.27ms
+  2025-10-24 08:21:16 /assets/imgs/page/about/social.svg ........... ~ 0.10ms
+  2025-10-24 08:21:16 /assets/imgs/template/shadow-1.svg ........... ~ 0.23ms
+  2025-10-24 08:21:16 /assets/imgs/template/icons/insta.svg ........ ~ 0.54ms
+  2025-10-24 08:21:16 /assets/fonts/uicons/uicons-regular-rounded.woff2  ~ 0.75ms
+  2025-10-24 08:21:16 /storage/thumbnails/RXt7jqVqupf5ViZ7OX7XKnIg8mUJ18nkOsXr31Af.jpg  ~ 0.12ms
+  2025-10-24 08:21:16 /storage/bidang/thumbnails/komunikasi.jpg .. ~ 501.40ms
+  2025-10-24 08:21:16 /storage/thumbnails/r4bEyW2mqpuqzQrxZZmeEAAJOUAEPwvAZ2wtgvnv.png  ~ 502.06ms
+  2025-10-24 08:21:16 /storage/thumbnails/bkIwQ7wU0FBWVrqUT699YBq2s0t5gxLGIS7gBSAD.png  ~ 0.98ms
+  2025-10-24 08:21:16 /assets/imgs/page/homepage1/default.svg ...... ~ 0.68ms
+  2025-10-24 08:21:14 /img/aarr1.png .................................. ~ 2dt
+  2025-10-24 08:21:45 / ............................................ ~ 0.25ms
+  2025-10-24 08:21:45 /storage/thumbnails/r4bEyW2mqpuqzQrxZZmeEAAJOUAEPwvAZ2wtgvnv.png  ~ 0.11ms
+  2025-10-24 08:21:45 /storage/thumbnails/RXt7jqVqupf5ViZ7OX7XKnIg8mUJ18nkOsXr31Af.jpg  ~ 0.84ms
+  2025-10-24 08:21:45 /storage/bidang/thumbnails/komunikasi.jpg .... ~ 1.11ms
+  2025-10-24 08:21:45 /assets/imgs/page/homepage1/default.svg .... ~ 502.67ms
+  2025-10-24 08:21:45 /storage/thumbnails/bkIwQ7wU0FBWVrqUT699YBq2s0t5gxLGIS7gBSAD.png  ~ 502.76ms
+  2025-10-24 08:21:45 /assets/css/vendors/uicons-regular-rounded.css  ~ 1.61ms
+  2025-10-24 08:21:46 /assets/fonts/uicons/uicons-regular-rounded.woff2  ~ 0.14ms
+  2025-10-24 08:21:46 /storage/thumbnails/r4bEyW2mqpuqzQrxZZmeEAAJOUAEPwvAZ2wtgvnv.png  ~ 0.55ms
+  2025-10-24 08:21:46 /storage/bidang/thumbnails/komunikasi.jpg .. ~ 502.11ms
+  2025-10-24 08:21:46 /assets/imgs/page/homepage1/default.svg .... ~ 501.58ms
+  2025-10-24 08:21:46 /storage/thumbnails/RXt7jqVqupf5ViZ7OX7XKnIg8mUJ18nkOsXr31Af.jpg  ~ 0.84ms
+  2025-10-24 08:21:46 /storage/thumbnails/bkIwQ7wU0FBWVrqUT699YBq2s0t5gxLGIS7gBSAD.png  ~ 1.30ms
+  2025-10-24 08:21:46 /img/rb_30833.png ............................ ~ 0.18ms
+  2025-10-24 08:22:12 /dokumentasi ............................... ~ 500.96ms
+  2025-10-24 08:22:15 / ............................................ ~ 0.43ms
+  2025-10-24 08:22:15 /storage/thumbnails/r4bEyW2mqpuqzQrxZZmeEAAJOUAEPwvAZ2wtgvnv.png  ~ 0.25ms
+  2025-10-24 08:22:15 /storage/thumbnails/bkIwQ7wU0FBWVrqUT699YBq2s0t5gxLGIS7gBSAD.png  ~ 0.67ms
+  2025-10-24 08:22:15 /assets/imgs/page/homepage1/default.svg .... ~ 501.93ms
+  2025-10-24 08:22:15 /storage/thumbnails/RXt7jqVqupf5ViZ7OX7XKnIg8mUJ18nkOsXr31Af.jpg  ~ 502.35ms
+  2025-10-24 08:22:15 /storage/bidang/thumbnails/komunikasi.jpg .... ~ 0.71ms
+  2025-10-24 08:22:15 /storage/thumbnails/r4bEyW2mqpuqzQrxZZmeEAAJOUAEPwvAZ2wtgvnv.png  ~ 0.78ms
+  2025-10-24 08:23:36 /login ....................................... ~ 0.55ms
+  2025-10-24 08:23:36 /assets/imgs/page/login/security.svg ......... ~ 0.21ms
+  2025-10-24 08:23:43 / ............................................ ~ 0.26ms
+  2025-10-24 08:23:43 /storage/thumbnails/r4bEyW2mqpuqzQrxZZmeEAAJOUAEPwvAZ2wtgvnv.png  ~ 0.30ms
+  2025-10-24 08:23:43 /storage/bidang/thumbnails/komunikasi.jpg .. ~ 501.36ms
+  2025-10-24 08:23:43 /assets/imgs/page/homepage1/default.svg .... ~ 502.28ms
+  2025-10-24 08:23:43 /storage/thumbnails/bkIwQ7wU0FBWVrqUT699YBq2s0t5gxLGIS7gBSAD.png  ~ 0.91ms
+  2025-10-24 08:23:43 /storage/thumbnails/RXt7jqVqupf5ViZ7OX7XKnIg8mUJ18nkOsXr31Af.jpg  ~ 0.55ms
+  2025-10-24 08:23:43 /storage/bidang/thumbnails/komunikasi.jpg .... ~ 0.21ms
+  2025-10-24 08:23:43 /storage/thumbnails/r4bEyW2mqpuqzQrxZZmeEAAJOUAEPwvAZ2wtgvnv.png  ~ 0.73ms
+
+   INFO  Server running on [http://0.0.0.0:8000].  
+
+  Press Ctrl+C to stop the server
+
+  2025-10-25 00:44:16 / ............................................... ~ 1dt
+  2025-10-25 00:44:17 /storage/thumbnails/RXt7jqVqupf5ViZ7OX7XKnIg8mUJ18nkOsXr31Af.jpg  ~ 0.42ms
+  2025-10-25 00:44:17 /storage/thumbnails/r4bEyW2mqpuqzQrxZZmeEAAJOUAEPwvAZ2wtgvnv.png  ~ 0.38ms
+  2025-10-25 00:44:17 /storage/bidang/thumbnails/komunikasi.jpg .... ~ 0.80ms
+  2025-10-25 00:44:17 /assets/imgs/page/homepage1/default.svg ...... ~ 0.79ms
+  2025-10-25 00:44:17 /storage/thumbnails/bkIwQ7wU0FBWVrqUT699YBq2s0t5gxLGIS7gBSAD.png  ~ 0.76ms
+  2025-10-25 00:44:17 /storage/thumbnails/RXt7jqVqupf5ViZ7OX7XKnIg8mUJ18nkOsXr31Af.jpg  ~ 0.14ms
